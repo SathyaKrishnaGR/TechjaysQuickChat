@@ -58,12 +58,6 @@ class ConversationsViewController: UIViewController {
 //MARK: IBActions
 extension ConversationsViewController {
   
-  @IBAction func profilePressed(_ sender: Any) {
-    let vc: ProfileViewController = UIStoryboard.initial(storyboard: .profile)
-    vc.delegate = self
-    vc.user = currentUser
-    present(vc, animated: false)
-  }
   
   @IBAction func composePressed(_ sender: Any) {
     let vc: ContactsPreviewController = UIStoryboard.controller(storyboard: .previews)
@@ -138,13 +132,7 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
   }
 }
 
-//MARK: ProfileViewController Delegate
-extension ConversationsViewController: ProfileViewControllerDelegate {
-  func profileViewControllerDidLogOut() {
-//    userManager.logout()
-    navigationController?.dismiss(animated: true)
-  }
-}
+
 
 //MARK: ContactsPreviewController Delegate
 extension ConversationsViewController: ContactsPreviewControllerDelegate {

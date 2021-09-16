@@ -40,11 +40,38 @@ class ContactsPreviewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    guard let id = manager.currentUserID() else { return }
-    manager.contacts {[weak self] results in
-      self?.users = results.filter({$0.id != id})
-      self?.collectionView.reloadData()
-    }
+//    guard let id = manager.currentUserID() else { return }
+//    manager.contacts {[weak self] results in
+//      self?.users = results.filter({$0.id != id})
+//      self?.collectionView.reloadData()
+//    }
+    ObjectUser.init().email = "sathya.gr@iderize.in"
+    let userOne = ObjectUser.init()
+    userOne.email = "sathya.gr@iderize.in"
+    userOne.id = "1"
+    userOne.name = "Sathya Krishna"
+    userOne.profilePicLink = "https://file-examples-com.github.io/uploads/2017/10/file_example_PNG_1MB.png"
+    
+    let userTwo = ObjectUser.init()
+    userTwo.email = "mathankumar.g@iderize.in"
+    userTwo.id = "2"
+    userTwo.name = "Mathan Kumar"
+    userTwo.profilePicLink = "https://sample-videos.com/img/Sample-jpg-image-1mb.jpg"
+    
+    let userThree = ObjectUser.init()
+    userThree.email = "rajaram@iderize.in"
+    userThree.id = "3"
+    userThree.name = "Rajaram"
+    userThree.profilePicLink = "https://file-examples-com.github.io/uploads/2017/10/file_example_PNG_1MB.png"
+    
+    let userFour = ObjectUser.init()
+    userFour.email = "ajay.jeric@iderize.in"
+    userFour.id = "4"
+    userFour.name = "Ajay"
+    userFour.profilePicLink = "https://sample-videos.com/img/Sample-jpg-image-1mb.jpg"
+    
+    self.users = [userOne, userTwo]
+    
   }
   
   required init?(coder aDecoder: NSCoder) {
