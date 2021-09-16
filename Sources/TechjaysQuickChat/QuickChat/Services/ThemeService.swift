@@ -21,7 +21,7 @@
 //  SOFTWARE.
 
 import UIKit
-import ALLoadingView
+//import ALLoadingView
 
 class ThemeService {
   
