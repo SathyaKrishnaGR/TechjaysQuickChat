@@ -23,7 +23,7 @@
 
 import UIKit
 
-protocol MessageTableViewCellDelegate: class {
+protocol MessageTableViewCellDelegate: AnyObject {
   func messageTableViewCellUpdate()
 }
 
