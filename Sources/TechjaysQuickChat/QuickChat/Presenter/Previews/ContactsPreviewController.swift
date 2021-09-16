@@ -91,9 +91,11 @@ extension ContactsPreviewController: UICollectionViewDelegateFlowLayout, UIColle
     guard !users.isEmpty else {
       return collectionView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath)
     }
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContactsCell.className, for: indexPath) as! ContactsCell
-    cell.set(users[indexPath.row])
-    return cell
+    if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContactsCell.className, for: indexPath) as? ContactsCell {
+        cell.set(users[indexPath.row])
+        return cell
+    }
+    return UICollectionViewCell()
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
