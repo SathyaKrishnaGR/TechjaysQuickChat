@@ -8,6 +8,7 @@ let package = Package(
     platforms: [
         // Only add support for iOS 11 and up.
         .iOS(.v11)
+        
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.

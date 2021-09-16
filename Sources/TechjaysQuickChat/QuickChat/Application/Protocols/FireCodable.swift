@@ -22,7 +22,7 @@
 
 import UIKit
 
-protocol BaseCodable: class {
+protocol BaseCodable: AnyObject {
   
   var id: String { get set }
   
