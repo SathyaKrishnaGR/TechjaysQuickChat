@@ -33,7 +33,7 @@ extension UIStoryboard {
 //    }
     
     static func ViewController(id: TechjaysChatIdentifiers.ViewController, in storyboard: TechjaysChatIdentifiers.Storyboard) -> UIViewController {
-        let storyboard = UIStoryboard(name: storyboard.rawValue, bundle: nil)
+        let storyboard = UIStoryboard(name: storyboard.rawValue, bundle: Bundle.module)
         let viewController = storyboard.instantiateViewController(withIdentifier: id.rawValue)
         return viewController
     }
