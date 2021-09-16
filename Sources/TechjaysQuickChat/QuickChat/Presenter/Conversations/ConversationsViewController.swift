@@ -60,9 +60,11 @@ extension ConversationsViewController {
   
   
   @IBAction func composePressed(_ sender: Any) {
-    let vc: ContactsPreviewController = UIStoryboard.controller(storyboard: .previews)
-    vc.delegate = self
-    present(vc, animated: true, completion: nil)
+   if let vc: ContactsPreviewController = UIStoryboard.ViewController(id: .previews, in: .previews) as? ContactsPreviewController {
+        vc.delegate = self
+        present(vc, animated: true, completion: nil)
+        
+    }
   }
 }
 
@@ -118,10 +120,12 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
       composePressed(self)
       return
     }
-    let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
-    vc.conversation = conversations[indexPath.row]
-    manager.markAsRead(conversations[indexPath.row])
-    show(vc, sender: self)
+    if let vc: MessagesViewController = UIStoryboard.ViewController(id: .messages, in: .messages) as? MessagesViewController {
+        vc.conversation = conversations[indexPath.row]
+        manager.markAsRead(conversations[indexPath.row])
+        show(vc, sender: self)
+        
+    }
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -138,7 +142,7 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
 extension ConversationsViewController: ContactsPreviewControllerDelegate {
   func contactsPreviewController(didSelect user: ObjectUser) {
     guard let currentID = userManager.currentUserID() else { return }
-    let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
+    let vc: MessagesViewController = UIStoryboard.ViewController(id: .messages, in: .messages) as! MessagesViewController
     if let conversation = conversations.filter({$0.userIDs.contains(user.id)}).first {
       vc.conversation = conversation
       show(vc, sender: self)

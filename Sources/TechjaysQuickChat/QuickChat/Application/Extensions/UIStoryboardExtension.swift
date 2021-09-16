@@ -23,20 +23,35 @@
 import UIKit
 
 extension UIStoryboard {
-  
-  class func controller<T: UIViewController>(storyboard: StoryboardEnum) -> T {
-    return UIStoryboard(name: storyboard.rawValue, bundle: Bundle.module).instantiateViewController(withIdentifier: T.className) as! T
-  }
-  
-  class func initial<T: UIViewController>(storyboard: StoryboardEnum) -> T {
-    return UIStoryboard(name: storyboard.rawValue, bundle: Bundle.module).instantiateInitialViewController() as! T
-  }
-  
-    // UIStoryboard(name: “CakeVC”, bundle: Bundle.module).instantiateInitialViewController()!
-  enum StoryboardEnum: String {
-    case conversations = "Conversations"
-    case profile = "Profile"
-    case previews = "Previews"
-    case messages = "Messages"
-  }
+    
+//    class func controller<T: UIViewController>(storyboard: StoryboardEnum) -> T {
+//        return UIStoryboard(name: storyboard.rawValue, bundle: Bundle.module).instantiateViewController(withIdentifier: T.className) as! T
+//    }
+//
+//    class func initial<T: UIViewController>(storyboard: StoryboardEnum) -> T {
+//        return UIStoryboard(name: storyboard.rawValue, bundle: Bundle.module).instantiateInitialViewController() as! T
+//    }
+    
+    static func ViewController(id: TechjaysChatIdentifiers.ViewController, in storyboard: TechjaysChatIdentifiers.Storyboard) -> UIViewController {
+        let storyboard = UIStoryboard(name: storyboard.rawValue, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: id.rawValue)
+        return viewController
+    }
+    
+    struct TechjaysChatIdentifiers {
+        enum Storyboard: String {
+            case conversations = "Conversations"
+            case profile = "Profile"
+            case previews = "Previews"
+            case messages = "Messages"
+        }
+        enum ViewController: String {
+            case conversations = "ConversationsViewController"
+            case profile = "ProfileViewController"
+            case previews = "PreviewsViewController"
+            case messages = "MessagesViewController"
+        }
+    }
 }
+
+
