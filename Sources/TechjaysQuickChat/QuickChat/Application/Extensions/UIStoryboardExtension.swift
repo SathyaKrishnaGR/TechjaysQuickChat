@@ -48,7 +48,9 @@ extension UIStoryboard {
         enum ViewController: String {
             case conversations = "ConversationsViewController"
             case profile = "ProfileViewController"
-            case previews = "PreviewsViewController"
+            case imagePreviews = "ImagePreviewViewController"
+            case mapPreviews = "MapPreviewViewController"
+            case contactsPreviews = "ContactsPreviewViewController"
             case messages = "MessagesViewController"
         }
     }
