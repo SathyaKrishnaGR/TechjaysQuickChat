@@ -18,8 +18,9 @@ public struct TechjaysQuickChat {
         
     }
     
-    public func hello() -> String {
-        return "Hello"
+    public func ConfigureFireServiceStore() -> String {
+        FirestoreService().configure()
+        return "Success, FireStore connected"
     }
     
     public func openChatListScreen() {
