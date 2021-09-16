@@ -25,13 +25,14 @@ import UIKit
 extension UIStoryboard {
   
   class func controller<T: UIViewController>(storyboard: StoryboardEnum) -> T {
-    return UIStoryboard(name: storyboard.rawValue, bundle: Bundle(for: self)).instantiateViewController(withIdentifier: T.className) as! T
+    return UIStoryboard(name: storyboard.rawValue, bundle: Bundle.module).instantiateViewController(withIdentifier: T.className) as! T
   }
   
   class func initial<T: UIViewController>(storyboard: StoryboardEnum) -> T {
-    return UIStoryboard(name: storyboard.rawValue, bundle: Bundle(for: self)).instantiateInitialViewController() as! T
+    return UIStoryboard(name: storyboard.rawValue, bundle: Bundle.module).instantiateInitialViewController() as! T
   }
   
+    // UIStoryboard(name: “CakeVC”, bundle: Bundle.module).instantiateInitialViewController()!
   enum StoryboardEnum: String {
     case auth = "Auth"
     case conversations = "Conversations"
