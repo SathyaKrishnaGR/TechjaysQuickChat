@@ -23,7 +23,9 @@ public struct TechjaysQuickChat {
     public func openChatListScreen() {
         let storyboard = UIStoryboard(name: "Conversations", bundle: Bundle.module)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "Conversations") as? ConversationsViewController {
-            topMostController?.present(viewController, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                topMostController?.present(viewController, animated: true, completion: nil)
+            }
         }
     }
 }
