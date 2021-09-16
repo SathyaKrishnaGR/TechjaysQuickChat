@@ -199,13 +199,13 @@ extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
         let message = messages[indexPath.row]
         switch message.contentType {
         case .location:
-            if let vc: MapPreviewController = UIStoryboard.ViewController(id: .previews, in: .mapPreviews) as? MapPreviewController {
+            if let vc: MapPreviewController = UIStoryboard.ViewController(id: .mapPreviews, in: .previews) as? MapPreviewController {
                 
                 vc.locationString = message.content
                 navigationController?.present(vc, animated: true)
             }
         case .photo:
-            if let vc: ImagePreviewController = UIStoryboard.ViewController(id: .previews, in: .imagePreviews) as? ImagePreviewController {
+            if let vc: ImagePreviewController = UIStoryboard.ViewController(id: .imagePreviews, in: .previews) as? ImagePreviewController {
                 vc.imageURLString = message.profilePicLink
                 navigationController?.present(vc, animated: true)
             }

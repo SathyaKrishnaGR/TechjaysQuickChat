@@ -60,7 +60,7 @@ extension ConversationsViewController {
   
   
   @IBAction func composePressed(_ sender: Any) {
-   if let vc: ContactsPreviewController = UIStoryboard.ViewController(id: .previews, in: .contactsPreviews) as? ContactsPreviewController {
+   if let vc: ContactsPreviewController = UIStoryboard.ViewController(id: .contactsPreviews, in: .previews) as? ContactsPreviewController {
         vc.delegate = self
         present(vc, animated: true, completion: nil)
         
