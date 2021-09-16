@@ -22,7 +22,7 @@
 
 import UIKit
 
-protocol ContactsPreviewControllerDelegate: AnyObject {
+protocol ContactsPreviewControllerDelegate: class {
   func contactsPreviewController(didSelect user: ObjectUser)
 }
 

@@ -141,7 +141,7 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
 //MARK: ProfileViewController Delegate
 extension ConversationsViewController: ProfileViewControllerDelegate {
   func profileViewControllerDidLogOut() {
-    userManager.logout()
+//    userManager.logout()
     navigationController?.dismiss(animated: true)
   }
 }

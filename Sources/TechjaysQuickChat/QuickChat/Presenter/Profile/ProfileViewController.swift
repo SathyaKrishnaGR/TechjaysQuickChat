@@ -23,7 +23,7 @@
 
 import UIKit
 
-protocol ProfileViewControllerDelegate: AnyObject {
+protocol ProfileViewControllerDelegate: class {
   func profileViewControllerDidLogOut()
 }
 
