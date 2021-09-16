@@ -70,7 +70,7 @@ class ContactsPreviewController: UIViewController {
     userFour.name = "Ajay"
     userFour.profilePicLink = "https://sample-videos.com/img/Sample-jpg-image-1mb.jpg"
     
-    self.users = [userOne, userTwo]
+    self.users = [userOne, userTwo, userThree, userFour]
     
   }
   
