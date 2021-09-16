@@ -18,12 +18,9 @@ public struct TechjaysQuickChat {
         
     }
     
-    public func ConfigureFireServiceStore() -> String {
-        return "Success, FireStore connected"
-    }
     // User Id, Profile, 
     public func openChatListScreen() {
-        let vc = UIStoryboard.initial(storyboard: UserManager().currentUserID().isNone ? .auth : .conversations)
+        let vc = UIStoryboard.initial(storyboard: .conversations)
         vc.modalPresentationStyle = .fullScreen
         topMostController?.present(vc, animated: true, completion: nil)
     }
