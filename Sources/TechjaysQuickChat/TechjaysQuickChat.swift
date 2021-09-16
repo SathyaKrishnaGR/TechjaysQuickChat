@@ -3,7 +3,7 @@ import UIKit
 public struct TechjaysQuickChat {
     var text = "Hello, World!"
     var topMostController: UIViewController? {
-        guard let win = UIApplication.shared.windows.filter({$0.isKeyWindow}).first,
+        guard let win = UIApplication.shared.windows.first,
             let rootViewController = win.rootViewController else {
             return nil
         }
@@ -14,6 +14,7 @@ public struct TechjaysQuickChat {
         return topController
     }
     
+
     public init() {
         
     }
