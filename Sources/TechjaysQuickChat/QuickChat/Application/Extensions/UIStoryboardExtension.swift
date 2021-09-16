@@ -37,23 +37,6 @@ extension UIStoryboard {
         let viewController = storyboard.instantiateViewController(withIdentifier: id.rawValue)
         return viewController
     }
-    
-    struct TechjaysChatIdentifiers {
-        enum Storyboard: String {
-            case conversations = "Conversations"
-            case profile = "Profile"
-            case previews = "Previews"
-            case messages = "Messages"
-        }
-        enum ViewController: String {
-            case conversations = "ConversationsViewController"
-            case profile = "ProfileViewController"
-            case imagePreviews = "ImagePreviewViewController"
-            case mapPreviews = "MapPreviewViewController"
-            case contactsPreviews = "ContactsPreviewViewController"
-            case messages = "MessagesViewController"
-        }
-    }
 }
 
 
