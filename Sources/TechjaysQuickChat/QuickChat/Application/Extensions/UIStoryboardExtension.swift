@@ -34,7 +34,6 @@ extension UIStoryboard {
   
     // UIStoryboard(name: “CakeVC”, bundle: Bundle.module).instantiateInitialViewController()!
   enum StoryboardEnum: String {
-    case auth = "Auth"
     case conversations = "Conversations"
     case profile = "Profile"
     case previews = "Previews"
