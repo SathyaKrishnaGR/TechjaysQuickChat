@@ -7,7 +7,7 @@ let package = Package(
     name: "TechjaysQuickChat",
     platforms: [
         // Only add support for iOS 11 and up.
-        .iOS(.v11)
+        .iOS(.v13)
         
     ],
     products: [
