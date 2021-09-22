@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Reachability
 import Alamofire
 import UIKit
 

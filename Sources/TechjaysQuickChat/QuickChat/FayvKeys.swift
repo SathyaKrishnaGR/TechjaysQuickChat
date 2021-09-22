@@ -15,8 +15,8 @@ struct FayvKeys {
         static let authTokenKey = "Auth-Token"
         static let userKey = "user"
         static let userId = "user_id"
-        static let token = "token"
-        static let chatToken = "chat_token"
-        static let endpoint = "app_endpoint"
+        static var token = "token"
+        static var chatToken = "chat_token"
+        static var endpoint = "app_endpoint"
        }
 }
