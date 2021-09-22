@@ -155,7 +155,7 @@ extension MessagesViewController {
 //            message.contentType = .photo
 //            message.profilePic = image
 //            message.ownerID = UserManager().currentUserID()
-            self?.send(message)
+//            self?.send(message)
             self?.inputTextField.text = nil
             self?.showActionButtons(false)
         }
