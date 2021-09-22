@@ -146,7 +146,7 @@ extension MessagesViewController {
 //        message.ownerID = UserManager().currentUserID()
         inputTextField.text = nil
         showActionButtons(false)
-        send(message)
+        send(text)
     }
     
     @IBAction func sendImagePressed(_ sender: UIButton) {
