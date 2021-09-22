@@ -132,7 +132,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
 
 extension ConversationsViewController {
     fileprivate func fetchConversations(for url: String, isFirstPage: Bool, hasNext: @escaping (Bool) -> Void) {
-        APIClient().GET(url: url, headers: ["Authorization": FayvKeys.UserDefault.token]) { (status, response: APIResponse<[ObjectConversation]>) in
+        APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
                 if let data = response.data {
@@ -151,7 +151,7 @@ extension ConversationsViewController {
     }
     
     fileprivate func deleteChatList(users: String) {
-        APIClient().POST(url: "chat/delete-chat-list/", headers: ["Authorization": FayvKeys.UserDefault.token], payload: users) { (status, response: APIResponse<[ObjectConversation]>) in
+        APIClient().POST(url: "chat/delete-chat-list/", headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: users) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
                 self.tableView.reloadData()

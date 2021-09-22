@@ -38,17 +38,17 @@ extension SocketManager {
                 print("Sending PING failed: \(error)")
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-                self.connectRequst()
-                self.sendPing()
-                self.receiveMessages()
+//                self.connectRequst()
+//                self.sendPing()
+//                self.receiveMessages()
             }
         }
     }
     
-    func connectRequst() {
+    func connectRequst(chatToken: String) {
        let message = URLSessionWebSocketTask.Message.string("{\n" +
                                                                "\n" +
-                                                               "    \"token\": \"gAAAAABhSyIaKLQbYN0-yjrNh_es5hcGSQI0HTUCi8Z-slMnrDxs7vg6OB3YUOwzsocVYyezKTjV0GPHd8kuyOqgniQmy6iaAljrOvYwUS00IgRv4EPoVt_nO3i5e3lzdf2A5W52GYrxE1ps63t-d_oUPKwjqRYxBQ==\",\n" +
+                                                               "    \"token\": \"\(chatToken)\",\n" +
                                                                "\n" +
                                                                "    \"type\": \"connect\"\n" +
                                                                "\n" +
@@ -60,13 +60,13 @@ extension SocketManager {
        }
    }
     
-    func sendMessage() {
+    func sendMessage(chatToken: String, toUserId: String, message: String) {
        let message = URLSessionWebSocketTask.Message.string("{\n" +
-        "    \"token\": \"gAAAAABhSyIaKLQbYN0-yjrNh_es5hcGSQI0HTUCi8Z-slMnrDxs7vg6OB3YUOwzsocVYyezKTjV0GPHd8kuyOqgniQmy6iaAljrOvYwUS00IgRv4EPoVt_nO3i5e3lzdf2A5W52GYrxE1ps63t-d_oUPKwjqRYxBQ==\",\n" +
+        "    \"token\": \"\(chatToken)\",\n" +
         "    \"type\": \"chat\",\n" +
         "    \"chat_type\": \"private\",\n" +
-        "    \"to\": 6,\n" +
-        "    \"message\": \"test\"\n" +
+        "    \"to\": \(toUserId),\n" +
+        "    \"message\": \"\(message)\"\n" +
         "}")
        webSocketTask.send(message) { error in
            if let error = error {

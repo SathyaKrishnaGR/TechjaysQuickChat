@@ -55,7 +55,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             self?.tableView.scroll(to: .bottom, animated: true)
         }
         self.tableView.fetchData()
-        webSocket.sendUrlForWebsocketConfigure(url: "ws://3.19.93.161:8765")
+        webSocket.sendUrlForWebsocketConfigure(url: FayvKeys.ChatDefaults.socketUrl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,15 +73,16 @@ class MessagesViewController: UIViewController, KeyboardHandler {
 
 //MARK: Private methods
 extension MessagesViewController {
-    private func send(_ message: ObjectMessage) {
-        manager.create(message, conversation: conversation) {[weak self] response in
-            guard let weakSelf = self else { return }
-            if response == .failure {
-                weakSelf.showAlert()
-                return
-            }
-            weakSelf.conversation.timestamp = String(Date().timeIntervalSince1970)
-            //      switch message.contentType {
+    private func send(_ message: String) {
+        webSocket.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: conversation.to_user_id, message: message)
+//        manager.create(message, conversation: conversation) {[weak self] response in
+//            guard let weakSelf = self else { return }
+//            if response == .failure {
+//                weakSelf.showAlert()
+//                return
+//            }
+//            weakSelf.conversation.timestamp = String(Date().timeIntervalSince1970)
+//            //      switch message.contentType {
             //      case .none: weakSelf.conversation.lastMessage = message.message
             //      case .photo: weakSelf.conversation.lastMessage = "Attachment"
             //      case .location: weakSelf.conversation.lastMessage = "Location"
@@ -258,7 +259,7 @@ extension MessagesViewController: MessageTableViewCellDelegate {
 
 extension MessagesViewController {
     fileprivate func fetchMessages(for url: String, isFirstPage: Bool, hasNext: @escaping (Bool) -> Void) {
-        APIClient().GET(url: url, headers: ["Authorization": FayvKeys.UserDefault.token]) { (status, response: APIResponse<[ObjectMessage]>) in
+        APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectMessage]>) in
             switch status {
             case .SUCCESS:
                 if let data = response.data {
