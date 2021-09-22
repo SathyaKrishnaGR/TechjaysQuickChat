@@ -80,7 +80,7 @@
         <!--Map Preview Controller-->
         <scene sceneID="y36-37-Evd">
             <objects>
-                <viewController storyboardIdentifier="MapPreviewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9lx-gG-OwU" customClass="MapPreviewController" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapPreviewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9lx-gG-OwU" customClass="MapPreviewController" customModule="TechjaysQuickChat" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2BI-E6-yau">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,7 +122,7 @@
         <!--Contacts Preview Controller-->
         <scene sceneID="brw-QR-Tb3">
             <objects>
-                <viewController storyboardIdentifier="ContactsPreviewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="l7i-m2-WHZ" customClass="ContactsPreviewController" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactsPreviewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="l7i-m2-WHZ" customClass="ContactsPreviewController" customModule="TechjaysQuickChat" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Edj-vT-ggE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
