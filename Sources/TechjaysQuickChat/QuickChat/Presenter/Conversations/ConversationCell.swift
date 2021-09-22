@@ -57,7 +57,8 @@ class ConversationCell: UITableViewCell {
         timeLabel.font = timeLabel.font.bold
         
         // Data Set here
-        self.nameLabel.text = conversation.company_name + conversation.first_name
+        let name = conversation.company_name + conversation.first_name
+        self.nameLabel.text = name
         self.timeLabel.text = conversation.timestamp
         self.messageLabel.text = conversation.message
         guard let urlString = conversation.thumbnail_profile_pic else {
