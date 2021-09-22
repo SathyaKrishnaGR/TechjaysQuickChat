@@ -19,7 +19,6 @@ class SocketManager {
     
     func sendUrlForWebsocketConfigure(url: String) {
         webSocketTask = configureWebSocket(url: url)
-        sendPing()
     }
 }
 
@@ -32,19 +31,17 @@ extension SocketManager {
         return websocket
     }
     
-    func sendPing() {
-        webSocketTask.sendPing { (error) in
-            if let error = error {
-                print("Sending PING failed: \(error)")
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-//                self.connectRequst()
-//                self.sendPing()
-//                self.receiveMessages()
-            }
-        }
-    }
-    
+//    func connectWebSocket() {
+//            guard let url = URL(string: chatEndPoint) else {
+//                print("Error: can not create URL")
+//                return
+//            }
+//
+//            let request = URLRequest(url: url)
+//
+//            webSocketTask = URLSession.shared.webSocketTask(with: request)
+//            webSocketTask.resume()
+//    }
     func connectRequst(chatToken: String) {
        let message = URLSessionWebSocketTask.Message.string("{\n" +
                                                                "\n" +

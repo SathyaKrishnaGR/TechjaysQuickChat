@@ -38,7 +38,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
     private let imageService = ImagePickerService()
     private let locationService = LocationService()
     private var messages = [ObjectMessage]()
-    var webSocket = SocketManager()
+    var socketManager = SocketManager()
     
     //MARK: Public properties
     var conversation = ObjectConversation()
@@ -67,7 +67,8 @@ class MessagesViewController: UIViewController, KeyboardHandler {
                 // Fallback on earlier versions
             }
             
-            webSocket.sendUrlForWebsocketConfigure(url: FayvKeys.ChatDefaults.socketUrl)
+//            webSocket = socketManager.sendUrlForWebsocketConfigure(url: FayvKeys.ChatDefaults.socketUrl)
+            socketManager.configureWebSocket(url: FayvKeys.ChatDefaults.socketUrl)
         }
         
     }
@@ -76,7 +77,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
 //MARK: Private methods
 extension MessagesViewController {
     private func send(_ message: String) {
-            webSocket.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message)
+            socketManager.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message)
         
         
         //        manager.create(message, conversation: conversation) {[weak self] response in
