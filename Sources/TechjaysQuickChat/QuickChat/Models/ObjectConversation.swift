@@ -20,8 +20,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-
-
 import Foundation
 
 class Conversation: Codable {
@@ -64,7 +62,6 @@ extension Conversation {
         case data
     }
 }
-
 class ObjectConversation: Codable {
 //    var id = UUID().uuidString
     var company_name: String?
@@ -86,17 +83,17 @@ class ObjectConversation: Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 //        try container.encode(id, forKey: .id)
-        try container.encode(company_name, forKey: .company_name)
-        try container.encode(first_name, forKey: .first_name)
-        try container.encode(is_sent_by_myself, forKey: .is_sent_by_myself)
-        try container.encode(medium_profile_pic, forKey: .medium_profile_pic)
-        try container.encode(message, forKey: .message)
-        try container.encode(message_id, forKey: .message_id)
-        try container.encode(profile_pic, forKey: .profile_pic)
+        try container.encodeIfPresent(company_name, forKey: .company_name)
+        try container.encodeIfPresent(first_name, forKey: .first_name)
+        try container.encodeIfPresent(is_sent_by_myself, forKey: .is_sent_by_myself)
+        try container.encodeIfPresent(medium_profile_pic, forKey: .medium_profile_pic)
+        try container.encodeIfPresent(message, forKey: .message)
+        try container.encodeIfPresent(message_id, forKey: .message_id)
+        try container.encodeIfPresent(profile_pic, forKey: .profile_pic)
         try container.encodeIfPresent(thumbnail_profile_pic, forKey: .thumbnail_profile_pic)
-        try container.encode(to_user_id, forKey: .to_user_id)
-        try container.encode(user_type, forKey: .user_type)
-        try container.encode(timestamp, forKey: .timestamp)
+        try container.encodeIfPresent(to_user_id, forKey: .to_user_id)
+        try container.encodeIfPresent(user_type, forKey: .user_type)
+        try container.encodeIfPresent(timestamp, forKey: .timestamp)
         //    try container.encode(userIDs, forKey: .userIDs)
         //    try container.encodeIfPresent(lastMessage, forKey: .lastMessage)
         //    try container.encode(isRead, forKey: .isRead)
@@ -109,17 +106,17 @@ class ObjectConversation: Codable {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
 //        id = try container.decode(String.self, forKey: .id)
-        company_name = try container.decode(String.self, forKey: .company_name)
-        first_name = try container.decode(String.self, forKey: .first_name)
-        is_sent_by_myself = try container.decode(Bool.self, forKey: .is_sent_by_myself)
-        medium_profile_pic = try container.decode(String.self, forKey: .medium_profile_pic)
-        message = try container.decode(String.self, forKey: .message)
-        message_id = try container.decode(Int.self, forKey: .message_id)
-        profile_pic = try container.decode(String.self, forKey: .profile_pic)
-        thumbnail_profile_pic = try container.decode(String.self, forKey: .thumbnail_profile_pic)
-        to_user_id = try container.decode(Int.self, forKey: .to_user_id)
-        user_type = try container.decode(String.self, forKey: .user_type)
-        timestamp = try container.decode(String.self, forKey: .timestamp)
+        company_name = try container.decodeIfPresent(String.self, forKey: .company_name)
+        first_name = try container.decodeIfPresent(String.self, forKey: .first_name)
+        is_sent_by_myself = try container.decodeIfPresent(Bool.self, forKey: .is_sent_by_myself)
+        medium_profile_pic = try container.decodeIfPresent(String.self, forKey: .medium_profile_pic)
+        message = try container.decodeIfPresent(String.self, forKey: .message)
+        message_id = try container.decodeIfPresent(Int.self, forKey: .message_id)
+        profile_pic = try container.decodeIfPresent(String.self, forKey: .profile_pic)
+        thumbnail_profile_pic = try container.decodeIfPresent(String.self, forKey: .thumbnail_profile_pic)
+        to_user_id = try container.decodeIfPresent(Int.self, forKey: .to_user_id)
+        user_type = try container.decodeIfPresent(String.self, forKey: .user_type)
+        timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp)
         //    userIDs = try container.decode([String].self, forKey: .userIDs)
         //    lastMessage = try container.decodeIfPresent(String.self, forKey: .lastMessage)
         //    isRead = try container.decode([String: Bool].self, forKey: .isRead)
