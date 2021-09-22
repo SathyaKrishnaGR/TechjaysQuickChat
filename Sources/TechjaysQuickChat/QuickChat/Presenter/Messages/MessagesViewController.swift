@@ -74,7 +74,8 @@ class MessagesViewController: UIViewController, KeyboardHandler {
 //MARK: Private methods
 extension MessagesViewController {
     private func send(_ message: String) {
-        webSocket.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: "\(conversation.to_user_id)", message: message)
+            webSocket.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message)
+         
 //        manager.create(message, conversation: conversation) {[weak self] response in
 //            guard let weakSelf = self else { return }
 //            if response == .failure {
