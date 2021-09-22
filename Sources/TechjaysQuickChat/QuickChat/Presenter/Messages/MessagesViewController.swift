@@ -38,7 +38,8 @@ class MessagesViewController: UIViewController, KeyboardHandler {
     private let imageService = ImagePickerService()
     private let locationService = LocationService()
     private var messages = [ObjectMessage]()
-    
+    var webSocket = SocketManager()
+
     //MARK: Public properties
     var conversation = ObjectConversation()
     var bottomInset: CGFloat {
@@ -54,7 +55,9 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             self?.tableView.scroll(to: .bottom, animated: true)
         }
         self.tableView.fetchData()
+        webSocket.sendUrlForWebsocketConfigure(url: "ws://3.19.93.161:8765")
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if let url = conversation.medium_profile_pic {
@@ -142,6 +145,7 @@ extension MessagesViewController {
 //        message.ownerID = UserManager().currentUserID()
         inputTextField.text = nil
         showActionButtons(false)
+        webSocket.sendMessage()
         send(message)
     }
     
