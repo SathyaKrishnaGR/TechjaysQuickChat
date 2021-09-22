@@ -68,7 +68,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             }
             
 //            webSocket = socketManager.sendUrlForWebsocketConfigure(url: FayvKeys.ChatDefaults.socketUrl)
-            socketManager.configureWebSocket(url: FayvKeys.ChatDefaults.socketUrl)
+            socketManager.sendUrlForWebsocketConfigure(url: FayvKeys.ChatDefaults.socketUrl)
         }
         
     }
