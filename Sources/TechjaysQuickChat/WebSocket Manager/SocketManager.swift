@@ -68,6 +68,7 @@ extension SocketManager {
         "    \"to\": \(toUserId),\n" +
         "    \"message\": \"\(message)\"\n" +
         "}")
+        
        webSocketTask.send(message) { error in
            if let error = error {
                print("WebSocket couldn’t send message because: \(error)")
