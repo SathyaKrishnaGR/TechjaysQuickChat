@@ -146,7 +146,6 @@ extension MessagesViewController {
 //        message.ownerID = UserManager().currentUserID()
         inputTextField.text = nil
         showActionButtons(false)
-        webSocket.sendMessage()
         send(message)
     }
     
