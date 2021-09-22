@@ -131,7 +131,6 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
 }
 
 extension ConversationsViewController {
-//    "Token 1d0e5734f76ad754333a3b297442a4b1f38eb60e"
     fileprivate func fetchConversations(for url: String, isFirstPage: Bool, hasNext: @escaping (Bool) -> Void) {
         APIClient().GET(url: url, headers: ["Authorization": FayvKeys.UserDefault.token]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {

@@ -25,11 +25,11 @@ import UIKit
 extension UIStoryboard {
   
   class func controller<T: UIViewController>(storyboard: StoryboardEnum) -> T {
-    return UIStoryboard(name: storyboard.rawValue, bundle: nil).instantiateViewController(withIdentifier: T.className) as! T
+    return UIStoryboard(name: storyboard.rawValue, bundle: Bundle.module).instantiateViewController(withIdentifier: T.className) as! T
   }
   
   class func initial<T: UIViewController>(storyboard: StoryboardEnum) -> T {
-    return UIStoryboard(name: storyboard.rawValue, bundle: nil).instantiateInitialViewController() as! T
+    return UIStoryboard(name: storyboard.rawValue, bundle: Bundle.module).instantiateInitialViewController() as! T
   }
   
   enum StoryboardEnum: String {
