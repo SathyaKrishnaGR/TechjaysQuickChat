@@ -12,7 +12,7 @@
         <!--Profile View Controller-->
         <scene sceneID="Hja-zh-Uly">
             <objects>
-                <viewController id="Adz-rX-u5p" customClass="ProfileViewController" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Adz-rX-u5p" customClass="ProfileViewController" customModule="TechjaysQuickChat" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C4G-p6-ATm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
