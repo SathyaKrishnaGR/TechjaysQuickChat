@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +10,7 @@
         <!--Image Preview Controller-->
         <scene sceneID="Oky-u0-vXi">
             <objects>
-                <viewController storyboardIdentifier="ImagePreviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kOO-sf-zLU" customClass="ImagePreviewController" customModule="TechjaysQuickChat" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImagePreviewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kOO-sf-zLU" customClass="ImagePreviewController" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Ir-3M-n0G">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,7 +39,7 @@
                                     <outlet property="delegate" destination="kOO-sf-zLU" id="jKr-0C-FI8"/>
                                 </connections>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJW-NY-Crx">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJW-NY-Crx">
                                 <rect key="frame" x="330" y="64" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="8dz-gO-BJi"/>
@@ -52,7 +51,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="4lI-7g-GxT"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="6ee-eP-UZ8" secondAttribute="trailing" id="6Nt-AY-cLg"/>
@@ -62,6 +60,7 @@
                             <constraint firstItem="6ee-eP-UZ8" firstAttribute="top" secondItem="3Ir-3M-n0G" secondAttribute="top" id="nbA-we-yWe"/>
                             <constraint firstItem="4lI-7g-GxT" firstAttribute="trailing" secondItem="HJW-NY-Crx" secondAttribute="trailing" constant="20" id="omE-ns-qku"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="4lI-7g-GxT"/>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="BaM-aK-jKQ" id="nOC-E6-2cV"/>
@@ -80,7 +79,7 @@
         <!--Map Preview Controller-->
         <scene sceneID="y36-37-Evd">
             <objects>
-                <viewController storyboardIdentifier="MapPreviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9lx-gG-OwU" customClass="MapPreviewController" customModule="TechjaysQuickChat" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapPreviewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9lx-gG-OwU" customClass="MapPreviewController" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2BI-E6-yau">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,7 +87,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwc-e8-UJn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rea-98-Xb7">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rea-98-Xb7">
                                 <rect key="frame" x="330" y="64" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="2Z1-Ns-gih"/>
@@ -100,7 +99,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="fwp-f7-4AM"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fwp-f7-4AM" firstAttribute="top" secondItem="Rea-98-Xb7" secondAttribute="top" constant="-20" id="3L0-fx-2ce"/>
@@ -110,6 +108,7 @@
                             <constraint firstItem="fwp-f7-4AM" firstAttribute="trailing" secondItem="Rea-98-Xb7" secondAttribute="trailing" constant="20" id="qxm-CW-EqG"/>
                             <constraint firstAttribute="trailing" secondItem="lwc-e8-UJn" secondAttribute="trailing" id="xdk-Mz-SjC"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="fwp-f7-4AM"/>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="lwc-e8-UJn" id="Sbj-jh-mG0"/>
@@ -122,7 +121,7 @@
         <!--Contacts Preview Controller-->
         <scene sceneID="brw-QR-Tb3">
             <objects>
-                <viewController storyboardIdentifier="ContactsPreviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="l7i-m2-WHZ" customClass="ContactsPreviewController" customModule="TechjaysQuickChat" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactsPreviewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="l7i-m2-WHZ" customClass="ContactsPreviewController" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Edj-vT-ggE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -137,7 +136,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContactsCell" id="pZF-3R-SVV" customClass="ContactsCell" customModule="TechjaysQuickChat">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContactsCell" id="pZF-3R-SVV" customClass="ContactsCell" customModule="QuickChat" customModuleProvider="target">
                                         <rect key="frame" x="47.666666666666664" y="0.0" width="250" height="265"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -216,7 +215,7 @@
                                     <outlet property="delegate" destination="l7i-m2-WHZ" id="mxZ-RN-a3o"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3F6-JJ-eS0">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3F6-JJ-eS0">
                                 <rect key="frame" x="127.66666666666669" y="718" width="120" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="6on-mQ-p4f"/>
@@ -236,7 +235,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="GlF-hg-eYZ"/>
                         <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="3F6-JJ-eS0" firstAttribute="top" secondItem="4Ps-Z9-8Mv" secondAttribute="bottom" constant="20" id="JB4-sg-cjA"/>
@@ -246,6 +244,7 @@
                             <constraint firstItem="3F6-JJ-eS0" firstAttribute="centerX" secondItem="Edj-vT-ggE" secondAttribute="centerX" id="vDv-i2-bYM"/>
                             <constraint firstItem="4Ps-Z9-8Mv" firstAttribute="top" secondItem="GlF-hg-eYZ" secondAttribute="top" id="wdy-it-zdN"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="GlF-hg-eYZ"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="4Ps-Z9-8Mv" id="K0h-Zs-ZWX"/>

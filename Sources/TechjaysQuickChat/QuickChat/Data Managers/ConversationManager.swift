@@ -40,8 +40,8 @@ class ConversationManager {
   
   func markAsRead(_ conversation: ObjectConversation, _ completion: CompletionObject<FirestoreResponse>? = nil) {
     guard let userID = UserManager().currentUserID() else { return }
-    guard conversation.isRead[userID] == false else { return }
-    conversation.isRead[userID] = true
+//    guard conversation.isRead[userID] == false else { return }
+//    conversation.isRead[userID] = true
 //    FirestoreService().update(conversation, reference: .init(location: .conversations)) { completion?($0) }
   }
 }

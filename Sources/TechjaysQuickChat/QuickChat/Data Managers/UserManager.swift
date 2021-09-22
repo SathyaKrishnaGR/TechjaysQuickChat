@@ -24,8 +24,8 @@
 class UserManager {
   
   
-  func currentUserID() -> String? {
-    return "UserID"
+  func currentUserID() -> Int? {
+    return 0
   }
   
   func currentUserData(_ completion: @escaping CompletionObject<ObjectUser?>) {

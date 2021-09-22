@@ -37,7 +37,7 @@ class ImagePickerService: NSObject, UIImagePickerControllerDelegate, UINavigatio
     picker.allowsEditing = allowEditing
     guard let source = source else {
       let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-      sheet.view.tintColor = ThemeService.purpleColor
+      sheet.view.tintColor = ThemeService.black
       let cameraAction = UIAlertAction(title: "Camera", style: .default) {[weak self] _ in
         guard let weakSelf = self else { return }
         weakSelf.picker.sourceType = .camera

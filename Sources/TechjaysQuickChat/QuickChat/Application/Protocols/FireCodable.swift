@@ -28,13 +28,13 @@ protocol BaseCodable: AnyObject {
   
 }
 
-protocol FireCodable: BaseCodable, Codable {
+protocol ChatCodable: BaseCodable, Codable {
   
   var id: String { get set }
   
 }
 
-protocol FireStorageCodable: FireCodable {
+protocol ChatStorageCodable: ChatCodable {
   
   var profilePic: UIImage? { get set }
   var profilePicLink: String? { get set }

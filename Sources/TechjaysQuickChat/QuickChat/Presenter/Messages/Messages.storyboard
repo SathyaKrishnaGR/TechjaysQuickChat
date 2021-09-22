@@ -13,16 +13,16 @@
         <!--Messages View Controller-->
         <scene sceneID="J9y-GG-FKZ">
             <objects>
-                <viewController storyboardIdentifier="MessagesViewController" id="gTs-Hf-oyN" customClass="MessagesViewController" customModule="TechjaysQuickChat" sceneMemberID="viewController">
+                <viewController id="gTs-Hf-oyN" customClass="MessagesViewController" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZCI-dJ-g5h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bBq-0a-Ntf">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bBq-0a-Ntf" customClass="PaginatedTableView" customModule="QuickChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88" width="375" height="640"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageTableViewCell" rowHeight="90" id="75b-FZ-kCW" customClass="MessageTableViewCell" customModule="TechjaysQuickChat">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageTableViewCell" rowHeight="90" id="75b-FZ-kCW" customClass="MessageTableViewCell" customModule="QuickChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.333333969116211" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="75b-FZ-kCW" id="3k0-vp-xYi">
@@ -63,7 +63,7 @@
                                             <outlet property="messageTextView" destination="ZnP-PL-A6i" id="fZp-8n-Nn5"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserMessageTableViewCell" rowHeight="90" id="m0C-Mh-4Nd" customClass="MessageTableViewCell" customModule="TechjaysQuickChat">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserMessageTableViewCell" rowHeight="90" id="m0C-Mh-4Nd" customClass="MessageTableViewCell" customModule="QuickChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="114.33333396911621" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m0C-Mh-4Nd" id="z8b-Va-TFL">
@@ -72,7 +72,8 @@
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vzm-oI-d4p">
                                                     <rect key="frame" x="56" y="5" width="20" height="80"/>
-                                                    <color key="backgroundColor" red="0.50588235290000005" green="0.28627450980000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                    <color key="tintColor" name="AuthBackground"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <real key="value" value="18"/>
@@ -81,7 +82,7 @@
                                                 </view>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vrd-F8-pd4">
                                                     <rect key="frame" x="61" y="5" width="10" height="80"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
@@ -100,6 +101,7 @@
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" name="AuthBackground"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Vzm-oI-d4p" secondAttribute="bottom" constant="5" id="1to-V4-8wA"/>
                                                 <constraint firstItem="Vrd-F8-pd4" firstAttribute="bottom" secondItem="Vzm-oI-d4p" secondAttribute="bottom" id="2ac-te-FxX"/>
@@ -119,7 +121,7 @@
                                             <outlet property="profilePic" destination="oqU-VQ-Qe0" id="PzK-oV-86K"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageAttachmentTableViewCell" rowHeight="110" id="a7F-t6-xF2" customClass="MessageAttachmentTableViewCell" customModule="TechjaysQuickChat">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageAttachmentTableViewCell" rowHeight="110" id="a7F-t6-xF2" customClass="MessageAttachmentTableViewCell" customModule="QuickChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="204.33333396911621" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a7F-t6-xF2" id="jno-1U-KvW">
@@ -165,7 +167,7 @@
                                             <outlet property="attachmentImageViewWidthConstraint" destination="hu6-0h-M6P" id="Yrb-6t-svq"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserMessageAttachmentTableViewCell" rowHeight="90" id="WcO-43-MMO" customClass="MessageAttachmentTableViewCell" customModule="TechjaysQuickChat">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserMessageAttachmentTableViewCell" rowHeight="90" id="WcO-43-MMO" customClass="MessageAttachmentTableViewCell" customModule="QuickChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="314.33333396911621" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WcO-43-MMO" id="T8U-qO-YSe">
@@ -177,13 +179,15 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QRj-pJ-nDC">
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="80"/>
+                                                            <color key="tintColor" systemColor="systemBlueColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="80" id="R8S-zr-WSx"/>
                                                                 <constraint firstAttribute="width" constant="240" id="zmU-wa-nKi"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.50588235290000005" green="0.28627450980000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                    <color key="tintColor" name="AuthBackground"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="QRj-pJ-nDC" secondAttribute="trailing" id="4G5-8Z-xI7"/>
                                                         <constraint firstItem="QRj-pJ-nDC" firstAttribute="top" secondItem="4XG-W8-DP5" secondAttribute="top" id="X9D-Kj-TPM"/>
@@ -228,8 +232,7 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="gTs-Hf-oyN" id="DNJ-SI-MbS"/>
-                                    <outlet property="delegate" destination="gTs-Hf-oyN" id="U2T-lP-nWa"/>
+                                    <outlet property="paginationDelegate" destination="gTs-Hf-oyN" id="CiE-95-gXT"/>
                                 </connections>
                             </tableView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vn0-qa-7SK">
@@ -277,7 +280,7 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eTe-ES-iF1">
-                                                <rect key="frame" x="6" y="12.666666666666629" width="32" height="25"/>
+                                                <rect key="frame" x="6" y="25" width="32" height="0.0"/>
                                                 <subviews>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAN-TH-BmZ">
                                                         <rect key="frame" x="0.0" y="0.0" width="32" height="25"/>
@@ -312,7 +315,7 @@
                                                             <action selector="sendLocationPressed:" destination="gTs-Hf-oyN" eventType="touchUpInside" id="Np7-Fu-HPI"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wiw-ke-ss8">
+                                                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wiw-ke-ss8">
                                                         <rect key="frame" x="0.0" y="0.0" width="32" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="JON-yj-x8u"/>
@@ -405,8 +408,17 @@
         <namedColor name="AuthBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

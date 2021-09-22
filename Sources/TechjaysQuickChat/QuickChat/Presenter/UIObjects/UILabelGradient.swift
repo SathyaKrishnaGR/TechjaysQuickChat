@@ -24,13 +24,13 @@ import UIKit
 
 class UILabelGradient: UILabel {
   
-  @IBInspectable var leftColor: UIColor = ThemeService.purpleColor {
+  @IBInspectable var leftColor: UIColor = ThemeService.black {
     didSet {
       applyGradient()
     }
   }
   
-  @IBInspectable var rightColor: UIColor = ThemeService.blueColor {
+  @IBInspectable var rightColor: UIColor = ThemeService.black {
     didSet {
       applyGradient()
     }

@@ -23,7 +23,7 @@
 
 import UIKit
 
-protocol MessageTableViewCellDelegate: class {
+protocol MessageTableViewCellDelegate: AnyObject {
   func messageTableViewCellUpdate()
 }
 
@@ -32,14 +32,12 @@ class MessageTableViewCell: UITableViewCell {
   @IBOutlet weak var profilePic: UIImageView?
   @IBOutlet weak var messageTextView: UITextView?
   
-  func set(_ message: ObjectMessage) {
+    func set(_ message: ObjectMessage, conversation: ObjectConversation) {
     messageTextView?.text = message.message
     guard let imageView = profilePic else { return }
-    guard let userID = message.ownerID else { return }
-    ProfileManager.shared.userData(id: userID) { user in
-      guard let urlString = user?.profilePicLink else { return }
+      guard let urlString = conversation.thumbnail_profile_pic else { return }
       imageView.setImage(url: URL(string: urlString))
-    }
+
   }
 }
 
@@ -58,27 +56,27 @@ class MessageAttachmentTableViewCell: MessageTableViewCell {
     attachmentImageViewWidthConstraint.constant = 250
   }
   
-  override func set(_ message: ObjectMessage) {
-    super.set(message)
-    switch message.contentType {
-    case .location:
-      attachmentImageView.image = UIImage(named: "locationThumbnail")
-    case .photo:
-      guard let urlString = message.profilePicLink else { return }
-      attachmentImageView.setImage(url: URL(string: urlString)) {[weak self] image in
-        guard let image = image, let weakSelf = self else { return }
-        guard weakSelf.attachmentImageViewHeightConstraint.constant != image.size.height, weakSelf.attachmentImageViewWidthConstraint.constant != image.size.width else { return }
-        if max(image.size.height, image.size.width) <= 250 {
-          weakSelf.attachmentImageViewHeightConstraint.constant = image.size.height
-          weakSelf.attachmentImageViewWidthConstraint.constant = image.size.width
-          weakSelf.delegate?.messageTableViewCellUpdate()
-          return
-        }
-        weakSelf.attachmentImageViewWidthConstraint.constant = 250
-        weakSelf.attachmentImageViewHeightConstraint.constant = image.size.height * (250 / image.size.width)
-        weakSelf.delegate?.messageTableViewCellUpdate()
-      }
-    default: break
-    }
-  }
+//  override func set(_ message: ObjectMessage) {
+//    super.set(message, conversation: conversations)
+//    switch message.contentType {
+//    case .location:
+//      attachmentImageView.image = UIImage(named: "locationThumbnail")
+//    case .photo:
+//      guard let urlString = message.profilePicLink else { return }
+//      attachmentImageView.setImage(url: URL(string: urlString)) {[weak self] image in
+//        guard let image = image, let weakSelf = self else { return }
+//        guard weakSelf.attachmentImageViewHeightConstraint.constant != image.size.height, weakSelf.attachmentImageViewWidthConstraint.constant != image.size.width else { return }
+//        if max(image.size.height, image.size.width) <= 250 {
+//          weakSelf.attachmentImageViewHeightConstraint.constant = image.size.height
+//          weakSelf.attachmentImageViewWidthConstraint.constant = image.size.width
+//          weakSelf.delegate?.messageTableViewCellUpdate()
+//          return
+//        }
+//        weakSelf.attachmentImageViewWidthConstraint.constant = 250
+//        weakSelf.attachmentImageViewHeightConstraint.constant = image.size.height * (250 / image.size.width)
+//        weakSelf.delegate?.messageTableViewCellUpdate()
+//      }
+//    default: break
+//    }
+//  }
 }
