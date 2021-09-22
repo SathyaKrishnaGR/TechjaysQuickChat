@@ -13,8 +13,8 @@ public struct TechjaysQuickChat {
         FayvKeys.UserDefault.token = accessToken
         FayvKeys.UserDefault.endpoint = appEndPoint
         
-        let storyboard = UIStoryboard(name: TechjaysChatIdentifiers.Storyboard.conversations.rawValue, bundle: Bundle.module)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: TechjaysChatIdentifiers.ViewController.conversations.rawValue) as? ConversationsViewController {
+        let storyboard = UIStoryboard(name: "Conversations", bundle: Bundle.module)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "ConversationsViewController") as? ConversationsViewController {
             viewController.modalPresentationStyle = .fullScreen
             
             print("Chat token \(FayvKeys.UserDefault.chatToken)")
