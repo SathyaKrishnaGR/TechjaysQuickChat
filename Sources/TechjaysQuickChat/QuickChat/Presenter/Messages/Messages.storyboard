@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="640"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageTableViewCell" rowHeight="90" id="75b-FZ-kCW" customClass="MessageTableViewCell" customModule="QuickChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageTableViewCell" rowHeight="90" id="75b-FZ-kCW" customClass="MessageTableViewCell" customModule="TechjaysQuickChat">
                                         <rect key="frame" x="0.0" y="24.333333969116211" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="75b-FZ-kCW" id="3k0-vp-xYi">
@@ -63,7 +63,7 @@
                                             <outlet property="messageTextView" destination="ZnP-PL-A6i" id="fZp-8n-Nn5"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserMessageTableViewCell" rowHeight="90" id="m0C-Mh-4Nd" customClass="MessageTableViewCell" customModule="QuickChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserMessageTableViewCell" rowHeight="90" id="m0C-Mh-4Nd" customClass="MessageTableViewCell" customModule="TechjaysQuickChat">
                                         <rect key="frame" x="0.0" y="114.33333396911621" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m0C-Mh-4Nd" id="z8b-Va-TFL">
@@ -121,7 +121,7 @@
                                             <outlet property="profilePic" destination="oqU-VQ-Qe0" id="PzK-oV-86K"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageAttachmentTableViewCell" rowHeight="110" id="a7F-t6-xF2" customClass="MessageAttachmentTableViewCell" customModule="QuickChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageAttachmentTableViewCell" rowHeight="110" id="a7F-t6-xF2" customClass="MessageAttachmentTableViewCell" customModule="TechjaysQuickChat">
                                         <rect key="frame" x="0.0" y="204.33333396911621" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a7F-t6-xF2" id="jno-1U-KvW">
@@ -167,7 +167,7 @@
                                             <outlet property="attachmentImageViewWidthConstraint" destination="hu6-0h-M6P" id="Yrb-6t-svq"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserMessageAttachmentTableViewCell" rowHeight="90" id="WcO-43-MMO" customClass="MessageAttachmentTableViewCell" customModule="QuickChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserMessageAttachmentTableViewCell" rowHeight="90" id="WcO-43-MMO" customClass="MessageAttachmentTableViewCell" customModule="TechjaysQuickChat">
                                         <rect key="frame" x="0.0" y="314.33333396911621" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WcO-43-MMO" id="T8U-qO-YSe">
