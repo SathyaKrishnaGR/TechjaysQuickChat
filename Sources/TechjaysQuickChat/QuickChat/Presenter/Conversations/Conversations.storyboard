@@ -12,7 +12,7 @@
         <!--Conversations-->
         <scene sceneID="lvk-hN-N7n">
             <objects>
-                <viewController title=" " id="ri6-fX-8IQ" userLabel="Conversations" customClass="ConversationsViewController" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConversationsViewController" title=" " id="ri6-fX-8IQ" userLabel="Conversations" customClass="ConversationsViewController" customModule="QuickChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qEq-DZ-2B1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
