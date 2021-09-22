@@ -254,7 +254,7 @@ extension MessagesViewController: MessageTableViewCellDelegate {
 
 extension MessagesViewController {
     fileprivate func fetchMessages(for url: String, isFirstPage: Bool, hasNext: @escaping (Bool) -> Void) {
-        APIClient().GET(url: url, headers: ["Authorization": "Token 1d0e5734f76ad754333a3b297442a4b1f38eb60e"]) { (status, response: APIResponse<[ObjectMessage]>) in
+        APIClient().GET(url: url, headers: ["Authorization": FayvKeys.UserDefault.token]) { (status, response: APIResponse<[ObjectMessage]>) in
             switch status {
             case .SUCCESS:
                 if let data = response.data {

@@ -20,6 +20,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+
+
 import Foundation
 
 class Conversation: Codable {
@@ -62,6 +64,7 @@ extension Conversation {
         case data
     }
 }
+
 class ObjectConversation: Codable {
 //    var id = UUID().uuidString
     var company_name: String?
