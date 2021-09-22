@@ -39,13 +39,14 @@ class MessagesViewController: UIViewController, KeyboardHandler {
     private let locationService = LocationService()
     private var messages = [ObjectMessage]()
     var webSocket = SocketManager()
-
+    
     //MARK: Public properties
     var conversation = ObjectConversation()
     var bottomInset: CGFloat {
         return view.safeAreaInsets.bottom + 50
     }
     var to_user_id: Int = 0
+    fileprivate var webSocketConnected = false
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -55,7 +56,6 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             self?.tableView.scroll(to: .bottom, animated: true)
         }
         self.tableView.fetchData()
-        webSocket.sendUrlForWebsocketConfigure(url: FayvKeys.ChatDefaults.socketUrl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +66,8 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             } else {
                 // Fallback on earlier versions
             }
+            
+            webSocket.sendUrlForWebsocketConfigure(url: FayvKeys.ChatDefaults.socketUrl)
         }
         
     }
@@ -74,30 +76,33 @@ class MessagesViewController: UIViewController, KeyboardHandler {
 //MARK: Private methods
 extension MessagesViewController {
     private func send(_ message: String) {
+        if webSocketConnected {
+        
             webSocket.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message)
-         
-//        manager.create(message, conversation: conversation) {[weak self] response in
-//            guard let weakSelf = self else { return }
-//            if response == .failure {
-//                weakSelf.showAlert()
-//                return
-//            }
-//            weakSelf.conversation.timestamp = String(Date().timeIntervalSince1970)
-//            //      switch message.contentType {
-            //      case .none: weakSelf.conversation.lastMessage = message.message
-            //      case .photo: weakSelf.conversation.lastMessage = "Attachment"
-            //      case .location: weakSelf.conversation.lastMessage = "Location"
-            //      default: break
-            //      }
-            //      if let currentUserID = UserManager().currentUserID() {
-            //        weakSelf.conversation.isRead[currentUserID] = true
-            //      }
-            //      ConversationManager().create(weakSelf.conversation)
         }
-//    }
+        
+        //        manager.create(message, conversation: conversation) {[weak self] response in
+        //            guard let weakSelf = self else { return }
+        //            if response == .failure {
+        //                weakSelf.showAlert()
+        //                return
+        //            }
+        //            weakSelf.conversation.timestamp = String(Date().timeIntervalSince1970)
+        //            //      switch message.contentType {
+        //      case .none: weakSelf.conversation.lastMessage = message.message
+        //      case .photo: weakSelf.conversation.lastMessage = "Attachment"
+        //      case .location: weakSelf.conversation.lastMessage = "Location"
+        //      default: break
+        //      }
+        //      if let currentUserID = UserManager().currentUserID() {
+        //        weakSelf.conversation.isRead[currentUserID] = true
+        //      }
+        //      ConversationManager().create(weakSelf.conversation)
+    }
+    //    }
     
     private func showProfileIconOnNavBar(urlString: String) {
-
+        
         
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
@@ -106,7 +111,7 @@ extension MessagesViewController {
         button.imageView?.contentMode = .scaleAspectFit
         button.imageView?.setImage(url: URL(string : urlString)!)
         let imageData = try? Data(contentsOf: URL(string : urlString)!)
-
+        
         if let imageData = imageData , let image =  UIImage(data: imageData)?.resizeImage(to: button.frame.size) {
             button.setBackgroundImage(image, for: .normal)
         }
@@ -144,7 +149,7 @@ extension MessagesViewController {
         guard let text = inputTextField.text, !text.isEmpty else { return }
         let message = ObjectMessage()
         message.message = text
-//        message.ownerID = UserManager().currentUserID()
+        //        message.ownerID = UserManager().currentUserID()
         inputTextField.text = nil
         showActionButtons(false)
         send(text)
@@ -153,10 +158,10 @@ extension MessagesViewController {
     @IBAction func sendImagePressed(_ sender: UIButton) {
         imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
             let message = ObjectMessage()
-//            message.contentType = .photo
-//            message.profilePic = image
-//            message.ownerID = UserManager().currentUserID()
-//            self?.send(message)
+            //            message.contentType = .photo
+            //            message.profilePic = image
+            //            message.ownerID = UserManager().currentUserID()
+            //            self?.send(message)
             self?.inputTextField.text = nil
             self?.showActionButtons(false)
         }
@@ -168,11 +173,11 @@ extension MessagesViewController {
             case .denied:
                 self?.showAlert(title: "Error", message: "Please enable locattion services")
             case .location(let location):
-//                let message = ObjectMessage()
-//                message.ownerID = UserManager().currentUserID()
-//                message.content = location.string
-//                message.contentType = .location
-//                self?.send(message)
+                //                let message = ObjectMessage()
+                //                message.ownerID = UserManager().currentUserID()
+                //                message.content = location.string
+                //                message.contentType = .location
+                //                self?.send(message)
                 self?.inputTextField.text = nil
                 self?.showActionButtons(false)
             }
@@ -201,14 +206,14 @@ extension MessagesViewController: PaginatedTableViewDelegate {
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let message = messages[indexPath.row]
         
-//        if message.contentType == .none {
+        //        if message.contentType == .none {
         let cell = tableView.dequeueReusableCell(withIdentifier: message.message_id == UserManager().currentUserID() ? "MessageTableViewCell" : "UserMessageTableViewCell") as! MessageTableViewCell
         cell.set(message, conversation: conversation)
-            return cell
-//        }
-//        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
-//        cell.delegate = self
-//        cell.set(message)
+        return cell
+        //        }
+        //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
+        //        cell.delegate = self
+        //        cell.set(message)
         return cell
     }
     
@@ -222,17 +227,17 @@ extension MessagesViewController: PaginatedTableViewDelegate {
     
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let message = messages[indexPath.row]
-//        switch message.contentType {
-//        case .location:
-//            let vc: MapPreviewController = UIStoryboard.controller(storyboard: .previews)
-//            vc.locationString = message.content
-//            navigationController?.present(vc, animated: true)
-//        case .photo:
-//            let vc: ImagePreviewController = UIStoryboard.controller(storyboard: .previews)
-//            vc.imageURLString = message.profilePicLink
-//            navigationController?.present(vc, animated: true)
-//        default: break
-//        }
+        //        switch message.contentType {
+        //        case .location:
+        //            let vc: MapPreviewController = UIStoryboard.controller(storyboard: .previews)
+        //            vc.locationString = message.content
+        //            navigationController?.present(vc, animated: true)
+        //        case .photo:
+        //            let vc: ImagePreviewController = UIStoryboard.controller(storyboard: .previews)
+        //            vc.imageURLString = message.profilePicLink
+        //            navigationController?.present(vc, animated: true)
+        //        default: break
+        //        }
     }
 }
 
@@ -269,7 +274,7 @@ extension MessagesViewController {
                         self.messages.append(contentsOf: data )
                     }
                     
-//                    self.messages = self.messages.sorted(by: {$0.timestamp < $1.timestamp})
+                    //                    self.messages = self.messages.sorted(by: {$0.timestamp < $1.timestamp})
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .bottom, animated: true)
                 }
@@ -282,7 +287,7 @@ extension MessagesViewController {
 }
 extension UIImage {
     func resizeImage(to size: CGSize) -> UIImage {
-       return UIGraphicsImageRenderer(size: size).image { _ in
-           draw(in: CGRect(origin: .zero, size: size))
-    }
-}}
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
+        }
+    }}

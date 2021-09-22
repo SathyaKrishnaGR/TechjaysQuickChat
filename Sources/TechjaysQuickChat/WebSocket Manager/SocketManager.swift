@@ -56,6 +56,7 @@ extension SocketManager {
        webSocketTask.send(message) { error in
            if let error = error {
                print("WebSocket couldn’t send message because: \(error)")
+            
            }
        }
    }
