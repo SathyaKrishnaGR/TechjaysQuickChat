@@ -106,7 +106,6 @@ class SocketManager {
        
         //https://echo.websocket.org
         var request = URLRequest(url: URL(string:url)!)
-        request.timeoutInterval = 5
         socket = WebSocket(request: request)
         socket.delegate = self
         socket.connect()
