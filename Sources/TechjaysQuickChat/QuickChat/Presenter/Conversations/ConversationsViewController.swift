@@ -53,7 +53,8 @@ class ConversationsViewController: UIViewController {
         self.tableView.allowsMultipleSelectionDuringEditing = true
         self.tableView.fetchData()
 
-        if isFromReel {
+        if isFromReel! {
+            
             let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
                  vc.conversation = conversationFromMobileApp
                  if let toUserId = conversationFromMobileApp.to_user_id {
