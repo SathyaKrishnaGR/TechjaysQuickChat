@@ -290,7 +290,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
         
     }
     
-    func convertStringToJson(string: String) -> (SocketMessage, Error?) {
+    func convertStringToJson(string: String) -> SocketMessage {
         var socketMessage: SocketMessage!
         let data = string.data(using: .utf8)!
         do {
@@ -299,13 +299,13 @@ extension MessagesViewController: SocketDataTransferDelegate {
                 print(socketMessage.msg) // use the json here
                 socketMessage = socket
                 
-                return (socketMessage, nil)
+                return socketMessage
             }
         } catch let error as NSError {
             print(error)
             
-            return (socketMessage, error)
         }
+        return socketMessage
     }
     
     

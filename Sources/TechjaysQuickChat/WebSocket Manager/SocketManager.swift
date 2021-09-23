@@ -62,11 +62,6 @@ class SocketManager {
             socket.connect()
         }
     }
-    
-    // MARK:- fil
-    fileprivate func addMessageToChatList(message: ObjectMessage) {
-        
-    }
 }
 extension SocketManager: WebSocketDelegate {
     // MARK: - WebSocketDelegate
