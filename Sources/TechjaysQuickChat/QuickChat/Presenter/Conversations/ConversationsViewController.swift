@@ -45,11 +45,13 @@ class ConversationsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if isFromReel! {
-            let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
-            vc.to_user_id = userId!
-            vc.opponentUserName = opponentUserName
-            vc.isFromReel = isFromReel!
-            show(vc, sender: self)
+            DispatchQueue.main.async {
+                let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
+                vc.to_user_id = userId!
+                vc.opponentUserName = opponentUserName
+                vc.isFromReel = isFromReel!
+                show(vc, sender: self)
+            }
         }
     }
     
