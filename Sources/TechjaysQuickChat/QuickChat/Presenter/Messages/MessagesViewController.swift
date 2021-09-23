@@ -71,7 +71,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             } else {
                 // Fallback on earlier versions
             }
-            tableView.transform =CGAffineTransform(scaleX: 1, y: -1)
+            tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         }
         socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         socketManager.dataUpdateDelegate = self
