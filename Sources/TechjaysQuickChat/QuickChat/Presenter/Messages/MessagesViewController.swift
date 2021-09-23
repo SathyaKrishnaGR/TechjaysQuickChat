@@ -360,7 +360,9 @@ extension MessagesViewController: SocketDataTransferDelegate {
             
             messages.append(socket)
             inSocket = true
+            self.tableView.reloadData()
         }
+        
     }
     
     func jsonDecode(message: String, completion: @escaping ( _ data: ObjectMessage?, _ error: Error?) -> Void) {
