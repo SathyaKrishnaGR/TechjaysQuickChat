@@ -194,10 +194,10 @@
             </objects>
             <point key="canvasLocation" x="2295.6521739130435" y="428.57142857142856"/>
         </scene>
-        <!--Messages-->
+        <!--MessagesViewController-->
         <scene sceneID="nvb-VT-jAS">
             <objects>
-                <viewControllerPlaceholder storyboardName="Messages" id="FIB-XP-7yZ" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="MessagesViewController" storyboardName="Messages" referencedIdentifier="MessagesViewController" id="FIB-XP-7yZ" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="c5f-WS-l8n"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QYc-mz-mWY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
