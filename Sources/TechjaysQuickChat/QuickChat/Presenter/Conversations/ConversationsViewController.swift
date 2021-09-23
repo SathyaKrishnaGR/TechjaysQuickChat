@@ -74,7 +74,6 @@ class ConversationsViewController: UIViewController {
         if segue.identifier == "didSelect" {
             let nav = segue.destination as! UINavigationController
             if let vc = nav.topViewController as? MessagesViewController {
-                vc.conversation = conversations[selectedRow]
                 if selectedRow == -1 {
                     vc.to_user_id = self.userId!
                     vc.opponentUserName = opponentUserName
@@ -82,6 +81,8 @@ class ConversationsViewController: UIViewController {
                 } else {
                     if let toUserId = conversations[selectedRow].to_user_id {
                         vc.to_user_id = toUserId
+                        vc.conversation = conversations[selectedRow]
+                        
                     }
                 }
                 present(nav, animated: true, completion: nil)

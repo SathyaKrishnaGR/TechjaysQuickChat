@@ -105,11 +105,11 @@ extension MessagesViewController {
     
     private func showProfileIconOnNavBar(urlString: String) {
         
-        let closeButton = UIBarButtonItem(
-            barButtonSystemItem: target as? UIBarButtonItem,
-            self,
-            action: Selector("doneButtonTapped:"))
-        navigationItem.rightBarButtonItem = closeButton
+//        let closeButton = UIBarButtonItem(
+//            barButtonSystemItem: target
+//            target: self,
+//            action: Selector("doneButtonTapped:"))
+//        navigationItem.rightBarButtonItem = closeButton
         if isFromReel {
               self.navigationItem.title = opponentUserName
             } else {
