@@ -354,7 +354,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
             print("Message is \(String(describing: message))")
             if error == nil {
                 if let message = message {
-                  if  message.data == nil {
+                    if  message.data?.sender == nil {
                         // Our User - Sending someone a message
                         message.message = self.inputTextField.text
                         message.is_sent_by_myself = true
