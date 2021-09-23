@@ -353,7 +353,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
             print("Error is \(String(describing: error))")
             print("Message is \(String(describing: messageinClosure))")
             if error == nil {
-                if var socketMessage = messageinClosure {
+                if let socketMessage = messageinClosure {
                     if  socketMessage.data?.sender == nil {
                         // Our User - Sending someone a message
                         socketMessage.message = self.inputTextField.text
@@ -363,8 +363,10 @@ extension MessagesViewController: SocketDataTransferDelegate {
                         // Someone is sending you a message!
                         socketMessage.is_sent_by_myself = false
                         if let objMessage = messageinClosure {
-                            socketMessage = objMessage
+                            socketMessage.message = objMessage.message
+                            print("objMessage. message \(objMessage.message)")
                         }
+                        
                         print("Messag. message \(socketMessage.message)")
                     }
                     
