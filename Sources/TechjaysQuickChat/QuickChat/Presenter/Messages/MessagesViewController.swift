@@ -60,7 +60,8 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             guard state else { return }
             self?.tableView.scroll(to: .bottom, animated: true)
         }
-        
+        tableView.transform = CGAffineTransform(rotationAngle: (-.pi))
+        tableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.size.width - 10)
         self.tableView.fetchData()
 
     }
@@ -211,7 +212,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
                 cell.setChatList(message, conversation: conversation)
-                cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+                cell.transform = CGAffineTransform(rotationAngle: (-.pi))
                 return cell
                 //        }
                 //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
@@ -222,7 +223,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
                 cell.setChatList(message, conversation: conversation)
-                cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+                cell.transform = CGAffineTransform(rotationAngle: (-.pi))
                 return cell
                 //        }
                 //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
