@@ -40,7 +40,7 @@ class ConversationsViewController: UIViewController {
     var userId: Int?
     var to_user_id: Int? = 0
     var opponentUserName: String?
-    
+    var selectedRow: Int = 0
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +68,22 @@ class ConversationsViewController: UIViewController {
         super.viewWillDisappear(true)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "didSelect" {
+            let nav = segue.destination as! UINavigationController
+            if let vc = nav.topViewController as? MessagesViewController {
+                vc.conversation = conversations[selectedRow]
+                if let toUserId = conversations[selectedRow].to_user_id {
+                    vc.to_user_id = toUserId
+                }
+                vc.modalPresentationStyle = .currentContext
+                present(vc, animated: true, completion: nil)
+            }
+            
+            
+        }
+    }
 }
 
 //MARK: IBActions
@@ -75,26 +91,26 @@ extension ConversationsViewController {
     
     @IBAction func profilePressed(_ sender: Any) {
         isEditing = true
-            if let indexPaths = tableView.indexPathsForSelectedRows {
-              //Sort the array so it doesn’t cause a crash depending on your selection order.
-              let sortedPaths = indexPaths.sorted {$0.row > $1.row}
-                  for indexPath in sortedPaths {
-                    let count = conversations.count
-                    let index = count-1
-                    for i in stride(from: index, through: 0, by: -1) {
-                      if(indexPath.row == i){
+        if let indexPaths = tableView.indexPathsForSelectedRows {
+            //Sort the array so it doesn’t cause a crash depending on your selection order.
+            let sortedPaths = indexPaths.sorted {$0.row > $1.row}
+            for indexPath in sortedPaths {
+                let count = conversations.count
+                let index = count-1
+                for i in stride(from: index, through: 0, by: -1) {
+                    if(indexPath.row == i){
                         let toUserId = conversations[indexPath.row].to_user_id ?? 0
                         self.deleteChatList(users: "\(indexPath.row)", to_user_id: toUserId)
                         conversations.remove(at: i)
-                      }
                     }
-                  }
-                  isEditing = false
-                  tableView.deleteRows(at: sortedPaths, with: .automatic)
+                }
             }
+            isEditing = false
+            tableView.deleteRows(at: sortedPaths, with: .automatic)
+        }
     }
-        
-        
+    
+    
     
     
     @IBAction func composePressed(_ sender: Any) {}
@@ -135,20 +151,13 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isEditing {} else{
-              if conversations.isEmpty {
+            if conversations.isEmpty {
                 composePressed(self)
                 return
-              }
-              let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
-              vc.conversation = conversations[indexPath.row]
-              if let toUserId = conversations[indexPath.row].to_user_id {
-                vc.to_user_id = toUserId
-              }
-              //    manager.markAsRead(conversations[indexPath.row])
-//              show(vc, sender: self)
-            vc.modalPresentationStyle = .currentContext
-            present(vc, animated: true, completion: nil)
             }
+        }
+        
+        selectedRow = indexPath.row
     }
     
     func paginatedTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -183,14 +192,14 @@ extension ConversationsViewController {
     fileprivate func deleteChatList(users: String,to_user_id: Int ) {
         let url = URLFactory.shared.url(endpoint: "chat/delete-chat-list/", parameters: ["to_user_id": "\(to_user_id)"])
         APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: users) { (status, response: APIResponse<[ObjectConversation]>) in
-          switch status {
-          case .SUCCESS:
-            self.tableView.reloadData()
-          case .FAILURE:
-            print(response.msg)
-          }
+            switch status {
+            case .SUCCESS:
+                self.tableView.reloadData()
+            case .FAILURE:
+                print(response.msg)
+            }
         }
-      }
+    }
 }
 
 //MARK: ProfileViewController Delegate
