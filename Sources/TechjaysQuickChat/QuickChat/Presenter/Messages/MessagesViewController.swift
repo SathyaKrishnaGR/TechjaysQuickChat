@@ -388,7 +388,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
         do {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let data = Data(message.utf8)
+            let data = Data(messageToDecode.utf8)
             
             let weather = try decoder.decode(ObjectMessage.self, from: data)
             return completion(weather, nil)
