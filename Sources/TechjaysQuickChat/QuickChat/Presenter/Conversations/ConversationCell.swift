@@ -62,11 +62,12 @@ class ConversationCell: UITableViewCell {
         }
         self.timeLabel.text = conversation.timestamp
         self.messageLabel.text = conversation.message
-        if let urlString = conversation.medium_profile_pic {
-            
-            self.profilePic.setImage(url: URL(string: urlString))
-        } else {
-            self.profilePic.image = UIImage(named: "profile pic")
+        DispatchQueue.main.async {
+            if let urlString = conversation.medium_profile_pic {
+                self.profilePic.setImage(url: URL(string: urlString))
+            } else {
+                self.profilePic.image = UIImage(named: "profile_pic")
+            }
         }
     }
         
