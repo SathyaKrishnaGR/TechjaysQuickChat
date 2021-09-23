@@ -72,10 +72,9 @@ class MessagesViewController: UIViewController, KeyboardHandler {
                 // Fallback on earlier versions
             }
             tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
-            socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
-            socketManager.dataUpdateDelegate = self
         }
-        
+        socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
+        socketManager.dataUpdateDelegate = self
     }
 }
 
