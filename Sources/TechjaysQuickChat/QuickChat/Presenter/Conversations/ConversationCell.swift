@@ -62,7 +62,7 @@ class ConversationCell: UITableViewCell {
         }
         self.timeLabel.text = conversation.timestamp
         self.messageLabel.text = conversation.message
-        guard let urlString = conversation.thumbnail_profile_pic else {
+        guard let urlString = conversation.medium_profile_pic else {
             self.profilePic.image = UIImage(named: "profile pic")
             return
         }
