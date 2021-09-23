@@ -209,7 +209,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
                 cell.setChatList(message, conversation: conversation)
-                cell.transform = CGAffineTransform(scaleX: 1, y: -1)
+//                cell.transform = CGAffineTransform(scaleX: 1, y: -1)
                 return cell
                 //        }
                 //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
