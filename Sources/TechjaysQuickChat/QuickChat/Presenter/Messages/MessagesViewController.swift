@@ -339,14 +339,15 @@ extension MessagesViewController {
 
 
 extension MessagesViewController: SocketDataTransferDelegate {
-    func updateChatList(message: String) {
+    func updateChatList(message messageString: String) {
         
-        jsonDecode(message: message, completion: { message, error in
+        jsonDecode(message: messageString, completion: { message, error in
             
             print("Error is \(String(describing: error))")
             print("Message is \(String(describing: message))")
             if error == nil {
                 if let message = message {
+                    message.message = messageString
                     self.processTheDatafrom(socket: message)
                 }
             }
@@ -356,6 +357,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
     func processTheDatafrom(socket: ObjectMessage) {
         if socket.type == "chat" && socket.result == true {
             socket.is_sent_by_myself = true
+            
             messages.append(socket)
             inSocket = true
             self.tableView.reloadData()
