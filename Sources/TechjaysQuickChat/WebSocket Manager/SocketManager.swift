@@ -171,7 +171,7 @@ extension SocketManager: WebSocketDelegate {
             isConnected = false
         case .error(let error):
             isConnected = false
-//            handleError(error)
+            handleError(error)
         }
     }
 }
