@@ -74,11 +74,6 @@ class ConversationsViewController: UIViewController {
 extension ConversationsViewController {
     
     @IBAction func profilePressed(_ sender: Any) {
-        
-        
-    }
-    
-    @IBAction func composePressed(_ sender: Any) {
         isEditing = true
             if let indexPaths = tableView.indexPathsForSelectedRows {
               //Sort the array so it doesn’t cause a crash depending on your selection order.
@@ -98,6 +93,11 @@ extension ConversationsViewController {
                   tableView.deleteRows(at: sortedPaths, with: .automatic)
             }
     }
+        
+        
+    
+    
+    @IBAction func composePressed(_ sender: Any) {}
 }
 
 
