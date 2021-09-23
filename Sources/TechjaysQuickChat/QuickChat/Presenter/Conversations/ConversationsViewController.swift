@@ -123,6 +123,15 @@ extension ConversationsViewController {
 
 //MARK: UITableView Delegate & DataSource
 extension ConversationsViewController: PaginatedTableViewDelegate {
+    
+    func paginatedTableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func paginatedTableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.deleteChatList(users: "\(indexPath.row)", to_user_id: conversations[indexPath.row].to_user_id!)
+        }
+    }
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         
         return PaginationUrl(endpoint: "chat/chat-lists/")
