@@ -48,7 +48,8 @@ class ConversationsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-//        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        self.tableView.fetchData()
         self.tableView.allowsMultipleSelection = true
         self.tableView.allowsMultipleSelectionDuringEditing = true
         
@@ -58,7 +59,6 @@ class ConversationsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        self.tableView.fetchData()
         if isFromReel {
                 self.performSegue(withIdentifier: "didSelect", sender: self)
         }
