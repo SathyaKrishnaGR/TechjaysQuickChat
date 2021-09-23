@@ -44,16 +44,7 @@ class ConversationsViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        if isFromReel! {
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "didSelect", sender: self)
-//                let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
-//                vc.to_user_id = self.userId!
-//                vc.opponentUserName = self.opponentUserName
-//                vc.isFromReel = self.isFromReel!
-//                self.present(vc, animated: true, completion: nil)
-            }
-        }
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,7 +107,11 @@ extension ConversationsViewController {
     
     
     
-    @IBAction func composePressed(_ sender: Any) {}
+    @IBAction func composePressed(_ sender: Any) {
+        if isFromReel! {
+                self.performSegue(withIdentifier: "didSelect", sender: self)
+        }
+    }
 }
 
 
