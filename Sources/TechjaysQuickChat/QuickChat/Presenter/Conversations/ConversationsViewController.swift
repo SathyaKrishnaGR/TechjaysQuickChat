@@ -73,7 +73,7 @@ class ConversationsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "didSelect" {
             let nav = segue.destination as! UINavigationController
-            if let vc = nav.topViewController as? MessagesViewController {
+            if let vc = nav.viewControllers.first as? MessagesViewController {
                 if selectedRow == -1 {
                     vc.to_user_id = self.userId!
                     vc.opponentUserName = opponentUserName
