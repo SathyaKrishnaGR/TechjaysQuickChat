@@ -209,17 +209,6 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 // MARK:- Socket from API
             let message = sentMessages[indexPath.row]
             if ((message.data?.sender?.user_id) != nil) {
-                //        if message.contentType == .none {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
-                cell.setSocketList(message, conversation: conversation)
-                cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-                return cell
-                //        }
-                //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
-                //        cell.delegate = self
-                //        cell.set(message)
-                //        return cell
-            } else {
                 let message = messages[indexPath.row]
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
@@ -231,27 +220,39 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 //        cell.delegate = self
                 //        cell.set(message)
                 //        return cell
+                 } else {
+                    //        if message.contentType == .none {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
+                    cell.setSocketList(message, conversation: conversation)
+                    cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+                    return cell
+                    //        }
+                    //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
+                    //        cell.delegate = self
+                    //        cell.set(message)
+                    //        return cell
+               
+               
             }
             
         } else {
             // MARK:- Messages from API
             let message = messages[indexPath.row]
-            if !message.is_sent_by_myself! {
+            if message.is_sent_by_myself! {
                 
-                //        if message.contentType == .none {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
-                cell.setChatList(message, conversation: conversation)
-                cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-                return cell
-                //        }
-                //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
-                //        cell.delegate = self
-                //        cell.set(message)
-                //        return cell
-                
+                    //        if message.contentType == .none {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
+                    cell.setChatList(message, conversation: conversation)
+                    cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+                    return cell
+                    //        }
+                    //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
+                    //        cell.delegate = self
+                    //        cell.set(message)
+                    //        return cell
             } else {
                 //        if message.contentType == .none {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
                 cell.setChatList(message, conversation: conversation)
                 cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
                 return cell
