@@ -121,7 +121,7 @@ extension ObjectMessage {
 class SocketData: Codable {
     var sender: SocketSender?
     var message: String?
-    var timestamp: Int?
+    var timestamp: Double?
     
     
     func encode(to encoder: Encoder) throws {
@@ -138,7 +138,7 @@ class SocketData: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         sender = try container.decodeIfPresent(SocketSender.self, forKey: .sender)
         message = try container.decodeIfPresent(String.self, forKey: .message)
-        timestamp = try container.decodeIfPresent(Int.self, forKey: .timestamp)
+        timestamp = try container.decodeIfPresent(Double.self, forKey: .timestamp)
         
     }
 }
