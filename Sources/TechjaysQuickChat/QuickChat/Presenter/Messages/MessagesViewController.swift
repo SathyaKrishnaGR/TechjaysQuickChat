@@ -68,12 +68,8 @@ class MessagesViewController: UIViewController, KeyboardHandler {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if let url = conversation.medium_profile_pic {
-            if #available(iOS 14.0, *) {
                 showProfileIconOnNavBar(urlString: url)
-            } else {
-                // Fallback on earlier versions
-            }
-        }
+           }
         socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         socketManager.dataUpdateDelegate = self
     }
