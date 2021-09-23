@@ -160,6 +160,7 @@ extension SocketManager: WebSocketDelegate {
         case .connected(let headers):
             isConnected = true
             print("websocket is connected: \(headers)")
+            sendConnectRequest(FayvKeys.ChatDefaults.chatToken)
         case .disconnected(let reason, let code):
             isConnected = false
             print("websocket is disconnected: \(reason) with code: \(code)")
