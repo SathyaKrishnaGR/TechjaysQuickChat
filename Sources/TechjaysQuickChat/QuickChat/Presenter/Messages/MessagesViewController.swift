@@ -39,7 +39,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
     private let imageService = ImagePickerService()
     private let locationService = LocationService()
     private var messages = [ObjectMessage]()
-    private var sentMessages = [SocketMessage]()
+    private var sentMessages = [ObjectMessage]()
     var socketManager = SocketManager()
     var inSocket: Bool = false
     
@@ -346,7 +346,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
         }
     }
     
-    func processTheDatafrom(socket: SocketMessage) {
+    func processTheDatafrom(socket: ObjectMessage) {
         if socket.type == "chat" && socket.result == true {
             sentMessages.append(socket)
             inSocket = true
