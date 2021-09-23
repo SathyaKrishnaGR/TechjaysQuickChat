@@ -233,7 +233,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
         } else {
             // MARK:- Messages from API
             let message = messages[indexPath.row]
-            if message.is_sent_by_myself! {
+            if !message.is_sent_by_myself! {
                 
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
