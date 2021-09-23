@@ -290,20 +290,21 @@ extension MessagesViewController: SocketDataTransferDelegate {
         
     }
     
-    func convertStringToJson(string: String) -> (SocketMessage?, Error?) {
+    func convertStringToJson(string: String) -> (SocketMessage, Error?) {
+        var socketMessage: SocketMessage!
         let data = string.data(using: .utf8)!
         do {
-            if let socketMessage = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? SocketMessage
+            if let socket = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? SocketMessage
             {
                 print(socketMessage.msg) // use the json here
-                return (socketMessage, nil)
+                socketMessage = socket
             }
         } catch let error as NSError {
             print(error)
             
-            return (nil, error)
+            return (socketMessage, error)
         }
-        return (nil, nil)
+        return (socketMessage, nil)
     }
     
     
