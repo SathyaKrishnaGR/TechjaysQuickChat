@@ -104,12 +104,13 @@ extension MessagesViewController {
     //    }
     
     private func showProfileIconOnNavBar(urlString: String) {
-//        let button1 = UIBarButtonItem(image: UIImage(systemName: ""), style: .plain, target: self, action: Selector("doneButtonTapped")) // action:#selector(Class.MethodName) for swift 3
-//        self.navigationItem.rightBarButtonItem  = button1
         if isFromReel {
               self.navigationItem.title = opponentUserName
             } else {
-              self.navigationItem.title = conversation.first_name
+                if let firstName = conversation.first_name, let companyName = conversation.company_name {
+                    self.navigationItem.title = firstName + companyName
+                    
+                }
             }
         
     }
