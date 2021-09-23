@@ -36,7 +36,7 @@ class ConversationsViewController: UIViewController {
     private let manager = ConversationManager()
     private let userManager = UserManager()
     private var currentUser: ObjectUser?
-    var isFromReel: Bool?
+    var isFromReel: Bool = false
     var userId: Int?
     var to_user_id: Int? = 0
     var opponentUserName: String?
@@ -44,7 +44,6 @@ class ConversationsViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +57,9 @@ class ConversationsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        if isFromReel! {
+        
+        self.tableView.fetchData()
+        if isFromReel {
                 self.performSegue(withIdentifier: "didSelect", sender: self)
         }
     
