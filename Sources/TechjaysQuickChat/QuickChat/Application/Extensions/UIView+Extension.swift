@@ -74,7 +74,7 @@ extension UIView {
     
     func animate(_ animation: EmbedAnimation = .none, animationCompletion: ((Bool) -> Void)? = nil) {
         let screenWidth = UIScreen.main.bounds.width
-        let screenHeight: CGFloat = UIScreen.main.bounds.height
+        let screenHeight: CGFloat = UIScreen.main.bounds.height - 100
         switch animation {
         case .slideFromLeft:
             frame = CGRect(x: -screenWidth, y: 0, width: frame.width, height: frame.height)
