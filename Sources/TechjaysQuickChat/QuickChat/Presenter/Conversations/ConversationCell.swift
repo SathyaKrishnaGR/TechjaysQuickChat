@@ -68,7 +68,7 @@ class ConversationCell: UITableViewCell {
         } else {
             self.profilePic.image = UIImage(named: "profile pic")
         }
-        
+    }
         
         //MARK: Lifecycle
         override func prepareForReuse() {
