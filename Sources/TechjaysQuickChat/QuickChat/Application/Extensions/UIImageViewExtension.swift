@@ -45,9 +45,16 @@ extension UIImageView {
     func setImage(url: URL?) {
         if let url = url {
             URLSession.shared.dataTask(with: url) { data, response, error in
-                if let data = data {
-                    self.image = UIImage(data: data)
+                
+                print("Data is \(data)")
+                
+                print("Data is \(response)")
+                if (error == nil) {
+                    if let data = data {
+                        self.image = UIImage(data: data)
+                    }
                 }
+                
             }
         }
     }
