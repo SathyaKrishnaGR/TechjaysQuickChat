@@ -360,7 +360,6 @@ extension MessagesViewController: SocketDataTransferDelegate {
             
             messages.append(socket)
             inSocket = true
-            self.tableView.fetchData()
         }
     }
     
