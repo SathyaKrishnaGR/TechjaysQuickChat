@@ -36,20 +36,30 @@ public struct TechjaysQuickChat {
           viewController.userId = userId
           viewController.isFromReel = isFromReel
          viewController.modalPresentationStyle = .overCurrentContext
-            
-            
-            var navigation: UINavigationController? = nil
-            let window = UIWindow()
-            navigation = UINavigationController(rootViewController: viewController)
-            window.rootViewController = navigation
-            window.makeKeyAndVisible()
             DispatchQueue.main.async {
-   //            topMostController?.view.embed(viewController, inParent: topMostController!)
-                navigation?.pushViewController(viewController, animated: true)
-               
+                
+                topMostController?.present(viewController, animated: true, completion: nil)
+                        
             }
         }
          
+       }
+    
+    public func test(accessToken: String, chatToken: String, appEndPoint: String, socket: String,isFromReel: Bool?,userId: Int,opponentUserName: String?) -> UIViewController {
+        FayvKeys.ChatDefaults.chatToken = chatToken
+        FayvKeys.ChatDefaults.token = accessToken
+        FayvKeys.ChatDefaults.endpoint = appEndPoint
+        FayvKeys.ChatDefaults.socketUrl = socket
+        let storyboard = UIStoryboard(name: TechjaysChatIdentifiers.Storyboard.conversations.rawValue, bundle: Bundle.module)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: TechjaysChatIdentifiers.ViewController.conversations.rawValue) as? ConversationsViewController {
+          viewController.opponentUserName = opponentUserName
+          viewController.userId = userId
+          viewController.isFromReel = isFromReel
+//         viewController.modalPresentationStyle = .overCurrentContext
+            
+            return viewController
+        }
+         return UIViewController()
        }
 }
 
