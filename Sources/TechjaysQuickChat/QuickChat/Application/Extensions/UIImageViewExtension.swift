@@ -22,43 +22,8 @@
 
 import UIKit
 import Foundation
-//import Kingfisher
 
-//extension UIImageView {
-//
-//  func setImage(url: URL?, completion: CompletionObject<UIImage?>? = nil) {
-//    kf.setImage(with: url) { result in
-//      switch result {
-//      case .success(let value):
-//        completion?(value.image)
-//      case .failure(_):
-//        completion?(nil)
-//      }
-//    }
-//  }
-//
-//  func cancelDownload() {
-//    kf.cancelDownloadTask()
-//  }
-//}
 extension UIImageView {
-//    func setImage(url: URL?) {
-//        if let url = url {
-//            URLSession.shared.dataTask(with: url) { data, response, error in
-//
-//                print("Data is \(data)")
-//
-//                print("Data is \(response)")
-//                if (error == nil) {
-//                    if let data = data {
-//                        self.image = UIImage(data: data)
-//                    }
-//                }
-//
-//            }
-//        }
-//    }
-    
     func setImage(url :URL?) {
        URLSession.shared.dataTask( with: url!, completionHandler: {
           (data, response, error) -> Void in

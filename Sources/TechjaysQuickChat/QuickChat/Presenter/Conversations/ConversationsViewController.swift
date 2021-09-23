@@ -115,9 +115,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         if let toUserId = conversations[indexPath.row].to_user_id {
             vc.to_user_id = toUserId
         }
-        
-        
-        manager.markAsRead(conversations[indexPath.row])
+//        manager.markAsRead(conversations[indexPath.row])
         show(vc, sender: self)
     }
     

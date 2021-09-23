@@ -17,7 +17,7 @@ public struct TechjaysQuickChat {
         
         let storyboard = UIStoryboard(name: TechjaysChatIdentifiers.Storyboard.conversations.rawValue, bundle: Bundle.module)
         if let viewController = storyboard.instantiateViewController(withIdentifier: TechjaysChatIdentifiers.ViewController.conversations.rawValue) as? ConversationsViewController {
-            viewController.modalPresentationStyle = .fullScreen
+            viewController.modalPresentationStyle = .overCurrentContext
             
             print("Chat token \(FayvKeys.ChatDefaults.chatToken)")
             print("AccessToken \(FayvKeys.ChatDefaults.token)")
