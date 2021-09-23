@@ -69,6 +69,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             } else {
                 // Fallback on earlier versions
             }
+            tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
             socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
             socketManager.dataUpdateDelegate = self
         }
@@ -211,6 +212,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
                 cell.setSocketList(message, conversation: conversation)
+                cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
                 return cell
                 //        }
                 //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
@@ -222,6 +224,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
                 cell.setChatList(message, conversation: conversation)
+                cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
                 return cell
                 //        }
                 //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
@@ -238,6 +241,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
                 cell.setChatList(message, conversation: conversation)
+                cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
                 return cell
                 //        }
                 //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
@@ -249,6 +253,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
                 cell.setChatList(message, conversation: conversation)
+                cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
                 return cell
                 //        }
                 //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
