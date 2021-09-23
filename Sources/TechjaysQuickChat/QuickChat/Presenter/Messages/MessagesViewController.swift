@@ -61,7 +61,6 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             self?.tableView.scroll(to: .bottom, animated: true)
         }
         
-        tableView.transform = CGAffineTransform(rotationAngle: (CGFloat)(Double.pi))
         self.tableView.fetchData()
 
     }
@@ -212,7 +211,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
                 cell.setChatList(message, conversation: conversation)
-//                cell.transform = CGAffineTransform(rotationAngle: -CGFloat(Double.pi))
+                cell.transform = CGAffineTransform(rotationAngle: -CGFloat(Double.pi))
                 return cell
                 //        }
                 //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
@@ -223,7 +222,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
                 cell.setChatList(message, conversation: conversation)
-//                cell.transform = CGAffineTransform(rotationAngle: -CGFloat(Double.pi))
+                cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
                 return cell
                 //        }
                 //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
