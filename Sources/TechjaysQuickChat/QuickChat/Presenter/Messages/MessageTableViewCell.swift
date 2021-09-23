@@ -34,15 +34,15 @@ class MessageTableViewCell: UITableViewCell {
     
     func setChatList(_ message: ObjectMessage, conversation: ObjectConversation) {
         messageTextView?.text = message.message
-//        guard let imageView = profilePic else { return }
-//        guard let urlString = conversation.thumbnail_profile_pic else { return }
-//        imageView.setImage(url: URL(string: urlString))
+        guard let imageView = profilePic else { return }
+        guard let urlString = conversation.thumbnail_profile_pic else { return }
+        imageView.setImage(url: URL(string: urlString))
     }
     func setSocketList(_ message: ObjectMessage, conversation: ObjectConversation) {
         messageTextView?.text = message.data?.message
-//        guard let imageView = profilePic else { return }
-//        guard let urlString = conversation.thumbnail_profile_pic else { return }
-//        imageView.setImage(url: URL(string: urlString))
+        guard let imageView = profilePic else { return }
+        guard let urlString = conversation.thumbnail_profile_pic else { return }
+        imageView.setImage(url: URL(string: urlString))
     }
 }
 
