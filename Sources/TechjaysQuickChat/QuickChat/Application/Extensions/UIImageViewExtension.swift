@@ -42,20 +42,31 @@ import Foundation
 //  }
 //}
 extension UIImageView {
-    func setImage(url: URL?) {
-        if let url = url {
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                
-                print("Data is \(data)")
-                
-                print("Data is \(response)")
-                if (error == nil) {
-                    if let data = data {
-                        self.image = UIImage(data: data)
-                    }
-                }
-                
-            }
-        }
+//    func setImage(url: URL?) {
+//        if let url = url {
+//            URLSession.shared.dataTask(with: url) { data, response, error in
+//
+//                print("Data is \(data)")
+//
+//                print("Data is \(response)")
+//                if (error == nil) {
+//                    if let data = data {
+//                        self.image = UIImage(data: data)
+//                    }
+//                }
+//
+//            }
+//        }
+//    }
+    
+    func setImage(url :URL?) {
+       URLSession.shared.dataTask( with: url!, completionHandler: {
+          (data, response, error) -> Void in
+          DispatchQueue.main.async {
+             if let data = data {
+                self.image = UIImage(data: data)
+             }
+          }
+       }).resume()
     }
 }
