@@ -44,7 +44,13 @@ class ConversationsViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if isFromReel! {
+            let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
+            vc.to_user_id = userId!
+            vc.opponentUserName = opponentUserName
+            vc.isFromReel = isFromReel!
+            show(vc, sender: self)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,13 +60,6 @@ class ConversationsViewController: UIViewController {
         self.tableView.allowsMultipleSelectionDuringEditing = true
         self.tableView.fetchData()
         
-        if isFromReel! {
-            let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
-            vc.to_user_id = userId!
-            vc.opponentUserName = opponentUserName
-            vc.isFromReel = isFromReel!
-            show(vc, sender: self)
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
