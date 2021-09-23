@@ -362,6 +362,9 @@ extension MessagesViewController: SocketDataTransferDelegate {
                     } else {
                         // Someone is sending you a message!
                         message.is_sent_by_myself = false
+                        message.message = message.msg
+                        
+                        print("Messag. message \(message.message)")
 //                        self.tableView.reloadData()
                     }
                     
