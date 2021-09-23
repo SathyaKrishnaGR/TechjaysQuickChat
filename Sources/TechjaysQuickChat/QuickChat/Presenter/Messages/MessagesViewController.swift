@@ -298,13 +298,14 @@ extension MessagesViewController: SocketDataTransferDelegate {
             {
                 print(socketMessage.msg) // use the json here
                 socketMessage = socket
+                
+                return (socketMessage, nil)
             }
         } catch let error as NSError {
             print(error)
             
             return (socketMessage, error)
         }
-        return (socketMessage, nil)
     }
     
     
