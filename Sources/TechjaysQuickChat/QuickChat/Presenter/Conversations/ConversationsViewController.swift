@@ -79,9 +79,24 @@ extension ConversationsViewController {
     }
     
     @IBAction func composePressed(_ sender: Any) {
-        let vc: ContactsPreviewController = UIStoryboard.controller(storyboard: .previews)
-        vc.delegate = self
-        present(vc, animated: true, completion: nil)
+        isEditing = true
+            if let indexPaths = tableView.indexPathsForSelectedRows {
+              //Sort the array so it doesn’t cause a crash depending on your selection order.
+              let sortedPaths = indexPaths.sorted {$0.row > $1.row}
+                  for indexPath in sortedPaths {
+                    let count = conversations.count
+                    let index = count-1
+                    for i in stride(from: index, through: 0, by: -1) {
+                      if(indexPath.row == i){
+                        let toUserId = conversations[indexPath.row].to_user_id ?? 0
+                        self.deleteChatList(users: "\(indexPath.row)", to_user_id: toUserId)
+                        conversations.remove(at: i)
+                      }
+                    }
+                  }
+                  isEditing = false
+                  tableView.deleteRows(at: sortedPaths, with: .automatic)
+            }
     }
 }
 
@@ -119,18 +134,19 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if conversations.isEmpty {
-            composePressed(self)
-            return
-        }
-        let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
-        vc.conversation = conversations[indexPath.row]
-        if let toUserId = conversations[indexPath.row].to_user_id {
-            vc.to_user_id = toUserId
-        }
-        //        manager.markAsRead(conversations[indexPath.row])
-        show(vc, sender: self)
-        
+        if isEditing {} else{
+              if conversations.isEmpty {
+                composePressed(self)
+                return
+              }
+              let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
+              vc.conversation = conversations[indexPath.row]
+              if let toUserId = conversations[indexPath.row].to_user_id {
+                vc.to_user_id = toUserId
+              }
+              //    manager.markAsRead(conversations[indexPath.row])
+              show(vc, sender: self)
+            }
     }
     
     func paginatedTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -162,17 +178,17 @@ extension ConversationsViewController {
         }
     }
     
-    fileprivate func deleteChatList(users: String) {
-        APIClient().POST(url: "chat/delete-chat-list/", headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: users) { (status, response: APIResponse<[ObjectConversation]>) in
-            switch status {
-            case .SUCCESS:
-                self.tableView.reloadData()
-            case .FAILURE:
-                print(response.msg)
-                
-            }
+    fileprivate func deleteChatList(users: String,to_user_id: Int ) {
+        let url = URLFactory.shared.url(endpoint: "chat/delete-chat-list/", parameters: ["to_user_id": "\(to_user_id)"])
+        APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: users) { (status, response: APIResponse<[ObjectConversation]>) in
+          switch status {
+          case .SUCCESS:
+            self.tableView.reloadData()
+          case .FAILURE:
+            print(response.msg)
+          }
         }
-    }
+      }
 }
 
 //MARK: ProfileViewController Delegate
@@ -186,7 +202,7 @@ extension ConversationsViewController: ProfileViewControllerDelegate {
 //MARK: ContactsPreviewController Delegate
 extension ConversationsViewController: ContactsPreviewControllerDelegate {
     func contactsPreviewController(didSelect user: ObjectUser) {
-        guard let currentID = userManager.currentUserID() else { return }
+        guard userManager.currentUserID() != nil else { return }
         let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
         //        if let conversation = conversations.filter({$0.userIDs.contains(user.id)}).first {
         //            vc.conversation = conversation
