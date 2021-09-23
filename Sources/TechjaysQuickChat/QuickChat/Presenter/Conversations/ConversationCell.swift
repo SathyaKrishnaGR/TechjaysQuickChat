@@ -34,22 +34,22 @@ class ConversationCell: UITableViewCell {
     let userID = UserManager().currentUserID() ?? 0
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-           super.init(style: style, reuseIdentifier: reuseIdentifier)
-           self.selectionStyle = .none
-       }
-
-       required init?(coder aDecoder: NSCoder) {
-           super.init(coder: aDecoder)
-       }
-
-       override func setSelected(_ selected: Bool, animated: Bool) {
-           super.setSelected(selected, animated: animated)
-           self.accessoryType = selected ? .checkmark : .none
-       }
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        self.accessoryType = selected ? .checkmark : .none
+    }
     //MARK: Public methods
     func set(_ conversation: ObjectConversation) {
-//        timeLabel.text = DateService.shared.format(Date(timeIntervalSinceNow: TimeInterval(conversation.timestamp)))
-       
+        //        timeLabel.text = DateService.shared.format(Date(timeIntervalSinceNow: TimeInterval(conversation.timestamp)))
+        
         //    guard let id = conversation.userIDs.filter({$0 != userID}).first else { return }
         //    let isRead = conversation.isRead[userID] ?? true
         //    if !isRead {
@@ -62,22 +62,23 @@ class ConversationCell: UITableViewCell {
         }
         self.timeLabel.text = conversation.timestamp
         self.messageLabel.text = conversation.message
-        guard let urlString = conversation.medium_profile_pic else {
+        if let urlString = conversation.medium_profile_pic {
+            
+            self.profilePic.setImage(url: URL(string: urlString))
+        } else {
             self.profilePic.image = UIImage(named: "profile pic")
-            return
         }
-        self.profilePic.setImage(url: URL(string: urlString))
+        
+        
+        //MARK: Lifecycle
+        override func prepareForReuse() {
+            super.prepareForReuse()
+            //        profilePic.cancelDownload()
+            nameLabel.font = nameLabel.font.regular
+            messageLabel.font = messageLabel.font.regular
+            timeLabel.font = timeLabel.font.regular
+            messageLabel.textColor = .gray
+            messageLabel.text = nil
+        }
     }
-    
-    //MARK: Lifecycle
-    override func prepareForReuse() {
-        super.prepareForReuse()
-//        profilePic.cancelDownload()
-        nameLabel.font = nameLabel.font.regular
-        messageLabel.font = messageLabel.font.regular
-        timeLabel.font = timeLabel.font.regular
-        messageLabel.textColor = .gray
-        messageLabel.text = nil
-    }
-}
 
