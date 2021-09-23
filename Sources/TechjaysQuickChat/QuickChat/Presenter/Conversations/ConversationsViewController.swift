@@ -46,11 +46,12 @@ class ConversationsViewController: UIViewController {
         super.viewDidLoad()
         if isFromReel! {
             DispatchQueue.main.async {
-                let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
-                vc.to_user_id = self.userId!
-                vc.opponentUserName = self.opponentUserName
-                vc.isFromReel = self.isFromReel!
-                self.present(vc, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "didSelect", sender: self)
+//                let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
+//                vc.to_user_id = self.userId!
+//                vc.opponentUserName = self.opponentUserName
+//                vc.isFromReel = self.isFromReel!
+//                self.present(vc, animated: true, completion: nil)
             }
         }
     }
@@ -74,8 +75,14 @@ class ConversationsViewController: UIViewController {
             let nav = segue.destination as! UINavigationController
             if let vc = nav.topViewController as? MessagesViewController {
                 vc.conversation = conversations[selectedRow]
-                if let toUserId = conversations[selectedRow].to_user_id {
-                    vc.to_user_id = toUserId
+                if selectedRow == 0 {
+                    vc.to_user_id = self.userId
+                    vc.opponentUserName = opponentUserName
+                    vc.isFromReel = self.isFromReel
+                } else {
+                    if let toUserId = conversations[selectedRow].to_user_id {
+                        vc.to_user_id = toUserId
+                    }
                 }
                 present(nav, animated: true, completion: nil)
             }
