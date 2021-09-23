@@ -38,7 +38,8 @@ public struct TechjaysQuickChat {
          viewController.modalPresentationStyle = .overCurrentContext
 //
          DispatchQueue.main.async {
-          topMostController?.present(viewController, animated: true, completion: nil)
+//          topMostController?.present(viewController, animated: true, completion: nil)
+            topMostController?.view.embed(viewController, inParent: topMostController!)
           // tell the childviewcontroller it’s contained in it’s parent
          }
         }

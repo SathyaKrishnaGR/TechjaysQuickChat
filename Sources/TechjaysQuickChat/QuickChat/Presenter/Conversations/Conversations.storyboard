@@ -183,7 +183,6 @@
                             <color key="tintColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
-                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="profileImageView" destination="UUO-sI-ZJg" id="JQE-5i-1Ub"/>
                         <outlet property="tableView" destination="rep-KH-3nN" id="OyQ-XB-Lkb"/>
