@@ -76,9 +76,9 @@ class ConversationsViewController: UIViewController {
             if let vc = nav.topViewController as? MessagesViewController {
                 vc.conversation = conversations[selectedRow]
                 if selectedRow == 0 {
-                    vc.to_user_id = self.userId
+                    vc.to_user_id = self.userId!
                     vc.opponentUserName = opponentUserName
-                    vc.isFromReel = self.isFromReel
+                    vc.isFromReel = self.isFromReel!
                 } else {
                     if let toUserId = conversations[selectedRow].to_user_id {
                         vc.to_user_id = toUserId
