@@ -66,7 +66,8 @@ class ConversationCell: UITableViewCell {
             if let urlString = conversation.medium_profile_pic {
                 self.profilePic.setImage(url: URL(string: urlString))
             } else {
-                self.profilePic.image = UIImage(systemName: "person.circle")
+//                self.profilePic.image = UIImage(systemName: "person.circle")
+                self.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .none)
             }
         }
     }
