@@ -36,7 +36,7 @@ class ConversationsViewController: UIViewController {
     private let manager = ConversationManager()
     private let userManager = UserManager()
     private var currentUser: ObjectUser?
-    var isFromReel: Bool? = false
+    var isFromReel: Bool?
     var userId: Int?
     var to_user_id: Int? = 0
     var opponentUserName: String?
@@ -77,7 +77,7 @@ class ConversationsViewController: UIViewController {
                 if selectedRow == -1 {
                     vc.to_user_id = self.userId!
                     vc.opponentUserName = opponentUserName
-                    vc.isFromReel = self.isFromReel!
+                    vc.isFromReel = isFromReel!
                 } else {
                     if let toUserId = conversations[selectedRow].to_user_id {
                         vc.to_user_id = toUserId
