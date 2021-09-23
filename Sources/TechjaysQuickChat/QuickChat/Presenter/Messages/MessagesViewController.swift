@@ -39,7 +39,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
     private let imageService = ImagePickerService()
     private let locationService = LocationService()
     private var messages = [ObjectMessage]()
-    private var sentMessages = [ObjectMessage]()
+//    private var sentMessages = [ObjectMessage]()
     var socketManager = SocketManager()
     var inSocket: Bool = false
     
@@ -207,7 +207,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
         if inSocket {
             
                 // MARK:- Socket from API
-            let message = sentMessages[indexPath.row]
+            let message = messages[indexPath.row]
             if ((message.data?.sender?.user_id) != nil) {
                 
                    //        if message.contentType == .none {
@@ -354,7 +354,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
     
     func processTheDatafrom(socket: ObjectMessage) {
         if socket.type == "chat" && socket.result == true {
-            sentMessages.append(socket)
+            socket.is_sent_by_myself = true
+            messages.append(socket)
             inSocket = true
             self.tableView.reloadData()
         }
