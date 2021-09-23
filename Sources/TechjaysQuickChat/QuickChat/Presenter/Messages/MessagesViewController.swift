@@ -357,7 +357,6 @@ extension MessagesViewController: SocketDataTransferDelegate {
     
     func processTheDatafrom(socket: ObjectMessage) {
         if socket.type == "chat" && socket.result == true {
-            socket.is_sent_by_myself = true
             
             messages.append(socket)
             inSocket = true
