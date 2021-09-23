@@ -207,7 +207,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             
             // MARK:- Socket from API
             let message = messages[indexPath.row]
-            if ((message.data?.sender?.user_id) == nil) {
+            if (message.data == nil) {
                 
                 let message = messages[indexPath.row]
                 //        if message.contentType == .none {
