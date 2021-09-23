@@ -103,14 +103,16 @@ class SocketManager {
     let server = WebSocketServer()
     
     func startSocketWith(url: String) {
-       
+        
         //https://echo.websocket.org
         var request = URLRequest(url: URL(string:url)!)
         socket = WebSocket(request: request)
         socket.delegate = self
         socket.connect()
+        
+        sendConnectRequest(chatToken: FayvKeys.ChatDefaults.chatToken)
     }
-  
+    
     
     func handleError(_ error: Error?) {
         if let e = error as? WSError {
@@ -123,20 +125,30 @@ class SocketManager {
     }
     
     // MARK: Write Text Action
+    func sendConnectRequest(chatToken: String) {
+        let messageString = "{\n" +
+            "\n" +
+            "    \"token\": \"\(chatToken)\",\n" +
+            "\n" +
+            "    \"type\": \"connect\"\n" +
+            "\n" +
+            "}"
+        socket.write(string: messageString)
+    }
     func sendMessage(chatToken: String, toUserId: String, message: String) {
-               let messageString = "{\n" +
-                "    \"token\": \"\(chatToken)\",\n" +
-                "    \"type\": \"chat\",\n" +
-                "    \"chat_type\": \"private\",\n" +
-                "    \"to\": \(toUserId),\n" +
-                "    \"message\": \"\(message)\"\n" +
-                "}"
-            socket.write(string: messageString)
+        let messageString = "{\n" +
+            "    \"token\": \"\(chatToken)\",\n" +
+            "    \"type\": \"chat\",\n" +
+            "    \"chat_type\": \"private\",\n" +
+            "    \"to\": \(toUserId),\n" +
+            "    \"message\": \"\(message)\"\n" +
+            "}"
+        socket.write(string: messageString)
     }
     
     // MARK: Disconnect Action
     
-   func disconnect( ) {
+    func disconnect( ) {
         if isConnected {
             socket.disconnect()
         } else {
