@@ -104,18 +104,12 @@ extension MessagesViewController {
     //    }
     
     private func showProfileIconOnNavBar(urlString: String) {
-        let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        button.layer.cornerRadius = 15
-        button.clipsToBounds = true
-        button.imageView?.contentMode = .scaleAspectFit
-        button.imageView?.setImage(url: URL(string : urlString)!)
-        let imageData = try? Data(contentsOf: URL(string : urlString)!)
         
-        if let imageData = imageData , let image =  UIImage(data: imageData)?.resizeImage(to: button.frame.size) {
-            button.setBackgroundImage(image, for: .normal)
-        }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
+        let closeButton = UIBarButtonItem(
+            barButtonSystemItem: target as? UIBarButtonItem,
+            self,
+            action: Selector("doneButtonTapped:"))
+        navigationItem.rightBarButtonItem = closeButton
         if isFromReel {
               self.navigationItem.title = opponentUserName
             } else {
@@ -124,6 +118,9 @@ extension MessagesViewController {
         
     }
     
+    private func doneButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
     private func showActionButtons(_ status: Bool) {
         guard !status else {
             stackViewWidthConstraint.constant = 112
