@@ -93,7 +93,7 @@ class ContactsCell: UICollectionViewCell {
   
   override func prepareForReuse() {
     super.prepareForReuse()
-    profilePic.cancelDownload()
+//    profilePic.cancelDownload()
     profilePic.image = UIImage(named: "profile pic")
   }
   

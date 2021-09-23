@@ -21,22 +21,34 @@
 //  SOFTWARE.
 
 import UIKit
-import Kingfisher
+import Foundation
+//import Kingfisher
 
+//extension UIImageView {
+//
+//  func setImage(url: URL?, completion: CompletionObject<UIImage?>? = nil) {
+//    kf.setImage(with: url) { result in
+//      switch result {
+//      case .success(let value):
+//        completion?(value.image)
+//      case .failure(_):
+//        completion?(nil)
+//      }
+//    }
+//  }
+//
+//  func cancelDownload() {
+//    kf.cancelDownloadTask()
+//  }
+//}
 extension UIImageView {
-  
-  func setImage(url: URL?, completion: CompletionObject<UIImage?>? = nil) {
-    kf.setImage(with: url) { result in
-      switch result {
-      case .success(let value):
-        completion?(value.image)
-      case .failure(_):
-        completion?(nil)
-      }
+    func setImage(url: URL?) {
+        if let url = url {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data {
+                    self.image = UIImage(data: data)
+                }
+            }
+        }
     }
-  }
-  
-  func cancelDownload() {
-    kf.cancelDownloadTask()
-  }
 }

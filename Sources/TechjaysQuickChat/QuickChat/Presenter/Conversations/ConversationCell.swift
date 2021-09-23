@@ -72,7 +72,7 @@ class ConversationCell: UITableViewCell {
     //MARK: Lifecycle
     override func prepareForReuse() {
         super.prepareForReuse()
-        profilePic.cancelDownload()
+//        profilePic.cancelDownload()
         nameLabel.font = nameLabel.font.regular
         messageLabel.font = messageLabel.font.regular
         timeLabel.font = timeLabel.font.regular

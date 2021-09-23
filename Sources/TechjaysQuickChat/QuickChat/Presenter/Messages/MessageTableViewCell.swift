@@ -50,7 +50,7 @@ class MessageAttachmentTableViewCell: MessageTableViewCell {
   
   override func prepareForReuse() {
     super.prepareForReuse()
-    attachmentImageView.cancelDownload()
+//    attachmentImageView.cancelDownload()
     attachmentImageView.image = nil
     attachmentImageViewHeightConstraint.constant = 250 / 1.3
     attachmentImageViewWidthConstraint.constant = 250
