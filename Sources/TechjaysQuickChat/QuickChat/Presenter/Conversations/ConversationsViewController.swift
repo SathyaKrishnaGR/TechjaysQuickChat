@@ -50,7 +50,7 @@ class ConversationsViewController: UIViewController {
                 vc.to_user_id = self.userId!
                 vc.opponentUserName = self.opponentUserName
                 vc.isFromReel = self.isFromReel!
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.present(vc, animated: true, completion: nil)
             }
         }
     }
@@ -129,9 +129,8 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
             vc.to_user_id = toUserId
         }
         //        manager.markAsRead(conversations[indexPath.row])
-//        show(vc, sender: self)
+        show(vc, sender: self)
         
-        navigationController?.pushViewController(vc, animated: true)
     }
     
     func paginatedTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
