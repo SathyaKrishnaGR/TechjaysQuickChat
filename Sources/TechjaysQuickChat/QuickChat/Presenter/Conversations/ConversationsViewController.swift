@@ -146,6 +146,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
               }
               //    manager.markAsRead(conversations[indexPath.row])
 //              show(vc, sender: self)
+            vc.modalPresentationStyle = .currentContext
             present(vc, animated: true, completion: nil)
             }
     }
