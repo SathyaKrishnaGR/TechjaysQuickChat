@@ -348,27 +348,25 @@ extension MessagesViewController {
 extension MessagesViewController: SocketDataTransferDelegate {
     func updateChatList(message messageString: String) {
         
-        jsonDecode(message: messageString, completion: { message, error in
+        jsonDecode(messageToDecode: messageString, completion: { messageinClosure, error in
             
             print("Error is \(String(describing: error))")
-            print("Message is \(String(describing: message))")
+            print("Message is \(String(describing: messageinClosure))")
             if error == nil {
-                if let message = message {
-                    if  message.data?.sender == nil {
+                if var socketMessage = messageinClosure {
+                    if  socketMessage.data?.sender == nil {
                         // Our User - Sending someone a message
-                        message.message = self.inputTextField.text
-                        message.is_sent_by_myself = true
+                        socketMessage.message = self.inputTextField.text
+                        socketMessage.is_sent_by_myself = true
                         self.inputTextField.text = nil
                     } else {
                         // Someone is sending you a message!
-                        message.is_sent_by_myself = false
-//                        message.message = message.msg
-                        
-                        print("Messag. message \(message.message)")
-//                        self.tableView.reloadData()
+                        socketMessage.is_sent_by_myself = false
+                        socketMessage = messageinClosure
+                        print("Messag. message \(socketMessage.message)")
                     }
                     
-                    self.processTheDatafrom(socket: message)
+                    self.processTheDatafrom(socket: socketMessage)
                 }
             }
         })
@@ -384,7 +382,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
         
     }
     
-    func jsonDecode(message: String, completion: @escaping ( _ data: ObjectMessage?, _ error: Error?) -> Void) {
+    func jsonDecode(messageToDecode: String, completion: @escaping ( _ data: ObjectMessage?, _ error: Error?) -> Void) {
         do {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
