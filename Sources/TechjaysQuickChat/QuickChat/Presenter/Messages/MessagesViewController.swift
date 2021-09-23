@@ -361,7 +361,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
                         self.inputTextField.text = nil
                     } else {
                         // Someone is sending you a message!
-                        self.tableView.reloadData()
+                        message.is_sent_by_myself = false
+//                        self.tableView.reloadData()
                     }
                     
                     self.processTheDatafrom(socket: message)
