@@ -36,13 +36,20 @@ public struct TechjaysQuickChat {
           viewController.userId = userId
           viewController.isFromReel = isFromReel
          viewController.modalPresentationStyle = .overCurrentContext
-//
-         DispatchQueue.main.async {
-//          topMostController?.present(viewController, animated: true, completion: nil)
-            topMostController?.view.embed(viewController, inParent: topMostController!)
-          // tell the childviewcontroller it’s contained in it’s parent
-         }
+            
+            
+            var navigation: UINavigationController? = nil
+            let window = UIWindow()
+            navigation = UINavigationController(rootViewController: viewController)
+            window.rootViewController = navigation
+            window.makeKeyAndVisible()
+            DispatchQueue.main.async {
+   //            topMostController?.view.embed(viewController, inParent: topMostController!)
+                navigation?.pushViewController(viewController, animated: true)
+               
+            }
         }
+         
        }
 }
 
