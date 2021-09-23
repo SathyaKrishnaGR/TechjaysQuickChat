@@ -45,7 +45,7 @@ public struct TechjaysQuickChat {
          
        }
     
-    public func test(accessToken: String, chatToken: String, appEndPoint: String, socket: String,isFromReel: Bool?,userId: Int,opponentUserName: String?) -> UIViewController {
+    public func presentInContainerWith(accessToken: String, chatToken: String, appEndPoint: String, socket: String,isFromReel: Bool?,userId: Int,opponentUserName: String?) -> UIViewController {
         FayvKeys.ChatDefaults.chatToken = chatToken
         FayvKeys.ChatDefaults.token = accessToken
         FayvKeys.ChatDefaults.endpoint = appEndPoint
