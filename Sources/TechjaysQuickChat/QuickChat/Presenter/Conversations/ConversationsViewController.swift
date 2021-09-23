@@ -50,13 +50,18 @@ class ConversationsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 //        navigationController?.setNavigationBarHidden(true, animated: true)
-        if isFromReel! {
-                self.performSegue(withIdentifier: "didSelect", sender: self)
-        }
         self.tableView.allowsMultipleSelection = true
         self.tableView.allowsMultipleSelectionDuringEditing = true
         self.tableView.fetchData()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if isFromReel! {
+                self.performSegue(withIdentifier: "didSelect", sender: self)
+        }
+    
     }
     
     override func viewWillDisappear(_ animated: Bool) {
