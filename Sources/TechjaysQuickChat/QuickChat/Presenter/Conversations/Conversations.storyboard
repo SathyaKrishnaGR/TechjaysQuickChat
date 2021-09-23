@@ -134,7 +134,7 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="VV4-rQ-2Nk">
                         <barButtonItem key="backBarButtonItem" title=" " id="afj-R8-TKj"/>
-                        <barButtonItem key="rightBarButtonItem" image="trash.fill" catalog="system" id="OXr-hC-jIE">
+                        <barButtonItem key="rightBarButtonItem" title="Delete" image="trash.fill" catalog="system" id="OXr-hC-jIE">
                             <color key="tintColor" red="0.1247849539" green="0.45409178729999999" blue="0.94906610250000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="profilePressed:" destination="ri6-fX-8IQ" id="cAA-ab-kan"/>
