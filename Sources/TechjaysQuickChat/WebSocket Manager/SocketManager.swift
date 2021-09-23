@@ -104,13 +104,10 @@ class SocketManager {
     
     func startSocketWith(url: String) {
         
-        //https://echo.websocket.org
         var request = URLRequest(url: URL(string:url)!)
         socket = WebSocket(request: request)
         socket.delegate = self
         socket.connect()
-        
-        sendConnectRequest(chatToken: FayvKeys.ChatDefaults.chatToken)
     }
     
     

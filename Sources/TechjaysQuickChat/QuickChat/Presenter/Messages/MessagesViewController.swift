@@ -67,7 +67,8 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             } else {
                 // Fallback on earlier versions
             }
-                socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
+            socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
+            socketManager.sendConnectRequest(chatToken: FayvKeys.ChatDefaults.chatToken)
         }
         
     }
