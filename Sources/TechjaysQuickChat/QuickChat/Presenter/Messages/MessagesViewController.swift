@@ -61,6 +61,8 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             self?.tableView.scroll(to: .bottom, animated: true)
         }
         self.tableView.fetchData()
+        tableView.transform = CGAffineTransform(rotationAngle: -(CGFloat)(Double.pi));
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -202,12 +204,14 @@ extension MessagesViewController: PaginatedTableViewDelegate {
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             // MARK:- Messages from API
+        
             let message = messages[indexPath.row]
             if !message.is_sent_by_myself! {
                 
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
                 cell.setChatList(message, conversation: conversation)
+                cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
                 return cell
                 //        }
                 //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
@@ -218,6 +222,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 //        if message.contentType == .none {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
                 cell.setChatList(message, conversation: conversation)
+                cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
                 return cell
                 //        }
                 //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
@@ -331,8 +336,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
     
     func processTheDatafrom(socket: ObjectMessage) {
         if socket.type == "chat" && socket.result == true {
-//            messages.insert(socket, at: 0)
-            messages.append(socket)
+            messages.insert(socket, at: 0)
+//            messages.append(socket)
             inSocket = true
             self.tableView.reloadData()
         }
