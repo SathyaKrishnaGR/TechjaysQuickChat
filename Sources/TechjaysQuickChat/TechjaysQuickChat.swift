@@ -34,7 +34,7 @@ public struct TechjaysQuickChat {
         if let viewController = storyboard.instantiateViewController(withIdentifier: TechjaysChatIdentifiers.ViewController.conversations.rawValue) as? ConversationsViewController {
           viewController.opponentUserName = opponentUserName
           viewController.userId = userId
-          viewController.isFromReel = isFromReel
+            viewController.isFromReel = isFromReel!
          viewController.modalPresentationStyle = .overCurrentContext
             DispatchQueue.main.async {
                 
@@ -54,7 +54,7 @@ public struct TechjaysQuickChat {
         if let viewController = storyboard.instantiateViewController(withIdentifier: TechjaysChatIdentifiers.ViewController.conversations.rawValue) as? ConversationsViewController {
           viewController.opponentUserName = opponentUserName
           viewController.userId = userId
-          viewController.isFromReel = isFromReel
+            viewController.isFromReel = isFromReel!
 //         viewController.modalPresentationStyle = .overCurrentContext
             
             return viewController

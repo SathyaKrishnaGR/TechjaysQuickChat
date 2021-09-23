@@ -77,7 +77,7 @@ class ConversationsViewController: UIViewController {
                 if selectedRow == -1 {
                     vc.to_user_id = self.userId!
                     vc.opponentUserName = opponentUserName
-                    vc.isFromReel = isFromReel!
+                    vc.isFromReel = isFromReel
                 } else {
                     if let toUserId = conversations[selectedRow].to_user_id {
                         vc.to_user_id = toUserId
