@@ -286,9 +286,27 @@ extension MessagesViewController {
 
 extension MessagesViewController: SocketDataTransferDelegate {
     func updateChatList(message: String) {
+        let dict = convertStringToJson(string: message)
         
+    }
+    
+    func convertStringToJson(string: String) -> (SocketMessage?, Error?) {
+        let data = string.data(using: .utf8)!
+        do {
+            if let socketMessage = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? SocketMessage
+            {
+                print(socketMessage.msg) // use the json here
+                return (socketMessage, nil)
+            }
+        } catch let error as NSError {
+            print(error)
+            
+            return (nil, error)
+        }
+        return (nil, nil)
     }
     
     
 }
+
 
