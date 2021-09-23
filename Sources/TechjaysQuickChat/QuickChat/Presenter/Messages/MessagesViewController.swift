@@ -149,7 +149,6 @@ extension MessagesViewController {
         let message = ObjectMessage()
         message.message = text
         //        message.ownerID = UserManager().currentUserID()
-        inputTextField.text = nil
         showActionButtons(false)
         send(text)
         
@@ -162,7 +161,7 @@ extension MessagesViewController {
             //            message.profilePic = image
             //            message.ownerID = UserManager().currentUserID()
             //            self?.send(message)
-            self?.inputTextField.text = nil
+//            self?.inputTextField.text = nil
             self?.showActionButtons(false)
         }
     }
@@ -178,7 +177,7 @@ extension MessagesViewController {
                 //                message.content = location.string
                 //                message.contentType = .location
                 //                self?.send(message)
-                self?.inputTextField.text = nil
+//                self?.inputTextField.text = nil
                 self?.showActionButtons(false)
             }
         }
@@ -347,7 +346,9 @@ extension MessagesViewController: SocketDataTransferDelegate {
             print("Message is \(String(describing: message))")
             if error == nil {
                 if let message = message {
-                    message.message = messageString
+                    message.message = self.inputTextField.text
+                    self.inputTextField.text = nil
+                    
                     self.processTheDatafrom(socket: message)
                 }
             }
