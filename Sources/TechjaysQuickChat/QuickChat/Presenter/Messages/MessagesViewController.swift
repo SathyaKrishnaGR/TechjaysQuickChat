@@ -363,11 +363,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
                         // Someone is sending you a message!
                         socketMessage.is_sent_by_myself = false
                         if let objMessage = messageinClosure {
-                            socketMessage.message = objMessage.message
-                            print("objMessage. message \(objMessage.message)")
+                            socketMessage.message = objMessage.data?.message
                         }
-                        
-                        print("Messag. message \(socketMessage.message)")
                     }
                     
                     self.processTheDatafrom(socket: socketMessage)
