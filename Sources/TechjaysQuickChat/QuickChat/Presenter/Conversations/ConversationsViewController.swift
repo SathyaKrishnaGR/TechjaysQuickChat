@@ -145,7 +145,8 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
                 vc.to_user_id = toUserId
               }
               //    manager.markAsRead(conversations[indexPath.row])
-              show(vc, sender: self)
+//              show(vc, sender: self)
+            present(vc, animated: true, completion: nil)
             }
     }
     
