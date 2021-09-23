@@ -203,7 +203,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if inSocket {
+        /*if inSocket {
             
             // MARK:- Socket from API
             let message = messages[indexPath.row]
@@ -236,7 +236,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 
             }
             
-        } else {
+        } else {*/
             // MARK:- Messages from API
             let message = messages[indexPath.row]
             if !message.is_sent_by_myself! {
@@ -264,7 +264,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
                 //        return cell
                 
             }
-        }
+//        }
         
         
     }
