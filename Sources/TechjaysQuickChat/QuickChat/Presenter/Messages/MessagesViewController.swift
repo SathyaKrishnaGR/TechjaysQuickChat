@@ -340,16 +340,23 @@ extension MessagesViewController {
 
 extension MessagesViewController: SocketDataTransferDelegate {
     func updateChatList(message: String) {
-        let data = message.data(using: .utf8)!
-        do {
-            if let socket = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? ObjectMessage
-            {
-                print("Message in Socket is \(String(describing: socket.msg))")
-                processTheDatafrom(socket: socket)
+//        let data = message.data(using: .utf8)!
+//        do {
+//            if let socket = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? ObjectMessage
+//            {
+//                print("Message in Socket is \(String(describing: socket.msg))")
+//                processTheDatafrom(socket: socket)
+//            }
+//        } catch let error as NSError {
+//            print("Error is \(error)")
+//
+//        }
+        if let json = try? NSJSONSerialization.dataWithJSONObject(String, options: []) {
+            // here `json` is your JSON data
+            print("Json is here \(json)")
+            if json != nil {
+                processTheDatafrom(socket: json)
             }
-        } catch let error as NSError {
-            print("Error is \(error)")
-            
         }
     }
     
