@@ -40,7 +40,7 @@ class ConversationsViewController: UIViewController {
     var userId: Int?
     var to_user_id: Int? = 0
     var opponentUserName: String?
-    var selectedRow: Int = 0
+    var selectedRow: Int =  -1 // Nothing is selected
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ class ConversationsViewController: UIViewController {
             let nav = segue.destination as! UINavigationController
             if let vc = nav.topViewController as? MessagesViewController {
                 vc.conversation = conversations[selectedRow]
-                if selectedRow == 0 {
+                if selectedRow == -1 {
                     vc.to_user_id = self.userId!
                     vc.opponentUserName = opponentUserName
                     vc.isFromReel = self.isFromReel!
