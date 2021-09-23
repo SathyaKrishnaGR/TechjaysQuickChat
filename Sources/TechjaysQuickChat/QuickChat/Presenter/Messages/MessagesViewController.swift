@@ -331,8 +331,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
     
     func processTheDatafrom(socket: ObjectMessage) {
         if socket.type == "chat" && socket.result == true {
-            messages.insert(socket, at: 0)
-//            messages.append(socket)
+//            messages.insert(socket, at: 0)
+            messages.append(socket)
             inSocket = true
             self.tableView.reloadData()
         }
