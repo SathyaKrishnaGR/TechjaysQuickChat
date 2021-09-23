@@ -344,11 +344,11 @@ extension MessagesViewController: SocketDataTransferDelegate {
         do {
             if let socket = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? ObjectMessage
             {
-                print("Message in Socket is \(socket.msg)")
+                print("Message in Socket is \(String(describing: socket.msg))")
                 processTheDatafrom(socket: socket)
             }
         } catch let error as NSError {
-            print(error)
+            print("Error is \(error)")
             
         }
     }

@@ -25,7 +25,7 @@ public struct TechjaysQuickChat {
         }
     }
     
-    func openChatListScreenForVidhire(accessToken: String, chatToken: String, appEndPoint: String, socket: String,isFromReel: Bool?,chatIntroArray: ObjectConversation) {
+    public func openChatListScreenForVidhire(accessToken: String, chatToken: String, appEndPoint: String, socket: String,isFromReel: Bool?,chatIntroArray: ObjectConversation) {
         FayvKeys.ChatDefaults.chatToken = chatToken
         FayvKeys.ChatDefaults.token = accessToken
         FayvKeys.ChatDefaults.endpoint = appEndPoint

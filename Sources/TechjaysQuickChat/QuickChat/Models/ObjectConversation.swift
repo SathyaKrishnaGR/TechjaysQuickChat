@@ -62,7 +62,7 @@ extension Conversation {
         case data
     }
 }
-class ObjectConversation: Codable {
+public class ObjectConversation: Codable {
 //    var id = UUID().uuidString
     var company_name: String?
     var first_name: String?
@@ -80,7 +80,7 @@ class ObjectConversation: Codable {
     //    var isRead = [String: Bool]()
     //    var userIDs = [String]()
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 //        try container.encode(id, forKey: .id)
         try container.encodeIfPresent(company_name, forKey: .company_name)
