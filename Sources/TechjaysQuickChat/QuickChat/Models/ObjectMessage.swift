@@ -24,14 +24,6 @@ import UIKit
 
 class ObjectMessage: Codable {
     
-    //  var id = UUID().uuidString
-    //  var message: String?
-    //  var content: String?
-    //  var contentType = ContentType.none
-    //  var timestamp = Int(Date().timeIntervalSince1970)
-    //  var ownerID: String?
-    //  var profilePicLink: String?
-    //  var profilePic: UIImage?
     var message_id: Int?
     var is_sent_by_myself: Bool?
     var message: String?

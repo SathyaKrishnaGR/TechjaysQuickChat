@@ -24,59 +24,64 @@
 import UIKit
 
 protocol MessageTableViewCellDelegate: AnyObject {
-  func messageTableViewCellUpdate()
+    func messageTableViewCellUpdate()
 }
 
 class MessageTableViewCell: UITableViewCell {
-  
-  @IBOutlet weak var profilePic: UIImageView?
-  @IBOutlet weak var messageTextView: UITextView?
-  
-    func set(_ message: ObjectMessage, conversation: ObjectConversation) {
-    messageTextView?.text = message.message
-    guard let imageView = profilePic else { return }
-      guard let urlString = conversation.thumbnail_profile_pic else { return }
-      imageView.setImage(url: URL(string: urlString))
-
-  }
+    
+    @IBOutlet weak var profilePic: UIImageView?
+    @IBOutlet weak var messageTextView: UITextView?
+    
+    func setChatList(_ message: ObjectMessage, conversation: ObjectConversation) {
+        messageTextView?.text = message.message
+//        guard let imageView = profilePic else { return }
+//        guard let urlString = conversation.thumbnail_profile_pic else { return }
+//        imageView.setImage(url: URL(string: urlString))
+    }
+    func setSocketList(_ message: SocketMessage, conversation: ObjectConversation) {
+        messageTextView?.text = message.data?.message
+//        guard let imageView = profilePic else { return }
+//        guard let urlString = conversation.thumbnail_profile_pic else { return }
+//        imageView.setImage(url: URL(string: urlString))
+    }
 }
 
 class MessageAttachmentTableViewCell: MessageTableViewCell {
-  
-  @IBOutlet weak var attachmentImageView: UIImageView!
-  @IBOutlet weak var attachmentImageViewHeightConstraint: NSLayoutConstraint!
-  @IBOutlet weak var attachmentImageViewWidthConstraint: NSLayoutConstraint!
-  weak var delegate: MessageTableViewCellDelegate?
-  
-  override func prepareForReuse() {
-    super.prepareForReuse()
-//    attachmentImageView.cancelDownload()
-    attachmentImageView.image = nil
-    attachmentImageViewHeightConstraint.constant = 250 / 1.3
-    attachmentImageViewWidthConstraint.constant = 250
-  }
-  
-//  override func set(_ message: ObjectMessage) {
-//    super.set(message, conversation: conversations)
-//    switch message.contentType {
-//    case .location:
-//      attachmentImageView.image = UIImage(named: "locationThumbnail")
-//    case .photo:
-//      guard let urlString = message.profilePicLink else { return }
-//      attachmentImageView.setImage(url: URL(string: urlString)) {[weak self] image in
-//        guard let image = image, let weakSelf = self else { return }
-//        guard weakSelf.attachmentImageViewHeightConstraint.constant != image.size.height, weakSelf.attachmentImageViewWidthConstraint.constant != image.size.width else { return }
-//        if max(image.size.height, image.size.width) <= 250 {
-//          weakSelf.attachmentImageViewHeightConstraint.constant = image.size.height
-//          weakSelf.attachmentImageViewWidthConstraint.constant = image.size.width
-//          weakSelf.delegate?.messageTableViewCellUpdate()
-//          return
-//        }
-//        weakSelf.attachmentImageViewWidthConstraint.constant = 250
-//        weakSelf.attachmentImageViewHeightConstraint.constant = image.size.height * (250 / image.size.width)
-//        weakSelf.delegate?.messageTableViewCellUpdate()
-//      }
-//    default: break
-//    }
-//  }
+    
+    @IBOutlet weak var attachmentImageView: UIImageView!
+    @IBOutlet weak var attachmentImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var attachmentImageViewWidthConstraint: NSLayoutConstraint!
+    weak var delegate: MessageTableViewCellDelegate?
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        //    attachmentImageView.cancelDownload()
+        attachmentImageView.image = nil
+        attachmentImageViewHeightConstraint.constant = 250 / 1.3
+        attachmentImageViewWidthConstraint.constant = 250
+    }
+    
+    //  override func set(_ message: ObjectMessage) {
+    //    super.set(message, conversation: conversations)
+    //    switch message.contentType {
+    //    case .location:
+    //      attachmentImageView.image = UIImage(named: "locationThumbnail")
+    //    case .photo:
+    //      guard let urlString = message.profilePicLink else { return }
+    //      attachmentImageView.setImage(url: URL(string: urlString)) {[weak self] image in
+    //        guard let image = image, let weakSelf = self else { return }
+    //        guard weakSelf.attachmentImageViewHeightConstraint.constant != image.size.height, weakSelf.attachmentImageViewWidthConstraint.constant != image.size.width else { return }
+    //        if max(image.size.height, image.size.width) <= 250 {
+    //          weakSelf.attachmentImageViewHeightConstraint.constant = image.size.height
+    //          weakSelf.attachmentImageViewWidthConstraint.constant = image.size.width
+    //          weakSelf.delegate?.messageTableViewCellUpdate()
+    //          return
+    //        }
+    //        weakSelf.attachmentImageViewWidthConstraint.constant = 250
+    //        weakSelf.attachmentImageViewHeightConstraint.constant = image.size.height * (250 / image.size.width)
+    //        weakSelf.delegate?.messageTableViewCellUpdate()
+    //      }
+    //    default: break
+    //    }
+    //  }
 }
