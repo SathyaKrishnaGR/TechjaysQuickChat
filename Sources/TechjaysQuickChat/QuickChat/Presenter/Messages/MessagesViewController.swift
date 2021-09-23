@@ -68,6 +68,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
                 // Fallback on earlier versions
             }
             socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
+            socketManager.dataUpdateDelegate = self
         }
         
     }
@@ -148,6 +149,7 @@ extension MessagesViewController {
         inputTextField.text = nil
         showActionButtons(false)
         send(text)
+        
     }
     
     @IBAction func sendImagePressed(_ sender: UIButton) {
@@ -280,9 +282,13 @@ extension MessagesViewController {
         }
     }
 }
-extension UIImage {
-    func resizeImage(to size: CGSize) -> UIImage {
-        return UIGraphicsImageRenderer(size: size).image { _ in
-            draw(in: CGRect(origin: .zero, size: size))
-        }
-    }}
+
+
+extension MessagesViewController: SocketDataTransferDelegate {
+    func updateChatList(message: String) {
+        
+    }
+    
+    
+}
+
