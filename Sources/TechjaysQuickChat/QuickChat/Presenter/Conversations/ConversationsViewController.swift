@@ -77,7 +77,6 @@ class ConversationsViewController: UIViewController {
                 if let toUserId = conversations[selectedRow].to_user_id {
                     vc.to_user_id = toUserId
                 }
-                vc.modalPresentationStyle = .currentContext
                 present(vc, animated: true, completion: nil)
             }
             
