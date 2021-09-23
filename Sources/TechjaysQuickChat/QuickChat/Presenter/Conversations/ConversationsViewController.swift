@@ -44,7 +44,7 @@ class ConversationsViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        self.tableView.fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +52,7 @@ class ConversationsViewController: UIViewController {
 //        navigationController?.setNavigationBarHidden(true, animated: true)
         self.tableView.allowsMultipleSelection = true
         self.tableView.allowsMultipleSelectionDuringEditing = true
-        self.tableView.fetchData()
+        
         
     }
     
