@@ -59,6 +59,7 @@ class ConversationsViewController: UIViewController {
             vc.to_user_id = userId!
             vc.opponentUserName = opponentUserName
             vc.isFromReel = isFromReel!
+            show(vc, sender: self)
         }
     }
     
