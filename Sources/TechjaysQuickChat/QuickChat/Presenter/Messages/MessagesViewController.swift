@@ -61,7 +61,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             self?.tableView.scroll(to: .bottom, animated: true)
         }
         
-        tableView.transform = CGAffineTransform(rotationAngle: -(CGFloat)(Double.pi))
+        tableView.transform = CGAffineTransform(rotationAngle: (CGFloat)(Double.pi))
         self.tableView.fetchData()
 
     }
