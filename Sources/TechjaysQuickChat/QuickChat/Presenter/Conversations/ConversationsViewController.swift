@@ -47,10 +47,10 @@ class ConversationsViewController: UIViewController {
         if isFromReel! {
             DispatchQueue.main.async {
                 let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
-                vc.to_user_id = userId!
-                vc.opponentUserName = opponentUserName
-                vc.isFromReel = isFromReel!
-                show(vc, sender: self)
+                vc.to_user_id = self.userId!
+                vc.opponentUserName = self.opponentUserName
+                vc.isFromReel = self.isFromReel!
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }
@@ -129,7 +129,9 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
             vc.to_user_id = toUserId
         }
         //        manager.markAsRead(conversations[indexPath.row])
-        show(vc, sender: self)
+//        show(vc, sender: self)
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func paginatedTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
