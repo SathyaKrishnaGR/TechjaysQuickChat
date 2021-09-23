@@ -158,6 +158,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         }
         
         selectedRow = indexPath.row
+        performSegue(withIdentifier: "didSelect", sender: self)
     }
     
     func paginatedTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
