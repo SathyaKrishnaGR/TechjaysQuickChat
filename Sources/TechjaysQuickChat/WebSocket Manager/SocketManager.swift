@@ -77,7 +77,8 @@ extension SocketManager: WebSocketDelegate {
         case .text(let string):
             print("Received text: \(string)")
             // Process it here
-            dataUpdateDelegate?.updateChatList(message: string)
+            
+            dataUpdateDelegate?.updateChatList(message: "{\"result\": true, \"msg\": \"success\", \"type\": \"chat\", \"chat_type\": \"private\", \"data\": {\"sender\": {\"user_id\": 4, \"username\": \"Srinath\"}, \"message\": \"hi sathya anna !\", \"timestamp\": 1632402483.121749}}")
         case .binary(let data):
             print("Received data: \(data.count)")
         case .ping(_):
