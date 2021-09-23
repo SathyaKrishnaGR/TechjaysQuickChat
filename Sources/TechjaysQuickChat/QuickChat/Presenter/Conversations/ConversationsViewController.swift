@@ -82,12 +82,10 @@ class ConversationsViewController: UIViewController {
                     if let toUserId = conversations[selectedRow].to_user_id {
                         vc.to_user_id = toUserId
                         vc.conversation = conversations[selectedRow]
-                        
                     }
                 }
-                present(nav, animated: true, completion: nil)
             }
-            
+            present(nav, animated: true, completion: nil)
             
         }
     }
