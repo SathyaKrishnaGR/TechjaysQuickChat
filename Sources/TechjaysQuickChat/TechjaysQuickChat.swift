@@ -18,17 +18,27 @@ public struct TechjaysQuickChat {
         let storyboard = UIStoryboard(name: TechjaysChatIdentifiers.Storyboard.conversations.rawValue, bundle: Bundle.module)
         if let viewController = storyboard.instantiateViewController(withIdentifier: TechjaysChatIdentifiers.ViewController.conversations.rawValue) as? ConversationsViewController {
             viewController.modalPresentationStyle = .popover
-            
-            
-            print("Chat token \(FayvKeys.ChatDefaults.chatToken)")
-            print("AccessToken \(FayvKeys.ChatDefaults.token)")
-            print("Endpoint \(FayvKeys.ChatDefaults.endpoint)")
             DispatchQueue.main.async {
                 topMostController?.present(viewController, animated: true, completion: nil)
                 // tell the childviewcontroller it's contained in it's parent
             }
         }
     }
+    
+    func openChatListScreenForVidhire(accessToken: String, chatToken: String, appEndPoint: String, socket: String,isFromReel: Bool?,chatIntroArray: ObjectConversation) {
+        FayvKeys.ChatDefaults.chatToken = chatToken
+        FayvKeys.ChatDefaults.token = accessToken
+        FayvKeys.ChatDefaults.endpoint = appEndPoint
+        FayvKeys.ChatDefaults.socketUrl = socket
+        let storyboard = UIStoryboard(name: TechjaysChatIdentifiers.Storyboard.conversations.rawValue, bundle: Bundle.module)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: TechjaysChatIdentifiers.ViewController.conversations.rawValue) as? ConversationsViewController {
+          viewController.modalPresentationStyle = .popover
+          DispatchQueue.main.async {
+            topMostController?.present(viewController, animated: true, completion: nil)
+            // tell the childviewcontroller it’s contained in it’s parent
+          }
+        }
+      }
 }
 
 

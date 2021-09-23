@@ -36,6 +36,9 @@ class ConversationsViewController: UIViewController {
     private let manager = ConversationManager()
     private let userManager = UserManager()
     private var currentUser: ObjectUser?
+    var isFromReel: Bool? = false
+    var userId: Int?
+    var conversationFromMobileApp = ObjectConversation()
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -49,6 +52,14 @@ class ConversationsViewController: UIViewController {
         self.tableView.allowsMultipleSelection = true
         self.tableView.allowsMultipleSelectionDuringEditing = true
         self.tableView.fetchData()
+
+        if isFromReel {
+            let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
+                 vc.conversation = conversationFromMobileApp
+                 if let toUserId = conversationFromMobileApp.to_user_id {
+                   vc.to_user_id = toUserId
+                 }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
