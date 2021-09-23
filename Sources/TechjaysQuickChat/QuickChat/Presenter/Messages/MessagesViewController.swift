@@ -42,6 +42,8 @@ class MessagesViewController: UIViewController, KeyboardHandler {
     //    private var sentMessages = [ObjectMessage]()
     var socketManager = SocketManager()
     var inSocket: Bool = false
+    var isFromReel: Bool = false
+    var opponentUserName: String?
     
     //MARK: Public properties
     var conversation = ObjectConversation()
@@ -115,7 +117,11 @@ extension MessagesViewController {
             button.setBackgroundImage(image, for: .normal)
         }
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
-        self.navigationItem.title = conversation.first_name
+        if isFromReel {
+              self.navigationItem.title = opponentUserName
+            } else {
+              self.navigationItem.title = conversation.first_name
+            }
         
     }
     

@@ -38,7 +38,8 @@ class ConversationsViewController: UIViewController {
     private var currentUser: ObjectUser?
     var isFromReel: Bool? = false
     var userId: Int?
-    var conversationFromMobileApp = ObjectConversation()
+    var to_user_id: Int? = 0
+    var opponentUserName: String?
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -52,14 +53,12 @@ class ConversationsViewController: UIViewController {
         self.tableView.allowsMultipleSelection = true
         self.tableView.allowsMultipleSelectionDuringEditing = true
         self.tableView.fetchData()
-
+        
         if isFromReel! {
-            
             let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
-                 vc.conversation = conversationFromMobileApp
-                 if let toUserId = conversationFromMobileApp.to_user_id {
-                   vc.to_user_id = toUserId
-                 }
+            vc.to_user_id = userId!
+            vc.opponentUserName = opponentUserName
+            vc.isFromReel = isFromReel!
         }
     }
     
@@ -74,7 +73,7 @@ extension ConversationsViewController {
     
     @IBAction func profilePressed(_ sender: Any) {
         
-       
+        
     }
     
     @IBAction func composePressed(_ sender: Any) {
@@ -127,7 +126,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         if let toUserId = conversations[indexPath.row].to_user_id {
             vc.to_user_id = toUserId
         }
-//        manager.markAsRead(conversations[indexPath.row])
+        //        manager.markAsRead(conversations[indexPath.row])
         show(vc, sender: self)
     }
     
