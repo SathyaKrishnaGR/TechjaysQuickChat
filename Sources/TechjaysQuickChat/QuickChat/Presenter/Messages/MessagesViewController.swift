@@ -22,6 +22,7 @@
 
 
 import UIKit
+import Foundation
 
 class MessagesViewController: UIViewController, KeyboardHandler {
     
@@ -66,9 +67,9 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             } else {
                 // Fallback on earlier versions
             }
-            
-//            webSocket = socketManager.sendUrlForWebsocketConfigure(url: FayvKeys.ChatDefaults.socketUrl)
-            socketManager.sendUrlForWebsocketConfigure(url: FayvKeys.ChatDefaults.socketUrl)
+            if !socketManager.isConnected {
+                socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
+            }
         }
         
     }
@@ -77,8 +78,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
 //MARK: Private methods
 extension MessagesViewController {
     private func send(_ message: String) {
-            socketManager.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message)
-        
+        socketManager.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message)
         
         //        manager.create(message, conversation: conversation) {[weak self] response in
         //            guard let weakSelf = self else { return }
@@ -101,8 +101,6 @@ extension MessagesViewController {
     //    }
     
     private func showProfileIconOnNavBar(urlString: String) {
-        
-        
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.layer.cornerRadius = 15
