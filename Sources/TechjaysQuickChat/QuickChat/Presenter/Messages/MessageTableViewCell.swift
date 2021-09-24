@@ -44,7 +44,7 @@ class MessageTableViewCell: UITableViewCell {
         messageTextView?.text = message.data?.message
         if let timeStamp = message.timestamp {
             print("TimeStamp Error \(timeStamp.getElapsedIntervalWithAgo())")
-            timestampLabel.text = timeStamp
+            timestampLabel?.text = timeStamp
         }
         guard let imageView = profilePic else { return }
         guard let urlString = conversation.thumbnail_profile_pic else { return }
