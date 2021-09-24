@@ -96,15 +96,15 @@ extension ConversationsViewController {
         
         isEditing = !isEditing
         if isEditing {
-            self.editButton.setTitle("Done", for: .normal)
-            self.deleteButton.isHidden = true
-            self.deleteButton.isUserInteractionEnabled = false
+            self.editButton.setTitle("Done", for: .selected)
+            self.deleteButton.isHidden = false
+            self.deleteButton.isUserInteractionEnabled = true
             
             
         } else {
             self.editButton.setTitle("Edit", for: .normal)
-                self.deleteButton.isHidden = false
-                self.deleteButton.isUserInteractionEnabled = true
+                self.deleteButton.isHidden = true
+                self.deleteButton.isUserInteractionEnabled = false
             
         }
     }
