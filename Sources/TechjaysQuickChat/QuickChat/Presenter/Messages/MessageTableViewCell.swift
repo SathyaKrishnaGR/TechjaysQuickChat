@@ -32,7 +32,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var profilePic: UIImageView?
     @IBOutlet weak var messageTextView: UITextView?
     
-    @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet weak var timestampLabel: UILabel?
     
     func setChatList(_ message: ObjectMessage, conversation: ObjectConversation) {
         messageTextView?.text = message.message
@@ -42,7 +42,7 @@ class MessageTableViewCell: UITableViewCell {
         
         if let timeStamp = message.timestamp {
             print("TimeStamp Error \(timeStamp.getElapsedIntervalWithAgo())")
-            self.timestampLabel.text = timeStamp.getElapsedIntervalWithAgo()
+            timestampLabel?.text = timeStamp.getElapsedIntervalWithAgo()
         }
     }
 }
