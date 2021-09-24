@@ -232,6 +232,8 @@ extension ConversationsViewController {
             case .SUCCESS:
                 self.conversations.removeArrayOfIndex(array: rows)
                 self.isEditing = !self.isEditing
+                self.deleteButton.isHidden =  true
+                self.deleteButton.isUserInteractionEnabled = false
                 self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
