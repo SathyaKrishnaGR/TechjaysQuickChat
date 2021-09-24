@@ -115,6 +115,8 @@ extension ConversationsViewController {
     
     
     @IBAction func editPressed(_ sender: Any) {
+        
+        isEditing = !isEditing
         if isEditing {
             self.editButton.setTitle("Delete", for: .normal)
             
@@ -122,7 +124,6 @@ extension ConversationsViewController {
             self.editButton.setTitle("Edit", for: .normal)
             
         }
-        isEditing = !isEditing
     }
 }
 
