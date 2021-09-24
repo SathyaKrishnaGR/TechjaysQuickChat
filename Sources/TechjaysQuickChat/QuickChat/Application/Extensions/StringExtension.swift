@@ -38,7 +38,8 @@ extension String {
   }
     func getElapsedIntervalWithAgo() -> String {
         let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute]
-        let dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//        let dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         guard let date = self.toDate(dateFormat: dateFormat) else { return "" }
         
         var utcCalender = Calendar.current
