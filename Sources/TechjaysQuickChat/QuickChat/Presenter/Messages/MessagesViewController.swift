@@ -284,7 +284,8 @@ extension MessagesViewController {
                     } else {
                         self.messages.append(contentsOf: data )
                     }
-                    
+                    self.messages.reverse()
+
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .bottom, animated: true)
                 }
