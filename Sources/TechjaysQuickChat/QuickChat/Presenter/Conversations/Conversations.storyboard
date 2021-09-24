@@ -121,15 +121,6 @@
                                     <action selector="editPressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="N8U-ix-YYU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ta8-72-wT6">
-                                <rect key="frame" x="253" y="54" width="45" height="30"/>
-                                <state key="normal" title="Delete">
-                                    <color key="titleColor" red="0.1247849539" green="0.45409178729999999" blue="0.94906610250000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <action selector="deletePressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="3sn-7k-Gt7"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGV-l1-IZ6">
                                 <rect key="frame" x="164.66666666666666" y="58.666666666666657" width="45.666666666666657" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -141,11 +132,9 @@
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="jGV-l1-IZ6" firstAttribute="centerX" secondItem="eVC-iO-6zG" secondAttribute="centerX" id="COC-az-XI3"/>
-                            <constraint firstItem="xl9-qF-y2U" firstAttribute="leading" secondItem="ta8-72-wT6" secondAttribute="trailing" constant="15" id="Kqw-N3-y0m"/>
+                            <constraint firstItem="jGV-l1-IZ6" firstAttribute="centerY" secondItem="xl9-qF-y2U" secondAttribute="centerY" id="RPU-Jt-dyL"/>
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="trailing" secondItem="xl9-qF-y2U" secondAttribute="trailing" constant="16" id="SGz-na-mMd"/>
-                            <constraint firstItem="ta8-72-wT6" firstAttribute="centerY" secondItem="xl9-qF-y2U" secondAttribute="centerY" id="Yih-bg-aoV"/>
                             <constraint firstItem="CZg-e7-KoX" firstAttribute="top" secondItem="xl9-qF-y2U" secondAttribute="bottom" constant="10" id="bfI-0f-ln6"/>
-                            <constraint firstItem="jGV-l1-IZ6" firstAttribute="centerY" secondItem="ta8-72-wT6" secondAttribute="centerY" id="hMd-1w-cSU"/>
                             <constraint firstItem="CZg-e7-KoX" firstAttribute="leading" secondItem="eVC-iO-6zG" secondAttribute="leading" id="lne-Ax-TUf"/>
                             <constraint firstItem="xl9-qF-y2U" firstAttribute="top" secondItem="eVC-iO-6zG" secondAttribute="top" constant="10" id="v94-oN-ezo"/>
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="bottom" secondItem="CZg-e7-KoX" secondAttribute="bottom" id="vHa-cl-xzG"/>

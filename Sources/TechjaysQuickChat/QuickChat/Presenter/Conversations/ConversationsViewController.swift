@@ -94,7 +94,20 @@ class ConversationsViewController: UIViewController {
 //MARK: IBActions
 extension ConversationsViewController {
     
-    @IBAction func deletePressed(_ sender: Any) {
+    @IBAction func editPressed(_ sender: Any) {
+        
+        isEditing = !isEditing
+        if isEditing {
+            self.editButton.setTitle("Delete", for: .normal)
+            deleteAndRemoveRows()
+            
+        } else {
+            self.editButton.setTitle("Edit", for: .normal)
+            
+        }
+    }
+    
+    fileprivate func deleteAndRemoveRows() {
         var arrayOfIndex: [Int] = []
         if let selectedRows = tableView.indexPathsForSelectedRows {
             
@@ -107,21 +120,7 @@ extension ConversationsViewController {
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: selectedRows, with: .automatic)
             deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
-            
-        }
-    }
-    
-    
-    
-    
-    @IBAction func editPressed(_ sender: Any) {
-        
-        isEditing = !isEditing
-        if isEditing {
-            self.editButton.setTitle("Delete", for: .normal)
-            
-        } else {
-            self.editButton.setTitle("Edit", for: .normal)
+            self.tableView.endUpdates()
             
         }
     }
@@ -224,7 +223,6 @@ extension ConversationsViewController {
             switch status {
             case .SUCCESS:
                 self.conversations.removeArrayOfIndex(array: rows)
-                self.tableView.endUpdates()
                 self.isEditing = !self.isEditing
             case .FAILURE:
                 print(response.msg)
