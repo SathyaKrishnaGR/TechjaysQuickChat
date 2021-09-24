@@ -212,7 +212,7 @@ extension ConversationsViewController {
             switch status {
             case .SUCCESS:
                     DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                        self.tableView.fetchData()
                     }
             case .FAILURE:
                 print(response.msg)
