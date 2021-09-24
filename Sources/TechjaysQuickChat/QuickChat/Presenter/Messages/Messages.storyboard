@@ -34,7 +34,7 @@
                                                     <rect key="frame" x="340" y="5" width="20" height="80"/>
                                                     <subviews>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnP-PL-A6i">
-                                                            <rect key="frame" x="5" y="4.6666666666666643" width="10" height="68.333333333333343"/>
+                                                            <rect key="frame" x="5" y="5" width="10" height="63"/>
                                                             <color key="backgroundColor" systemColor="systemRedColor"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
@@ -57,7 +57,7 @@
                                                         <constraint firstItem="ZnP-PL-A6i" firstAttribute="top" secondItem="mzO-gQ-Kf9" secondAttribute="top" constant="4.6666660308839027" id="5Wt-wE-ERl"/>
                                                         <constraint firstAttribute="bottom" secondItem="CIS-bK-2vD" secondAttribute="bottom" constant="2" id="Khr-jb-ut6"/>
                                                         <constraint firstAttribute="trailing" secondItem="ZnP-PL-A6i" secondAttribute="trailing" constant="5" id="Pa6-fu-ofu"/>
-                                                        <constraint firstItem="CIS-bK-2vD" firstAttribute="top" secondItem="ZnP-PL-A6i" secondAttribute="bottom" id="TgZ-TG-GMq"/>
+                                                        <constraint firstItem="CIS-bK-2vD" firstAttribute="top" secondItem="ZnP-PL-A6i" secondAttribute="bottom" constant="5" id="TgZ-TG-GMq"/>
                                                         <constraint firstItem="ZnP-PL-A6i" firstAttribute="leading" secondItem="mzO-gQ-Kf9" secondAttribute="leading" constant="5" id="uRK-qI-3n5"/>
                                                         <constraint firstItem="CIS-bK-2vD" firstAttribute="trailing" secondItem="ZnP-PL-A6i" secondAttribute="trailing" id="uhS-76-Exe"/>
                                                         <constraint firstItem="CIS-bK-2vD" firstAttribute="leading" secondItem="ZnP-PL-A6i" secondAttribute="leading" id="zII-mE-aFS"/>

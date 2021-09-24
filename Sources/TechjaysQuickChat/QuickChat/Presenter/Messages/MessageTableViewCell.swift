@@ -39,6 +39,11 @@ class MessageTableViewCell: UITableViewCell {
         guard let imageView = profilePic else { return }
         guard let urlString = conversation.thumbnail_profile_pic else { return }
         imageView.setImage(url: URL(string: urlString))
+        
+        if let timeStamp = message.timestamp {
+            print("TimeStamp Error \(timeStamp.getElapsedIntervalWithAgo())")
+            timestampLabel?.text = timeStamp
+        }
     }
     func setSocketList(_ message: ObjectMessage, conversation: ObjectConversation) {
         messageTextView?.text = message.data?.message
