@@ -107,8 +107,7 @@ extension ConversationsViewController {
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: selectedRows, with: .automatic)
             deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
-            self.tableView.endUpdates()
-
+            
         }
     }
     
@@ -217,11 +216,13 @@ extension ConversationsViewController {
             switch status {
             case .SUCCESS:
                 print(response.msg)
+                
             case .FAILURE:
                 print(response.msg)
                 
             }
         }
+        self.tableView.endUpdates()
     }
 }
 
