@@ -104,7 +104,7 @@ extension ConversationsViewController {
                 selectedConversations.append(conversations[indexPath.row])
             }
             
-            deleteChatList(users: arrayOfIndex, userIdToDelete: selectedConversations)
+            deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
         
             tableView.beginUpdates()
             tableView.deleteRows(at: selectedRows, with: .automatic)
@@ -203,7 +203,7 @@ extension ConversationsViewController {
         }
     }
     
-    fileprivate func deleteChatList(users: [Int], userIdToDelete: [ObjectConversation] ) {
+    fileprivate func deleteChatList(rows: [IndexPath], userIdToDelete: [ObjectConversation] ) {
         let stringArray = userIdToDelete.map { "\($0.to_user_id ?? 0)" }
         let payloadString = stringArray.joined(separator: ",")
         
@@ -212,8 +212,9 @@ extension ConversationsViewController {
             switch status {
             case .SUCCESS:
                     DispatchQueue.main.async {
-                        self.tableView.fetchData()
+                        self.tableView.deleteRows(at: rows, with: .automatic)
                     }
+                
             case .FAILURE:
                 print(response.msg)
                 
