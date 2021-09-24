@@ -281,10 +281,8 @@ extension MessagesViewController {
                 if let data = response.data {
                     if isFirstPage {
                         self.messages = data
-                        self.messages.reverse()
                     } else {
                         self.messages.append(contentsOf: data )
-                        self.messages.reverse()
                     }
                     
                     self.tableView.reloadData()

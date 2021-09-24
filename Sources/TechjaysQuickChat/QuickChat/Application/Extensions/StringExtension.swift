@@ -36,4 +36,46 @@ extension String {
     guard coordinates.count == 2 else { return nil }
     return CLLocationCoordinate2D(latitude: Double(coordinates.first!)!, longitude: Double(coordinates.last!)!)
   }
+    func getElapsedIntervalWithAgo() -> String {
+        let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute]
+        let dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        guard let date = self.toDate(dateFormat: dateFormat) else { return "" }
+        
+        var utcCalender = Calendar.current
+        utcCalender.timeZone = TimeZone(abbreviation: "UTC")!
+        let fromDate = utcCalender.dateComponents(components, from: date)
+        
+        var localCalender = Calendar.current
+        localCalender.timeZone = TimeZone(abbreviation: "UTC")!
+        let localDate = localCalender.dateComponents(components, from: Date())
+        
+        let interval = Calendar.current.dateComponents(components, from: fromDate, to: localDate)
+        
+        if let year = interval.year, year > 0 {
+            return year == 1 ? "\(year)" + " " + "year ago" :
+                "\(year)" + " " + "years ago"
+        } else if let month = interval.month, month > 0 {
+            return month == 1 ? "\(month)" + " " + "month ago" :
+                "\(month)" + " " + "months ago"
+        } else if let day = interval.day, day > 0 {
+            return day == 1 ? "\(day)" + " " + "day ago" :
+                "\(day)" + " " + "days ago"
+        } else if let hour = interval.hour, hour > 0 {
+            return hour == 1 ? "\(hour)" + " " + "hour ago" :
+                "\(hour)" + " " + "hours ago"
+        } else if let min = interval.minute, min > 0 {
+            return min == 1 ? "\(min)" + " " + "min ago" :
+                "\(min)" + " " + "mins ago"
+        } else {
+            return "moment ago"
+        }
+    }
+    
+    func toDate(dateFormat: String, timezone: TimeZone = TimeZone(abbreviation: "UTC")!) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        dateFormatter.timeZone = timezone
+        guard let date = dateFormatter.date(from: self) else { return nil }
+        return date
+    }
 }

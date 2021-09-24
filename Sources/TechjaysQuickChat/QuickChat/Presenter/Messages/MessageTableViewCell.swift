@@ -32,6 +32,8 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var profilePic: UIImageView?
     @IBOutlet weak var messageTextView: UITextView?
     
+    @IBOutlet weak var timestampLabel: UILabel?
+    
     func setChatList(_ message: ObjectMessage, conversation: ObjectConversation) {
         messageTextView?.text = message.message
         guard let imageView = profilePic else { return }
@@ -40,6 +42,10 @@ class MessageTableViewCell: UITableViewCell {
     }
     func setSocketList(_ message: ObjectMessage, conversation: ObjectConversation) {
         messageTextView?.text = message.data?.message
+        if let timeStamp = message.timestamp {
+            print("TimeStamp Error \(timeStamp.getElapsedIntervalWithAgo())")
+            timestampLabel.text = timeStamp
+        }
         guard let imageView = profilePic else { return }
         guard let urlString = conversation.thumbnail_profile_pic else { return }
         imageView.setImage(url: URL(string: urlString))
