@@ -27,7 +27,7 @@ class ConversationsViewController: UIViewController {
     //MARK: IBOutlets
     @IBOutlet weak var tableView: PaginatedTableView!
     @IBOutlet weak var profileImageView: UIImageView!
-//    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var editButton: UIButton!
 //    @IBOutlet weak var deleteButton: UIBarButtonItem!
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -115,6 +115,13 @@ extension ConversationsViewController {
     
     
     @IBAction func editPressed(_ sender: Any) {
+        if isEditing {
+            self.editButton.setTitle("Delete", for: .selected)
+            
+        } else {
+            self.editButton.setTitle("Edit", for: .selected)
+            
+        }
         isEditing = !isEditing
     }
 }
