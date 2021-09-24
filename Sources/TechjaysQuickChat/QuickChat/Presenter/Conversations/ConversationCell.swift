@@ -44,7 +44,6 @@ class ConversationCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        self.accessoryType = selected ? .checkmark : .none
     }
     //MARK: Public methods
     func set(_ conversation: ObjectConversation) {
