@@ -130,11 +130,17 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
     func paginatedTableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
+        if editingStyle == .delete {
+            conversations.remove(at: indexPath.row)
+        }
+        
     }
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         
         return PaginationUrl(endpoint: "chat/chat-lists/")
     }
+    
+    
     
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
         DispatchQueue.main.async {
