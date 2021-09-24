@@ -109,7 +109,7 @@
                                     <outlet property="paginationDelegate" destination="ri6-fX-8IQ" id="1dp-7j-Wl9"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xl9-qF-y2U">
+                            <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xl9-qF-y2U">
                                 <rect key="frame" x="324" y="54" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="jVa-9g-uWF"/>

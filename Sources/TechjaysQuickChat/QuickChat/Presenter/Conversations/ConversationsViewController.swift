@@ -97,6 +97,7 @@ extension ConversationsViewController {
         isEditing = !isEditing
         if isEditing {
             self.editButton.setTitle("Done", for: .selected)
+            self.editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             self.deleteButton.isHidden = false
             self.deleteButton.isUserInteractionEnabled = true
             
