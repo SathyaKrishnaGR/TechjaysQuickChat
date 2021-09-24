@@ -49,6 +49,7 @@ class ConversationsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.tableView.fetchData()
+        tableView.allowsMultipleSelectionDuringEditing = true
         
         
     }
@@ -89,32 +90,52 @@ class ConversationsViewController: UIViewController {
 //MARK: IBActions
 extension ConversationsViewController {
     
-    @IBAction func profilePressed(_ sender: Any) {
-        isEditing = true
-        if let indexPaths = tableView.indexPathsForSelectedRows {
-            //Sort the array so it doesn’t cause a crash depending on your selection order.
-            let sortedPaths = indexPaths.sorted {$0.row > $1.row}
-            for indexPath in sortedPaths {
-                let count = conversations.count
-                let index = count-1
-                for i in stride(from: index, through: 0, by: -1) {
-                    if(indexPath.row == i){
-                        let toUserId = conversations[indexPath.row].to_user_id ?? 0
-                        self.deleteChatList(users: "\(indexPath.row)", to_user_id: toUserId)
-                        conversations.remove(at: i)
-                    }
+    @IBAction func deletePressed(_ sender: Any) {
+//        isEditing = true
+//        if let indexPaths = tableView.indexPathsForSelectedRows {
+//            //Sort the array so it doesn’t cause a crash depending on your selection order.
+//            let sortedPaths = indexPaths.sorted {$0.row > $1.row}
+//            for indexPath in sortedPaths {
+//                let count = conversations.count
+//                let index = count-1
+//                for i in stride(from: index, through: 0, by: -1) {
+//                    if(indexPath.row == i){
+//                        let toUserId = conversations[indexPath.row].to_user_id ?? 0
+//                        self.deleteChatList(users: "\(indexPath.row)", to_user_id: toUserId)
+//                        conversations.remove(at: i)
+//                    }
+//                }
+//            }
+//            isEditing = false
+//            tableView.deleteRows(at: sortedPaths, with: .automatic)
+//        }
+        
+        
+        if let selectedRows = tableView.indexPathsForSelectedRows {
+            // 1
+            var selectedConversations = [ObjectConversation]()
+            for indexPath in selectedRows  {
+                selectedConversations.append(conversations[indexPath.row])
+            }
+            // 2
+            for item in selectedConversations {
+                
+                if let index = conversations.index(of: item) {
+                    conversations.remove(at: index)
                 }
             }
-            isEditing = false
-            tableView.deleteRows(at: sortedPaths, with: .automatic)
+            // 3
+            tableView.beginUpdates()
+            tableView.deleteRows(at: selectedRows, with: .automatic)
+            tableView.endUpdates()
         }
     }
     
     
     
     
-    @IBAction func composePressed(_ sender: Any) {
-       
+    @IBAction func editPressed(_ sender: Any) {
+        isEditing = !isEditing
     }
 }
 
@@ -161,12 +182,6 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isEditing {} else{
-            if conversations.isEmpty {
-                composePressed(self)
-                return
-            }
-        }
         
         selectedRow = indexPath.row
         performSegue(withIdentifier: "didSelect", sender: self)

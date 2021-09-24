@@ -62,7 +62,11 @@ extension Conversation {
         case data
     }
 }
-public class ObjectConversation: Codable {
+public class ObjectConversation: Codable, Equatable {
+    public static func == (lhs: ObjectConversation, rhs: ObjectConversation) -> Bool {
+        return (lhs.company_name == rhs.company_name) && (lhs.first_name == rhs.first_name) && (lhs.is_sent_by_myself == rhs.is_sent_by_myself) && (lhs.medium_profile_pic == rhs.medium_profile_pic) && (lhs.message == rhs.message) && (lhs.message_id == rhs.message_id) && (lhs.profile_pic == rhs.profile_pic) && (lhs.thumbnail_profile_pic == rhs.thumbnail_profile_pic) && (lhs.to_user_id == rhs.to_user_id) && (lhs.user_type == rhs.user_type) && (lhs.timestamp == rhs.timestamp)
+    }
+    
 //    var id = UUID().uuidString
     var company_name: String?
     var first_name: String?
