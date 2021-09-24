@@ -216,13 +216,13 @@ extension ConversationsViewController {
             switch status {
             case .SUCCESS:
                 print(response.msg)
-                
+                self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
                 
             }
         }
-        self.tableView.endUpdates()
+        
     }
 }
 
