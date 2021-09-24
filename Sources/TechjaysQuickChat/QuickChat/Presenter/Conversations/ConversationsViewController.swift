@@ -104,6 +104,7 @@ extension ConversationsViewController {
             
         } else {
             self.editButton.setTitle("Edit", for: .normal)
+            self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
                 self.deleteButton.isHidden = true
                 self.deleteButton.isUserInteractionEnabled = false
             
@@ -232,15 +233,21 @@ extension ConversationsViewController {
             case .SUCCESS:
                 self.conversations.removeArrayOfIndex(array: rows)
                 self.isEditing = !self.isEditing
-                self.deleteButton.isHidden =  true
-                self.deleteButton.isUserInteractionEnabled = false
+                self.resetEditAndDeletebuttons()
                 self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
                 
             }
         }
+    }
+    
+    fileprivate func resetEditAndDeletebuttons() {
         
+        self.deleteButton.isHidden =  true
+        self.deleteButton.isUserInteractionEnabled = false
+        self.editButton.setTitle("Edit", for: .normal)
+        self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     }
 }
 
