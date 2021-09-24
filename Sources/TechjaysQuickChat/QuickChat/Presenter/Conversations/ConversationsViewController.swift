@@ -48,7 +48,7 @@ class ConversationsViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.allowsMultipleSelectionDuringEditing = true
-//        self.editButton = self.editButtonItem
+        addTapGesture(view: self.view)
         
     }
     
@@ -123,6 +123,15 @@ extension ConversationsViewController {
             self.tableView.endUpdates()
             
         }
+    }
+    
+    fileprivate func addTapGesture(view: UIView) {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:))))
+    }
+    
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        isEditing = !isEditing
     }
 }
 
