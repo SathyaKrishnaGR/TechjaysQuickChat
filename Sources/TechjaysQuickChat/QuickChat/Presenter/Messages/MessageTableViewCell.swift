@@ -42,7 +42,7 @@ class MessageTableViewCell: UITableViewCell {
         
         if let timeStamp = message.timestamp {
             print("TimeStamp Error \(timeStamp.getElapsedIntervalWithAgo())")
-            timestampLabel?.text = timeStamp
+            timestampLabel?.text = timeStamp.getElapsedIntervalWithAgo()
         }
     }
     func setSocketList(_ message: ObjectMessage, conversation: ObjectConversation) {
