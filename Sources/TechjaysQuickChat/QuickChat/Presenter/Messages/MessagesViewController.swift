@@ -190,7 +190,6 @@ extension MessagesViewController: PaginatedTableViewDelegate {
     
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
         fetchMessages(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
-        self.messages.reverse()
     }
     
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -282,8 +281,10 @@ extension MessagesViewController {
                 if let data = response.data {
                     if isFirstPage {
                         self.messages = data
+                        self.messages.reverse()
                     } else {
                         self.messages.append(contentsOf: data )
+                        self.messages.reverse()
                     }
                     
                     self.tableView.reloadData()
