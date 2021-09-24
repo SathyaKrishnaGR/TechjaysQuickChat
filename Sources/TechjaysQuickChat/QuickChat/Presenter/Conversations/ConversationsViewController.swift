@@ -28,7 +28,7 @@ class ConversationsViewController: UIViewController {
     @IBOutlet weak var tableView: PaginatedTableView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var editButton: UIButton!
-//    @IBOutlet weak var deleteButton: UIBarButtonItem!
+        @IBOutlet weak var deleteButton: UIButton!
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -48,8 +48,6 @@ class ConversationsViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.allowsMultipleSelectionDuringEditing = true
-        addTapGesture(view: self.view)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,9 +60,9 @@ class ConversationsViewController: UIViewController {
         super.viewDidAppear(true)
         
         if isFromReel {
-                self.performSegue(withIdentifier: "didSelect", sender: self)
+            self.performSegue(withIdentifier: "didSelect", sender: self)
         }
-    
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -98,15 +96,23 @@ extension ConversationsViewController {
         
         isEditing = !isEditing
         if isEditing {
-            self.editButton.setTitle("Delete", for: .normal)
-            deleteAndRemoveRows()
+            self.editButton.setTitle("Done", for: .normal)
+            self.deleteButton.isHidden = true
+            self.deleteButton.isUserInteractionEnabled = false
+            
             
         } else {
             self.editButton.setTitle("Edit", for: .normal)
+                self.deleteButton.isHidden = false
+                self.deleteButton.isUserInteractionEnabled = true
             
         }
     }
     
+    @IBAction func deletePressed(_ sender: Any) {
+        deleteAndRemoveRows()
+        
+    }
     fileprivate func deleteAndRemoveRows() {
         var arrayOfIndex: [Int] = []
         if let selectedRows = tableView.indexPathsForSelectedRows {
@@ -125,16 +131,6 @@ extension ConversationsViewController {
         }
     }
     
-    fileprivate func addTapGesture(view: UIView) {
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:))))
-    }
-    
-    
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        if !isEditing {
-            self.editPressed(sender as Any)
-        }
-    }
 }
 
 
@@ -201,7 +197,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
-
+        
     }
 }
 
@@ -272,7 +268,7 @@ extension ConversationsViewController: ContactsPreviewControllerDelegate {
 
 extension Array {
     mutating func removeArrayOfIndex(array: [IndexPath]) {
-         let res = array.map { index in
+        let res = array.map { index in
             self.remove(at: index.row)
         }
         
