@@ -41,7 +41,6 @@ class MessagesViewController: UIViewController, KeyboardHandler {
     private var messages = [ObjectMessage]()
     //    private var sentMessages = [ObjectMessage]()
     var socketManager = SocketManager()
-    var inSocket: Bool = false
     var isFromReel: Bool = false
     var opponentUserName: String?
     
@@ -330,8 +329,10 @@ extension MessagesViewController: SocketDataTransferDelegate {
         if socket.type == "chat" && socket.result == true {
 //            messages.insert(socket, at: 0)
             messages.append(socket)
-            inSocket = true
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                
+            }
         }
         
     }
