@@ -104,6 +104,10 @@ extension ConversationsViewController {
                 selectedConversations.append(conversations[indexPath.row])
             }
             
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: selectedRows, with: .automatic)
+            self.tableView.endUpdates()
+            
             deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
 
         }
@@ -172,7 +176,6 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         return 80
     }
     
-    
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
@@ -210,9 +213,6 @@ extension ConversationsViewController {
             case .SUCCESS:
                     DispatchQueue.main.async {
                         
-                        self.tableView.beginUpdates()
-                        self.tableView.deleteRows(at: rows, with: .automatic)
-                        self.tableView.endUpdates()
                     }
                 
             case .FAILURE:
