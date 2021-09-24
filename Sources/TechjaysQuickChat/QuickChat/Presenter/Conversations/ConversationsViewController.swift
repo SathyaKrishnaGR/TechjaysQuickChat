@@ -204,8 +204,8 @@ extension ConversationsViewController {
         let stringArray = userIdToDelete.map { "\($0.to_user_id ?? 0)" }
         let payloadString = stringArray.joined(separator: ",")
         
-        let url = URLFactory.shared.url(endpoint: "chat/delete-chat-list/", parameters: ["to_user_id": payloadString])
-        APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: [:]) { (status, response: APIResponse<[ObjectConversation]>) in
+        let url = URLFactory.shared.url(endpoint: "chat/delete-chat-list/")
+        APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: ["to_user_id": payloadString]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
                     DispatchQueue.main.async {
