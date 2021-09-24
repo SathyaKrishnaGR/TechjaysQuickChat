@@ -127,7 +127,7 @@ extension ConversationsViewController {
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: selectedRows, with: .automatic)
             deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
-            self.tableView.endUpdates()
+            
             
         }
     }
@@ -232,6 +232,7 @@ extension ConversationsViewController {
             case .SUCCESS:
                 self.conversations.removeArrayOfIndex(array: rows)
                 self.isEditing = !self.isEditing
+                self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
                 
