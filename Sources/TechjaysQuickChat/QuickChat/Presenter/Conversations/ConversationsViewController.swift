@@ -95,40 +95,17 @@ class ConversationsViewController: UIViewController {
 extension ConversationsViewController {
     
     @IBAction func deletePressed(_ sender: Any) {
-//        isEditing = true
-//        if let indexPaths = tableView.indexPathsForSelectedRows {
-//            //Sort the array so it doesn’t cause a crash depending on your selection order.
-//            let sortedPaths = indexPaths.sorted {$0.row > $1.row}
-//            for indexPath in sortedPaths {
-//                let count = conversations.count
-//                let index = count-1
-//                for i in stride(from: index, through: 0, by: -1) {
-//                    if(indexPath.row == i){
-//                        let toUserId = conversations[indexPath.row].to_user_id ?? 0
-//                        self.deleteChatList(users: "\(indexPath.row)", to_user_id: toUserId)
-//                        conversations.remove(at: i)
-//                    }
-//                }
-//            }
-//            isEditing = false
-//            tableView.deleteRows(at: sortedPaths, with: .automatic)
-//        }
-        
-        
+        var arrayOfIndex: [Int] = []
         if let selectedRows = tableView.indexPathsForSelectedRows {
-            // 1
+            
             var selectedConversations = [ObjectConversation]()
             for indexPath in selectedRows  {
+                arrayOfIndex.append(indexPath.row)
                 selectedConversations.append(conversations[indexPath.row])
             }
-            // 2
-            for item in selectedConversations {
-                
-                if let index = conversations.index(of: item) {
-                    conversations.remove(at: index)
-                }
-            }
-            // 3
+            
+            deleteChatList(users: arrayOfIndex, to_user_id: to_user_id!)
+        
             tableView.beginUpdates()
             tableView.deleteRows(at: selectedRows, with: .automatic)
             tableView.endUpdates()
@@ -151,9 +128,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         return true
     }
     func paginatedTableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            self.deleteChatList(users: "\(indexPath.row)", to_user_id: conversations[indexPath.row].to_user_id!, index: indexPath.row)
-        }
+        
     }
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         
@@ -186,9 +161,11 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !isEditing {
+            selectedRow = indexPath.row
+            performSegue(withIdentifier: "didSelect", sender: self)
+        }
         
-        selectedRow = indexPath.row
-        performSegue(withIdentifier: "didSelect", sender: self)
     }
     
     func paginatedTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -226,14 +203,20 @@ extension ConversationsViewController {
         }
     }
     
-    fileprivate func deleteChatList(users: String,to_user_id: Int, index: Int ) {
+    fileprivate func deleteChatList(users: [Int],to_user_id: Int ) {
+        let stringArray = users.map { String($0) }
+        let payloadString = stringArray.joined(separator: ",")
+        
         let url = URLFactory.shared.url(endpoint: "chat/delete-chat-list/", parameters: ["to_user_id": "\(to_user_id)"])
-        APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: users) { (status, response: APIResponse<[ObjectConversation]>) in
+        APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: payloadString) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
-                self.conversations.remove(at: index)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
             case .FAILURE:
                 print(response.msg)
+                
             }
         }
     }
