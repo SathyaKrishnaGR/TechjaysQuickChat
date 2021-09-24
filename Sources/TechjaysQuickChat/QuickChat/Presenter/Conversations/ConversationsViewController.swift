@@ -131,7 +131,7 @@ extension ConversationsViewController {
     
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        isEditing = !isEditing
+        self.editPressed(sender as Any)
     }
 }
 
