@@ -33,20 +33,22 @@ class ObjectMessage: Codable {
     var type: String?
     var chat_type: String?
     var data: SocketData?
+    var timestamp_in_date: Date?
     
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
-            try container.encodeIfPresent(message_id, forKey: .message_id)
-            try container.encodeIfPresent(is_sent_by_myself, forKey: .is_sent_by_myself)
-            try container.encodeIfPresent(message, forKey: .message)
-            try container.encodeIfPresent(timestamp, forKey: .timestamp)
+        try container.encodeIfPresent(message_id, forKey: .message_id)
+        try container.encodeIfPresent(is_sent_by_myself, forKey: .is_sent_by_myself)
+        try container.encodeIfPresent(message, forKey: .message)
+        try container.encodeIfPresent(timestamp, forKey: .timestamp)
         
-            try container.encodeIfPresent(result, forKey: .result)
-            try container.encodeIfPresent(msg, forKey: .msg)
-            try container.encodeIfPresent(type, forKey: .type)
-            try container.encodeIfPresent(chat_type, forKey: .chat_type)
+        try container.encodeIfPresent(result, forKey: .result)
+        try container.encodeIfPresent(msg, forKey: .msg)
+        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(chat_type, forKey: .chat_type)
+        try container.encodeIfPresent(timestamp_in_date, forKey: .timestamp_in_date)
         
         //    try container.encode(id, forKey: .id)
         //    try container.encodeIfPresent(message, forKey: .message)
@@ -71,6 +73,7 @@ class ObjectMessage: Codable {
         type = try container.decodeIfPresent(String.self, forKey: .type)
         chat_type = try container.decodeIfPresent(String.self, forKey: .chat_type)
         data = try container.decodeIfPresent(SocketData.self, forKey: .data)
+        timestamp_in_date = try container.decodeIfPresent(Date.self, forKey: .timestamp_in_date)
         
         //
         //    id = try container.decode(String.self, forKey: .id)
@@ -86,7 +89,7 @@ class ObjectMessage: Codable {
 
 extension ObjectMessage {
     func currentUserID() -> Int? {
-      return message_id
+        return message_id
     }
     private enum CodingKeys: String, CodingKey {
         case message_id
@@ -98,6 +101,7 @@ extension ObjectMessage {
         case type
         case chat_type
         case data
+        case timestamp_in_date
         
         
         //    case id
@@ -110,25 +114,27 @@ extension ObjectMessage {
         
     }
     
-//    enum ContentType: Int {
-//        //    case none
-//        //    case photo
-//        //    case location
-//        //    case unknown
-//    }
+    //    enum ContentType: Int {
+    //        //    case none
+    //        //    case photo
+    //        //    case location
+    //        //    case unknown
+    //    }
 }
 
 class SocketData: Codable {
     var sender: SocketSender?
     var message: String?
     var timestamp: Double?
+    var timestamp_in_date: Date?
     
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encodeIfPresent(sender, forKey: .sender)
-            try container.encodeIfPresent(message, forKey: .message)
-            try container.encodeIfPresent(timestamp, forKey: .timestamp)
+        try container.encodeIfPresent(sender, forKey: .sender)
+        try container.encodeIfPresent(message, forKey: .message)
+        try container.encodeIfPresent(timestamp, forKey: .timestamp)
+        try container.encodeIfPresent(timestamp_in_date, forKey: .timestamp_in_date)
     }
     
     init() {}
@@ -139,6 +145,7 @@ class SocketData: Codable {
         sender = try container.decodeIfPresent(SocketSender.self, forKey: .sender)
         message = try container.decodeIfPresent(String.self, forKey: .message)
         timestamp = try container.decodeIfPresent(Double.self, forKey: .timestamp)
+        timestamp_in_date = try container.decodeIfPresent(Date.self, forKey: .timestamp_in_date)
         
     }
 }
@@ -148,6 +155,7 @@ extension SocketData {
         case sender
         case message
         case timestamp
+        case timestamp_in_date
         
     }
 }
@@ -157,8 +165,8 @@ class SocketSender: Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encodeIfPresent(user_id, forKey: .user_id)
-            try container.encodeIfPresent(username, forKey: .username)
+        try container.encodeIfPresent(user_id, forKey: .user_id)
+        try container.encodeIfPresent(username, forKey: .username)
     }
     
     init() {}
@@ -174,7 +182,7 @@ class SocketSender: Codable {
 
 extension SocketSender {
     func currentUserID() -> String? {
-      return user_id
+        return user_id
     }
     private enum CodingKeys: String, CodingKey {
         case user_id
