@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T4u-7a-8pH">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -108,7 +109,7 @@
                                     <outlet property="paginationDelegate" destination="ri6-fX-8IQ" id="1dp-7j-Wl9"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xl9-qF-y2U">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xl9-qF-y2U">
                                 <rect key="frame" x="313" y="98" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="tzo-S2-9nW"/>
@@ -120,7 +121,7 @@
                                     <action selector="editPressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="N8U-ix-YYU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ta8-72-wT6">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ta8-72-wT6">
                                 <rect key="frame" x="253" y="98" width="45" height="30"/>
                                 <state key="normal" title="Delete">
                                     <color key="titleColor" red="0.1247849539" green="0.45409178729999999" blue="0.94906610250000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -143,7 +144,7 @@
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="trailing" secondItem="CZg-e7-KoX" secondAttribute="trailing" id="y6u-6o-oOi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="VV4-rQ-2Nk">
+                    <navigationItem key="navigationItem" title="Chat" largeTitleDisplayMode="always" id="VV4-rQ-2Nk">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="IfA-Wk-5eQ"/>
                     </navigationItem>
                     <connections>
