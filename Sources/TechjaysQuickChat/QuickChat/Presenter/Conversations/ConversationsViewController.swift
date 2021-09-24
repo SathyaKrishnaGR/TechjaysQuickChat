@@ -56,9 +56,6 @@ class ConversationsViewController: UIViewController {
         super.viewWillAppear(true)
         self.tableView.fetchData()
         
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,7 +69,7 @@ class ConversationsViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-//        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
