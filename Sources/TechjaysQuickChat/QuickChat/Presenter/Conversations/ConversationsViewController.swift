@@ -27,6 +27,8 @@ class ConversationsViewController: UIViewController {
     //MARK: IBOutlets
     @IBOutlet weak var tableView: PaginatedTableView!
     @IBOutlet weak var profileImageView: UIImageView!
+//    @IBOutlet weak var editButton: UIBarButtonItem!
+//    @IBOutlet weak var deleteButton: UIBarButtonItem!
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -46,11 +48,15 @@ class ConversationsViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.allowsMultipleSelectionDuringEditing = true
+//        self.editButton = self.editButtonItem
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.tableView.fetchData()
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
         
         
     }
@@ -66,7 +72,7 @@ class ConversationsViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        navigationController?.setNavigationBarHidden(false, animated: true)
+//        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -149,7 +155,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
     func paginatedTableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.deleteChatList(users: "\(indexPath.row)", to_user_id: conversations[indexPath.row].to_user_id!)
+            self.deleteChatList(users: "\(indexPath.row)", to_user_id: conversations[indexPath.row].to_user_id!, index: indexPath.row)
         }
     }
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
@@ -217,12 +223,12 @@ extension ConversationsViewController {
         }
     }
     
-    fileprivate func deleteChatList(users: String,to_user_id: Int ) {
+    fileprivate func deleteChatList(users: String,to_user_id: Int, index: Int ) {
         let url = URLFactory.shared.url(endpoint: "chat/delete-chat-list/", parameters: ["to_user_id": "\(to_user_id)"])
         APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: users) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
-                self.tableView.reloadData()
+                self.conversations.remove(at: index)
             case .FAILURE:
                 print(response.msg)
             }
