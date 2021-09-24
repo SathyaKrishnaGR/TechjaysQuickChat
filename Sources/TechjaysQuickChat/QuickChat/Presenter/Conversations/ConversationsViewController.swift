@@ -215,7 +215,7 @@ extension ConversationsViewController {
         APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: ["to_user_id": payloadString]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
-                print(response.msg)
+                self.conversations.removeArrayOfIndex(array: rows)
                 self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
@@ -252,3 +252,12 @@ extension ConversationsViewController: ContactsPreviewControllerDelegate {
     }
 }
 
+extension Array {
+    mutating func removeArrayOfIndex(array: [IndexPath]) {
+         let res = array.map { index in
+            self.remove(at: index.row)
+        }
+        
+        print("Res is \(res)")
+    }
+}
