@@ -285,7 +285,8 @@ extension MessagesViewController {
                         self.messages.append(contentsOf: data )
                     }
                     if self.messages.count > 1 {
-                        self.messages = self.messages.sorted(by: {$0.timestamp_in_date!.compare($1.timestamp_in_date!) == .orderedAscending })
+//                        self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate() < $1.timestamp?.stringToDate()})
+                        self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
                     }
                     
                     self.tableView.reloadData()
