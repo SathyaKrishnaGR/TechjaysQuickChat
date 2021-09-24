@@ -286,7 +286,6 @@ extension MessagesViewController {
                         self.messages.append(contentsOf: data )
                     }
                     
-                    //                    self.messages = self.messages.sorted(by: {$0.timestamp < $1.timestamp})
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .bottom, animated: true)
                 }
@@ -329,8 +328,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
     
     func processTheDatafrom(socket: ObjectMessage) {
         if socket.type == "chat" && socket.result == true {
-            messages.insert(socket, at: 0)
-//            messages.append(socket)
+//            messages.insert(socket, at: 0)
+            messages.append(socket)
             inSocket = true
             self.tableView.reloadData()
         }
