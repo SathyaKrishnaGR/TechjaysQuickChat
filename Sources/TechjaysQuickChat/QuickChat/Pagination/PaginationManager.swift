@@ -50,7 +50,7 @@ extension PaginationManager {
         let url = paginationUrl
         var query: [QueryParam: String] = [
             .offset: offset.description,
-            .limit: fayvEnvironment.fetchLimit.description
+            .limit: "10"
         ]
         if !url.searchQuery.isEmpty {
             query[.search] = url.searchQuery

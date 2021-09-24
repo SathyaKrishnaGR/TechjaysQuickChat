@@ -31,7 +31,7 @@ class URLFactory {
     /// - Returns: Fayvit URL string for the provided paramters
     func url(
         endpoint: String,
-        query: [QueryParam: String] = [.limit: String(fayvEnvironment.fetchLimit)],
+        query: [QueryParam: String] = [.limit: "10"],
         parameters: [String: String] = [:],
         pathVariable: String = "",
         version: Int = 1
@@ -43,7 +43,7 @@ class URLFactory {
 
 extension URLFactory {
     private func buildBaseUrl(for version: Int) -> String {
-        return Urls.base + String(format: Urls.version, version)
+        return FayvKeys.APIDefaults.baseUrl + FayvKeys.APIDefaults.version
     }
 
     private func buildPathVariable(for url: String, with pathVariable: String) -> String {

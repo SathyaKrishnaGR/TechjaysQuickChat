@@ -9,8 +9,8 @@
 import Foundation
 
 
-struct Urls {
-    static let base = fayvEnvironment.baseUrl
-    static let version = "api/v%d/"
+public struct Urls {
+    var base: String = ""
+    var version: Int = 0
 }
 

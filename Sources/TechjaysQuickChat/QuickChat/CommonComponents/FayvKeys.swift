@@ -20,4 +20,9 @@ struct FayvKeys {
         static var endpoint = "app_endpoint"
         static var socketUrl = "socket_url"
        }
+    
+    struct APIDefaults {
+        static var baseUrl = "baseUrl"
+        static var version = "version"
+    }
 }
