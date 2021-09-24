@@ -217,7 +217,7 @@ extension ConversationsViewController {
             case .SUCCESS:
                 self.conversations.removeArrayOfIndex(array: rows)
                 self.tableView.endUpdates()
-                isEditing = !isEditing
+                self.isEditing = !self.isEditing
             case .FAILURE:
                 print(response.msg)
                 
