@@ -106,9 +106,8 @@ extension ConversationsViewController {
             
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: selectedRows, with: .automatic)
-            self.tableView.endUpdates()
-            
             deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
+            self.tableView.endUpdates()
 
         }
     }
@@ -217,10 +216,7 @@ extension ConversationsViewController {
         APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: ["to_user_id": payloadString]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
-                    DispatchQueue.main.async {
-                        
-                    }
-                
+                print(response.msg)
             case .FAILURE:
                 print(response.msg)
                 
