@@ -104,7 +104,7 @@ extension ConversationsViewController {
                 selectedConversations.append(conversations[indexPath.row])
             }
             
-            deleteChatList(users: arrayOfIndex, to_user_id: to_user_id!)
+            deleteChatList(users: arrayOfIndex, userIdToDelete: selectedConversations)
         
             tableView.beginUpdates()
             tableView.deleteRows(at: selectedRows, with: .automatic)
@@ -203,12 +203,12 @@ extension ConversationsViewController {
         }
     }
     
-    fileprivate func deleteChatList(users: [Int],to_user_id: Int ) {
-        let stringArray = users.map { String($0) }
+    fileprivate func deleteChatList(users: [Int], userIdToDelete: [ObjectConversation] ) {
+        let stringArray = userIdToDelete.map { "\($0.to_user_id ?? 0)" }
         let payloadString = stringArray.joined(separator: ",")
         
-        let url = URLFactory.shared.url(endpoint: "chat/delete-chat-list/", parameters: ["to_user_id": "\(to_user_id)"])
-        APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: payloadString) { (status, response: APIResponse<[ObjectConversation]>) in
+        let url = URLFactory.shared.url(endpoint: "chat/delete-chat-list/", parameters: ["to_user_id": payloadString])
+        APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: [:]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
                     DispatchQueue.main.async {
