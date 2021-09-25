@@ -126,6 +126,7 @@ class SocketData: Codable {
     var sender: SocketSender?
     var message: String?
     var timestamp: String?
+    var profile_pic: String?
     var timestamp_in_date: Date?
     
     
@@ -134,6 +135,7 @@ class SocketData: Codable {
         try container.encodeIfPresent(sender, forKey: .sender)
         try container.encodeIfPresent(message, forKey: .message)
         try container.encodeIfPresent(timestamp, forKey: .timestamp)
+        try container.encodeIfPresent(profile_pic, forKey: .profile_pic)
         try container.encodeIfPresent(timestamp_in_date, forKey: .timestamp_in_date)
     }
     
@@ -145,6 +147,7 @@ class SocketData: Codable {
         sender = try container.decodeIfPresent(SocketSender.self, forKey: .sender)
         message = try container.decodeIfPresent(String.self, forKey: .message)
         timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp)
+        profile_pic = try container.decodeIfPresent(String.self, forKey: .profile_pic)
         timestamp_in_date = try container.decodeIfPresent(Date.self, forKey: .timestamp_in_date)
         
     }
@@ -155,6 +158,7 @@ extension SocketData {
         case sender
         case message
         case timestamp
+        case profile_pic
         case timestamp_in_date
         
     }
@@ -165,7 +169,7 @@ class SocketSender: Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(user_id, forKey: .user_id)
+        try container.encode(user_id, forKey: .user_id)
         try container.encodeIfPresent(username, forKey: .username)
     }
     
