@@ -108,7 +108,6 @@ extension MessagesViewController {
         if let image = conversation.medium_profile_pic {
             showIconOnNavigationBar(imageUrl: image)
         }
-        
     }
     
     fileprivate func showIconOnNavigationBar(imageUrl: String?) {
@@ -120,10 +119,10 @@ extension MessagesViewController {
         imageView.layer.cornerRadius = imageView.frame.height * 0.5
         imageView.layer.masksToBounds = true
         
-        if imageUrl == nil {
-            imageView.image = UIImage(named: "profile_pic", in: Bundle.module, with: .none)
+        if imageUrl != nil {
+            imageView.setImage(url: URL(string: imageUrl!))
         } else {
-            imageView.setImage(url: URL(string: imageUrl))
+            imageView.image = UIImage(named: "profile_pic", in: Bundle.module, with: .none)
         }
         customView.addSubview(imageView)
         navigationItem.rightBarButtonItems = [
