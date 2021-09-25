@@ -52,7 +52,6 @@ class ConversationCell: UITableViewCell {
         //    guard let id = conversation.userIDs.filter({$0 != userID}).first else { return }
         //    let isRead = conversation.isRead[userID] ?? true
         //    if !isRead {
-        messageLabel.textColor = ThemeService.black
         timeLabel.font = timeLabel.font.bold
         
         // Data Set here
