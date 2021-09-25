@@ -65,9 +65,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if let url = conversation.medium_profile_pic {
-                showProfileIconOnNavBar(urlString: url)
-           }
+        showUserNameOnNavBar()
         socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         socketManager.dataUpdateDelegate = self
     }
@@ -97,7 +95,7 @@ extension MessagesViewController {
         //      ConversationManager().create(weakSelf.conversation)
     }
     
-    private func showProfileIconOnNavBar(urlString: String) {
+    private func showUserNameOnNavBar() {
         if toChatScreen {
               self.navigationItem.title = opponentUserName
             } else {
