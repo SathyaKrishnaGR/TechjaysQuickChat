@@ -169,7 +169,7 @@ class SocketSender: Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(user_id, forKey: .user_id)
+        try container.encodeIfPresent(user_id, forKey: .user_id)
         try container.encodeIfPresent(username, forKey: .username)
     }
     
@@ -178,7 +178,7 @@ class SocketSender: Codable {
     public required convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        user_id = try container.decode(Int.self, forKey: .user_id)
+        user_id = try container.decodeIfPresent(Int.self, forKey: .user_id)
         username = try container.decodeIfPresent(String.self, forKey: .username)
         
     }
