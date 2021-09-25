@@ -112,7 +112,9 @@ extension MessagesViewController {
         let imageView = UIImageView()
         imageView.setImage(url: URL(string: image))
         let item = UIBarButtonItem(customView: imageView)
-        self.navigationItem.rightBarButtonItem = item
+        DispatchQueue.main.async {
+            self.navigationItem.rightBarButtonItem = item
+        }
         
     }
     private func doneButtonTapped() {
