@@ -24,21 +24,21 @@ import Foundation
 import CoreLocation
 
 extension String {
-  
-  func isValidEmail() -> Bool {
-    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-    let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-    return emailTest.evaluate(with: self)
-  }
-  
-  var location: CLLocationCoordinate2D? {
-    let coordinates = self.components(separatedBy: ":")
-    guard coordinates.count == 2 else { return nil }
-    return CLLocationCoordinate2D(latitude: Double(coordinates.first!)!, longitude: Double(coordinates.last!)!)
-  }
+    
+    func isValidEmail() -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: self)
+    }
+    
+    var location: CLLocationCoordinate2D? {
+        let coordinates = self.components(separatedBy: ":")
+        guard coordinates.count == 2 else { return nil }
+        return CLLocationCoordinate2D(latitude: Double(coordinates.first!)!, longitude: Double(coordinates.last!)!)
+    }
     func getElapsedIntervalWithAgo() -> String {
         let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute]
-//        let dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        //        let dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         let dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         guard let date = self.toDate(dateFormat: dateFormat) else { return "" }
         
@@ -70,6 +70,16 @@ extension String {
         } else {
             return "moment ago"
         }
+    }
+    
+    
+    func formatDateForChat() -> String {
+        let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute]
+        let dateFormatFromServer = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        guard let date = self.toDate(dateFormat: dateFormatFromServer) else { return "" }
+        let dateFormatter = DateFormatter()
+        let dateFormat = "hh:mmaa, dd MMM"
+        return dateFormatter.string(from: date)
     }
     
     func toDate(dateFormat: String, timezone: TimeZone = TimeZone(abbreviation: "UTC")!) -> Date? {

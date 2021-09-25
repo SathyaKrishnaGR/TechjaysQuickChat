@@ -41,8 +41,8 @@ class MessageTableViewCell: UITableViewCell {
         imageView.setImage(url: URL(string: urlString))
         
         if let timeStamp = message.timestamp {
-            print("TimeStamp Error \(timeStamp.getElapsedIntervalWithAgo())")
-            timestampLabel?.text = timeStamp.getElapsedIntervalWithAgo()
+            print("TimeStamp Error \(timeStamp.formatDateForChat())")
+            timestampLabel?.text = timeStamp.formatDateForChat()
         }
     }
 }
