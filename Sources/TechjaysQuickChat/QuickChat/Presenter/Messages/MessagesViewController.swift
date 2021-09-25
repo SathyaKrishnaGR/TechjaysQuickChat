@@ -60,7 +60,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             self?.tableView.scroll(to: .bottom, animated: true)
         }
         self.tableView.fetchData()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,12 +97,12 @@ extension MessagesViewController {
     
     private func showUserNameOnNavBar() {
         if toChatScreen {
-              self.navigationItem.title = opponentUserName
-            } else {
-                if let firstName = conversation.first_name, let companyName = conversation.company_name {
-                    self.navigationItem.title = firstName + companyName
-                }
+            self.navigationItem.title = opponentUserName
+        } else {
+            if let firstName = conversation.first_name, let companyName = conversation.company_name {
+                self.navigationItem.title = firstName + companyName
             }
+        }
         if let image = conversation.medium_profile_pic {
             showIconOnNavigationBar(image: image)
         }
@@ -159,7 +159,7 @@ extension MessagesViewController {
     
     @IBAction func sendImagePressed(_ sender: UIButton) {
         imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
-//            let message = ObjectMessage()
+            //            let message = ObjectMessage()
             //            message.contentType = .photo
             //            message.profilePic = image
             //            message.ownerID = UserManager().currentUserID()
@@ -206,33 +206,33 @@ extension MessagesViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            // MARK:- Messages from API
+        // MARK:- Messages from API
         
-            let message = messages[indexPath.row]
-            if !message.is_sent_by_myself! {
-                
-                //        if message.contentType == .none {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
-                cell.setChatList(message, conversation: conversation)
-                return cell
-                //        }
-                //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
-                //        cell.delegate = self
-                //        cell.set(message)
-                //        return cell
-            } else {
-                //        if message.contentType == .none {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
-                cell.setChatList(message, conversation: conversation)
-                return cell
-                //        }
-                //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
-                //        cell.delegate = self
-                //        cell.set(message)
-                //        return cell
-                
-            }
-//        }
+        let message = messages[indexPath.row]
+        if !message.is_sent_by_myself! {
+            
+            //        if message.contentType == .none {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
+            cell.setChatList(message, conversation: conversation)
+            return cell
+            //        }
+            //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
+            //        cell.delegate = self
+            //        cell.set(message)
+            //        return cell
+        } else {
+            //        if message.contentType == .none {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
+            cell.setChatList(message, conversation: conversation)
+            return cell
+            //        }
+            //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
+            //        cell.delegate = self
+            //        cell.set(message)
+            //        return cell
+            
+        }
+        //        }
         
         
     }
@@ -327,7 +327,14 @@ extension MessagesViewController: SocketDataTransferDelegate {
                         // Someone is sending you a message!
                         socketMessage.is_sent_by_myself = false
                         if let objMessage = messageinClosure {
-                            socketMessage.message = objMessage.data?.message
+                            if let message = objMessage.data, let username = message.sender?.username {
+                                if Int((message.sender?.user_id)!) != self.to_user_id {
+                                    let notification = LocalNotification(title: "Chat message from \(username)", subTitle: "", body: message.message)
+                                    LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
+                                } else {
+                                    socketMessage.message = objMessage.data?.message
+                                }
+                            }
                         }
                     }
                     
