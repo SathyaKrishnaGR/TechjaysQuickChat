@@ -327,7 +327,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
                         // Someone is sending you a message!
                         socketMessage.is_sent_by_myself = false
                         if let objMessage = messageinClosure {
-                            if let message = objMessage.data, let sender = message.sender? {
+                            if let message = objMessage.data, let sender = objMessage.data?.sender {
                                 
                                 if let userId = sender.user_id {
                                     if  userId != self.to_user_id {
