@@ -181,9 +181,6 @@ class SocketSender: Codable {
 }
 
 extension SocketSender {
-    func currentUserID() -> String? {
-        return user_id
-    }
     private enum CodingKeys: String, CodingKey {
         case user_id
         case username
