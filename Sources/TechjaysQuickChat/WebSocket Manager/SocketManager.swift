@@ -76,8 +76,6 @@ extension SocketManager: WebSocketDelegate {
             print("websocket is disconnected: \(reason) with code: \(code)")
         case .text(let string):
             print("Received text: \(string)")
-            // Process it here
-            /*"{\"result\": true, \"msg\": \"success\", \"type\": \"chat\", \"chat_type\": \"private\", \"data\": {\"sender\": {\"user_id\": 4, \"username\": \"Srinath\"}, \"message\": \"hi sathya anna !\", \"timestamp\": 1632402483.121749}}"**/
             dataUpdateDelegate?.updateChatList(message: string)
         case .binary(let data):
             print("Received data: \(data.count)")

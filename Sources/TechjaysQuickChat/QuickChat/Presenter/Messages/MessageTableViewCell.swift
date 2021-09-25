@@ -36,10 +36,12 @@ class MessageTableViewCell: UITableViewCell {
     
     func setChatList(_ message: ObjectMessage, conversation: ObjectConversation) {
         messageTextView?.text = message.message
-        guard let imageView = profilePic else { return }
-        guard let urlString = conversation.thumbnail_profile_pic else { return }
-        imageView.setImage(url: URL(string: urlString))
-        
+        if let imageView = profilePic {
+            if let urlString = conversation.thumbnail_profile_pic {
+                imageView.setImage(url: URL(string: urlString))
+                
+            }
+        }
         if let timeStamp = message.timestamp {
             print("TimeStamp Error \(timeStamp.formatDateForChat())")
             timestampLabel?.text = timeStamp.formatDateForChat()
