@@ -85,7 +85,7 @@ class ConversationsViewController: UIViewController {
                     }
                 }
             }
-            modalPresentationStyle = .currentContext
+            modalPresentationStyle = .fullScreen
         }
     }
 }
