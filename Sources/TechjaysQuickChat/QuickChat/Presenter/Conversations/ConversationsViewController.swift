@@ -222,9 +222,9 @@ extension ConversationsViewController {
                         self.conversations.append(contentsOf: data )
                     }
                     
-                    if self.conversations.count > 1 {
-                        self.conversations = self.conversations.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedDescending})
-                    }
+//                    if self.conversations.count > 1 {
+//                        self.conversations = self.conversations.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedDescending})
+//                    }
                     
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .top, animated: true)

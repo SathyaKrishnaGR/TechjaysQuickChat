@@ -104,16 +104,29 @@ extension MessagesViewController {
             }
         }
         if let image = conversation.medium_profile_pic {
-            showIconOnNavigationBar(image: image)
+            showIconOnNavigationBar(imageUrl: image)
         }
     }
     
-    fileprivate func showIconOnNavigationBar(image: String) {
-        let imageView = UIImageView()
-        imageView.setImage(url: URL(string: image))
-        let item = UIBarButtonItem(customView: imageView)
-        DispatchQueue.main.async {
-            self.navigationItem.rightBarButtonItem = item
+    fileprivate func showIconOnNavigationBar(imageUrl: String) {
+//        let imageView = UIImageView()
+//        imageView.
+//        imageView.setImage(url: URL(string: image))
+//        let item = UIBarButtonItem(customView: imageView)
+//        DispatchQueue.main.async {
+//            self.navigationItem.rightBarButtonItem = item
+//        }
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.layer.cornerRadius = 15
+        button.clipsToBounds = true
+        button.imageView?.contentMode = .scaleAspectFit
+
+        let imageData = try? Data(contentsOf: URL(string : imageUrl)!)
+        
+        button.setBackgroundImage(UIImage(named: "profile_pic", in: Bundle.module, with: .none), for: .normal)
+        if let imageData = imageData , let image =  UIImage(data: imageData)?.resizeImage(to: button.frame.size) {
+            button.setBackgroundImage(image, for: .normal)
         }
         
     }
