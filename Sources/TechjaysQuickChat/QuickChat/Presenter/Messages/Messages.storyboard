@@ -31,7 +31,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vzm-oI-d4p">
-                                                    <rect key="frame" x="56" y="5" width="35.666666666666657" height="64.333333333333329"/>
+                                                    <rect key="frame" x="10" y="5" width="35.666666666666664" height="64.333333333333329"/>
                                                     <subviews>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vrd-F8-pd4">
                                                             <rect key="frame" x="5.0000000000000018" y="0.0" width="25.666666666666671" height="64.333333333333329"/>
@@ -70,7 +70,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:39 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqa-wx-q1F">
-                                                    <rect key="frame" x="56" y="70" width="35.666666666666657" height="20"/>
+                                                    <rect key="frame" x="10" y="70" width="35.666666666666664" height="20"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" id="PpM-br-kqL"/>
@@ -83,7 +83,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="tintColor" name="AuthBackground"/>
                                             <constraints>
-                                                <constraint firstItem="Vzm-oI-d4p" firstAttribute="leading" secondItem="oqU-VQ-Qe0" secondAttribute="trailing" constant="10" id="Jlk-OF-C0u"/>
+                                                <constraint firstItem="Vzm-oI-d4p" firstAttribute="leading" secondItem="oqU-VQ-Qe0" secondAttribute="leading" id="MWf-vw-5UT"/>
                                                 <constraint firstAttribute="bottom" secondItem="oqU-VQ-Qe0" secondAttribute="bottom" constant="6" id="SGl-Rs-Sae"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Vzm-oI-d4p" secondAttribute="trailing" constant="100" id="TO4-ck-lux"/>
                                                 <constraint firstItem="oqU-VQ-Qe0" firstAttribute="leading" secondItem="z8b-Va-TFL" secondAttribute="leading" constant="10" id="TWB-Ce-THS"/>
@@ -134,7 +134,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:39 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Mg-Og-AxX">
-                                                    <rect key="frame" x="319.33333333333326" y="72" width="35.666666666666686" height="20"/>
+                                                    <rect key="frame" x="319.33333333333331" y="72" width="35.666666666666686" height="20"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" id="Dcj-80-yjd"/>
