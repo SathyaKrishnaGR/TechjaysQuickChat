@@ -109,25 +109,29 @@ extension MessagesViewController {
     }
     
     fileprivate func showIconOnNavigationBar(imageUrl: String) {
-//        let imageView = UIImageView()
-//        imageView.
-//        imageView.setImage(url: URL(string: image))
-//        let item = UIBarButtonItem(customView: imageView)
-//        DispatchQueue.main.async {
-//            self.navigationItem.rightBarButtonItem = item
-//        }
-        let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        button.layer.cornerRadius = 15
-        button.clipsToBounds = true
-        button.imageView?.contentMode = .scaleAspectFit
-
-        let imageData = try? Data(contentsOf: URL(string : imageUrl)!)
+        //        let imageView = UIImageView()
+        //        imageView.
+        //        imageView.setImage(url: URL(string: image))
+        //        let item = UIBarButtonItem(customView: imageView)
+        //        DispatchQueue.main.async {
+        //            self.navigationItem.rightBarButtonItem = item
+        //        }
+        let frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        let customView = UIView(frame: frame)
+        let imageView = UIImageView()
+        imageView.frame = frame
+        imageView.layer.cornerRadius = imageView.frame.height * 0.5
+        imageView.layer.masksToBounds = true
         
-        button.setBackgroundImage(UIImage(named: "profile_pic", in: Bundle.module, with: .none), for: .normal)
-        if let imageData = imageData , let image =  UIImage(data: imageData)?.resizeImage(to: button.frame.size) {
-            button.setBackgroundImage(image, for: .normal)
+        if imageUrl == "" {
+            imageView.image = UIImage(named: "profile_pic", in: Bundle.module, with: .none)
+        } else {
+            imageView.setImage(url: URL(string: imageUrl))
         }
+        customView.addSubview(imageView)
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(customView: customView)
+        ]
         
     }
     private func doneButtonTapped() {
@@ -286,6 +290,7 @@ extension MessagesViewController: UITextFieldDelegate {
     }
 }
 
+
 //MARK: MessageTableViewCellDelegate Delegate
 extension MessagesViewController: MessageTableViewCellDelegate {
     
@@ -307,11 +312,11 @@ extension MessagesViewController {
                         self.messages.append(contentsOf: data )
                     }
                     if self.messages.count > 1 {
-//                        if let time = $1.timestamp?.stringToDate() {
-//                            self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
-                            
-                        }
-//                    }
+                        //                        if let time = $1.timestamp?.stringToDate() {
+                        //                            self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
+                        
+                    }
+                    //                    }
                     
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .bottom, animated: true)
@@ -348,14 +353,14 @@ extension MessagesViewController: SocketDataTransferDelegate {
                                 if let userId = sender.user_id {
                                     if  userId != self.to_user_id {
                                         if let user = sender.username {
-                                        let notification = LocalNotification(title: "New message from \(user)", subTitle: "", body: message.message)
-                                        LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
+                                            let notification = LocalNotification(title: "New message from \(user)", subTitle: "", body: message.message)
+                                            LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
                                         }
                                     } else {
                                         socketMessage.message = objMessage.data?.message
                                     }
                                 }
-            
+                                
                                 
                             }
                         }
