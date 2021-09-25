@@ -101,12 +101,18 @@ extension MessagesViewController {
             } else {
                 if let firstName = conversation.first_name, let companyName = conversation.company_name {
                     self.navigationItem.title = firstName + companyName
-                    
                 }
             }
-        
+        if let image = conversation.medium_profile_pic {
+            showIconOnNavigationBar(image: image)
+        }
     }
     
+    fileprivate func showIconOnNavigationBar(image: String) {
+        let imageView = UIImageView()
+        imageView.setImage(url: URL(string: image))
+        self.navigationItem.titleView = imageView
+    }
     private func doneButtonTapped() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -149,7 +155,7 @@ extension MessagesViewController {
     
     @IBAction func sendImagePressed(_ sender: UIButton) {
         imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
-            let message = ObjectMessage()
+//            let message = ObjectMessage()
             //            message.contentType = .photo
             //            message.profilePic = image
             //            message.ownerID = UserManager().currentUserID()
