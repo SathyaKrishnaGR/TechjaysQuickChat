@@ -174,7 +174,7 @@ class SocketSender: Codable {
     public required convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        user_id = try container.decodeIfPresent(Int.self, forKey: .user_id)
+        user_id = try container.decode(Int.self, forKey: .user_id)
         username = try container.decodeIfPresent(String.self, forKey: .username)
         
     }
