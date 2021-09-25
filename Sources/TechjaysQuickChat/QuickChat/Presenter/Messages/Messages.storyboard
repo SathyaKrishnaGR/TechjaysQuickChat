@@ -159,6 +159,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="messageTextView" destination="ZnP-PL-A6i" id="fZp-8n-Nn5"/>
+                                            <outlet property="timestampLabel" destination="8Mg-Og-AxX" id="zky-06-xhI"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageAttachmentTableViewCell" rowHeight="110" id="a7F-t6-xF2" customClass="MessageAttachmentTableViewCell" customModule="TechjaysQuickChat">
