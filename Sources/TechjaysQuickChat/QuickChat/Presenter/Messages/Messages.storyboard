@@ -57,10 +57,10 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oqU-VQ-Qe0">
-                                                    <rect key="frame" x="10" y="48" width="36" height="36"/>
+                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oqU-VQ-Qe0">
+                                                    <rect key="frame" x="10" y="84" width="36" height="0.0"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="36" id="VuN-e7-Y6l"/>
+                                                        <constraint firstAttribute="height" id="VuN-e7-Y6l"/>
                                                         <constraint firstAttribute="width" constant="36" id="Z3R-97-gsW"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
