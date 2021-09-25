@@ -27,7 +27,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConversationCell" id="omi-P6-clh" customClass="ConversationCell" customModule="TechjaysQuickChat">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConversationCell" id="omi-P6-clh" customClass="ConversationCell" customModule="TechjaysQuickChat">
                                         <rect key="frame" x="0.0" y="74.333333969116211" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="omi-P6-clh" id="09Y-kk-zKy">
@@ -84,7 +84,7 @@
                                                 <constraint firstItem="xAA-5P-oaD" firstAttribute="bottom" secondItem="oib-Vn-mYe" secondAttribute="bottom" id="yyh-BM-97B"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" systemColor="labelColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="messageLabel" destination="xAA-5P-oaD" id="hti-2H-25n"/>
                                             <outlet property="nameLabel" destination="SVu-Tp-h0M" id="wBP-mF-Zb3"/>
