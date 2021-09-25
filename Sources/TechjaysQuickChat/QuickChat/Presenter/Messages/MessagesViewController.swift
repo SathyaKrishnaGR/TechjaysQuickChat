@@ -103,19 +103,16 @@ extension MessagesViewController {
                 self.navigationItem.title = firstName + companyName
             }
         }
+        
+        showIconOnNavigationBar(imageUrl: nil) // Will show default image
         if let image = conversation.medium_profile_pic {
             showIconOnNavigationBar(imageUrl: image)
         }
+        
     }
     
-    fileprivate func showIconOnNavigationBar(imageUrl: String) {
-        //        let imageView = UIImageView()
-        //        imageView.
-        //        imageView.setImage(url: URL(string: image))
-        //        let item = UIBarButtonItem(customView: imageView)
-        //        DispatchQueue.main.async {
-        //            self.navigationItem.rightBarButtonItem = item
-        //        }
+    fileprivate func showIconOnNavigationBar(imageUrl: String?) {
+    
         let frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         let customView = UIView(frame: frame)
         let imageView = UIImageView()
@@ -123,7 +120,7 @@ extension MessagesViewController {
         imageView.layer.cornerRadius = imageView.frame.height * 0.5
         imageView.layer.masksToBounds = true
         
-        if imageUrl == "" {
+        if imageUrl == nil {
             imageView.image = UIImage(named: "profile_pic", in: Bundle.module, with: .none)
         } else {
             imageView.setImage(url: URL(string: imageUrl))
