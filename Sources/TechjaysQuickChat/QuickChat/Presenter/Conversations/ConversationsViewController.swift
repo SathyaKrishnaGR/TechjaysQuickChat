@@ -38,7 +38,7 @@ class ConversationsViewController: UIViewController {
     private let manager = ConversationManager()
     private let userManager = UserManager()
     private var currentUser: ObjectUser?
-    var isFromReel: Bool = false
+    var toChatScreen: Bool = false
     var userId: Int?
     var to_user_id: Int? = 0
     var opponentUserName: String?
@@ -59,7 +59,7 @@ class ConversationsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        if isFromReel {
+        if toChatScreen {
             self.performSegue(withIdentifier: "didSelect", sender: self)
         }
         
@@ -77,7 +77,7 @@ class ConversationsViewController: UIViewController {
                 if selectedRow == -1 {
                     vc.to_user_id = self.userId!
                     vc.opponentUserName = opponentUserName
-                    vc.isFromReel = isFromReel
+                    vc.toChatScreen = toChatScreen
                 } else {
                     if let toUserId = conversations[selectedRow].to_user_id {
                         vc.to_user_id = toUserId
@@ -85,6 +85,7 @@ class ConversationsViewController: UIViewController {
                     }
                 }
             }
+            modalPresentationStyle = .currentContext
         }
     }
 }
@@ -243,7 +244,6 @@ extension ConversationsViewController {
     }
     
     fileprivate func resetEditAndDeletebuttons() {
-        
         self.deleteButton.isHidden =  true
         self.deleteButton.isUserInteractionEnabled = false
         self.editButton.setTitle("Edit", for: .normal)

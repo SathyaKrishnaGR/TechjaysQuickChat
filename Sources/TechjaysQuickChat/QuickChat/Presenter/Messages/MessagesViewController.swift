@@ -41,7 +41,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
     private var messages = [ObjectMessage]()
     //    private var sentMessages = [ObjectMessage]()
     var socketManager = SocketManager()
-    var isFromReel: Bool = false
+    var toChatScreen: Bool = false
     var opponentUserName: String?
     
     //MARK: Public properties
@@ -96,10 +96,9 @@ extension MessagesViewController {
         //      }
         //      ConversationManager().create(weakSelf.conversation)
     }
-    //    }
     
     private func showProfileIconOnNavBar(urlString: String) {
-        if isFromReel {
+        if toChatScreen {
               self.navigationItem.title = opponentUserName
             } else {
                 if let firstName = conversation.first_name, let companyName = conversation.company_name {
