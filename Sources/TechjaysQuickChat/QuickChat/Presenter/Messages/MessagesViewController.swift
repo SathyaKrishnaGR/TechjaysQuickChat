@@ -327,14 +327,18 @@ extension MessagesViewController: SocketDataTransferDelegate {
                         // Someone is sending you a message!
                         socketMessage.is_sent_by_myself = false
                         if let objMessage = messageinClosure {
-                            if let message = objMessage.data, let username = message.sender?.username, let userId = message.sender?.user_id {
-            
-                                if  userId != self.to_user_id {
-                                    let notification = LocalNotification(title: "Chat message from \(username)", subTitle: "", body: message.message)
-                                    LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
-                                } else {
-                                    socketMessage.message = objMessage.data?.message
+                            if let message = objMessage.data, let sender = message.sender? {
+                                
+                                if let userId = sender.user_id {
+                                    if  userId != self.to_user_id {
+                                        let notification = LocalNotification(title: "Chat message from \(sender.username)", subTitle: "", body: message.message)
+                                        LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
+                                    } else {
+                                        socketMessage.message = objMessage.data?.message
+                                    }
                                 }
+            
+                                
                             }
                         }
                     }
