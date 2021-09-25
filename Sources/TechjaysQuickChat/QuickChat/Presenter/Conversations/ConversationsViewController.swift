@@ -221,6 +221,13 @@ extension ConversationsViewController {
                     } else {
                         self.conversations.append(contentsOf: data )
                     }
+                    
+                    if self.conversations.count > 1 {
+                        self.conversations = self.conversations.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
+                    }
+                    
+                    self.tableView.reloadData()
+                    self.tableView.scroll(to: .top, animated: true)
                     self.tableView.reloadData()
                 }
                 hasNext(response.nextLink ?? false)
