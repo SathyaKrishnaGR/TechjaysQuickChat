@@ -52,13 +52,13 @@ class ConversationCell: UITableViewCell {
         //    guard let id = conversation.userIDs.filter({$0 != userID}).first else { return }
         //    let isRead = conversation.isRead[userID] ?? true
         //    if !isRead {
-        timeLabel.font = timeLabel.font.bold
+//        timeLabel.font = timeLabel.font.bold
         
         // Data Set here
         if let companyName = conversation.company_name, let firstName = conversation.first_name {
             self.nameLabel.text = companyName + firstName
         }
-        self.timeLabel.text = conversation.timestamp
+//        self.timeLabel.text = conversation.timestamp
         self.messageLabel.text = conversation.message
         DispatchQueue.main.async {
             if let urlString = conversation.medium_profile_pic {
