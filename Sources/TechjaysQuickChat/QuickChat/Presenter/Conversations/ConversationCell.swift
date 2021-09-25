@@ -28,7 +28,7 @@ class ConversationCell: UITableViewCell {
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+//    @IBOutlet weak var timeLabel: UILabel!
     
     //MARK: Private properties
     let userID = UserManager().currentUserID() ?? 0
@@ -76,7 +76,7 @@ class ConversationCell: UITableViewCell {
             //        profilePic.cancelDownload()
             nameLabel.font = nameLabel.font.regular
             messageLabel.font = messageLabel.font.regular
-            timeLabel.font = timeLabel.font.regular
+//            timeLabel.font = timeLabel.font.regular
             messageLabel.textColor = .gray
             messageLabel.text = nil
         }
