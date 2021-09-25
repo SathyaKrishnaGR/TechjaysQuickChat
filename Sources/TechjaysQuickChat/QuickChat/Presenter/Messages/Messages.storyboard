@@ -34,7 +34,7 @@
                                                     <rect key="frame" x="340" y="5" width="20" height="80"/>
                                                     <subviews>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnP-PL-A6i">
-                                                            <rect key="frame" x="5" y="4.6666666666666679" width="10" height="50.333333333333329"/>
+                                                            <rect key="frame" x="5" y="4.6666666666666679" width="10" height="55.333333333333329"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
@@ -43,7 +43,7 @@
                                                         </textView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIS-bK-2vD">
                                                             <rect key="frame" x="5" y="60" width="10" height="20"/>
-                                                            <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="X2o-tU-bsZ"/>
                                                             </constraints>
@@ -57,7 +57,7 @@
                                                         <constraint firstItem="ZnP-PL-A6i" firstAttribute="top" secondItem="mzO-gQ-Kf9" secondAttribute="top" constant="4.6666660308839027" id="5Wt-wE-ERl"/>
                                                         <constraint firstAttribute="bottom" secondItem="CIS-bK-2vD" secondAttribute="bottom" id="Khr-jb-ut6"/>
                                                         <constraint firstAttribute="trailing" secondItem="ZnP-PL-A6i" secondAttribute="trailing" constant="5" id="Pa6-fu-ofu"/>
-                                                        <constraint firstItem="CIS-bK-2vD" firstAttribute="top" secondItem="ZnP-PL-A6i" secondAttribute="bottom" constant="5" id="TgZ-TG-GMq"/>
+                                                        <constraint firstItem="CIS-bK-2vD" firstAttribute="top" secondItem="ZnP-PL-A6i" secondAttribute="bottom" id="TgZ-TG-GMq"/>
                                                         <constraint firstItem="ZnP-PL-A6i" firstAttribute="leading" secondItem="mzO-gQ-Kf9" secondAttribute="leading" constant="5" id="uRK-qI-3n5"/>
                                                         <constraint firstItem="CIS-bK-2vD" firstAttribute="trailing" secondItem="ZnP-PL-A6i" secondAttribute="trailing" id="uhS-76-Exe"/>
                                                         <constraint firstItem="CIS-bK-2vD" firstAttribute="leading" secondItem="ZnP-PL-A6i" secondAttribute="leading" id="zII-mE-aFS"/>
@@ -95,16 +95,16 @@
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XAl-ad-VaU">
                                                             <rect key="frame" x="5" y="60" width="10" height="20"/>
-                                                            <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="k2l-fz-Qd4"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="10"/>
-                                                            <color key="textColor" red="0.96858769659999999" green="0.96077686549999997" blue="0.96078485250000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vrd-F8-pd4">
-                                                            <rect key="frame" x="5" y="0.0" width="10" height="55"/>
+                                                            <rect key="frame" x="5" y="0.0" width="10" height="60"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -120,7 +120,7 @@
                                                         <constraint firstItem="Vrd-F8-pd4" firstAttribute="top" secondItem="Vzm-oI-d4p" secondAttribute="top" id="PwN-eR-TPN"/>
                                                         <constraint firstItem="Vrd-F8-pd4" firstAttribute="leading" secondItem="Vzm-oI-d4p" secondAttribute="leading" constant="5" id="gnl-Aq-ZI7"/>
                                                         <constraint firstAttribute="bottom" secondItem="XAl-ad-VaU" secondAttribute="bottom" id="mvD-vx-bIW"/>
-                                                        <constraint firstItem="XAl-ad-VaU" firstAttribute="top" secondItem="Vrd-F8-pd4" secondAttribute="bottom" constant="5" id="oCl-yn-6Bd"/>
+                                                        <constraint firstItem="XAl-ad-VaU" firstAttribute="top" secondItem="Vrd-F8-pd4" secondAttribute="bottom" id="oCl-yn-6Bd"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -457,9 +457,6 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
