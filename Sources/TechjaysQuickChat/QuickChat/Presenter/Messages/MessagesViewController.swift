@@ -111,7 +111,9 @@ extension MessagesViewController {
     fileprivate func showIconOnNavigationBar(image: String) {
         let imageView = UIImageView()
         imageView.setImage(url: URL(string: image))
-        self.navigationItem.titleView = imageView
+        let item = UIBarButtonItem(customView: imageView)
+        self.navigationItem.rightBarButtonItem = item
+        
     }
     private func doneButtonTapped() {
         self.dismiss(animated: true, completion: nil)
