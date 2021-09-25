@@ -30,7 +30,7 @@ class LocalNotificationManager {
         content.title = title
         content.subtitle = subTitle
         content.body = body
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: true)
         let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
