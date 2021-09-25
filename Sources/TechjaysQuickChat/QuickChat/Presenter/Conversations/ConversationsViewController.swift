@@ -223,7 +223,7 @@ extension ConversationsViewController {
                     }
                     
                     if self.conversations.count > 1 {
-                        self.conversations = self.conversations.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
+                        self.conversations = self.conversations.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedDescending})
                     }
                     
                     self.tableView.reloadData()
