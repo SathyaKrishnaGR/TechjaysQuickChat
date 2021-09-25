@@ -309,7 +309,7 @@ extension MessagesViewController {
                     }
                     if self.messages.count > 1 {
                         //                        if let time = $1.timestamp?.stringToDate() {
-                        //                            self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
+                        self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
                         
                     }
                     //                    }
@@ -350,7 +350,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
                                     if  userId != self.to_user_id {
                                         if let user = sender.username {
                                             let notification = LocalNotification(title: "New message from \(user)", subTitle: "", body: message.message)
-                                            LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
+//                                            LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
                                         }
                                     } else {
                                         socketMessage.message = objMessage.data?.message

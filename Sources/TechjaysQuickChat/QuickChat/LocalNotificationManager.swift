@@ -21,29 +21,29 @@ class LocalNotificationManager {
     
     static let shared = LocalNotificationManager()
     
-    func sendNotification(localNotification: LocalNotification) {
-        let content = UNMutableNotificationContent()
-
-        guard let title = localNotification.title else {return}
-        guard let subTitle = localNotification.subTitle else {return}
-        guard let body = localNotification.body else {return}
-        content.title = title
-        content.subtitle = subTitle
-        content.body = body
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
-        let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-    }
-    
-    func getAccessPermissionAndNotify(localNotification: LocalNotification) {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {
-            (granted, error) in
-            if granted {
-                self.sendNotification(localNotification: localNotification)
-            } else {
-                return
-            }
-        }
-    }
+//    func sendNotification(localNotification: LocalNotification) {
+//        let content = UNMutableNotificationContent()
+//
+//        guard let title = localNotification.title else {return}
+//        guard let subTitle = localNotification.subTitle else {return}
+//        guard let body = localNotification.body else {return}
+//        content.title = title
+//        content.subtitle = subTitle
+//        content.body = body
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+//        let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
+//
+//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+//    }
+//    
+//    func getAccessPermissionAndNotify(localNotification: LocalNotification) {
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {
+//            (granted, error) in
+//            if granted {
+//                self.sendNotification(localNotification: localNotification)
+//            } else {
+//                return
+//            }
+//        }
+//    }
 }
