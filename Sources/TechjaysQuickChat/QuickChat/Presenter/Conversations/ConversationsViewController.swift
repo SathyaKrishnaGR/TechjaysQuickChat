@@ -309,6 +309,7 @@ extension ConversationsViewController: SocketDataTransferDelegate {
                             socketConversation.company_name = objMessage.company_name
                             socketConversation.first_name = objMessage.first_name
                             socketConversation.to_user_id = objMessage.to_user_id
+                            socketConversation.timestamp = objMessage.timestamp
                             
                             socketConversation.message = objMessage.message
                             
