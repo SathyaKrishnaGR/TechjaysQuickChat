@@ -74,11 +74,10 @@ extension String {
     
     
     func formatDateForChat() -> String {
-        let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute]
         let dateFormatFromServer = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         guard let date = self.toDate(dateFormat: dateFormatFromServer) else { return "" }
         let dateFormatter = DateFormatter()
-        let dateFormat = "hh:mmaa, dd MMM"
+        dateFormatter.dateFormat = "hh:mmaa, dd MMM"
         return dateFormatter.string(from: date)
     }
     
