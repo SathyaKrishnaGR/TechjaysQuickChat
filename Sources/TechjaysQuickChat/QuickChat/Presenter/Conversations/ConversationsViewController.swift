@@ -28,7 +28,7 @@ class ConversationsViewController: UIViewController {
     @IBOutlet weak var tableView: PaginatedTableView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var editButton: UIButton!
-        @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -43,6 +43,8 @@ class ConversationsViewController: UIViewController {
     var to_user_id: Int? = 0
     var opponentUserName: String?
     var selectedRow: Int =  -1 // Nothing is selected
+    var socketManager = SocketManager()
+    
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +55,10 @@ class ConversationsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.tableView.fetchData()
+        
+        
+        socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
+        socketManager.dataUpdateDelegate = self
         
     }
     
@@ -106,8 +112,8 @@ extension ConversationsViewController {
         } else {
             self.editButton.setTitle("Edit", for: .normal)
             self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-                self.deleteButton.isHidden = true
-                self.deleteButton.isUserInteractionEnabled = false
+            self.deleteButton.isHidden = true
+            self.deleteButton.isUserInteractionEnabled = false
             
         }
     }
@@ -285,4 +291,57 @@ extension Array {
         
         print("Res is \(res)")
     }
+}
+
+extension ConversationsViewController: SocketDataTransferDelegate {
+    func updateChatList(message messageString: String) {
+        
+        jsonDecode(messageToDecode: messageString, completion: { messageinClosure, error in
+            
+            print("Error is \(String(describing: error))")
+            print("Message is \(String(describing: messageinClosure))")
+            if error == nil {
+                if let socketConversation = messageinClosure {
+                     // Someone is sending you a message!
+                    socketConversation.is_sent_by_myself = false
+                    if let objMessage = messageinClosure {
+                        if let message = objMessage.message {
+                            socketConversation.company_name = objMessage.company_name
+                            socketConversation.first_name = objMessage.first_name
+                            socketConversation.to_user_id = objMessage.to_user_id
+                            
+                            socketConversation.message = objMessage.message
+                            
+                        }
+                    }
+                    self.processTheDatafrom(socket: socketConversation)
+                }
+                
+            }
+        })
+}
+
+func processTheDatafrom(socket: ObjectConversation) {
+    if socket.type == "chat" && !socket.is_sent_by_myself! && socket.to_user_id != nil {
+        self.conversations.append(socket)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.tableView.scroll(to: .top, animated: true)
+            
+        }
+    }
+    
+}
+
+func jsonDecode(messageToDecode: String, completion: @escaping ( _ data: ObjectConversation?, _ error: Error?) -> Void) {
+    do {
+        let decoder = JSONDecoder()
+        let data = Data(messageToDecode.utf8)
+        
+        let decodedConversation = try decoder.decode(ObjectConversation.self, from: data)
+        return completion(decodedConversation, nil)
+    } catch let error {
+        return completion(nil, error)
+    }
+}
 }
