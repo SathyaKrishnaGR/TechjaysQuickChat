@@ -19,6 +19,7 @@ struct FayvKeys {
         static var chatToken = "chat_token"
         static var endpoint = "app_endpoint"
         static var socketUrl = "socket_url"
+        static var paginationLimit = "100"
        }
     
     struct APIDefaults {

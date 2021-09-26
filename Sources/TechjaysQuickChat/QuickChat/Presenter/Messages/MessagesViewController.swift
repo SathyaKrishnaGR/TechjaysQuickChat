@@ -59,6 +59,8 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             guard state else { return }
             self?.tableView.scroll(to: .bottom, animated: true)
         }
+        
+        FayvKeys.ChatDefaults.paginationLimit = "100"
         self.tableView.fetchData()
         
     }

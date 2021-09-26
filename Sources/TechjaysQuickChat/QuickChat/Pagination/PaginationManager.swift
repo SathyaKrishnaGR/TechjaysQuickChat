@@ -15,6 +15,7 @@ class PaginationManager {
     weak var paginatedCollectionView: PaginatedCollectionView?
     weak var paginatedTableView: PaginatedTableView?
     private let urlFactory = URLFactory.shared
+   
     
     init(delegate: PaginatedTableViewDelegate, tableView: PaginatedTableView) {
         self.tableViewDelegate = delegate
@@ -50,7 +51,7 @@ extension PaginationManager {
         let url = paginationUrl
         var query: [QueryParam: String] = [
             .offset: offset.description,
-            .limit: "10"
+            .limit: FayvKeys.ChatDefaults.paginationLimit
         ]
         if !url.searchQuery.isEmpty {
             query[.search] = url.searchQuery

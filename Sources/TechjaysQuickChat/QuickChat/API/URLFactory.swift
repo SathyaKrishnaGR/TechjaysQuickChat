@@ -31,7 +31,7 @@ class URLFactory {
     /// - Returns: Fayvit URL string for the provided paramters
     func url(
         endpoint: String,
-        query: [QueryParam: String] = [.limit: "10"],
+        query: [QueryParam: String] = [.limit: FayvKeys.ChatDefaults.paginationLimit],
         parameters: [String: String] = [:],
         pathVariable: String = "",
         version: Int = 1

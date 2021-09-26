@@ -48,8 +48,8 @@ class ConversationsViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.allowsMultipleSelectionDuringEditing = true
+        FayvKeys.ChatDefaults.paginationLimit = "10"
     }
     
     override func viewWillAppear(_ animated: Bool) {
