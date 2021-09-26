@@ -76,7 +76,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="messageLabel" destination="xAA-5P-oaD" id="hti-2H-25n"/>
                                             <outlet property="nameLabel" destination="SVu-Tp-h0M" id="wBP-mF-Zb3"/>
