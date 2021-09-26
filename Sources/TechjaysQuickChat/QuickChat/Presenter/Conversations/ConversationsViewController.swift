@@ -222,9 +222,9 @@ extension ConversationsViewController {
                         self.conversations.append(contentsOf: data )
                     }
                     
-//                    if self.conversations.count > 1 {
-//                        self.conversations = self.conversations.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedDescending})
-//                    }
+                    if self.conversations.count > 1 {
+                        self.conversations = self.conversations.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedDescending})
+                    }
                     
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .top, animated: true)
@@ -267,52 +267,23 @@ extension ConversationsViewController {
 //MARK: ProfileViewController Delegate
 extension ConversationsViewController: ProfileViewControllerDelegate {
     func profileViewControllerDidLogOut() {
-        //    userManager.logout()
         navigationController?.dismiss(animated: true)
     }
 }
 
-//MARK: ContactsPreviewController Delegate
-extension ConversationsViewController: ContactsPreviewControllerDelegate {
-    func contactsPreviewController(didSelect user: ObjectUser) {
-        guard userManager.currentUserID() != nil else { return }
-        let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
-        //        if let conversation = conversations.filter({$0.userIDs.contains(user.id)}).first {
-        //            vc.conversation = conversation
-        //            show(vc, sender: self)
-        //            return
-        //        }
-        let conversation = ObjectConversation()
-        //        conversation.userIDs.append(contentsOf: [currentID, user.id])
-        //        conversation.isRead = [currentID: true, user.id: true]
-        vc.conversation = conversation
-        show(vc, sender: self)
-    }
-}
 
-extension Array {
-    mutating func removeArrayOfIndex(array: [IndexPath]) {
-        let res = array.map { index in
-            self.remove(at: index.row)
-        }
-        
-        print("Res is \(res)")
-    }
-}
 
 extension ConversationsViewController: SocketDataTransferDelegate {
     func updateChatList(message messageString: String) {
         
         jsonDecode(messageToDecode: messageString, completion: { messageinClosure, error in
             
-            print("Error is \(String(describing: error))")
-            print("Message is \(String(describing: messageinClosure))")
             if error == nil {
                 if let socketConversation = messageinClosure {
                      // Someone is sending you a message!
                     socketConversation.is_sent_by_myself = false
                     if let objMessage = messageinClosure {
-                        if let message = objMessage.message {
+                        if objMessage.message != nil {
                             socketConversation.company_name = objMessage.company_name
                             socketConversation.first_name = objMessage.first_name
                             socketConversation.to_user_id = objMessage.to_user_id
