@@ -28,10 +28,11 @@ class LocalNotificationManager {
         guard let subTitle = localNotification.subTitle else {return}
         guard let body = localNotification.body else {return}
         content.title = title
-        content.subtitle = subTitle
         content.body = body
+        content.setValue("YES", forKeyPath: "shouldAlwaysAlertWhileAppIsForeground")
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
         let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
+        
 
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
