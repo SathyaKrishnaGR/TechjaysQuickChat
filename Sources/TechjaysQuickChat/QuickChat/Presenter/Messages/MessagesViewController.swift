@@ -187,7 +187,7 @@ extension MessagesViewController {
             switch response {
             case .denied:
                 self?.showAlert(title: "Error", message: "Please enable locattion services")
-            case .location(let location):
+            case .location(_):
                 //                let message = ObjectMessage()
                 //                message.ownerID = UserManager().currentUserID()
                 //                message.content = location.string
@@ -259,7 +259,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let message = messages[indexPath.row]
+//        let message = messages[indexPath.row]
         //        switch message.contentType {
         //        case .location:
         //            let vc: MapPreviewController = UIStoryboard.controller(storyboard: .previews)
@@ -309,7 +309,7 @@ extension MessagesViewController {
                     }
                     if self.messages.count > 1 {
                         for timeCheck in self.messages {
-                            print("Test Time Check \(timeCheck.timestamp?.stringToDate())")
+                            print("Test Time Check \(timeCheck.timestamp?.stringToDate().description)")
                         }
                         self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
                         
@@ -331,9 +331,6 @@ extension MessagesViewController: SocketDataTransferDelegate {
     func updateChatList(message messageString: String) {
         
         jsonDecode(messageToDecode: messageString, completion: { messageinClosure, error in
-            
-            print("Error is \(String(describing: error))")
-            print("Message is \(String(describing: messageinClosure))")
             if error == nil {
                 if let socketMessage = messageinClosure {
                     if  socketMessage.data?.sender == nil {
@@ -355,21 +352,18 @@ extension MessagesViewController: SocketDataTransferDelegate {
                                         }
                                     } else {
                                         socketMessage.message = objMessage.data?.message
+                                        self.showDataOnChatScreen(socket: socketMessage)
                                     }
                                 }
-                                
-                                
                             }
                         }
                     }
-                    
-                    self.processTheDatafrom(socket: socketMessage)
                 }
             }
         })
     }
     
-    func processTheDatafrom(socket: ObjectMessage) {
+    func showDataOnChatScreen(socket: ObjectMessage) {
         if socket.type == "chat" && socket.result == true {
             messages.append(socket)
             DispatchQueue.main.async {
