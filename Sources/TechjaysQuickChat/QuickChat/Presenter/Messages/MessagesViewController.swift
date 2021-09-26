@@ -308,11 +308,12 @@ extension MessagesViewController {
                         self.messages.append(contentsOf: data )
                     }
                     if self.messages.count > 1 {
-                        //                        if let time = $1.timestamp?.stringToDate() {
+                        for timeCheck in self.messages {
+                            print("Test Time Check \(timeCheck.timestamp?.stringToDate())")
+                        }
                         self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
                         
                     }
-                    //                    }
                     
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .bottom, animated: true)
