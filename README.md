@@ -1,4 +1,4 @@
-# TechjaysQuickChat
+# TechjaysQuickChat Chat Package 
 
-A description of this package.
+This repository contains all Chat features for iOS platform. Chat List and Chat Conversations Screen
 
