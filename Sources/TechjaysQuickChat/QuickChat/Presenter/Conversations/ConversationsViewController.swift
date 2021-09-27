@@ -55,10 +55,7 @@ class ConversationsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.tableView.fetchData()
-        
-        
-        //        socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
-        //        socketManager.dataUpdateDelegate = self
+        deleteButton.isEnabled = true
         
     }
     
@@ -122,8 +119,11 @@ extension ConversationsViewController {
     }
     
     @IBAction func deletePressed(_ sender: Any) {
-        deleteAndRemoveRows()
-        
+        if deleteButton.isEnabled {
+            deleteButton.isEnabled = false
+            deleteAndRemoveRows()
+        }
+         
     }
     fileprivate func deleteAndRemoveRows() {
         var arrayOfIndex: [Int] = []
@@ -250,13 +250,13 @@ extension ConversationsViewController {
                 self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
-                
             }
         }
     }
     
     fileprivate func resetEditAndDeletebuttons() {
         self.deleteButton.isHidden =  true
+        self.deleteButton.isEnabled = true
         self.deleteButton.isUserInteractionEnabled = false
         self.editButton.setTitle("Edit", for: .normal)
         self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
