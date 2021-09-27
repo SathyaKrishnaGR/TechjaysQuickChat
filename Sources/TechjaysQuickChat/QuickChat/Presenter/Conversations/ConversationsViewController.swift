@@ -107,14 +107,11 @@ extension ConversationsViewController {
             self.editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             self.deleteButton.isHidden = false
             self.deleteButton.isUserInteractionEnabled = true
-            
-            
         } else {
             self.editButton.setTitle("Edit", for: .normal)
             self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             self.deleteButton.isHidden = true
             self.deleteButton.isUserInteractionEnabled = false
-            
         }
     }
     
@@ -123,7 +120,6 @@ extension ConversationsViewController {
             deleteButton.isEnabled = false
             deleteAndRemoveRows()
         }
-         
     }
     fileprivate func deleteAndRemoveRows() {
         var arrayOfIndex: [Int] = []

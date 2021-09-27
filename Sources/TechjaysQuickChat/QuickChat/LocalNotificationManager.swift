@@ -29,7 +29,7 @@ class LocalNotificationManager: NSObject {
         guard let body = localNotification.body else {return}
         content.title = title
         content.body = body
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
         let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
         
         
