@@ -43,7 +43,6 @@ class MessageTableViewCell: UITableViewCell {
             }
         }
         if let timeStamp = message.timestamp {
-            print("TimeStamp Error \(timeStamp.formatDateForChat())")
             timestampLabel?.text = timeStamp.formatDateForChat()
         }
     }

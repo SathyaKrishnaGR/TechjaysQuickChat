@@ -57,8 +57,8 @@ class ConversationsViewController: UIViewController {
         self.tableView.fetchData()
         
         
-        socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
-        socketManager.dataUpdateDelegate = self
+        //        socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
+        //        socketManager.dataUpdateDelegate = self
         
     }
     
@@ -81,7 +81,10 @@ class ConversationsViewController: UIViewController {
             let nav = segue.destination as! UINavigationController
             if let vc = nav.viewControllers.first as? MessagesViewController {
                 if selectedRow == -1 {
-                    vc.to_user_id = self.userId!
+                    if let toUserId = self.to_user_id {
+                        vc.to_user_id = toUserId
+                        
+                    }
                     vc.opponentUserName = opponentUserName
                     vc.toChatScreen = toChatScreen
                 } else {
@@ -269,54 +272,4 @@ extension ConversationsViewController: ProfileViewControllerDelegate {
 
 
 
-extension ConversationsViewController: SocketDataTransferDelegate {
-    func updateChatList(message messageString: String) {
-        
-        jsonDecode(messageToDecode: messageString, completion: { messageinClosure, error in
-            
-            if error == nil {
-                if let socketConversation = messageinClosure {
-                     // Someone is sending you a message!
-                    socketConversation.is_sent_by_myself = false
-                    if let objMessage = messageinClosure {
-                        if objMessage.message != nil {
-                            socketConversation.company_name = objMessage.company_name
-                            socketConversation.first_name = objMessage.first_name
-                            socketConversation.to_user_id = objMessage.to_user_id
-                            socketConversation.timestamp = objMessage.timestamp
-                            
-                            socketConversation.message = objMessage.message
-                            
-                        }
-                    }
-                    self.processTheDatafrom(socket: socketConversation)
-                }
-                
-            }
-        })
-}
 
-func processTheDatafrom(socket: ObjectConversation) {
-    if socket.type == "chat" && !socket.is_sent_by_myself! && socket.to_user_id != nil {
-        self.conversations.append(socket)
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            self.tableView.scroll(to: .top, animated: true)
-            
-        }
-    }
-    
-}
-
-func jsonDecode(messageToDecode: String, completion: @escaping ( _ data: ObjectConversation?, _ error: Error?) -> Void) {
-    do {
-        let decoder = JSONDecoder()
-        let data = Data(messageToDecode.utf8)
-        
-        let decodedConversation = try decoder.decode(ObjectConversation.self, from: data)
-        return completion(decodedConversation, nil)
-    } catch let error {
-        return completion(nil, error)
-    }
-}
-}

@@ -310,9 +310,6 @@ extension MessagesViewController {
                         self.messages.append(contentsOf: data )
                     }
                     if self.messages.count > 1 {
-                        for timeCheck in self.messages {
-                            print("Test Time Check \(timeCheck.timestamp?.stringToDate().description)")
-                        }
                         self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
                         
                     }
