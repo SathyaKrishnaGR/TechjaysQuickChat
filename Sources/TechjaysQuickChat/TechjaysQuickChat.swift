@@ -32,8 +32,8 @@ public struct TechjaysQuickChat {
         FayvKeys.APIDefaults.baseUrl = appEndPoint
         FayvKeys.APIDefaults.version = version
         
-        let storyboard = UIStoryboard(name: TechjaysChatIdentifiers.Storyboard.messages.rawValue, bundle: Bundle.module)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: TechjaysChatIdentifiers.ViewController.messages.rawValue) as? MessagesViewController {
+        let storyboard = UIStoryboard(name: TechjaysChatIdentifiers.Storyboard.conversations.rawValue, bundle: Bundle.module)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: TechjaysChatIdentifiers.ViewController.conversations.rawValue) as? ConversationsViewController {
             viewController.opponentUserName = opponentUserName
             viewController.to_user_id = userId
             viewController.toChatScreen = true
