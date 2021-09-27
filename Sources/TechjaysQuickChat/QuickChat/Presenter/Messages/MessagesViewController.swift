@@ -340,6 +340,9 @@ extension MessagesViewController: SocketDataTransferDelegate {
                         socketMessage.message = self.inputTextField.text
                         socketMessage.is_sent_by_myself = true
                         self.inputTextField.text = nil
+                        
+                        self.showDataOnChatScreen(socket: socketMessage)
+                        
                     } else {
                         // Someone is sending you a message!
                         socketMessage.is_sent_by_myself = false
