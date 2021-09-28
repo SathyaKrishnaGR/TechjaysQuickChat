@@ -55,9 +55,15 @@ class ConversationCell: UITableViewCell {
 //        timeLabel.font = timeLabel.font.bold
         
         // Data Set here
-        guard let companyName = conversation.company_name else {return}
-        guard let firstName = conversation.first_name else {return}
-        self.nameLabel.text = companyName + firstName
+        var company = ""
+        var first = ""
+        if let companyName = conversation.company_name {
+            company = companyName
+        }
+        if let firstName = conversation.first_name {
+            first = firstName
+        }
+        self.nameLabel.text = first + company
         
 //        self.timeLabel.text = conversation.timestamp
         self.messageLabel.text = conversation.message
