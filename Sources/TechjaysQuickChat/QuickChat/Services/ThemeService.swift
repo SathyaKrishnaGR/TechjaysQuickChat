@@ -23,9 +23,6 @@
 import UIKit
 
 class ThemeService {
-  
-//  static let blueColor = UIColor(red: 129.0/255.0, green: 144.0/255.0, blue: 255.0/255.0, alpha: 1)
-//  static let purpleColor = UIColor(red: 161.0/255.0, green: 114.0/255.0, blue: 255.0/255.0, alpha: 1)
     static let black = UIColor.black
   
   static func showLoading(_ status: Bool)  {

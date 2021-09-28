@@ -68,6 +68,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         showUserNameOnNavBar()
+        self.setTint()
         socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         socketManager.dataUpdateDelegate = self
     }
@@ -391,3 +392,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
 }
 
 
+extension MessagesViewController {
+    func setTint() {
+        self.tableView.tintColor = ChatColors.tint
+    }
+}

@@ -56,7 +56,8 @@ class ConversationsViewController: UIViewController {
         super.viewWillAppear(true)
         self.tableView.fetchData()
         deleteButton.isEnabled = true
-        
+
+        self.setTint()        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -266,6 +267,10 @@ extension ConversationsViewController: ProfileViewControllerDelegate {
     }
 }
 
-
+extension ConversationsViewController {
+    func setTint() {
+        self.tableView.tintColor = ChatColors.tint
+    }
+}
 
 
