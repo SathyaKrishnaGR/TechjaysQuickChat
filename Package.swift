@@ -22,7 +22,7 @@ let package = Package(
         //
 //        .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "7.0.0")),
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.4.3")),
-        .package(url: "https://github.com/ashleymills/Reachability.swift", .upToNextMajor(from: "5.1.0")),
+//        .package(url: "https://github.com/ashleymills/Reachability.swift", .upToNextMajor(from: "5.1.0")),
         .package(url: "https://github.com/daltoniam/Starscream.git", .upToNextMajor(from: "4.0.0")),
 
     ],
@@ -34,8 +34,6 @@ let package = Package(
             dependencies: ["Alamofire", "Starscream"
             ],
             resources: [
-                .process("Info.plist"),
-                .copy("newMessage.wav")
             ]),
         .testTarget(
             name: "TechjaysQuickChatTests",

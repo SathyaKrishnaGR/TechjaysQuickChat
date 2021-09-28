@@ -2,8 +2,8 @@ import UIKit
 
 public struct TechjaysQuickChat {
     
-    public init() {
-        
+    public init(themeColor: UIColor) {
+        ChatColors.tint = themeColor
     }
     
     public func openChatList(accessToken: String, chatToken: String, appEndPoint: String, version: String, socket: String) -> UIViewController {
@@ -23,7 +23,6 @@ public struct TechjaysQuickChat {
         return UIViewController()
     }
     
-    
     public func openChatMessage(accessToken: String, chatToken: String, appEndPoint: String, version: String, socket: String,toChatScreen: Bool?,userId: Int,opponentUserName: String?) -> UIViewController {
         FayvKeys.ChatDefaults.chatToken = chatToken
         FayvKeys.ChatDefaults.token = accessToken
@@ -42,24 +41,6 @@ public struct TechjaysQuickChat {
         }
         return UIViewController()
     }
-//    public func openChatMessage(accessToken: String, chatToken: String, appEndPoint: String, version: String, socket: String,toChatScreen: Bool?,userId: Int,opponentUserName: String?) -> UIViewController {
-//            FayvKeys.ChatDefaults.chatToken = chatToken
-//            FayvKeys.ChatDefaults.token = accessToken
-//            FayvKeys.ChatDefaults.endpoint = appEndPoint
-//            FayvKeys.ChatDefaults.socketUrl = socket
-//            FayvKeys.APIDefaults.baseUrl = appEndPoint
-//            FayvKeys.APIDefaults.version = version
-//
-//            let storyboard = UIStoryboard(name: TechjaysChatIdentifiers.Storyboard.messages.rawValue, bundle: Bundle.module)
-//            if let viewController = storyboard.instantiateViewController(withIdentifier: TechjaysChatIdentifiers.ViewController.messages.rawValue) as? MessagesViewController {
-//                viewController.opponentUserName = opponentUserName
-//                viewController.to_user_id = userId
-//                viewController.toChatScreen = true
-//
-//                return viewController
-//            }
-//            return UIViewController()
-////        }
 }
 
 
