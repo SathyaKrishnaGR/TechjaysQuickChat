@@ -270,6 +270,8 @@ extension ConversationsViewController: ProfileViewControllerDelegate {
 extension ConversationsViewController {
     func setTint() {
         self.tableView.tintColor = ChatColors.tint
+        self.navigationItem.rightBarButtonItem?.tintColor = ChatColors.tint
+        self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
     }
 }
 

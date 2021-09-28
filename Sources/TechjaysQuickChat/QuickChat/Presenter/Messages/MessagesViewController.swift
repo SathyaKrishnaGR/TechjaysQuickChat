@@ -32,6 +32,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
     @IBOutlet weak var expandButton: UIButton!
     @IBOutlet weak var barBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sendButton: UIButton!
     @IBOutlet var actionButtons: [UIButton]!
     
     //MARK: Private properties
@@ -395,5 +396,6 @@ extension MessagesViewController: SocketDataTransferDelegate {
 extension MessagesViewController {
     func setTint() {
         self.tableView.tintColor = ChatColors.tint
+        self.sendButton.tintColor = ChatColors.tint
     }
 }

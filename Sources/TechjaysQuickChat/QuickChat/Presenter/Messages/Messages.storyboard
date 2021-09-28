@@ -435,6 +435,7 @@
                         <outlet property="barBottomConstraint" destination="USX-fV-RHa" id="izl-sj-oQR"/>
                         <outlet property="expandButton" destination="Wiw-ke-ss8" id="68o-lJ-1dX"/>
                         <outlet property="inputTextField" destination="QSa-zB-UHJ" id="kY9-9V-eoH"/>
+                        <outlet property="sendButton" destination="aBf-gd-SKK" id="hBj-Ge-UjU"/>
                         <outlet property="stackViewWidthConstraint" destination="ufN-j0-uAx" id="sDa-cX-hti"/>
                         <outlet property="tableView" destination="bBq-0a-Ntf" id="3bs-rp-U9P"/>
                         <outletCollection property="actionButtons" destination="v2o-z8-jrT" collectionClass="NSMutableArray" id="M8E-ve-vyR"/>
