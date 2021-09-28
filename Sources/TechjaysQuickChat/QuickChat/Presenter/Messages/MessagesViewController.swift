@@ -103,9 +103,9 @@ extension MessagesViewController {
         if toChatScreen {
             self.navigationItem.title = opponentUserName
         } else {
-            if let firstName = conversation.first_name, let companyName = conversation.company_name {
-                self.navigationItem.title = firstName + companyName
-            }
+            guard let companyName = conversation.company_name else {return}
+            guard let firstName = conversation.first_name else {return}
+            self.navigationItem.title = firstName + companyName
         }
         
         showIconOnNavigationBar(imageUrl: nil) // Will show default image
@@ -115,7 +115,7 @@ extension MessagesViewController {
     }
     
     fileprivate func showIconOnNavigationBar(imageUrl: String?) {
-    
+        
         let frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         let customView = UIView(frame: frame)
         let imageView = UIImageView()
@@ -263,7 +263,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let message = messages[indexPath.row]
+        //        let message = messages[indexPath.row]
         //        switch message.contentType {
         //        case .location:
         //            let vc: MapPreviewController = UIStoryboard.controller(storyboard: .previews)
