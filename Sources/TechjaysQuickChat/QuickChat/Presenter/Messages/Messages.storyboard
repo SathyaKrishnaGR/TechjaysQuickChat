@@ -97,6 +97,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="chatBubbleView" destination="Vzm-oI-d4p" id="wIX-yE-Tgc"/>
                                             <outlet property="messageTextView" destination="Vrd-F8-pd4" id="aP5-AI-GTy"/>
                                             <outlet property="profilePic" destination="oqU-VQ-Qe0" id="PzK-oV-86K"/>
                                             <outlet property="timestampLabel" destination="dqa-wx-q1F" id="ZxV-AB-Abr"/>
@@ -160,6 +161,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="chatBubbleView" destination="mzO-gQ-Kf9" id="3lO-3m-6Lw"/>
                                             <outlet property="messageTextView" destination="ZnP-PL-A6i" id="fZp-8n-Nn5"/>
                                             <outlet property="timestampLabel" destination="8Mg-Og-AxX" id="zky-06-xhI"/>
                                         </connections>

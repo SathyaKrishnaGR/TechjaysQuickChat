@@ -246,6 +246,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
         } else {
             //        if message.contentType == .none {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
+            cell.chatBubbleView.background = ChatColors.tint
             cell.setChatList(message, conversation: conversation)
             return cell
             //        }

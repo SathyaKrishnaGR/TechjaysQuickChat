@@ -29,12 +29,14 @@ protocol MessageTableViewCellDelegate: AnyObject {
 
 class MessageTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var chatBubbleView: UIView!
     @IBOutlet weak var profilePic: UIImageView?
     @IBOutlet weak var messageTextView: UITextView?
     
     @IBOutlet weak var timestampLabel: UILabel?
     
     func setChatList(_ message: ObjectMessage, conversation: ObjectConversation) {
+        
         messageTextView?.text = message.message
         if let imageView = profilePic {
             if let urlString = conversation.thumbnail_profile_pic {
