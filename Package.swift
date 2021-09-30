@@ -32,8 +32,7 @@ let package = Package(
         .target(
             name: "TechjaysQuickChat",
             dependencies: ["Alamofire", "Starscream"
-            ],
-            resources: []),
+            ]),
         .testTarget(
             name: "TechjaysQuickChatTests",
             dependencies: ["TechjaysQuickChat"]),
