@@ -43,6 +43,11 @@ class SocketManager {
         socket.write(string: messageString)
     }
     func sendMessage(chatToken: String, toUserId: String, message: String) {
+        
+        let dict = ["token": chatToken, "type": "chat", "chat_type": "private", "to": toUserId, "message": message]
+        let test = self.convertDoctionaryToJson(dict: dict)
+        
+        print(test)
         let messageString = "{\n" +
             "    \"token\": \"\(chatToken)\",\n" +
             "    \"type\": \"chat\",\n" +
@@ -93,5 +98,19 @@ extension SocketManager: WebSocketDelegate {
             isConnected = false
             handleError(error)
         }
+    }
+}
+
+extension SocketManager {
+    func convertDoctionaryToJson(dict: [String: Any]) -> String {
+        var jsonString = ""
+        let encoder = JSONEncoder()
+        if let jsonData = try? encoder.encode(dic) {
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                jsonString = jsonString
+                return jsonString
+            }
+        }
+        return jsonString
     }
 }
