@@ -105,7 +105,7 @@ extension SocketManager {
     func convertDoctionaryToJson(dict: [String: Any]) -> String {
         var jsonString = ""
         let encoder = JSONEncoder()
-        if let jsonData = try? encoder.encode(dic) {
+        if let jsonData = try? encoder.encode(dict) {
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 jsonString = jsonString
                 return jsonString
