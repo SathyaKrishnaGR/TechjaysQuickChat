@@ -151,10 +151,6 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
     func paginatedTableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        if editingStyle == .delete {
-            conversations.remove(at: indexPath.row)
-        }
-        
     }
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         
