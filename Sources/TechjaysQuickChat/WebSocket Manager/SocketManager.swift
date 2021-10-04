@@ -4,12 +4,17 @@ import Starscream
 import Foundation
 
 protocol SocketDataTransferDelegate {
+    func updateChat(message: String)
+}
+
+protocol SocketListUpdateDelegate {
     func updateChatList(message: String)
 }
 class SocketManager {
     var socket: WebSocket!
     var isConnected = false
     var dataUpdateDelegate: SocketDataTransferDelegate?
+    var listUpdateDelegate: SocketListUpdateDelegate?
     let server = WebSocketServer()
     var addMessageToChatList: ((String) -> Void)?
     
@@ -35,26 +40,12 @@ class SocketManager {
     func sendConnectRequest(chatToken: String) {
         let dict = ["token": chatToken, "type": "connect"]
         let messageString = self.dictToJson(payload: dict)
-        /*"{\n" +
-            "\n" +
-            "    \"token\": \"\(chatToken)\",\n" +
-            "\n" +
-            "    \"type\": \"connect\"\n" +
-            "\n" +
-            "}"*/
         socket.write(string: messageString)
     }
     func sendMessage(chatToken: String, toUserId: String, message: String) {
         
         let dict = ["token": chatToken, "type": "chat", "chat_type": "private", "to": toUserId, "message": message]
         let messageString = self.dictToJson(payload: dict)
-        /*"{\n" +
-            "    \"token\": \"\(chatToken)\",\n" +
-            "    \"type\": \"chat\",\n" +
-            "    \"chat_type\": \"private\",\n" +
-            "    \"to\": \(toUserId),\n" +
-            "    \"message\": \"\(message)\"\n" +
-            "}"*/
         socket.write(string: messageString)
     }
     
@@ -81,7 +72,7 @@ extension SocketManager: WebSocketDelegate {
             print("websocket is disconnected: \(reason) with code: \(code)")
         case .text(let string):
             print("Received text: \(string)")
-            dataUpdateDelegate?.updateChatList(message: string)
+            dataUpdateDelegate?.updateChat(message: string)
         case .binary(let data):
             print("Received data: \(data.count)")
         case .ping(_):

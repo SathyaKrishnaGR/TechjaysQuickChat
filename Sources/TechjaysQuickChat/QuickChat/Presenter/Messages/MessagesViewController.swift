@@ -70,7 +70,6 @@ class MessagesViewController: UIViewController, KeyboardHandler {
         super.viewWillAppear(true)
         showUserNameOnNavBar()
         self.setTint()
-        socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         socketManager.dataUpdateDelegate = self
     }
 }
@@ -257,10 +256,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             
         }
         //        }
-        
-        
     }
-    
     func paginatedTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard tableView.isDragging else { return }
         cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
@@ -268,7 +264,6 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             cell.transform = CGAffineTransform.identity
         })
     }
-    
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //        let message = messages[indexPath.row]
         //        switch message.contentType {
@@ -336,9 +331,8 @@ extension MessagesViewController {
 
 
 extension MessagesViewController: SocketDataTransferDelegate {
-    func updateChatList(message messageString: String) {
-        
-        jsonDecode(messageToDecode: messageString, completion: { messageinClosure, error in
+    func updateChat(message messageString: String) {
+        MessagesViewController.jsonDecode(messageToDecode: messageString, completion: { messageinClosure, error in
             if error == nil {
                 if let socketMessage = messageinClosure {
                     if  socketMessage.data?.sender == nil {
@@ -346,9 +340,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
                         socketMessage.message = self.inputTextField.text
                         socketMessage.is_sent_by_myself = true
                         self.inputTextField.text = nil
-                        
                         self.showDataOnChatScreen(socket: socketMessage)
-                        
                     } else {
                         // Someone is sending you a message!
                         socketMessage.is_sent_by_myself = false
@@ -373,7 +365,6 @@ extension MessagesViewController: SocketDataTransferDelegate {
             }
         })
     }
-    
     func showDataOnChatScreen(socket: ObjectMessage) {
         if socket.type == "chat" && socket.result == true {
             messages.append(socket)
@@ -383,10 +374,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
                 
             }
         }
-        
     }
-    
-    func jsonDecode(messageToDecode: String, completion: @escaping ( _ data: ObjectMessage?, _ error: Error?) -> Void) {
+    class func jsonDecode(messageToDecode: String, completion: @escaping ( _ data: ObjectMessage?, _ error: Error?) -> Void) {
         do {
             let decoder = JSONDecoder()
             let data = Data(messageToDecode.utf8)

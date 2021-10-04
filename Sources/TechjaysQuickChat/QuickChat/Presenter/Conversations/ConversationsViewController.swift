@@ -44,6 +44,7 @@ class ConversationsViewController: UIViewController {
     var opponentUserName: String?
     var selectedRow: Int =  -1 // Nothing is selected
     var socketManager = SocketManager()
+    var socketListDelegate: SocketListUpdateDelegate?
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -56,17 +57,16 @@ class ConversationsViewController: UIViewController {
         super.viewWillAppear(true)
         self.tableView.fetchData()
         deleteButton.isEnabled = true
-
-        self.setTint()        
+        socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
+        socketManager.listUpdateDelegate = self
+        self.setTint()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
         if toChatScreen {
             self.performSegue(withIdentifier: "didSelect", sender: self)
         }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,7 +81,6 @@ class ConversationsViewController: UIViewController {
                 if selectedRow == -1 {
                     if let toUserId = self.to_user_id {
                         vc.to_user_id = toUserId
-                        
                     }
                     vc.opponentUserName = opponentUserName
                     vc.toChatScreen = toChatScreen
@@ -99,9 +98,7 @@ class ConversationsViewController: UIViewController {
 
 //MARK: IBActions
 extension ConversationsViewController {
-    
     @IBAction func editPressed(_ sender: Any) {
-        
         isEditing = !isEditing
         if isEditing {
             self.editButton.setTitle("Done", for: .normal)
@@ -142,7 +139,6 @@ extension ConversationsViewController {
     
 }
 
-
 //MARK: UITableView Delegate & DataSource
 extension ConversationsViewController: PaginatedTableViewDelegate {
     
@@ -156,23 +152,18 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         
         return PaginationUrl(endpoint: "chat/chat-lists/")
     }
-    
-    
-    
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
         DispatchQueue.main.async {
             self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
         }
         
     }
-    
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if conversations.isEmpty {
             return 1
         }
         return conversations.count
     }
-    
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard !conversations.isEmpty else {
             return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
@@ -183,15 +174,12 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         }
         return UITableViewCell()
     }
-    
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !isEditing {
             selectedRow = indexPath.row
             performSegue(withIdentifier: "didSelect", sender: self)
         }
-        
     }
-    
     func paginatedTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if conversations.isEmpty {
             return tableView.bounds.height - 50 //header view height
@@ -256,6 +244,26 @@ extension ConversationsViewController {
     }
 }
 
+extension ConversationsViewController: SocketListUpdateDelegate {
+    func updateChatList(message: String) {
+        MessagesViewController.jsonDecode(messageToDecode: message, completion: { messageinClosure, error in
+            if error == nil {
+                if let socketMessage = messageinClosure {
+                    if let message = socketMessage.data, let sender = message.sender {
+                        if let userId = sender.user_id {
+                            if self.conversations.contains(where: { conversation in conversation.to_user_id == userId }) {
+                                print("1 exists in the array")
+                            } else {
+                                print("1 does not exists in the array")
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+}
+
 //MARK: ProfileViewController Delegate
 extension ConversationsViewController: ProfileViewControllerDelegate {
     func profileViewControllerDidLogOut() {
@@ -270,5 +278,3 @@ extension ConversationsViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
     }
 }
-
-
