@@ -45,7 +45,7 @@ class SocketManager {
     func sendMessage(chatToken: String, toUserId: String, message: String) {
         
         let dict = ["token": chatToken, "type": "chat", "chat_type": "private", "to": toUserId, "message": message]
-        let test = self.convertDoctionaryToJson(dict: dict)
+        let test = self.dictToJson(payload: dict)
         
         print(test)
         let messageString = "{\n" +
@@ -102,15 +102,15 @@ extension SocketManager: WebSocketDelegate {
 }
 
 extension SocketManager {
-    func convertDoctionaryToJson(dict: [String: Any]) -> String {
-        var jsonString = ""
+    func dictToJson<T: Encodable>(payload: [String: T]) -> String {
+        var json = ""
         let encoder = JSONEncoder()
-        if let jsonData = try? encoder.encode(dict) {
+        if let jsonData = try? encoder.encode(payload) {
             if let jsonString = String(data: jsonData, encoding: .utf8) {
-                jsonString = jsonString
+                json = jsonString
                 return jsonString
             }
         }
-        return jsonString
+        return json
     }
 }
