@@ -33,28 +33,28 @@ class SocketManager {
     
     // MARK: Write Text Action
     func sendConnectRequest(chatToken: String) {
-        let messageString = "{\n" +
+        let dict = ["token": chatToken, "type": "connect"]
+        let messageString = self.dictToJson(payload: dict)
+        /*"{\n" +
             "\n" +
             "    \"token\": \"\(chatToken)\",\n" +
             "\n" +
             "    \"type\": \"connect\"\n" +
             "\n" +
-            "}"
+            "}"*/
         socket.write(string: messageString)
     }
     func sendMessage(chatToken: String, toUserId: String, message: String) {
         
         let dict = ["token": chatToken, "type": "chat", "chat_type": "private", "to": toUserId, "message": message]
-        let test = self.dictToJson(payload: dict)
-        
-        print(test)
-        let messageString = "{\n" +
+        let messageString = self.dictToJson(payload: dict)
+        /*"{\n" +
             "    \"token\": \"\(chatToken)\",\n" +
             "    \"type\": \"chat\",\n" +
             "    \"chat_type\": \"private\",\n" +
             "    \"to\": \(toUserId),\n" +
             "    \"message\": \"\(message)\"\n" +
-            "}"
+            "}"*/
         socket.write(string: messageString)
     }
     
