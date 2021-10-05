@@ -30,6 +30,7 @@ class ConversationsViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var newMessageCountLabel: UILabel!
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -257,6 +258,8 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                         if let userId = sender.user_id {
                             if !self.conversations.contains(where: { conversation in conversation.to_user_id == userId }) {
                                 print("1 does not exists in the array")
+                                
+                                newMessageCountLabel.isHidden = false
                                 let newconversation = ObjectConversation()
                                 newconversation.first_name = sender.username
                                 newconversation.to_user_id = sender.user_id
