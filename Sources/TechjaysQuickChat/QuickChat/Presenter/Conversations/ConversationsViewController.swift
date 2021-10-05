@@ -93,6 +93,7 @@ class ConversationsViewController: UIViewController {
                     }
                 }
                 vc.socketManager.socket = self.socket
+                vc.socketManager = self.socketManager
             }
             modalPresentationStyle = .fullScreen
         }
