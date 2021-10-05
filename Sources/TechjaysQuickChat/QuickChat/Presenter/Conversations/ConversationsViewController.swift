@@ -255,10 +255,21 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                 if let socketMessage = messageinClosure {
                     if let message = socketMessage.data, let sender = message.sender {
                         if let userId = sender.user_id {
-                            if self.conversations.contains(where: { conversation in conversation.to_user_id == userId }) {
-                                print("1 exists in the array")
-                            } else {
+                            if !self.conversations.contains(where: { conversation in conversation.to_user_id == userId }) {
                                 print("1 does not exists in the array")
+                                let newconversation = ObjectConversation()
+                                newconversation.first_name = sender.username
+                                newconversation.to_user_id = sender.user_id
+                                newconversation.profile_pic = message.profile_pic
+                                newconversation.message = message.message
+                                newconversation.timestamp = message.timestamp
+                                self.conversations.append(newconversation)
+                                self.tableView.fetchData()
+                                
+                            } else {
+                                print("1 exists in the array")
+                                self.tableView.fetchData()
+                                
                             }
                         }
                     }
