@@ -21,6 +21,7 @@
 //  SOFTWARE.
 
 import UIKit
+import Starscream
 
 class ConversationsViewController: UIViewController {
     
@@ -44,6 +45,7 @@ class ConversationsViewController: UIViewController {
     var opponentUserName: String?
     var selectedRow: Int =  -1 // Nothing is selected
     var socketManager = SocketManager()
+    var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
     
     //MARK: Lifecycle
@@ -57,7 +59,7 @@ class ConversationsViewController: UIViewController {
         super.viewWillAppear(true)
         self.tableView.fetchData()
         deleteButton.isEnabled = true
-        socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
+        socket = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         socketManager.listUpdateDelegate = self
         self.setTint()
     }
@@ -90,6 +92,7 @@ class ConversationsViewController: UIViewController {
                         vc.conversation = conversations[selectedRow]
                     }
                 }
+                vc.socketManager.socket = self.socket
             }
             modalPresentationStyle = .fullScreen
         }

@@ -18,11 +18,13 @@ class SocketManager {
     let server = WebSocketServer()
     var addMessageToChatList: ((String) -> Void)?
     
-    func startSocketWith(url: String) {
+    func startSocketWith(url: String) -> WebSocket {
         let request = URLRequest(url: URL(string:url)!)
         socket = WebSocket(request: request)
         socket.delegate = self
         socket.connect()
+        
+        return socket
     }
     
     
