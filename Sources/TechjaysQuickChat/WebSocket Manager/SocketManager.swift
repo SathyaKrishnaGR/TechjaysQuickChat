@@ -75,6 +75,7 @@ extension SocketManager: WebSocketDelegate {
         case .text(let string):
             print("Received text: \(string)")
             dataUpdateDelegate?.updateChat(message: string)
+            listUpdateDelegate?.updateChatList(message: string)
         case .binary(let data):
             print("Received data: \(data.count)")
         case .ping(_):
