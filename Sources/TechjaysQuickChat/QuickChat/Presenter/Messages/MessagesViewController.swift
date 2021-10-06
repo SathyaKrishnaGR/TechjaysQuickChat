@@ -60,7 +60,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
             guard state else { return }
             self?.tableView.scroll(to: .bottom, animated: true)
         }
-        
+        self.setLongPressGesture()
         FayvKeys.ChatDefaults.paginationLimit = "100"
         self.tableView.fetchData()
         
@@ -70,7 +70,6 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
         super.viewWillAppear(true)
         showUserNameOnNavBar()
         self.setTint()
-        self.setLongPressGesture()
         socketManager.dataUpdateDelegate = self
     }
 }
