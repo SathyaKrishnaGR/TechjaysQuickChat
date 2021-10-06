@@ -395,7 +395,7 @@ extension MessagesViewController {
     }
     
     func setLongPressGesture() {
-        let lpgr = UILongPressGestureRecognizer(target: self, action: Selector("handleLongPress:"))
+        let lpgr = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
                  lpgr.minimumPressDuration = 0.5
                  lpgr.delaysTouchesBegan = true
                  self.tableView.addGestureRecognizer(lpgr)
