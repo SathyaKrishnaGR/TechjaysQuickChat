@@ -265,7 +265,8 @@ extension MessagesViewController: PaginatedTableViewDelegate {
         })
     }
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let message = messages[indexPath.row]
+                let message = messages[indexPath.row]
+            Utilities.showDeleteActionSheet()
         //        switch message.contentType {
         //        case .location:
         //            let vc: MapPreviewController = UIStoryboard.controller(storyboard: .previews)
@@ -285,7 +286,6 @@ extension MessagesViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         showActionButtons(false)
         return true
@@ -295,7 +295,6 @@ extension MessagesViewController: UITextFieldDelegate {
 
 //MARK: MessageTableViewCellDelegate Delegate
 extension MessagesViewController: MessageTableViewCellDelegate {
-    
     func messageTableViewCellUpdate() {
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -317,7 +316,6 @@ extension MessagesViewController {
                         self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
                         
                     }
-                    
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .bottom, animated: true)
                 }
