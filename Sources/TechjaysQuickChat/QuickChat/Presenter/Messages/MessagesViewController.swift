@@ -405,7 +405,7 @@ extension MessagesViewController {
         let indexPath = self.tableView.indexPathForRow(at: p)
         if gestureReconizer.state == .ended{
             if let index = indexPath {
-                var cell = self.tableView.cellForRow(at: index)
+                let cell = self.tableView.cellForRow(at: index)
                 if cell?.reuseIdentifier == "UserMessageTableViewCell" {
                     Utilities.showDeleteforMeActionSheet()
                 } else {
