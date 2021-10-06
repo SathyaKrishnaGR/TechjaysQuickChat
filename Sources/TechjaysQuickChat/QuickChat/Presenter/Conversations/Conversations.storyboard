@@ -179,7 +179,6 @@
                     <connections>
                         <outlet property="deleteButton" destination="xl9-qF-y2U" id="j1m-t1-BJB"/>
                         <outlet property="editButton" destination="XtN-b5-qY4" id="Vx1-xs-LTt"/>
-                        <outlet property="newMessageCountLabel" destination="33o-19-jjC" id="2yo-sf-syE"/>
                         <outlet property="tableView" destination="CZg-e7-KoX" id="EC0-gT-Cqg"/>
                         <segue destination="jE4-jN-pKd" kind="show" identifier="didSelect" id="uYn-Fc-dsr"/>
                     </connections>
