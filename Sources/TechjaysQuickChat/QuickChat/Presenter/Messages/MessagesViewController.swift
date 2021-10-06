@@ -406,8 +406,11 @@ extension MessagesViewController {
         if gestureReconizer.state == .ended{
             if let index = indexPath {
                 var cell = self.tableView.cellForRow(at: index)
-                // do stuff with your cell, for example print the indexPath
-                Utilities.showDeleteActionSheet()
+                if cell?.reuseIdentifier == "UserMessageTableViewCell" {
+                    Utilities.showDeleteforMeActionSheet()
+                } else {
+                    Utilities.showDeleteActionSheet()
+                }
                 print(index.row)
             } else {
                 print("Could not find index path")
