@@ -70,6 +70,7 @@ class MessagesViewController: UIViewController, KeyboardHandler {
         super.viewWillAppear(true)
         showUserNameOnNavBar()
         self.setTint()
+        self.setLongPressGesture()
         socketManager.dataUpdateDelegate = self
     }
 }
@@ -392,4 +393,29 @@ extension MessagesViewController {
         self.tableView.tintColor = ChatColors.tint
         self.sendButton.tintColor = ChatColors.tint
     }
+    
+    func setLongPressGesture() {
+        let lpgr = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+                 lpgr.minimumPressDuration = 0.5
+                 lpgr.delaysTouchesBegan = true
+                 lpgr.delegate = self
+                 self.tableView.addGestureRecognizer(lpgr)
+    }
+    
+    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+            if gestureReconizer.state != UIGestureRecognizerState.Ended {
+                return
+            }
+
+            let p = gestureReconizer.locationInView(self.tableView)
+            let indexPath = self.tableView.indexPathForItemAtPoint(p)
+
+            if let index = indexPath {
+                var cell = self.tableView.cellForItemAtIndexPath(index)
+                // do stuff with your cell, for example print the indexPath
+                 println(index.row)
+            } else {
+                println("Could not find index path")
+            }
+        }
 }
