@@ -24,7 +24,7 @@
 import UIKit
 import Foundation
 
-class MessagesViewController: UIViewController, KeyboardHandler {
+class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecognizerDelegate {
     
     //MARK: IBOutlets
     @IBOutlet weak var tableView: PaginatedTableView!
@@ -395,27 +395,22 @@ extension MessagesViewController {
     }
     
     func setLongPressGesture() {
-        let lpgr = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        let lpgr = UILongPressGestureRecognizer(target: self, action: Selector("handleLongPress:"))
                  lpgr.minimumPressDuration = 0.5
                  lpgr.delaysTouchesBegan = true
-                 lpgr.delegate = self
                  self.tableView.addGestureRecognizer(lpgr)
     }
     
     func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
-            if gestureReconizer.state != UIGestureRecognizerState.Ended {
-                return
-            }
-
-            let p = gestureReconizer.locationInView(self.tableView)
-            let indexPath = self.tableView.indexPathForItemAtPoint(p)
+        let p = gestureReconizer.location(in: self.tableView)
+        let indexPath = self.tableView.indexPathForRow(at: p)
 
             if let index = indexPath {
-                var cell = self.tableView.cellForItemAtIndexPath(index)
+                var cell = self.tableView.cellForRow(at: index)
                 // do stuff with your cell, for example print the indexPath
-                 println(index.row)
+                 print(index.row)
             } else {
-                println("Could not find index path")
+                print("Could not find index path")
             }
         }
 }
