@@ -265,8 +265,8 @@ extension MessagesViewController: PaginatedTableViewDelegate {
         })
     }
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                let message = messages[indexPath.row]
-
+        let message = messages[indexPath.row]
+        
         //        switch message.contentType {
         //        case .location:
         //            let vc: MapPreviewController = UIStoryboard.controller(storyboard: .previews)
@@ -395,22 +395,23 @@ extension MessagesViewController {
     
     func setLongPressGesture() {
         let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-                 lpgr.minimumPressDuration = 0.5
-                 lpgr.delaysTouchesBegan = true
-                 self.tableView.addGestureRecognizer(lpgr)
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delaysTouchesBegan = true
+        self.tableView.addGestureRecognizer(lpgr)
     }
     
     @objc func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
         let p = gestureReconizer.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: p)
-
+        if gestureReconizer.state == .ended{
             if let index = indexPath {
                 var cell = self.tableView.cellForRow(at: index)
                 // do stuff with your cell, for example print the indexPath
-                            Utilities.showDeleteActionSheet()
-                 print(index.row)
+                Utilities.showDeleteActionSheet()
+                print(index.row)
             } else {
                 print("Could not find index path")
             }
         }
+    }
 }
