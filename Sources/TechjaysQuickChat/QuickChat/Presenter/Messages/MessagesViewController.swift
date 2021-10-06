@@ -267,7 +267,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
     }
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                 let message = messages[indexPath.row]
-            Utilities.showDeleteActionSheet()
+
         //        switch message.contentType {
         //        case .location:
         //            let vc: MapPreviewController = UIStoryboard.controller(storyboard: .previews)
@@ -408,6 +408,7 @@ extension MessagesViewController {
             if let index = indexPath {
                 var cell = self.tableView.cellForRow(at: index)
                 // do stuff with your cell, for example print the indexPath
+                            Utilities.showDeleteActionSheet()
                  print(index.row)
             } else {
                 print("Could not find index path")
