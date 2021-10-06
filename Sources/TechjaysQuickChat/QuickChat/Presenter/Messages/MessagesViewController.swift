@@ -30,6 +30,9 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     @IBOutlet weak var tableView: PaginatedTableView!
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var expandButton: UIButton!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
+
     @IBOutlet weak var barBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButton: UIButton!
@@ -165,6 +168,38 @@ extension MessagesViewController {
 }
 
 //MARK: IBActions
+extension MessagesViewController {
+    @IBAction func editPressed(_ sender: Any) {
+        isEditing = !isEditing
+        if isEditing {
+            self.deleteButton.isEnabled = false
+        } else {
+            self.deleteButton.isEnabled = true
+        }
+    }
+    
+    @IBAction func deletePressed(_ sender: Any) {
+        if deleteButton.isEnabled {
+            deleteButton.isEnabled = false
+            deleteAndRemoveRows()
+        }
+    }
+    fileprivate func deleteAndRemoveRows() {
+        var arrayOfIndex: [Int] = []
+        if let selectedRows = tableView.indexPathsForSelectedRows {
+            
+            var selectedConversations = [ObjectConversation]()
+            for indexPath in selectedRows  {
+                arrayOfIndex.append(indexPath.row)
+            }
+            
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: selectedRows, with: .automatic)
+            
+            
+        }
+    }
+}
 extension MessagesViewController {
     
     @IBAction func sendMessagePressed(_ sender: Any) {
@@ -406,11 +441,12 @@ extension MessagesViewController {
         if gestureReconizer.state == .ended{
             if let index = indexPath {
                 let cell = self.tableView.cellForRow(at: index)
-                if cell?.reuseIdentifier == "UserMessageTableViewCell" {
-                    Utilities.showDeleteforMeActionSheet()
-                } else {
-                    Utilities.showDeleteActionSheet()
-                }
+                
+//                if cell?.reuseIdentifier == "UserMessageTableViewCell" {
+//                    Utilities.showDeleteforMeActionSheet()
+//                } else {
+//                    Utilities.showDeleteActionSheet()
+//                }
                 print(index.row)
             } else {
                 print("Could not find index path")

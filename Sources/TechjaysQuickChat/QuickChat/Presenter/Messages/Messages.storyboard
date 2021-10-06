@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gTs-Hf-oyN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a55-9b-zJA">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bBq-0a-Ntf" customClass="PaginatedTableView" customModule="TechjaysQuickChat">
-                                <rect key="frame" x="0.0" y="44" width="375" height="684"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="640"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserMessageTableViewCell" rowHeight="90" id="m0C-Mh-4Nd" customClass="MessageTableViewCell" customModule="TechjaysQuickChat">
@@ -431,9 +431,22 @@
                             <constraint firstItem="bek-LY-nS1" firstAttribute="trailing" secondItem="Vn0-qa-7SK" secondAttribute="trailing" id="kPT-FD-JUo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="c2O-xi-NOP"/>
+                    <navigationItem key="navigationItem" id="c2O-xi-NOP">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="28p-sW-RXl">
+                            <connections>
+                                <action selector="editPressed:" destination="gTs-Hf-oyN" id="zkf-S6-JlL"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Delete" style="done" id="D9I-tu-adB">
+                            <connections>
+                                <action selector="deletePressed:" destination="gTs-Hf-oyN" id="2Mf-VH-r2h"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="barBottomConstraint" destination="USX-fV-RHa" id="izl-sj-oQR"/>
+                        <outlet property="deleteButton" destination="D9I-tu-adB" id="45P-34-oDm"/>
+                        <outlet property="editButton" destination="28p-sW-RXl" id="mQK-dx-8ML"/>
                         <outlet property="expandButton" destination="Wiw-ke-ss8" id="68o-lJ-1dX"/>
                         <outlet property="inputTextField" destination="QSa-zB-UHJ" id="kY9-9V-eoH"/>
                         <outlet property="sendButton" destination="aBf-gd-SKK" id="hBj-Ge-UjU"/>
@@ -445,6 +458,24 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N2C-io-OzE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3591.1999999999998" y="428.57142857142861"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dbD-om-jjC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a55-9b-zJA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dyz-28-ifS">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gTs-Hf-oyN" kind="relationship" relationship="rootViewController" id="7Km-rr-PI9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Hw-u4-DYq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2648.8000000000002" y="428.57142857142861"/>
         </scene>
