@@ -260,6 +260,7 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                                 print("1 does not exists in the array")
                                 
                                 self.newMessageCountLabel.isHidden = false
+                                self.newMessageCountLabel.backgroundColor = ChatColors.tint
                                 let newconversation = ObjectConversation()
                                 newconversation.first_name = sender.username
                                 newconversation.to_user_id = sender.user_id
@@ -271,6 +272,7 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                                 
                             } else {
                                 print("1 exists in the array")
+                                self.newMessageCountLabel.isHidden = true
                                 self.tableView.fetchData()
                                 
                             }
