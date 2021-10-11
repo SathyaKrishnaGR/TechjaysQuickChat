@@ -42,6 +42,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     //MARK: Private properties
     private let manager = MessageManager()
     private let imageService = ImagePickerService()
+    private let documentService = DocumentService()
     private let locationService = LocationService()
     private var messages = [ObjectMessage]()
     //    private var sentMessages = [ObjectMessage]()
@@ -189,7 +190,7 @@ extension MessagesViewController {
     fileprivate func deleteAndRemoveRows() {
         var arrayOfIndex: [Int] = []
         if let selectedRows = tableView.indexPathsForSelectedRows {
-            
+
             var selectedConversations = [ObjectConversation]()
             for indexPath in selectedRows  {
                 arrayOfIndex.append(indexPath.row)
@@ -217,15 +218,21 @@ extension MessagesViewController {
     }
     
     @IBAction func sendImagePressed(_ sender: UIButton) {
-        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
+//        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
             //            let message = ObjectMessage()
             //            message.contentType = .photo
             //            message.profilePic = image
             //            message.ownerID = UserManager().currentUserID()
             //            self?.send(message)
-            //            self?.inputTextField.text = nil
-            self?.showActionButtons(false)
+        if #available(iOS 14.0, *) {
+            documentService.present(on: self, allowedFileTypes: [.pdf]) { data in
+                self.showActionButtons(false)
+                
+            }
+        } else {
+            // Fallback on earlier versions
         }
+//        }
     }
     
     @IBAction func sendLocationPressed(_ sender: UIButton) {
