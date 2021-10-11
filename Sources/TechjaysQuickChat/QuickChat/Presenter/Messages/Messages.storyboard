@@ -422,7 +422,7 @@
                         <outlet property="expandButton" destination="Wiw-ke-ss8" id="68o-lJ-1dX"/>
                         <outlet property="inputTextField" destination="QSa-zB-UHJ" id="kY9-9V-eoH"/>
                         <outlet property="sendButton" destination="aBf-gd-SKK" id="hBj-Ge-UjU"/>
-                        <outlet property="stackViewWidthConstraint" destination="eTe-ES-iF1" id="C6X-aO-vEa"/>
+                        <outlet property="stackViewWidthConstraint" destination="cmr-g3-TmI" id="yp2-AV-yit"/>
                         <outlet property="tableView" destination="bBq-0a-Ntf" id="3bs-rp-U9P"/>
                         <outletCollection property="actionButtons" destination="aAN-TH-BmZ" collectionClass="NSMutableArray" id="iyj-eR-dxn"/>
                     </connections>

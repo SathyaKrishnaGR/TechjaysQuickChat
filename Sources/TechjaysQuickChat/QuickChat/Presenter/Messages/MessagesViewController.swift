@@ -32,8 +32,9 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     @IBOutlet weak var expandButton: UIButton!
     @IBOutlet weak var editButton: UIBarButtonItem!
 
-    @IBOutlet weak var barBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var barBottomConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet var actionButtons: [UIButton]!
     
