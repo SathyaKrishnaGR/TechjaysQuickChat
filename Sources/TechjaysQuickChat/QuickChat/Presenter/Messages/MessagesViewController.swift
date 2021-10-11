@@ -31,6 +31,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var expandButton: UIButton!
     @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
 
     @IBOutlet weak var stackViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var barBottomConstraint: NSLayoutConstraint!
@@ -117,10 +118,10 @@ extension MessagesViewController {
             self.navigationItem.title = first + company
         }
         
-        showIconOnNavigationBar(imageUrl: nil) // Will show default image
-        if let image = conversation.medium_profile_pic {
-            showIconOnNavigationBar(imageUrl: image)
-        }
+//        showIconOnNavigationBar(imageUrl: nil) // Will show default image
+//        if let image = conversation.medium_profile_pic {
+//            showIconOnNavigationBar(imageUrl: image)
+//        }
     }
     
     fileprivate func showIconOnNavigationBar(imageUrl: String?) {
@@ -173,17 +174,17 @@ extension MessagesViewController {
     @IBAction func editPressed(_ sender: Any) {
         isEditing = !isEditing
         if isEditing {
-//            self.deleteButton.isEnabled = false
+            self.deleteButton.isEnabled = false
         } else {
-//            self.deleteButton.isEnabled = true
+            self.deleteButton.isEnabled = true
         }
     }
     
     @IBAction func deletePressed(_ sender: Any) {
-//        if deleteButton.isEnabled {
-//            deleteButton.isEnabled = false
+        if deleteButton.isEnabled {
+            deleteButton.isEnabled = false
             deleteAndRemoveRows()
-//        }
+        }
     }
     fileprivate func deleteAndRemoveRows() {
         var arrayOfIndex: [Int] = []
