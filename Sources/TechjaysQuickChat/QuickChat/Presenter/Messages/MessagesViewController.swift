@@ -171,17 +171,17 @@ extension MessagesViewController {
     @IBAction func editPressed(_ sender: Any) {
         isEditing = !isEditing
         if isEditing {
-            self.deleteButton.isEnabled = false
+//            self.deleteButton.isEnabled = false
         } else {
-            self.deleteButton.isEnabled = true
+//            self.deleteButton.isEnabled = true
         }
     }
     
     @IBAction func deletePressed(_ sender: Any) {
-        if deleteButton.isEnabled {
-            deleteButton.isEnabled = false
+//        if deleteButton.isEnabled {
+//            deleteButton.isEnabled = false
             deleteAndRemoveRows()
-        }
+//        }
     }
     fileprivate func deleteAndRemoveRows() {
         var arrayOfIndex: [Int] = []
