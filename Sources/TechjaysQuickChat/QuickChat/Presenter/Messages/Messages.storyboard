@@ -287,7 +287,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxa-V7-sAi">
-                                                <rect key="frame" x="164" y="5" width="155" height="40"/>
+                                                <rect key="frame" x="84" y="5" width="235" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -302,7 +302,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type message..." adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QSa-zB-UHJ">
-                                                <rect key="frame" x="169" y="5" width="150" height="40"/>
+                                                <rect key="frame" x="89" y="5" width="230" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" red="0.25162395830000001" green="0.53981399539999997" blue="0.8078737855" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
@@ -330,7 +330,7 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eTe-ES-iF1">
-                                                <rect key="frame" x="6" y="12.666666666666629" width="152" height="25"/>
+                                                <rect key="frame" x="6" y="12.666666666666629" width="72" height="25"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAN-TH-BmZ">
                                                         <rect key="frame" x="0.0" y="0.0" width="32" height="25"/>
@@ -343,30 +343,8 @@
                                                             <action selector="sendImagePressed:" destination="gTs-Hf-oyN" eventType="touchUpInside" id="IjV-Vh-0vg"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v2o-z8-jrT">
-                                                        <rect key="frame" x="40" y="0.0" width="32" height="25"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="25" id="Tzc-aa-Rys"/>
-                                                            <constraint firstAttribute="width" constant="32" id="pNR-Rg-762"/>
-                                                        </constraints>
-                                                        <state key="normal" backgroundImage="selectCamera"/>
-                                                        <connections>
-                                                            <action selector="sendImagePressed:" destination="gTs-Hf-oyN" eventType="touchUpInside" id="khD-2w-l2i"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMb-hG-xeT">
-                                                        <rect key="frame" x="80" y="0.0" width="32" height="25"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="25" id="7ei-At-ZIV"/>
-                                                            <constraint firstAttribute="width" constant="32" id="auK-hP-qQg"/>
-                                                        </constraints>
-                                                        <state key="normal" backgroundImage="selectLocation"/>
-                                                        <connections>
-                                                            <action selector="sendLocationPressed:" destination="gTs-Hf-oyN" eventType="touchUpInside" id="Np7-Fu-HPI"/>
-                                                        </connections>
-                                                    </button>
                                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wiw-ke-ss8">
-                                                        <rect key="frame" x="120" y="0.0" width="32" height="25"/>
+                                                        <rect key="frame" x="40" y="0.0" width="32" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="JON-yj-x8u"/>
                                                             <constraint firstAttribute="width" constant="32" id="Lcz-tt-xUe"/>
@@ -377,6 +355,9 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="72" id="cmr-g3-TmI"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -441,10 +422,9 @@
                         <outlet property="expandButton" destination="Wiw-ke-ss8" id="68o-lJ-1dX"/>
                         <outlet property="inputTextField" destination="QSa-zB-UHJ" id="kY9-9V-eoH"/>
                         <outlet property="sendButton" destination="aBf-gd-SKK" id="hBj-Ge-UjU"/>
+                        <outlet property="stackViewWidthConstraint" destination="eTe-ES-iF1" id="C6X-aO-vEa"/>
                         <outlet property="tableView" destination="bBq-0a-Ntf" id="3bs-rp-U9P"/>
-                        <outletCollection property="actionButtons" destination="v2o-z8-jrT" collectionClass="NSMutableArray" id="M8E-ve-vyR"/>
                         <outletCollection property="actionButtons" destination="aAN-TH-BmZ" collectionClass="NSMutableArray" id="iyj-eR-dxn"/>
-                        <outletCollection property="actionButtons" destination="eMb-hG-xeT" collectionClass="NSMutableArray" id="ABG-SV-f9L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N2C-io-OzE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -474,8 +454,6 @@
     <resources>
         <image name="back" width="17" height="27"/>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
-        <image name="selectCamera" width="32" height="25"/>
-        <image name="selectLocation" width="32" height="25"/>
         <image name="selectPhoto" width="32" height="25"/>
         <namedColor name="AuthBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
