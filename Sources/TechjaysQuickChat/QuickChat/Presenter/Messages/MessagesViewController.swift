@@ -175,9 +175,9 @@ extension MessagesViewController {
     @IBAction func editPressed(_ sender: Any) {
         isEditing = !isEditing
         if isEditing {
-            self.deleteButton.isEnabled = false
-        } else {
             self.deleteButton.isEnabled = true
+        } else {
+            self.deleteButton.isEnabled = false
         }
     }
     
