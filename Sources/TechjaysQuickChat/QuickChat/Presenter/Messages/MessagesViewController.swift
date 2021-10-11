@@ -149,7 +149,7 @@ extension MessagesViewController {
     }
     private func showActionButtons(_ status: Bool) {
         guard !status else {
-            stackViewWidthConstraint.constant = 112
+            stackViewWidthConstraint.constant = 32
             UIView.animate(withDuration: 0.3) {
                 self.expandButton.isHidden = true
                 self.expandButton.alpha = 0
