@@ -73,6 +73,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
         showUserNameOnNavBar()
         self.setTint()
         socketManager.dataUpdateDelegate = self
+        showActionButtons(false)
     }
 }
 
