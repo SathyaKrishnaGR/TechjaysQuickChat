@@ -187,18 +187,14 @@ extension MessagesViewController {
         }
     }
     fileprivate func deleteAndRemoveRows(type: String) {
-        var arrayOfIndex: [Int] = []
         if let selectedRows = tableView.indexPathsForSelectedRows {
-            
             var selectedMessages = [ObjectMessage]()
             for indexPath in selectedRows  {
-                arrayOfIndex.append(indexPath.row)
+                selectedMessages.append(messages[indexPath.row])
             }
-            
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: selectedRows, with: .automatic)
             self.deleteChatMessages(rows: selectedRows, messageIdToDelete: selectedMessages, deleteType: type)
-            
         }
     }
 }

@@ -125,20 +125,14 @@ extension ConversationsViewController {
         }
     }
     fileprivate func deleteAndRemoveRows() {
-        var arrayOfIndex: [Int] = []
         if let selectedRows = tableView.indexPathsForSelectedRows {
-            
             var selectedConversations = [ObjectConversation]()
             for indexPath in selectedRows  {
-                arrayOfIndex.append(indexPath.row)
                 selectedConversations.append(conversations[indexPath.row])
             }
-            
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: selectedRows, with: .automatic)
             deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
-            
-            
         }
     }
     
