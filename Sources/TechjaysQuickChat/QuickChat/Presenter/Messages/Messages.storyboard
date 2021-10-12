@@ -415,7 +415,11 @@
                                 <action selector="editPressed:" destination="gTs-Hf-oyN" id="zkf-S6-JlL"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Delete" id="cGm-Kt-HN6"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Delete" id="cGm-Kt-HN6">
+                            <connections>
+                                <action selector="deletePressed:" destination="gTs-Hf-oyN" id="NNj-AB-XLq"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="barBottomConstraint" destination="USX-fV-RHa" id="izl-sj-oQR"/>
