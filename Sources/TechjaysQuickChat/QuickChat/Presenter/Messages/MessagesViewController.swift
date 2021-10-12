@@ -119,10 +119,10 @@ extension MessagesViewController {
             self.navigationItem.title = first + company
         }
         
-//        showIconOnNavigationBar(imageUrl: nil) // Will show default image
-//        if let image = conversation.medium_profile_pic {
-//            showIconOnNavigationBar(imageUrl: image)
-//        }
+        //        showIconOnNavigationBar(imageUrl: nil) // Will show default image
+        //        if let image = conversation.medium_profile_pic {
+        //            showIconOnNavigationBar(imageUrl: image)
+        //        }
     }
     
     fileprivate func showIconOnNavigationBar(imageUrl: String?) {
@@ -218,12 +218,12 @@ extension MessagesViewController {
     }
     
     @IBAction func sendImagePressed(_ sender: UIButton) {
-//        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
-            //            let message = ObjectMessage()
-            //            message.contentType = .photo
-            //            message.profilePic = image
-            //            message.ownerID = UserManager().currentUserID()
-            //            self?.send(message)
+        //        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
+        //            let message = ObjectMessage()
+        //            message.contentType = .photo
+        //            message.profilePic = image
+        //            message.ownerID = UserManager().currentUserID()
+        //            self?.send(message)
         if #available(iOS 14.0, *) {
             documentService.present(on: self, allowedFileTypes: [.pdf]) { data in
                 self.showActionButtons(false)
@@ -232,7 +232,7 @@ extension MessagesViewController {
         } else {
             // Fallback on earlier versions
         }
-//        }
+        //        }
     }
     
     @IBAction func sendLocationPressed(_ sender: UIButton) {
@@ -259,6 +259,13 @@ extension MessagesViewController {
 
 //MARK: UITableView Delegate & DataSource
 extension MessagesViewController: PaginatedTableViewDelegate {
+    
+    func paginatedTableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func paginatedTableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+    }
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         PaginationUrl(endpoint: "chat/chat-messages/", parameters: ["to_user_id": "\(to_user_id)"])
     }
@@ -456,11 +463,11 @@ extension MessagesViewController {
             if let index = indexPath {
                 let cell = self.tableView.cellForRow(at: index)
                 
-//                if cell?.reuseIdentifier == "UserMessageTableViewCell" {
-//                    Utilities.showDeleteforMeActionSheet()
-//                } else {
-//                    Utilities.showDeleteActionSheet()
-//                }
+                //                if cell?.reuseIdentifier == "UserMessageTableViewCell" {
+                //                    Utilities.showDeleteforMeActionSheet()
+                //                } else {
+                //                    Utilities.showDeleteActionSheet()
+                //                }
                 print(index.row)
             } else {
                 print("Could not find index path")
