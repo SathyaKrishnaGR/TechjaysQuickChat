@@ -474,7 +474,7 @@ extension MessagesViewController {
         alert.addAction(UIAlertAction(title: "Delete for me", style: .destructive , handler:{ (UIAlertAction)in
             self.deleteAndRemoveRows(type: "for_me")
         }))
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
         }))
         topMostController?.present(alert, animated: true, completion: {
         })
