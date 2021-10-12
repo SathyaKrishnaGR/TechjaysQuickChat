@@ -186,7 +186,7 @@ extension MessagesViewController {
             self.showDeleteActionSheet()
         }
     }
-    fileprivate func deleteAndRemoveRows(type: String) {
+    fileprivate func deleteAndRemoveRows(deleteType: String) {
         if let selectedRows = tableView.indexPathsForSelectedRows {
             var selectedMessages = [ObjectMessage]()
             for indexPath in selectedRows  {
@@ -194,7 +194,7 @@ extension MessagesViewController {
             }
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: selectedRows, with: .automatic)
-            self.deleteChatMessages(rows: selectedRows, messageIdToDelete: selectedMessages, deleteType: type)
+            self.deleteChatMessages(rows: selectedRows, messageIdToDelete: selectedMessages, deleteType: deleteType)
         }
     }
 }
@@ -412,7 +412,6 @@ extension MessagesViewController: SocketDataTransferDelegate {
                         socketMessage.is_sent_by_myself = false
                         if let objMessage = messageinClosure {
                             if let message = objMessage.data, let sender = objMessage.data?.sender {
-                                
                                 if let userId = sender.user_id {
                                     if  userId != self.to_user_id {
                                         if let user = sender.username {
@@ -462,13 +461,13 @@ extension MessagesViewController {
     }
     
     fileprivate func showDeleteActionSheet() {
-        let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Delete for Everyone", style: .destructive , handler:{ (UIAlertAction)in
-            self.deleteAndRemoveRows(type: "for_everyone")
+            self.deleteAndRemoveRows(deleteType: "for_everyone")
         }))
         alert.addAction(UIAlertAction(title: "Delete for me", style: .destructive , handler:{ (UIAlertAction)in
-            self.deleteAndRemoveRows(type: "for_me")
+            self.deleteAndRemoveRows(deleteType: "for_me")
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
         }))
