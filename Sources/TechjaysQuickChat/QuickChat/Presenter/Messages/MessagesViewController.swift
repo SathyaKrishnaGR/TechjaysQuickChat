@@ -32,7 +32,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     @IBOutlet weak var expandButton: UIButton!
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var deleteButton: UIBarButtonItem!
-
+    
     @IBOutlet weak var stackViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var barBottomConstraint: NSLayoutConstraint!
     
@@ -65,7 +65,6 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
             guard state else { return }
             self?.tableView.scroll(to: .bottom, animated: true)
         }
-        self.setLongPressGesture()
         FayvKeys.ChatDefaults.paginationLimit = "100"
         self.tableView.fetchData()
         
@@ -184,21 +183,21 @@ extension MessagesViewController {
     @IBAction func deletePressed(_ sender: Any) {
         if deleteButton.isEnabled {
             deleteButton.isEnabled = false
-            deleteAndRemoveRows()
+            self.showDeleteActionSheet()
         }
     }
-    fileprivate func deleteAndRemoveRows() {
+    fileprivate func deleteAndRemoveRows(type: String) {
         var arrayOfIndex: [Int] = []
         if let selectedRows = tableView.indexPathsForSelectedRows {
-
-            var selectedConversations = [ObjectConversation]()
+            
+            var selectedMessages = [ObjectMessage]()
             for indexPath in selectedRows  {
                 arrayOfIndex.append(indexPath.row)
             }
             
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: selectedRows, with: .automatic)
-            
+            self.deleteChatMessages(rows: selectedRows, messageIdToDelete: selectedMessages, deleteType: type)
             
         }
     }
@@ -381,6 +380,23 @@ extension MessagesViewController {
             }
         }
     }
+    fileprivate func deleteChatMessages(rows: [IndexPath], messageIdToDelete: [ObjectMessage], deleteType: String) {
+        let stringArray = messageIdToDelete.map { "\($0.message_id ?? 0)" }
+        let payloadString = stringArray.joined(separator: ",")
+        
+        let url = URLFactory.shared.url(endpoint: "chat/delete-chat-messages/")
+        APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: ["to_user_id": payloadString]) { (status, response: APIResponse<[ObjectMessage]>) in
+            switch status {
+            case .SUCCESS:
+                self.messages.removeArrayOfIndex(array: rows)
+                self.isEditing = !self.isEditing
+                self.tableView.endUpdates()
+            case .FAILURE:
+                print(response.msg)
+            }
+        }
+    }
+    
 }
 
 
@@ -449,29 +465,18 @@ extension MessagesViewController {
         self.sendButton.tintColor = ChatColors.tint
     }
     
-    func setLongPressGesture() {
-        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        lpgr.minimumPressDuration = 0.5
-        lpgr.delaysTouchesBegan = true
-        self.tableView.addGestureRecognizer(lpgr)
-    }
-    
-    @objc func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
-        let p = gestureReconizer.location(in: self.tableView)
-        let indexPath = self.tableView.indexPathForRow(at: p)
-        if gestureReconizer.state == .ended{
-            if let index = indexPath {
-                let cell = self.tableView.cellForRow(at: index)
-                
-                //                if cell?.reuseIdentifier == "UserMessageTableViewCell" {
-                //                    Utilities.showDeleteforMeActionSheet()
-                //                } else {
-                //                    Utilities.showDeleteActionSheet()
-                //                }
-                print(index.row)
-            } else {
-                print("Could not find index path")
-            }
-        }
+    fileprivate func showDeleteActionSheet() {
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Delete for Everyone", style: .destructive , handler:{ (UIAlertAction)in
+            self.deleteAndRemoveRows(type: "for_everyone")
+        }))
+        alert.addAction(UIAlertAction(title: "Delete for me", style: .destructive , handler:{ (UIAlertAction)in
+            self.deleteAndRemoveRows(type: "for_me")
+        }))
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
+        }))
+        topMostController?.present(alert, animated: true, completion: {
+        })
     }
 }

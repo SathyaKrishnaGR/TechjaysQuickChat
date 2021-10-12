@@ -415,7 +415,7 @@
                                 <action selector="editPressed:" destination="gTs-Hf-oyN" id="zkf-S6-JlL"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="trash" id="cGm-Kt-HN6"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Delete" id="cGm-Kt-HN6"/>
                     </navigationItem>
                     <connections>
                         <outlet property="barBottomConstraint" destination="USX-fV-RHa" id="izl-sj-oQR"/>
