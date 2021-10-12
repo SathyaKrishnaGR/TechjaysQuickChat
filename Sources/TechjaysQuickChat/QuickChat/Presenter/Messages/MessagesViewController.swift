@@ -323,6 +323,11 @@ extension MessagesViewController: PaginatedTableViewDelegate {
         //        default: break
         //        }
     }
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+        
+    }
 }
 
 //MARK: UItextField Delegate
