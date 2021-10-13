@@ -369,9 +369,9 @@ extension MessagesViewController {
             switch status {
             case .SUCCESS:
                 let msg = ObjectMessage()
-                msg.message = response.data?.file_url
-                if let message = msg.message {
-                    self.send(message, messageType: "file")
+                let data = response.data
+                if let dat = data?.file_url {
+                    self.send(dat, messageType: "file")
                 }
             case .FAILURE:
                 break
