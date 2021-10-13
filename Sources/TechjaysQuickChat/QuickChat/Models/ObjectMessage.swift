@@ -76,7 +76,7 @@ class ObjectMessage: Codable {
         chat_type = try container.decodeIfPresent(String.self, forKey: .chat_type)
         data = try container.decodeIfPresent(SocketData.self, forKey: .data)
         timestamp_in_date = try container.decodeIfPresent(Date.self, forKey: .timestamp_in_date)
-        file_url = try container.decodeIfPresent(Date.self, forKey: .file_url)
+        file_url = try container.decodeIfPresent(String.self, forKey: .file_url)
         
         //
         //    id = try container.decode(String.self, forKey: .id)
