@@ -81,8 +81,8 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
 
 //MARK: Private methods
 extension MessagesViewController {
-    private func send(_ message: String) {
-        socketManager.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message)
+    private func send(_ message: String, messageType: String) {
+        socketManager.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message, messageType: messageType)
         
         //        manager.create(message, conversation: conversation) {[weak self] response in
         //            guard let weakSelf = self else { return }
@@ -208,7 +208,7 @@ extension MessagesViewController {
         message.timestamp = Date().dateToString()
         //        message.ownerID = UserManager().currentUserID()
         showActionButtons(false)
-        send(text)
+        send(text, messageType: "message")
         
     }
     

@@ -44,9 +44,9 @@ class SocketManager {
         let messageString = self.dictToJson(payload: dict)
         socket.write(string: messageString)
     }
-    func sendMessage(chatToken: String, toUserId: String, message: String) {
+    func sendMessage(chatToken: String, toUserId: String, message: String, messageType: String) {
         
-        let dict = ["token": chatToken, "type": "chat", "chat_type": "private", "to": toUserId, "message": message]
+        let dict = ["token": chatToken, "type": "chat", "chat_type": "private", "to": toUserId, "message": message, "message_type": messageType]
         let messageString = self.dictToJson(payload: dict)
         socket.write(string: messageString)
     }
