@@ -448,7 +448,7 @@ extension MessagesViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Delete for Everyone", style: .destructive , handler:{ (UIAlertAction)in
-            self.deleteAndRemoveRows(deleteType: "for_everyone")
+            self.deleteAndRemoveRows(deleteType: "everyone")
         }))
         alert.addAction(UIAlertAction(title: "Delete for me", style: .destructive , handler:{ (UIAlertAction)in
             self.deleteAndRemoveRows(deleteType: "for_me")
