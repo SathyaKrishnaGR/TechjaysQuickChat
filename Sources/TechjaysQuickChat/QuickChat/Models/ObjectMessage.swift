@@ -50,7 +50,7 @@ class ObjectMessage: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(chat_type, forKey: .chat_type)
         try container.encodeIfPresent(timestamp_in_date, forKey: .timestamp_in_date)
-        try container.encodeIfPresent(file_url, forKey: .file_url)
+//        try container.encodeIfPresent(file_url, forKey: .file_url)
         
         //    try container.encode(id, forKey: .id)
         //    try container.encodeIfPresent(message, forKey: .message)
@@ -76,17 +76,8 @@ class ObjectMessage: Codable {
         chat_type = try container.decodeIfPresent(String.self, forKey: .chat_type)
         data = try container.decodeIfPresent(SocketData.self, forKey: .data)
         timestamp_in_date = try container.decodeIfPresent(Date.self, forKey: .timestamp_in_date)
-        file_url = try container.decodeIfPresent(String.self, forKey: .file_url)
+//        file_url = try container.decodeIfPresent(String.self, forKey: .file_url)
         
-        //
-        //    id = try container.decode(String.self, forKey: .id)
-        //    message = try container.decodeIfPresent(String.self, forKey: .message)
-        //    timestamp = try container.decodeIfPresent(Int.self, forKey: .timestamp) ?? Int(Date().timeIntervalSince1970)
-        //    ownerID = try container.decodeIfPresent(String.self, forKey: .ownerID)
-        //    profilePicLink = try container.decodeIfPresent(String.self, forKey: .profilePicLink)
-        //    content = try container.decodeIfPresent(String.self, forKey: .content)
-        //    if let contentTypeValue = try container.decodeIfPresent(Int.self, forKey: .contentType) {
-        //      contentType = ContentType(rawValue: contentTypeValue) ?? ContentType.unknown
     }
 }
 
@@ -107,23 +98,7 @@ extension ObjectMessage {
         case timestamp_in_date
         case file_url
         
-        
-        //    case id
-        //    case message
-        //    case timestamp
-        //    case ownerID
-        //    case profilePicLink
-        //    case contentType
-        //    case content
-        
     }
-    
-    //    enum ContentType: Int {
-    //        //    case none
-    //        //    case photo
-    //        //    case location
-    //        //    case unknown
-    //    }
 }
 
 class SocketData: Codable {
@@ -133,7 +108,6 @@ class SocketData: Codable {
     var profile_pic: String?
     var file_url: String?
     var timestamp_in_date: Date?
-    
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -154,7 +128,6 @@ class SocketData: Codable {
         timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp)
         profile_pic = try container.decodeIfPresent(String.self, forKey: .profile_pic)
         timestamp_in_date = try container.decodeIfPresent(Date.self, forKey: .timestamp_in_date)
-        
     }
 }
 
