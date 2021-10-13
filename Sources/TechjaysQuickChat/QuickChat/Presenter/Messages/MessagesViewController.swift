@@ -84,7 +84,6 @@ extension MessagesViewController {
     private func send(_ message: String, messageType: String) {
         socketManager.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message, messageType: messageType)
     }
-    
     private func showUserNameOnNavBar() {
         if toChatScreen {
             self.navigationItem.title = opponentUserName
@@ -187,37 +186,38 @@ extension MessagesViewController {
         let message = ObjectMessage()
         message.message = text
         message.timestamp = Date().dateToString()
-        send(message, messageType: "message")
-        showActionButtons(false)
+        if let message = message.message {
+            send(message, messageType: "message")
     }
-    
-    @IBAction func sendImagePressed(_ sender: UIButton) {
-        //        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
-        if #available(iOS 14.0, *) {
-            documentService.present(on: self, allowedFileTypes: [.pdf]) { data in
-                let payload = Multipart(toUserId: self.to_user_id, fileType: "pdf", imageData: data)
-                self.uploadAttachment(payload: payload)
-                send(message, messageType: "file")
-                self.showActionButtons(false)
-                
-            }
+    showActionButtons(false)
+}
+
+@IBAction func sendImagePressed(_ sender: UIButton) {
+    //        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
+    if #available(iOS 14.0, *) {
+        documentService.present(on: self, allowedFileTypes: [.pdf]) { data in
+            let payload = Multipart(toUserId: self.to_user_id, fileType: "pdf", imageData: data)
+            self.uploadAttachment(payload: payload)
+            self.showActionButtons(false)
+            
         }
     }
-    
-    @IBAction func sendLocationPressed(_ sender: UIButton) {
-        locationService.getLocation {[weak self] response in
-            switch response {
-            case .denied:
-                self?.showAlert(title: "Error", message: "Please enable locattion services")
-            case .location(_):
-                self?.showActionButtons(false)
-            }
+}
+
+@IBAction func sendLocationPressed(_ sender: UIButton) {
+    locationService.getLocation {[weak self] response in
+        switch response {
+        case .denied:
+            self?.showAlert(title: "Error", message: "Please enable locattion services")
+        case .location(_):
+            self?.showActionButtons(false)
         }
     }
-    
-    @IBAction func expandItemsPressed(_ sender: UIButton) {
-        showActionButtons(true)
-    }
+}
+
+@IBAction func expandItemsPressed(_ sender: UIButton) {
+    showActionButtons(true)
+}
 }
 
 //MARK: UITableView Delegate & DataSource
@@ -365,10 +365,14 @@ extension MessagesViewController {
         APIClient().MULTIPART(url: url,
                               uploadType: .post,
                               payload: payload,
-                              files: [.init(fileName: "file", fileExtension: "pdf" , data: resumeData)]) { (status, response: APIResponse<String>) in
+                              files: [.init(fileName: "file", fileExtension: "pdf" , data: resumeData)]) { (status, response: APIResponse<ObjectMessage>) in
             switch status {
             case .SUCCESS:
-                print("success")
+                let msg = ObjectMessage()
+                msg.message = response.data?.data?.file_url
+                if let message = msg.message {
+                    self.send(message, messageType: "file")
+                }
             case .FAILURE:
                 break
             }
