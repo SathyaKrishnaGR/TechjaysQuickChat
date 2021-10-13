@@ -349,7 +349,7 @@ extension MessagesViewController {
         let payloadString = stringArray.joined(separator: ",")
         
         let url = URLFactory.shared.url(endpoint: "chat/delete-chat-messages/")
-        APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: ["to_user_id": payloadString, "delete_message_type": deleteType]) { (status, response: APIResponse<[ObjectMessage]>) in
+        APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: ["to_user_id": to_user_id, "message_ids": payloadString,  "delete_message_type": deleteType]) { (status, response: APIResponse<[ObjectMessage]>) in
             switch status {
             case .SUCCESS:
                 self.messages.removeArrayOfIndex(array: rows)
