@@ -363,7 +363,7 @@ extension MessagesViewController {
     func uploadAttachment(payload: Multipart) {
         let url = URLFactory.shared.url(endpoint: "chat/file-upload/")
         APIClient().MULTIPART(url: url,
-                              uploadType: .post,
+                              headers: ["Authorization": FayvKeys.ChatDefaults.token], uploadType: .post,
                               payload: payload,
                               files: [.init(fileName: "file", fileExtension: "pdf" , data: resumeData)]) { (status, response: APIResponse<ObjectMessage>) in
             switch status {

@@ -349,6 +349,7 @@
                                                             <constraint firstAttribute="height" constant="25" id="JON-yj-x8u"/>
                                                             <constraint firstAttribute="width" constant="32" id="Lcz-tt-xUe"/>
                                                         </constraints>
+                                                        <color key="tintColor" red="0.25162395830000001" green="0.53981399539999997" blue="0.8078737855" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <state key="normal" image="back"/>
                                                         <connections>
                                                             <action selector="expandItemsPressed:" destination="gTs-Hf-oyN" eventType="touchUpInside" id="oGG-sP-K0q"/>
