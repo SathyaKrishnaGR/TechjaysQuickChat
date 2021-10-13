@@ -83,6 +83,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
 extension MessagesViewController {
     private func send(_ message: String, messageType: String) {
         socketManager.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message, messageType: messageType)
+        self.updateChat(message: message)
     }
     private func showUserNameOnNavBar() {
         if toChatScreen {
