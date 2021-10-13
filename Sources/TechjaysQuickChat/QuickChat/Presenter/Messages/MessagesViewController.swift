@@ -83,24 +83,6 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
 extension MessagesViewController {
     private func send(_ message: String, messageType: String) {
         socketManager.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message, messageType: messageType)
-        
-        //        manager.create(message, conversation: conversation) {[weak self] response in
-        //            guard let weakSelf = self else { return }
-        //            if response == .failure {
-        //                weakSelf.showAlert()
-        //                return
-        //            }
-        //            weakSelf.conversation.timestamp = String(Date().timeIntervalSince1970)
-        //            //      switch message.contentType {
-        //      case .none: weakSelf.conversation.lastMessage = message.message
-        //      case .photo: weakSelf.conversation.lastMessage = "Attachment"
-        //      case .location: weakSelf.conversation.lastMessage = "Location"
-        //      default: break
-        //      }
-        //      if let currentUserID = UserManager().currentUserID() {
-        //        weakSelf.conversation.isRead[currentUserID] = true
-        //      }
-        //      ConversationManager().create(weakSelf.conversation)
     }
     
     private func showUserNameOnNavBar() {
@@ -204,17 +186,12 @@ extension MessagesViewController {
         guard let text = inputTextField.text, !text.isEmpty else { return }
         let message = ObjectMessage()
         message.message = text
-        print("Dat to String \(Date().dateToString())")
         message.timestamp = Date().dateToString()
-        //        message.ownerID = UserManager().currentUserID()
         showActionButtons(false)
-        send(text, messageType: "message")
-        
     }
     
     @IBAction func sendImagePressed(_ sender: UIButton) {
         //        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
-       
         if #available(iOS 14.0, *) {
             documentService.present(on: self, allowedFileTypes: [.pdf]) { data in
                 let payload = Multipart(toUserId: self.to_user_id, fileType: "pdf", imageData: data)
@@ -222,10 +199,7 @@ extension MessagesViewController {
                 self.showActionButtons(false)
                 
             }
-        } else {
-            // Fallback on earlier versions
         }
-        //        }
     }
     
     @IBAction func sendLocationPressed(_ sender: UIButton) {
@@ -234,12 +208,6 @@ extension MessagesViewController {
             case .denied:
                 self?.showAlert(title: "Error", message: "Please enable locattion services")
             case .location(_):
-                //                let message = ObjectMessage()
-                //                message.ownerID = UserManager().currentUserID()
-                //                message.content = location.string
-                //                message.contentType = .location
-                //                self?.send(message)
-                //                self?.inputTextField.text = nil
                 self?.showActionButtons(false)
             }
         }
@@ -393,9 +361,9 @@ extension MessagesViewController {
     func uploadAttachment(payload: Multipart) {
         let url = URLFactory.shared.url(endpoint: "chat/file-upload/")
         APIClient().MULTIPART(url: url,
-                            uploadType: .post,
-                            payload: payload,
-                            files: [.init(fileName: "file", fileExtension: "pdf" , data: resumeData)]) { (status, response: APIResponse<String>) in
+                              uploadType: .post,
+                              payload: payload,
+                              files: [.init(fileName: "file", fileExtension: "pdf" , data: resumeData)]) { (status, response: APIResponse<String>) in
             switch status {
             case .SUCCESS:
                 print("success")
