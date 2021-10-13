@@ -187,6 +187,7 @@ extension MessagesViewController {
         let message = ObjectMessage()
         message.message = text
         message.timestamp = Date().dateToString()
+        send(message, messageType: "message")
         showActionButtons(false)
     }
     
@@ -196,6 +197,7 @@ extension MessagesViewController {
             documentService.present(on: self, allowedFileTypes: [.pdf]) { data in
                 let payload = Multipart(toUserId: self.to_user_id, fileType: "pdf", imageData: data)
                 self.uploadAttachment(payload: payload)
+                send(message, messageType: "file")
                 self.showActionButtons(false)
                 
             }
