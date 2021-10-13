@@ -34,6 +34,7 @@ class ObjectMessage: Codable {
     var chat_type: String?
     var data: SocketData?
     var timestamp_in_date: Date?
+    var file_url: String?
     
     
     func encode(to encoder: Encoder) throws {
@@ -49,6 +50,7 @@ class ObjectMessage: Codable {
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(chat_type, forKey: .chat_type)
         try container.encodeIfPresent(timestamp_in_date, forKey: .timestamp_in_date)
+        try container.encodeIfPresent(file_url, forKey: .file_url)
         
         //    try container.encode(id, forKey: .id)
         //    try container.encodeIfPresent(message, forKey: .message)
@@ -74,6 +76,7 @@ class ObjectMessage: Codable {
         chat_type = try container.decodeIfPresent(String.self, forKey: .chat_type)
         data = try container.decodeIfPresent(SocketData.self, forKey: .data)
         timestamp_in_date = try container.decodeIfPresent(Date.self, forKey: .timestamp_in_date)
+        file_url = try container.decodeIfPresent(Date.self, forKey: .file_url)
         
         //
         //    id = try container.decode(String.self, forKey: .id)
@@ -102,6 +105,7 @@ extension ObjectMessage {
         case chat_type
         case data
         case timestamp_in_date
+        case file_url
         
         
         //    case id
