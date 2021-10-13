@@ -190,3 +190,18 @@ extension SocketSender {
         case username
     }
 }
+
+
+struct Multipart: Codable {
+    var toUserId: Int?
+    var fileType: String?
+    var imageData: Data?
+    
+    private enum CodingKeys: String, CodingKey {
+        case
+        toUserId = "to_user_id",
+        fileType = "file_type",
+        imageData
+        
+    }
+}

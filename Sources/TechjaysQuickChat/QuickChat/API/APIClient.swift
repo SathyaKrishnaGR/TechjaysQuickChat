@@ -13,12 +13,17 @@ import UIKit
 typealias APICompletion<T: Codable> =  (_ status: APIClient.Status, _ response: APIResponse<T>) -> Void
 
 class APIClient {
-    
+    struct MultipartFile {
+        let fileName: String
+        let fileExtension: String
+        let data: Data
+    }
+
     static let shared = APIClient()
     let urlFactory = URLFactory()
-    
+
     init() {}
-    
+
     /// Sends a GET request to the server
     /// - Parameters:
     ///   - url: Request URL
@@ -74,13 +79,15 @@ class APIClient {
     func MULTIPART<T: Codable> (url: String,
                                 headers: [String: String]? = nil,
                                 uploadType method: HTTPMethod,
-                                image: (key: String, value: UIImage)? = nil,
+                                images: [(key: String, value: UIImage)]? = nil,
+                                files: [MultipartFile]? = nil,
                                 completion: @escaping APICompletion<T>) {
         executeRequest(to: url,
                        headers: headers,
                        requestType: method,
                        payload: [String: Any](),
-                       image: image,
+                       images: images,
+                       files: files,
                        completion: completion)
     }
 
@@ -95,16 +102,19 @@ class APIClient {
                                    headers: [String: String]? = nil,
                                    uploadType method: HTTPMethod,
                                    payload: P,
-                                   image: (key: String, value: UIImage)? = nil,
+                                   images: [(key: String, value: UIImage)]? = nil,
+                                   files: [MultipartFile]? = nil,
                                    completion: @escaping APICompletion<T>) {
         executeRequest(to: url,
                        headers: headers,
                        requestType: method,
                        payload: parsePayload(payload) ?? [String: Any](),
-                       image: image,
+                       images: images,
+                       files: files,
                        completion: completion)
     }
 }
+
 
 extension APIClient {
     /// Handles GET, POST, PUT, DELETE requests
@@ -148,29 +158,38 @@ extension APIClient {
                                             headers: [String: String]? = nil,
                                             requestType method: HTTPMethod,
                                             payload param: [String: Any],
-                                            image: (key: String, value: UIImage)?,
+                                            images: [(key: String, value: UIImage)]?,
+                                            files: [MultipartFile]?,
                                             completion: @escaping APICompletion<T>) {
         guard isNetworkReachable(completion) else {
             return
         }
-        let headers: HTTPHeaders = buildHeaders(contentType: FayvStrings.APIClient.multipartFormData, overrideHeaders: headers)
-
+        let headers: HTTPHeaders = buildHeaders(contentType: "multipart/form-data", overrideHeaders: headers)
+        
         let multipartFormData = { (data: MultipartFormData) in
-            if let img = image, let jpegImage = img.value.jpegData(compressionQuality: 1) {
-                data.append(jpegImage,
-                            withName: img.key,
-                            fileName: "\(img.key).\(FayvStrings.APIClient.JPG)",
-                    mimeType: FayvStrings.APIClient.imageJpg)
-            }
+            images?.forEach({ img in
+                if let jpegImage = img.value.jpegData(compressionQuality: 1) {
+                    data.append(jpegImage,
+                                withName: img.key,
+                                fileName: "\(img.key).jpg",
+                                mimeType: "image/jpg")
+                }
+            })
+            files?.forEach({ file in
+                data.append(file.data,
+                            withName: file.fileName,
+                            fileName: "\(file.fileName).\(file.fileExtension)",
+                            mimeType: "application/octet-stream")
+            })
             for (key, value) in param {
                 if let value = value as? String, let utf8Value = value.data(using: String.Encoding.utf8) {
                     data.append(utf8Value, withName: key)
                 } else {
-                    debugPrint(String(format: FayvStrings.APIClient.multiPartPayloadMustBeString, key))
+                    debugPrint(String(format: "MultiPartPayloadMustBeString", key))
                 }
             }
         }
-
+        
         debugPrint(param)
         guard let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             completion(.FAILURE, APIResponse<T>(result: false, msg: "Url can't be encoded"))
@@ -198,7 +217,7 @@ extension APIClient {
         do {
             debugPrint(response)
             var apiResponse: APIResponse<T>
-            
+
             if let data = response.data, let statusCode = response.response?.statusCode {
                 switch statusCode {
                 case 200, 201:

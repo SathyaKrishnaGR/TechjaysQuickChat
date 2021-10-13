@@ -45,7 +45,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     private let documentService = DocumentService()
     private let locationService = LocationService()
     private var messages = [ObjectMessage]()
-    //    private var sentMessages = [ObjectMessage]()
+    private var resumeData = Data()
     var socketManager = SocketManager()
     var toChatScreen: Bool = false
     var opponentUserName: String?
@@ -214,13 +214,11 @@ extension MessagesViewController {
     
     @IBAction func sendImagePressed(_ sender: UIButton) {
         //        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
-        //            let message = ObjectMessage()
-        //            message.contentType = .photo
-        //            message.profilePic = image
-        //            message.ownerID = UserManager().currentUserID()
-        //            self?.send(message)
+       
         if #available(iOS 14.0, *) {
             documentService.present(on: self, allowedFileTypes: [.pdf]) { data in
+                let payload = Multipart(toUserId: self.to_user_id, fileType: "pdf", imageData: data)
+                self.uploadAttachment(payload: payload)
                 self.showActionButtons(false)
                 
             }
@@ -392,7 +390,20 @@ extension MessagesViewController {
             }
         }
     }
-    
+    func uploadAttachment(payload: Multipart) {
+        let url = URLFactory.shared.url(endpoint: "chat/file-upload/")
+        APIClient().MULTIPART(url: url,
+                            uploadType: .post,
+                            payload: payload,
+                            files: [.init(fileName: "file", fileExtension: "pdf" , data: resumeData)]) { (status, response: APIResponse<String>) in
+            switch status {
+            case .SUCCESS:
+                print("success")
+            case .FAILURE:
+                break
+            }
+        }
+    }
 }
 
 
@@ -452,7 +463,6 @@ extension MessagesViewController: SocketDataTransferDelegate {
         }
     }
 }
-
 
 extension MessagesViewController {
     func setTint() {
