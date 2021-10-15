@@ -164,19 +164,30 @@ extension MessagesViewController {
     @IBAction func deletePressed(_ sender: Any) {
         if deleteButton.isEnabled {
             deleteButton.isEnabled = false
-            self.showDeleteActionSheet()
+            self.checkForDeleteAction()
         }
     }
-    fileprivate func deleteAndRemoveRows(deleteType: String) {
+    
+    fileprivate func checkForDeleteAction() {
         if let selectedRows = tableView.indexPathsForSelectedRows {
             var selectedMessages = [ObjectMessage]()
+            var deleteType: String = ""
             for indexPath in selectedRows  {
                 selectedMessages.append(messages[indexPath.row])
+                if messages[indexPath.row].is_sent_by_myself! {
+                    deleteType = "everyone"
+                    self.showDeleteActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: deleteType)
+                } else {
+                    deleteType = "for_me"
+                    self.showDeleteActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: deleteType)
+                }
             }
-            self.tableView.beginUpdates()
-            self.tableView.deleteRows(at: selectedRows, with: .automatic)
-            self.deleteChatMessages(rows: selectedRows, messageIdToDelete: selectedMessages, deleteType: deleteType)
         }
+    }
+    fileprivate func deleteAndRemoveRows(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
+        self.tableView.beginUpdates()
+        self.tableView.deleteRows(at: rows, with: .automatic)
+        self.deleteChatMessages(rows: rows, messageIdToDelete: messages, deleteType: deleteType)
     }
 }
 extension MessagesViewController {
@@ -188,36 +199,36 @@ extension MessagesViewController {
         message.timestamp = Date().dateToString()
         if let message = message.message {
             send(message, messageType: "message")
+        }
+        showActionButtons(false)
     }
-    showActionButtons(false)
-}
-
-@IBAction func sendImagePressed(_ sender: UIButton) {
-    //        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
-    if #available(iOS 14.0, *) {
-        documentService.present(on: self, allowedFileTypes: [.pdf]) { data in
-            let payload = Multipart(toUserId: self.to_user_id, fileType: "pdf", imageData: data)
-            self.uploadAttachment(payload: payload)
-            self.showActionButtons(false)
-            
+    
+    @IBAction func sendImagePressed(_ sender: UIButton) {
+        //        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
+        if #available(iOS 14.0, *) {
+            documentService.present(on: self, allowedFileTypes: [.pdf]) { data in
+                let payload = Multipart(toUserId: self.to_user_id, fileType: "pdf", imageData: data)
+                self.uploadAttachment(payload: payload)
+                self.showActionButtons(false)
+                
+            }
         }
     }
-}
-
-@IBAction func sendLocationPressed(_ sender: UIButton) {
-    locationService.getLocation {[weak self] response in
-        switch response {
-        case .denied:
-            self?.showAlert(title: "Error", message: "Please enable locattion services")
-        case .location(_):
-            self?.showActionButtons(false)
+    
+    @IBAction func sendLocationPressed(_ sender: UIButton) {
+        locationService.getLocation {[weak self] response in
+            switch response {
+            case .denied:
+                self?.showAlert(title: "Error", message: "Please enable locattion services")
+            case .location(_):
+                self?.showActionButtons(false)
+            }
         }
     }
-}
-
-@IBAction func expandItemsPressed(_ sender: UIButton) {
-    showActionButtons(true)
-}
+    
+    @IBAction func expandItemsPressed(_ sender: UIButton) {
+        showActionButtons(true)
+    }
 }
 
 //MARK: UITableView Delegate & DataSource
@@ -311,7 +322,6 @@ extension MessagesViewController: UITextFieldDelegate {
     }
 }
 
-
 //MARK: MessageTableViewCellDelegate Delegate
 extension MessagesViewController: MessageTableViewCellDelegate {
     func messageTableViewCellUpdate() {
@@ -360,7 +370,7 @@ extension MessagesViewController {
             }
         }
     }
-    func uploadAttachment(payload: Multipart) {
+    fileprivate func uploadAttachment(payload: Multipart) {
         let url = URLFactory.shared.url(endpoint: "chat/file-upload/")
         APIClient().MULTIPART(url: url,
                               headers: ["Authorization": FayvKeys.ChatDefaults.token], uploadType: .post,
@@ -379,7 +389,6 @@ extension MessagesViewController {
         }
     }
 }
-
 
 extension MessagesViewController: SocketDataTransferDelegate {
     func updateChat(message messageString: String) {
@@ -442,20 +451,33 @@ extension MessagesViewController {
     func setTint() {
         self.tableView.tintColor = ChatColors.tint
         self.sendButton.tintColor = ChatColors.tint
+        _ = self.actionButtons.map { btn in
+            btn.tintColor = ChatColors.tint
+        }
     }
     
-    fileprivate func showDeleteActionSheet() {
+    fileprivate func showDeleteActionSheet(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
         alert.addAction(UIAlertAction(title: "Delete for Everyone", style: .destructive , handler:{ (UIAlertAction)in
-            self.deleteAndRemoveRows(deleteType: "everyone")
+            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
         }))
         alert.addAction(UIAlertAction(title: "Delete for me", style: .destructive , handler:{ (UIAlertAction)in
-            self.deleteAndRemoveRows(deleteType: "for_me")
+            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
         }))
-        topMostController?.present(alert, animated: true, completion: {
+        self.present(alert, animated: true, completion: {
+        })
+    }
+    
+    fileprivate func showDeleteforMeActionSheet(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Delete for me", style: .destructive , handler:{ (UIAlertAction)in
+            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
+        }))
+        self.present(alert, animated: true, completion: {
         })
     }
 }

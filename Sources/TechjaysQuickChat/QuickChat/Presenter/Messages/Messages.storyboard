@@ -339,7 +339,7 @@
                                                             <constraint firstAttribute="height" constant="25" id="sXx-dz-hBM"/>
                                                         </constraints>
                                                         <color key="tintColor" red="0.25162395830000001" green="0.53981399539999997" blue="0.8078737855" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <state key="normal" image="selectPDF">
+                                                        <state key="normal" image="paperclip" catalog="system">
                                                             <color key="titleColor" red="0.25162395830000001" green="0.53981399539999997" blue="0.8078737855" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         </state>
                                                         <connections>
@@ -353,7 +353,7 @@
                                                             <constraint firstAttribute="width" constant="32" id="Lcz-tt-xUe"/>
                                                         </constraints>
                                                         <color key="tintColor" red="0.25162395830000001" green="0.53981399539999997" blue="0.8078737855" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <state key="normal" image="back"/>
+                                                        <state key="normal" image="chevron.right" catalog="system"/>
                                                         <connections>
                                                             <action selector="expandItemsPressed:" destination="gTs-Hf-oyN" eventType="touchUpInside" id="oGG-sP-K0q"/>
                                                         </connections>
@@ -462,9 +462,9 @@
     </scenes>
     <color key="tintColor" red="0.50588235290000005" green="0.56470588239999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
-        <image name="back" width="17" height="27"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <image name="paperclip" catalog="system" width="121" height="128"/>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
-        <image name="selectPDF" width="48" height="48"/>
         <namedColor name="AuthBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
