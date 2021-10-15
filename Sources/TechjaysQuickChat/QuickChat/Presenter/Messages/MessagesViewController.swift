@@ -156,8 +156,10 @@ extension MessagesViewController {
         isEditing = !isEditing
         if isEditing {
             self.deleteButton.isEnabled = true
+            self.editButton.title = "Done"
         } else {
             self.deleteButton.isEnabled = false
+            self.editButton.title = "Edit"
         }
     }
     
@@ -367,6 +369,7 @@ extension MessagesViewController {
             case .SUCCESS:
                 self.messages.removeArrayOfIndex(array: rows)
                 self.isEditing = !self.isEditing
+                self.resetEditAndDeletebuttons()
                 self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
@@ -381,7 +384,6 @@ extension MessagesViewController {
                               files: [.init(fileName: "file", fileExtension: "pdf" , data: resumeData)]) { (status, response: APIResponse<ObjectMessage>) in
             switch status {
             case .SUCCESS:
-                let msg = ObjectMessage()
                 let data = response.data
                 if let dat = data?.file_url {
                     self.send(dat, messageType: "file")
@@ -390,6 +392,11 @@ extension MessagesViewController {
                 break
             }
         }
+    }
+    
+    fileprivate func resetEditAndDeletebuttons() {
+        self.deleteButton.isEnabled = false
+        self.editButton.title = "Edit"
     }
 }
 
@@ -455,6 +462,8 @@ extension MessagesViewController {
         self.tableView.tintColor = ChatColors.tint
         self.sendButton.tintColor = ChatColors.tint
         self.expandButton.tintColor = ChatColors.tint
+        self.editButton.tintColor = ChatColors.tint
+        self.deleteButton.tintColor = ChatColors.tint
         _ = self.actionButtons.map { btn in
             btn.tintColor = ChatColors.tint
         }
