@@ -174,7 +174,7 @@ extension MessagesViewController {
             var deleteType: [String] = []
             for indexPath in selectedRows  {
                 selectedMessages.append(messages[indexPath.row])
-                if selectedMessages[indexPath.row].is_sent_by_myself! {
+                if messages[indexPath.row].is_sent_by_myself! {
                     deleteType.append("everyone")
                 } else {
                     deleteType.append("for_me")
@@ -454,6 +454,7 @@ extension MessagesViewController {
     func setTint() {
         self.tableView.tintColor = ChatColors.tint
         self.sendButton.tintColor = ChatColors.tint
+        self.expandButton.tintColor = ChatColors.tint
         _ = self.actionButtons.map { btn in
             btn.tintColor = ChatColors.tint
         }
