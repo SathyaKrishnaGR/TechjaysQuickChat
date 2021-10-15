@@ -176,11 +176,12 @@ extension MessagesViewController {
                 selectedMessages.append(messages[indexPath.row])
                 if self.messages.contains(where: { message in message.is_sent_by_myself == false }) {
                     deleteType = "everyone"
+                    self.showDeleteActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: deleteType)
                 } else {
                     deleteType = "for_me"
+                    self.showDeleteForMeActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: deleteType)
                 }
             }
-            self.showDeleteActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: deleteType)
         }
     }
     fileprivate func deleteAndRemoveRows(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
