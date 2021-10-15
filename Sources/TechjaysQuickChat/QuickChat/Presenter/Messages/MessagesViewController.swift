@@ -386,6 +386,7 @@ extension MessagesViewController {
             case .SUCCESS:
                 let data = response.data
                 if let dat = data?.file_url {
+                    self.inputTextField.text = dat
                     self.send(dat, messageType: "file")
                 }
             case .FAILURE:
