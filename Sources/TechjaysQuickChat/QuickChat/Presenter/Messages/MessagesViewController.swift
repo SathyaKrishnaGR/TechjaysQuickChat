@@ -171,16 +171,19 @@ extension MessagesViewController {
     fileprivate func checkForDeleteAction() {
         if let selectedRows = tableView.indexPathsForSelectedRows {
             var selectedMessages = [ObjectMessage]()
-            var deleteType: String = ""
+            var deleteType: [String] = []
             for indexPath in selectedRows  {
                 selectedMessages.append(messages[indexPath.row])
-                if self.messages.contains(where: { message in message.is_sent_by_myself == false }) {
-                    deleteType = "everyone"
-                    self.showDeleteActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: deleteType)
+                if selectedMessages[indexPath.row].is_sent_by_myself! {
+                    deleteType.append("everyone")
                 } else {
-                    deleteType = "for_me"
-                    self.showDeleteForMeActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: deleteType)
+                    deleteType.append("for_me")
                 }
+            }
+            if deleteType.contains("everyone") {
+                self.showDeleteActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: "everyone")
+            } else {
+                self.showDeleteforMeActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: "for_me")
             }
         }
     }
@@ -290,7 +293,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
         })
     }
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let message = messages[indexPath.row]
+//        let message = messages[indexPath.row]
         
         //        switch message.contentType {
         //        case .location:
