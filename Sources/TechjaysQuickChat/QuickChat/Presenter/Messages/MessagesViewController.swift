@@ -182,7 +182,7 @@ extension MessagesViewController {
                     deleteType.append("for_me")
                 }
             }
-            if deleteType.contains("everyone") {
+            if !deleteType.contains("for_me") {
                 self.showDeleteActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: "everyone")
             } else {
                 self.showDeleteforMeActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: "for_me")
