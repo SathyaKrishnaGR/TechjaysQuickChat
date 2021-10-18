@@ -361,7 +361,7 @@ extension MessagesViewController {
     }
     fileprivate func deleteChatMessages(rows: [IndexPath], messageIdToDelete: [ObjectMessage], deleteType: String) {
 
-        let stringArray = messageIdToDelete.map {(String(describing: $0.message_id)}
+        let stringArray = messageIdToDelete.map {String(describing: $0.message_id)}
         let payloadString = stringArray.joined(separator: ",")
         
         let url = URLFactory.shared.url(endpoint: "chat/delete-chat-messages/")
