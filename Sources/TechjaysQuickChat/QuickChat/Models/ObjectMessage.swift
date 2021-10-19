@@ -104,7 +104,7 @@ extension ObjectMessage {
 class SocketData: Codable {
     var sender: SocketSender?
     var message: String?
-    var message_id: String?
+    var message_id: Int?
     var message_type: String?
     var timestamp: String?
     var profile_pic: String?
@@ -129,7 +129,7 @@ class SocketData: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         sender = try container.decodeIfPresent(SocketSender.self, forKey: .sender)
         message = try container.decodeIfPresent(String.self, forKey: .message)
-        message_id = try container.decodeIfPresent(String.self, forKey: .message_id)
+        message_id = try container.decodeIfPresent(Int.self, forKey: .message_id)
         message_type = try container.decodeIfPresent(String.self, forKey: .message_type)
         timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp)
         profile_pic = try container.decodeIfPresent(String.self, forKey: .profile_pic)
