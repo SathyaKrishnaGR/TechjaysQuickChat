@@ -156,10 +156,10 @@ extension MessagesViewController {
         isEditing = !isEditing
         if isEditing {
             self.deleteButton.isEnabled = true
-            self.navigationItem.rightBarButtonItem?.title = "Done"
+            self.navigationItem.leftBarButtonItem?.title = "Done"
         } else {
             self.deleteButton.isEnabled = false
-            self.navigationItem.rightBarButtonItem?.title = "Edit"
+            self.navigationItem.leftBarButtonItem?.title = "Edit"
         }
     }
     
