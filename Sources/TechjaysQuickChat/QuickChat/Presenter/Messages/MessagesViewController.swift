@@ -410,7 +410,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
                 if let socketMessage = messageinClosure {
                     if  socketMessage.data?.sender == nil {
                         // Our User - Sending someone a message
-                        socketMessage.message = messageinClosure?.message
+                        socketMessage.message = self.inputTextField.text
                         socketMessage.message_id = messageinClosure?.message_id
                         socketMessage.is_sent_by_myself = true
                         self.inputTextField.text = nil
