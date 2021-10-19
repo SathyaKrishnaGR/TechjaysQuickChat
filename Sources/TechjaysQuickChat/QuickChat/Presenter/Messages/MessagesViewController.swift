@@ -426,6 +426,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
                                         }
                                     } else {
                                         socketMessage.message = objMessage.data?.message
+                                        socketMessage.message_id = objMessage.message_id
                                         self.showDataOnChatScreen(socket: socketMessage)
                                     }
                                 }
