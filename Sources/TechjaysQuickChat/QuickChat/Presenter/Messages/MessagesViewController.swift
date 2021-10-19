@@ -417,7 +417,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
                     if  socketMessage.data?.sender == nil {
                         // Our User - Sending someone a message
                         socketMessage.message = self.inputTextField.text
-                        socketMessage.message_id = messageinClosure?.message_id
+                        socketMessage.message_id = messageinClosure?.data?.message_id
                         socketMessage.is_sent_by_myself = true
                         self.inputTextField.text = nil
                         self.showDataOnChatScreen(socket: socketMessage)
@@ -434,7 +434,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
                                         }
                                     } else {
                                         socketMessage.message = objMessage.data?.message
-                                        socketMessage.message_id = objMessage.message_id
+                                        socketMessage.message_id = objMessage.data?.message_id
                                         self.showDataOnChatScreen(socket: socketMessage)
                                     }
                                 }
