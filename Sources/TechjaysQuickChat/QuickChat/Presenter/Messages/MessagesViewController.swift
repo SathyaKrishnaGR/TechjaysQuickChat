@@ -483,6 +483,7 @@ extension MessagesViewController {
             self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
+            isEditing = !isEditing
         }))
         self.present(alert, animated: true, completion: {
         })
@@ -494,6 +495,7 @@ extension MessagesViewController {
             self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
+            isEditing = !isEditing
         }))
         self.present(alert, animated: true, completion: {
         })
