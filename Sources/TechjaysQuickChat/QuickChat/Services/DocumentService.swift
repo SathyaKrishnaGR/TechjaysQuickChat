@@ -12,17 +12,12 @@ import UniformTypeIdentifiers
 
 class DocumentService: NSObject {
     
-    private lazy var picker: UIDocumentPickerViewController = {
-        let picker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF)], in: .import)
-        picker.delegate = self
-        return picker
-    }()
     var completionBlock: CompletionObject<Data>?
     
     @available(iOS 14.0, *)
     func present(on parentViewController: UIViewController, allowedFileTypes types: [UTType], completion: CompletionObject<Data>?) {
         completionBlock = completion
-        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: types)
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: types, asCopy: true)
         documentPicker.delegate = self
         parentViewController.present(documentPicker, animated: true, completion: nil)
         
