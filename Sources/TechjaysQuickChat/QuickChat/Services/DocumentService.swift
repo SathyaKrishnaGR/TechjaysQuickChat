@@ -13,9 +13,9 @@ import UniformTypeIdentifiers
 class DocumentService: NSObject {
     
     private lazy var picker: UIDocumentPickerViewController = {
-      let picker = UIDocumentPickerViewController()
-      picker.delegate = self
-      return picker
+        let picker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF)], in: .import)
+        picker.delegate = self
+        return picker
     }()
     var completionBlock: CompletionObject<Data>?
     
@@ -35,9 +35,8 @@ extension DocumentService: UIDocumentPickerDelegate {
             return
         }
         guard let data = try? Data(contentsOf: fileUrl) else {
-           return
+            return
         }
-          self.completionBlock?(data)
+        self.completionBlock?(data)
     }
-
 }
