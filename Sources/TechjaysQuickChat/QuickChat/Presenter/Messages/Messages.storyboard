@@ -314,7 +314,7 @@
                                                     <outlet property="delegate" destination="gTs-Hf-oyN" id="QDs-n5-929"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBf-gd-SKK">
+                                            <button opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBf-gd-SKK">
                                                 <rect key="frame" x="331" y="11.333333333333297" width="32" height="29.000000000000004"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="Q2f-MT-V6y"/>
