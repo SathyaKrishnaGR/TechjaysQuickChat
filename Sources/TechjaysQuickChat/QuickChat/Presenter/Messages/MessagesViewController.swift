@@ -204,6 +204,7 @@ extension MessagesViewController {
         message.timestamp = Date().dateToString()
         if let message = message.message {
             send(message, messageType: "message")
+            self.updateChat(message: message)
         }
         showActionButtons(false)
     }
