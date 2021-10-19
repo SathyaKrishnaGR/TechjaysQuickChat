@@ -210,12 +210,15 @@ extension MessagesViewController {
     
     @IBAction func sendImagePressed(_ sender: UIButton) {
         //        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
-            documentService.present(on: self, allowedFileTypes: [.data]) { data in
+        if #available(iOS 14.0, *) {
+            documentService.present(on: self, allowedFileTypes: [.pdf]) { data in
+                print("Data is pulled \(data)")
                 let payload = Multipart(toUserId: self.to_user_id, fileType: "pdf", imageData: data)
                 self.uploadAttachment(payload: payload)
                 self.showActionButtons(false)
                 
             }
+        }
     }
     
     @IBAction func sendLocationPressed(_ sender: UIButton) {
