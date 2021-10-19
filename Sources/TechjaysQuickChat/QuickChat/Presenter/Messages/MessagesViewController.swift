@@ -154,13 +154,19 @@ extension MessagesViewController {
 extension MessagesViewController {
     @IBAction func editPressed(_ sender: Any) {
         isEditing = !isEditing
-        if isEditing {
-            self.deleteButton.isEnabled = true
-            self.navigationItem.leftBarButtonItem?.title = "Done"
-        } else {
-            self.deleteButton.isEnabled = false
-            self.navigationItem.leftBarButtonItem?.title = "Edit"
+        DispatchQueue.main.async {
+            if self.isEditing {
+                self.deleteButton.isEnabled = true
+                self.navigationItem.leftBarButtonItem?.title = "Done"
+                self.editButton.title = "Done"
+               
+            } else {
+                self.deleteButton.isEnabled = false
+                self.navigationItem.leftBarButtonItem?.title = "Edit"
+                self.editButton.title = "Edit"
+            }
         }
+        
     }
     
     @IBAction func deletePressed(_ sender: Any) {
