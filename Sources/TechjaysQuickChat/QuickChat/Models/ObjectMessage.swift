@@ -105,6 +105,7 @@ class SocketData: Codable {
     var sender: SocketSender?
     var message: String?
     var message_id: String?
+    var message_type: String?
     var timestamp: String?
     var profile_pic: String?
     var file_url: String?
@@ -115,6 +116,7 @@ class SocketData: Codable {
         try container.encodeIfPresent(sender, forKey: .sender)
         try container.encodeIfPresent(message, forKey: .message)
         try container.encodeIfPresent(message_id, forKey: .message_id)
+        try container.encodeIfPresent(message_type, forKey: .message_type)
         try container.encodeIfPresent(timestamp, forKey: .timestamp)
         try container.encodeIfPresent(profile_pic, forKey: .profile_pic)
         try container.encodeIfPresent(timestamp_in_date, forKey: .timestamp_in_date)
@@ -128,6 +130,7 @@ class SocketData: Codable {
         sender = try container.decodeIfPresent(SocketSender.self, forKey: .sender)
         message = try container.decodeIfPresent(String.self, forKey: .message)
         message_id = try container.decodeIfPresent(String.self, forKey: .message_id)
+        message_type = try container.decodeIfPresent(String.self, forKey: .message_type)
         timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp)
         profile_pic = try container.decodeIfPresent(String.self, forKey: .profile_pic)
         timestamp_in_date = try container.decodeIfPresent(Date.self, forKey: .timestamp_in_date)
@@ -139,6 +142,7 @@ extension SocketData {
         case sender
         case message
         case message_id
+        case message_type
         case timestamp
         case profile_pic
         case timestamp_in_date
