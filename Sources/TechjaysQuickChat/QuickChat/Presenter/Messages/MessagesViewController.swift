@@ -476,14 +476,14 @@ extension MessagesViewController {
     
     fileprivate func showDeleteActionSheet(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Delete for Everyone", style: .destructive , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Delete For Everyone", style: .destructive , handler:{ (UIAlertAction)in
             self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
         }))
-        alert.addAction(UIAlertAction(title: "Delete for me", style: .destructive , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Delete For Me", style: .destructive , handler:{ (UIAlertAction)in
             self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
-            isEditing = !isEditing
+            self.isEditing = !self.isEditing
         }))
         self.present(alert, animated: true, completion: {
         })
@@ -491,11 +491,11 @@ extension MessagesViewController {
     
     fileprivate func showDeleteforMeActionSheet(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Delete for me", style: .destructive , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Delete For Me", style: .destructive , handler:{ (UIAlertAction)in
             self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
-            isEditing = !isEditing
+            self.isEditing = !self.isEditing
         }))
         self.present(alert, animated: true, completion: {
         })
