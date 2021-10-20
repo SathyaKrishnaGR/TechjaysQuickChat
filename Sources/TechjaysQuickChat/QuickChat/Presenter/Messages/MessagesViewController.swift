@@ -45,7 +45,6 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     private let documentService = DocumentService()
     private let locationService = LocationService()
     private var messages = [ObjectMessage]()
-    private var resumeData = Data()
     var socketManager = SocketManager()
     var toChatScreen: Bool = false
     var opponentUserName: String?
@@ -219,8 +218,6 @@ extension MessagesViewController {
         //        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
         if #available(iOS 14.0, *) {
             documentService.present(on: self, allowedFileTypes: [.pdf]) { data in
-                print("Data is pulled \(data)")
-                self.resumeData = data
                 let payload = Multipart(toUserId: self.to_user_id, fileType: "pdf", imageData: data)
                 self.uploadAttachment(payload: payload)
                 self.showActionButtons(false)
@@ -392,7 +389,7 @@ extension MessagesViewController {
         APIClient().MULTIPART(url: url,
                               headers: ["Authorization": FayvKeys.ChatDefaults.token], uploadType: .post,
                               payload: payload,
-                              files: [.init(fileName: "file", fileExtension: "pdf" , data: resumeData)]) { (status, response: APIResponse<ObjectMessage>) in
+                              files: [.init(fileName: "file", fileExtension: payload.fileType! , data: payload.imageData!)]) { (status, response: APIResponse<ObjectMessage>) in
             switch status {
             case .SUCCESS:
                 let data = response.data
