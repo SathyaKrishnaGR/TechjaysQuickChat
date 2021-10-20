@@ -144,9 +144,6 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     func paginatedTableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    func paginatedTableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-    }
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         
         return PaginationUrl(endpoint: "chat/chat-lists/")
