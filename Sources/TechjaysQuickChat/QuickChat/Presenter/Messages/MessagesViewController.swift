@@ -302,6 +302,9 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             cell.transform = CGAffineTransform.identity
         })
     }
+    func paginatedTableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let message = messages[indexPath.row]
         
