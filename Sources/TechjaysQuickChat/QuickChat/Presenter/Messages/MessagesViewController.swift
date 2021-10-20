@@ -367,7 +367,7 @@ extension MessagesViewController {
         }
     }
     fileprivate func deleteChatMessages(rows: [IndexPath], messageIdToDelete: [ObjectMessage], deleteType: String) {
-
+        self.messages.removeArrayOfIndex(array: rows)
         let stringArray = messageIdToDelete.map {String(describing: $0.message_id!)}
         let payloadString = stringArray.joined(separator: ",")
         
@@ -375,7 +375,6 @@ extension MessagesViewController {
         APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: ["to_user_id": to_user_id, "message_ids": payloadString,  "delete_message_type": deleteType]) { (status, response: APIResponse<[ObjectMessage]>) in
             switch status {
             case .SUCCESS:
-                self.messages.removeArrayOfIndex(array: rows)
                 self.isEditing = !self.isEditing
                 self.resetEditAndDeletebuttons()
                 self.tableView.endUpdates()
