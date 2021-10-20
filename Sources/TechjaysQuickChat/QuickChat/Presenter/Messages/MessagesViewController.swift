@@ -170,7 +170,7 @@ extension MessagesViewController {
     
     @IBAction func deletePressed(_ sender: Any) {
         if deleteButton.isEnabled {
-            deleteButton.isEnabled = false
+//            deleteButton.isEnabled = false
             self.checkForDeleteAction()
         }
     }
