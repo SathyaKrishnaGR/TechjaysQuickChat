@@ -367,7 +367,7 @@ extension MessagesViewController {
         }
     }
     fileprivate func deleteChatMessages(rows: [IndexPath], messageIdToDelete: [ObjectMessage], deleteType: String) {
-        self.messages.removeArrayOfIndex(array: rows)
+//        self.messages.removeArrayOfIndex(array: rows)
         let stringArray = messageIdToDelete.map {String(describing: $0.message_id!)}
         let payloadString = stringArray.joined(separator: ",")
         
