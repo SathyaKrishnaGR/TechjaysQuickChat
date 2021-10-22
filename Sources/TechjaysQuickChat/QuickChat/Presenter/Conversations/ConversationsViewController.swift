@@ -187,7 +187,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
             return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
         }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
-            if isSearchEnabled{
+            if isSearchEnabled {
                 cell.nameLabel.text = searchArray[indexPath.row]
                 cell.messageLabel.text = ""
                 cell.profilePic.image = nil
@@ -345,7 +345,7 @@ extension ConversationsViewController:UISearchBarDelegate {
             isSearchEnabled = false
             self.tableView.fetchData()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             if !self.tableView.isLoading {
                 self.tableView.fetchData()
             }
