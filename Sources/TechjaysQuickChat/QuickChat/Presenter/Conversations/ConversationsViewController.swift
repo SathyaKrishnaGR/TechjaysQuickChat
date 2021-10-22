@@ -154,6 +154,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         }else{
         return PaginationUrl(endpoint: "chat/chat-lists/")
         }
+        return PaginationUrl(endpoint: "chat/chat-lists/")
     }
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
         if isSearchEnabled {
@@ -166,14 +167,15 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         
     }
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearchEnabled{
-            searchArray.count
-        }else{
-            if conversations.isEmpty {
+          /*  if conversations.isEmpty {
                 return 1
             }
-            return conversations.count
+            return conversations.count*/
+        if isSearchEnabled {
+            return self.searchArray.count
         }
+        return self.conversations.count
+        
         
     }
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
