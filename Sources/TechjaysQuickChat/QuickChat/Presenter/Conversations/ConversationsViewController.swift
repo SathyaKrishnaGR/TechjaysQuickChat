@@ -174,7 +174,11 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         if isSearchEnabled {
             return self.searchArray.count
         }
-        return self.conversations.count
+        
+        else {
+            return self.conversations.count
+        }
+        
         
         
     }
