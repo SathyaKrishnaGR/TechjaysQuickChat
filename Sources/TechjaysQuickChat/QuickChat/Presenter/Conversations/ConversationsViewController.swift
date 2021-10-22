@@ -50,7 +50,7 @@ class ConversationsViewController: UIViewController {
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
     fileprivate var isSearchEnabled: Bool = false
-    fileprivate var searchArray = ["indhus","ajay","dont","nithis","Chandran","Naveen"]
+    fileprivate var searchArray = ["ajay","dont","nithis","Naveen","mahi"]
     
     //MARK: Lifecycle
     override func viewDidLoad() {
