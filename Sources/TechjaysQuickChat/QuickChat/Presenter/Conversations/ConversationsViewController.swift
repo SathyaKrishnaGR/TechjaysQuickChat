@@ -330,6 +330,7 @@ extension ConversationsViewController:UISearchBarDelegate {
        // dismissKeyboard()
         isSearchEnabled = true
         self.resignFirstResponder()
+        self.tableView.fetchData()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
