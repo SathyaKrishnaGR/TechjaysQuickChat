@@ -31,6 +31,7 @@ class ConversationsViewController: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
 //    @IBOutlet weak var newMessageCountLabel: UILabel!
+    @IBOutlet weak var searchBar: UISearchBar!
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -48,6 +49,8 @@ class ConversationsViewController: UIViewController {
     var socketManager = SocketManager()
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
+    fileprivate var isSearchEnabled: Bool = false
+    fileprivate var searchArray = ["indhu","ajay","dont","nithis","Chandran","Naveen"]
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -147,27 +150,42 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         return true
     }
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
-        
+        if isSearchEnabled{
+        }else{
         return PaginationUrl(endpoint: "chat/chat-lists/")
+        }
     }
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
+        if isSearchEnabled {
+            
+        } else {
         DispatchQueue.main.async {
             self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
+        }
         }
         
     }
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if conversations.isEmpty {
-            return 1
+        if isSearchEnabled{
+            searchArray.count
+        }else{
+            if conversations.isEmpty {
+                return 1
+            }
+            return conversations.count
         }
-        return conversations.count
+        
     }
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard !conversations.isEmpty else {
             return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
         }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
-            cell.set(conversations[indexPath.row])
+            if isSearchEnabled{
+                cell.nameLabel.text = searchArray[indexPath.row]
+            } else{
+                cell.set(conversations[indexPath.row])
+            }
             return cell
         }
         return UITableViewCell()
@@ -289,5 +307,37 @@ extension ConversationsViewController {
         self.tableView.tintColor = ChatColors.tint
         self.navigationItem.rightBarButtonItem?.tintColor = ChatColors.tint
         self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
+    }
+}
+
+extension ConversationsViewController:UISearchBarDelegate {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        //isSearchEnabled = false
+        self.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearchEnabled = false
+        self.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+       // dismissKeyboard()
+        isSearchEnabled = false
+        self.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.resignFirstResponder()
+        isSearchEnabled = true
+        if searchText == "" {
+            isSearchEnabled = false
+            self.tableView.fetchData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            if !self.tableView.isLoading {
+                self.tableView.fetchData()
+            }
+        }
     }
 }
