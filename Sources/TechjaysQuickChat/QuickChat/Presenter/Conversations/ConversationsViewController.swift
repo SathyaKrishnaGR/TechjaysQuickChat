@@ -360,6 +360,10 @@ extension ConversationsViewController:UISearchBarDelegate {
         if let texts = searchBar.text {
             textFilter(query: texts + text)
         }
+        if searchBar.text == nil {
+            isSearchEnabled = false
+            tableView.reloadData()
+        }
         return true
     }
     
