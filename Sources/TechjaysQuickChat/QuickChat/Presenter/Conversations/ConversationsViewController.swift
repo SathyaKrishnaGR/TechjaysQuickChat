@@ -330,6 +330,7 @@ extension ConversationsViewController:UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearchEnabled = false
+        tableView.reloadData()
         self.resignFirstResponder()
     }
     
@@ -359,10 +360,6 @@ extension ConversationsViewController:UISearchBarDelegate {
         isSearchEnabled = true
         if let texts = searchBar.text {
             textFilter(query: texts + text)
-        }
-        if searchBar.text == nil {
-            isSearchEnabled = false
-            tableView.reloadData()
         }
         return true
     }
