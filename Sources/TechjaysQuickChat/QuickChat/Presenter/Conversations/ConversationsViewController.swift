@@ -325,7 +325,7 @@ extension ConversationsViewController:UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
        // dismissKeyboard()
-        isSearchEnabled = false
+        isSearchEnabled = true
         self.resignFirstResponder()
     }
     
