@@ -358,9 +358,18 @@ extension ConversationsViewController:UISearchBarDelegate {
     }*/
     
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        isSearchEnabled = true
+        /*isSearchEnabled = true
         if let texts = searchBar.text {
             textFilter(query: texts + text)
+        }*/
+        if searchBar.text != "" {
+            isSearchEnabled = true
+            if let texts = searchBar.text {
+                textFilter(query: texts + text)
+            }
+        }else {
+            isSearchEnabled = false
+            tableView.reloadData()
         }
         return true
     }
