@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CZg-e7-KoX" customClass="PaginatedTableView" customModule="TechjaysQuickChat">
-                                <rect key="frame" x="0.0" y="87" width="428" height="805"/>
+                                <rect key="frame" x="0.0" y="139" width="428" height="753"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="tintColor" red="0.25162395830000001" green="0.53981399539999997" blue="0.8078737855" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
@@ -156,17 +156,25 @@
                                     <action selector="editPressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="6RJ-Pg-qJG"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Jvk-m2-GFt">
+                                <rect key="frame" x="0.0" y="89" width="428" height="50"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eVC-iO-6zG"/>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Jvk-m2-GFt" firstAttribute="leading" secondItem="eVC-iO-6zG" secondAttribute="leading" id="77P-At-oue"/>
                             <constraint firstItem="jGV-l1-IZ6" firstAttribute="centerX" secondItem="eVC-iO-6zG" secondAttribute="centerX" id="COC-az-XI3"/>
+                            <constraint firstItem="CZg-e7-KoX" firstAttribute="top" secondItem="Jvk-m2-GFt" secondAttribute="bottom" id="LoE-Yf-22k"/>
                             <constraint firstItem="XtN-b5-qY4" firstAttribute="centerY" secondItem="jGV-l1-IZ6" secondAttribute="centerY" id="OCJ-LD-ggN"/>
                             <constraint firstItem="jGV-l1-IZ6" firstAttribute="centerY" secondItem="xl9-qF-y2U" secondAttribute="centerY" id="RPU-Jt-dyL"/>
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="trailing" secondItem="xl9-qF-y2U" secondAttribute="trailing" constant="16" id="SGz-na-mMd"/>
-                            <constraint firstItem="CZg-e7-KoX" firstAttribute="top" secondItem="xl9-qF-y2U" secondAttribute="bottom" constant="-2" id="bfI-0f-ln6"/>
+                            <constraint firstItem="CZg-e7-KoX" firstAttribute="top" secondItem="xl9-qF-y2U" secondAttribute="bottom" constant="50" id="bfI-0f-ln6"/>
+                            <constraint firstItem="Jvk-m2-GFt" firstAttribute="trailing" secondItem="eVC-iO-6zG" secondAttribute="trailing" id="eLP-6B-4wQ"/>
                             <constraint firstItem="XtN-b5-qY4" firstAttribute="leading" secondItem="eVC-iO-6zG" secondAttribute="leading" constant="16" id="eWF-cg-vhl"/>
                             <constraint firstItem="CZg-e7-KoX" firstAttribute="leading" secondItem="eVC-iO-6zG" secondAttribute="leading" id="lne-Ax-TUf"/>
+                            <constraint firstItem="Jvk-m2-GFt" firstAttribute="top" secondItem="xl9-qF-y2U" secondAttribute="bottom" id="qN9-cC-fgw"/>
                             <constraint firstItem="xl9-qF-y2U" firstAttribute="top" secondItem="eVC-iO-6zG" secondAttribute="top" constant="10" id="v94-oN-ezo"/>
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="bottom" secondItem="CZg-e7-KoX" secondAttribute="bottom" id="vHa-cl-xzG"/>
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="trailing" secondItem="CZg-e7-KoX" secondAttribute="trailing" id="y6u-6o-oOi"/>
