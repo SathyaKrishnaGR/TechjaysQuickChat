@@ -50,7 +50,7 @@ class ConversationsViewController: UIViewController {
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
     fileprivate var isSearchEnabled: Bool = false
-    fileprivate var searchArray = ["indhu","ajay","dont","nithis","Chandran","Naveen"]
+    fileprivate var searchArray = ["indhus","ajay","dont","nithis","Chandran","Naveen"]
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -185,6 +185,9 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
             if isSearchEnabled{
                 cell.nameLabel.text = searchArray[indexPath.row]
+                cell.messageLabel.text = ""
+                cell.profilePic.image = nil
+                
             } else{
                 cell.set(conversations[indexPath.row])
             }
