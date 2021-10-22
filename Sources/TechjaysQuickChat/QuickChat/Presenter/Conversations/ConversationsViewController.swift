@@ -50,7 +50,7 @@ class ConversationsViewController: UIViewController {
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
     fileprivate var isSearchEnabled: Bool = false
-    fileprivate var searchArray = []()
+    fileprivate var searchArray = [String]()
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -357,13 +357,14 @@ extension ConversationsViewController:UISearchBarDelegate {
         if let texts = searchBar.text {
             textFilter(query: texts )
         }
+        return true
     }
     
-    func func textFilter(query:String){
+     func textFilter(query:String){
         searchArray.removeAll()
         for x in conversations{
-            if x.first_name?.starts(with: query){
-                searchArray.append(x.first_name?)
+            if ((x.first_name?.starts(with: query)) != nil){
+                searchArray.append(x.first_name ?? "")
             }
         }
         tableView.reloadData()
