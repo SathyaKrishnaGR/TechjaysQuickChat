@@ -24,23 +24,27 @@
 import UIKit
 import Foundation
 
-class MessagesViewController: UIViewController, KeyboardHandler {
+class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecognizerDelegate {
     
     //MARK: IBOutlets
     @IBOutlet weak var tableView: PaginatedTableView!
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var expandButton: UIButton!
-    @IBOutlet weak var barBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
+    
     @IBOutlet weak var stackViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var barBottomConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet var actionButtons: [UIButton]!
     
     //MARK: Private properties
     private let manager = MessageManager()
     private let imageService = ImagePickerService()
+    private let documentService = DocumentService()
     private let locationService = LocationService()
     private var messages = [ObjectMessage]()
-    //    private var sentMessages = [ObjectMessage]()
     var socketManager = SocketManager()
     var toChatScreen: Bool = false
     var opponentUserName: String?
@@ -60,7 +64,6 @@ class MessagesViewController: UIViewController, KeyboardHandler {
             guard state else { return }
             self?.tableView.scroll(to: .bottom, animated: true)
         }
-        
         FayvKeys.ChatDefaults.paginationLimit = "100"
         self.tableView.fetchData()
         
@@ -70,35 +73,16 @@ class MessagesViewController: UIViewController, KeyboardHandler {
         super.viewWillAppear(true)
         showUserNameOnNavBar()
         self.setTint()
-        socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         socketManager.dataUpdateDelegate = self
+        showActionButtons(false)
     }
 }
 
 //MARK: Private methods
 extension MessagesViewController {
-    private func send(_ message: String) {
-        socketManager.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message)
-        
-        //        manager.create(message, conversation: conversation) {[weak self] response in
-        //            guard let weakSelf = self else { return }
-        //            if response == .failure {
-        //                weakSelf.showAlert()
-        //                return
-        //            }
-        //            weakSelf.conversation.timestamp = String(Date().timeIntervalSince1970)
-        //            //      switch message.contentType {
-        //      case .none: weakSelf.conversation.lastMessage = message.message
-        //      case .photo: weakSelf.conversation.lastMessage = "Attachment"
-        //      case .location: weakSelf.conversation.lastMessage = "Location"
-        //      default: break
-        //      }
-        //      if let currentUserID = UserManager().currentUserID() {
-        //        weakSelf.conversation.isRead[currentUserID] = true
-        //      }
-        //      ConversationManager().create(weakSelf.conversation)
+    private func send(_ message: String, messageType: String) {
+        socketManager.sendMessage(chatToken: FayvKeys.ChatDefaults.chatToken, toUserId: String(to_user_id), message: message, messageType: messageType)
     }
-    
     private func showUserNameOnNavBar() {
         if toChatScreen {
             self.navigationItem.title = opponentUserName
@@ -114,10 +98,10 @@ extension MessagesViewController {
             self.navigationItem.title = first + company
         }
         
-        showIconOnNavigationBar(imageUrl: nil) // Will show default image
-        if let image = conversation.medium_profile_pic {
-            showIconOnNavigationBar(imageUrl: image)
-        }
+        //        showIconOnNavigationBar(imageUrl: nil) // Will show default image
+        //        if let image = conversation.medium_profile_pic {
+        //            showIconOnNavigationBar(imageUrl: image)
+        //        }
     }
     
     fileprivate func showIconOnNavigationBar(imageUrl: String?) {
@@ -145,7 +129,7 @@ extension MessagesViewController {
     }
     private func showActionButtons(_ status: Bool) {
         guard !status else {
-            stackViewWidthConstraint.constant = 112
+            stackViewWidthConstraint.constant = 32
             UIView.animate(withDuration: 0.3) {
                 self.expandButton.isHidden = true
                 self.expandButton.alpha = 0
@@ -167,28 +151,78 @@ extension MessagesViewController {
 
 //MARK: IBActions
 extension MessagesViewController {
+    @IBAction func editPressed(_ sender: Any) {
+        isEditing = !isEditing
+        DispatchQueue.main.async {
+            if self.isEditing {
+                self.deleteButton.isEnabled = true
+                self.navigationItem.leftBarButtonItem?.title = "Done"
+                self.editButton.title = "Done"
+               
+            } else {
+                self.deleteButton.isEnabled = false
+                self.navigationItem.leftBarButtonItem?.title = "Edit"
+                self.editButton.title = "Edit"
+            }
+        }
+        
+    }
+    
+    @IBAction func deletePressed(_ sender: Any) {
+        if deleteButton.isEnabled {
+//            deleteButton.isEnabled = false
+            self.checkForDeleteAction()
+        }
+    }
+    
+    fileprivate func checkForDeleteAction() {
+        if let selectedRows = tableView.indexPathsForSelectedRows {
+            var selectedMessages = [ObjectMessage]()
+            var deleteType: [String] = []
+            for indexPath in selectedRows  {
+                selectedMessages.append(messages[indexPath.row])
+                if messages[indexPath.row].is_sent_by_myself! {
+                    deleteType.append("everyone")
+                } else {
+                    deleteType.append("for_me")
+                }
+            }
+            if !deleteType.contains("for_me") {
+                self.showDeleteActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: "everyone")
+            } else {
+                self.showDeleteforMeActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: "for_me")
+            }
+        }
+    }
+    fileprivate func deleteAndRemoveRows(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
+        self.tableView.beginUpdates()
+        self.tableView.deleteRows(at: rows, with: .automatic)
+        self.messages.removeArrayOfIndex(array: rows)
+        self.deleteChatMessages(rows: rows, messageIdToDelete: messages, deleteType: deleteType)
+    }
+}
+extension MessagesViewController {
     
     @IBAction func sendMessagePressed(_ sender: Any) {
         guard let text = inputTextField.text, !text.isEmpty else { return }
         let message = ObjectMessage()
         message.message = text
-        print("Dat to String \(Date().dateToString())")
         message.timestamp = Date().dateToString()
-        //        message.ownerID = UserManager().currentUserID()
+        if let message = message.message {
+            send(message, messageType: "message")
+        }
         showActionButtons(false)
-        send(text)
-        
     }
     
     @IBAction func sendImagePressed(_ sender: UIButton) {
-        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
-            //            let message = ObjectMessage()
-            //            message.contentType = .photo
-            //            message.profilePic = image
-            //            message.ownerID = UserManager().currentUserID()
-            //            self?.send(message)
-            //            self?.inputTextField.text = nil
-            self?.showActionButtons(false)
+        //        imageService.pickImage(from: self, allowEditing: false, source: sender.tag == 0 ? .photoLibrary : .camera) {[weak self] image in
+        if #available(iOS 14.0, *) {
+            documentService.present(on: self, allowedFileTypes: [.pdf]) { data in
+                let payload = Multipart(toUserId: self.to_user_id, fileType: "pdf", imageData: data)
+                self.uploadAttachment(payload: payload)
+                self.showActionButtons(false)
+                
+            }
         }
     }
     
@@ -198,12 +232,6 @@ extension MessagesViewController {
             case .denied:
                 self?.showAlert(title: "Error", message: "Please enable locattion services")
             case .location(_):
-                //                let message = ObjectMessage()
-                //                message.ownerID = UserManager().currentUserID()
-                //                message.content = location.string
-                //                message.contentType = .location
-                //                self?.send(message)
-                //                self?.inputTextField.text = nil
                 self?.showActionButtons(false)
             }
         }
@@ -216,6 +244,13 @@ extension MessagesViewController {
 
 //MARK: UITableView Delegate & DataSource
 extension MessagesViewController: PaginatedTableViewDelegate {
+    
+    func paginatedTableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func paginatedTableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+    }
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         PaginationUrl(endpoint: "chat/chat-messages/", parameters: ["to_user_id": "\(to_user_id)"])
     }
@@ -257,10 +292,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             
         }
         //        }
-        
-        
     }
-    
     func paginatedTableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard tableView.isDragging else { return }
         cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
@@ -268,9 +300,12 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             cell.transform = CGAffineTransform.identity
         })
     }
-    
+    func paginatedTableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let message = messages[indexPath.row]
+//        let message = messages[indexPath.row]
+        
         //        switch message.contentType {
         //        case .location:
         //            let vc: MapPreviewController = UIStoryboard.controller(storyboard: .previews)
@@ -283,6 +318,11 @@ extension MessagesViewController: PaginatedTableViewDelegate {
         //        default: break
         //        }
     }
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+        
+    }
 }
 
 //MARK: UItextField Delegate
@@ -290,17 +330,14 @@ extension MessagesViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         showActionButtons(false)
         return true
     }
 }
 
-
 //MARK: MessageTableViewCellDelegate Delegate
 extension MessagesViewController: MessageTableViewCellDelegate {
-    
     func messageTableViewCellUpdate() {
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -322,7 +359,6 @@ extension MessagesViewController {
                         self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
                         
                     }
-                    
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .bottom, animated: true)
                 }
@@ -332,29 +368,64 @@ extension MessagesViewController {
             }
         }
     }
+    fileprivate func deleteChatMessages(rows: [IndexPath], messageIdToDelete: [ObjectMessage], deleteType: String) {
+        let stringArray = messageIdToDelete.map {String(describing: $0.message_id!)}
+        let payloadString = stringArray.joined(separator: ",")
+        
+        let url = URLFactory.shared.url(endpoint: "chat/delete-chat-messages/")
+        APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: ["to_user_id": to_user_id, "message_ids": payloadString,  "delete_message_type": deleteType]) { (status, response: APIResponse<[ObjectMessage]>) in
+            switch status {
+            case .SUCCESS:
+                self.isEditing = !self.isEditing
+                self.resetEditAndDeletebuttons()
+                self.tableView.endUpdates()
+            case .FAILURE:
+                print(response.msg)
+            }
+        }
+    }
+    fileprivate func uploadAttachment(payload: Multipart) {
+        let url = URLFactory.shared.url(endpoint: "chat/file-upload/")
+        APIClient().MULTIPART(url: url,
+                              headers: ["Authorization": FayvKeys.ChatDefaults.token], uploadType: .post,
+                              payload: payload,
+                              files: [.init(fileName: "file", fileExtension: payload.fileType! , data: payload.imageData!)]) { (status, response: APIResponse<ObjectMessage>) in
+            switch status {
+            case .SUCCESS:
+                let data = response.data
+                if let dat = data?.file_url {
+                    self.inputTextField.text = dat
+                    self.send(dat, messageType: "file")
+                }
+            case .FAILURE:
+                break
+            }
+        }
+    }
+    
+    fileprivate func resetEditAndDeletebuttons() {
+        self.deleteButton.isEnabled = false
+        self.editButton.title = "Edit"
+    }
 }
 
-
 extension MessagesViewController: SocketDataTransferDelegate {
-    func updateChatList(message messageString: String) {
-        
-        jsonDecode(messageToDecode: messageString, completion: { messageinClosure, error in
+    func updateChat(message messageString: String) {
+        MessagesViewController.jsonDecode(messageToDecode: messageString, completion: { messageinClosure, error in
             if error == nil {
                 if let socketMessage = messageinClosure {
                     if  socketMessage.data?.sender == nil {
                         // Our User - Sending someone a message
-                        socketMessage.message = self.inputTextField.text
+                        socketMessage.message = messageinClosure?.data?.message
+                        socketMessage.message_id = messageinClosure?.data?.message_id
                         socketMessage.is_sent_by_myself = true
                         self.inputTextField.text = nil
-                        
                         self.showDataOnChatScreen(socket: socketMessage)
-                        
                     } else {
                         // Someone is sending you a message!
                         socketMessage.is_sent_by_myself = false
                         if let objMessage = messageinClosure {
                             if let message = objMessage.data, let sender = objMessage.data?.sender {
-                                
                                 if let userId = sender.user_id {
                                     if  userId != self.to_user_id {
                                         if let user = sender.username {
@@ -363,6 +434,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
                                         }
                                     } else {
                                         socketMessage.message = objMessage.data?.message
+                                        socketMessage.message_id = objMessage.data?.message_id
                                         self.showDataOnChatScreen(socket: socketMessage)
                                     }
                                 }
@@ -373,7 +445,6 @@ extension MessagesViewController: SocketDataTransferDelegate {
             }
         })
     }
-    
     func showDataOnChatScreen(socket: ObjectMessage) {
         if socket.type == "chat" && socket.result == true {
             messages.append(socket)
@@ -383,10 +454,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
                 
             }
         }
-        
     }
-    
-    func jsonDecode(messageToDecode: String, completion: @escaping ( _ data: ObjectMessage?, _ error: Error?) -> Void) {
+    class func jsonDecode(messageToDecode: String, completion: @escaping ( _ data: ObjectMessage?, _ error: Error?) -> Void) {
         do {
             let decoder = JSONDecoder()
             let data = Data(messageToDecode.utf8)
@@ -399,10 +468,42 @@ extension MessagesViewController: SocketDataTransferDelegate {
     }
 }
 
-
 extension MessagesViewController {
     func setTint() {
         self.tableView.tintColor = ChatColors.tint
         self.sendButton.tintColor = ChatColors.tint
+        self.expandButton.tintColor = ChatColors.tint
+        self.editButton.tintColor = ChatColors.tint
+        self.deleteButton.tintColor = ChatColors.tint
+        _ = self.actionButtons.map { btn in
+            btn.tintColor = ChatColors.tint
+        }
+    }
+    
+    fileprivate func showDeleteActionSheet(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Delete For Everyone", style: .destructive , handler:{ (UIAlertAction)in
+            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
+        }))
+        alert.addAction(UIAlertAction(title: "Delete For Me", style: .destructive , handler:{ (UIAlertAction)in
+            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
+            self.isEditing = !self.isEditing
+        }))
+        self.present(alert, animated: true, completion: {
+        })
+    }
+    
+    fileprivate func showDeleteforMeActionSheet(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Delete For Me", style: .destructive , handler:{ (UIAlertAction)in
+            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
+            self.isEditing = !self.isEditing
+        }))
+        self.present(alert, animated: true, completion: {
+        })
     }
 }

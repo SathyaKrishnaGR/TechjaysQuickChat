@@ -21,6 +21,7 @@ import UIKit
     @objc optional func paginatedTableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
     
     @objc optional func paginatedTableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+    @objc optional func paginatedTableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle
     
     @objc optional func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
     @objc optional func scrollViewDidScroll(_ scrollView: UIScrollView)
@@ -97,6 +98,9 @@ extension PaginatedTableView: UITableViewDelegate, UITableViewDataSource {
     // while scrolling this delegate is being called so you may now check which direction your scrollView is being scrolled to
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         paginationDelegate.scrollViewDidScroll?(scrollView)
+    }
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return UITableViewCell.EditingStyle(rawValue: (paginationDelegate.paginatedTableView?(self, editingStyleForRowAt: indexPath))!.rawValue) ?? .none
     }
 }
 
