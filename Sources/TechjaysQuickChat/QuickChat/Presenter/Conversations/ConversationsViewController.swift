@@ -50,7 +50,7 @@ class ConversationsViewController: UIViewController {
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
     fileprivate var isSearchEnabled: Bool = false
-    fileprivate var searchArray = ["ajay","dont","nithis","Naveen","mahi"]
+    fileprivate var searchArray = []()
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -337,7 +337,7 @@ extension ConversationsViewController:UISearchBarDelegate {
         self.tableView.reloadData()
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+   /* func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.resignFirstResponder()
         isSearchEnabled = true
         self.tableView.fetchData()
@@ -350,5 +350,22 @@ extension ConversationsViewController:UISearchBarDelegate {
                 self.tableView.reloadData()
             }
         }
+    }*/
+    
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        isSearchEnabled = true
+        if let texts = searchBar.text {
+            textFilter(query: texts )
+        }
+    }
+    
+    func func textFilter(query:String){
+        searchArray.removeAll()
+        for x in conversations{
+            if x.first_name?.starts(with: query){
+                searchArray.append(x.first_name?)
+            }
+        }
+        tableView.reloadData()
     }
 }
