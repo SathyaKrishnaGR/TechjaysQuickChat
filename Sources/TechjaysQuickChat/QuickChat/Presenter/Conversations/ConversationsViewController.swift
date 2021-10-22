@@ -51,6 +51,7 @@ class ConversationsViewController: UIViewController {
     var socketListDelegate: SocketListUpdateDelegate?
     fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [String]()
+    var data = [String]()
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -194,6 +195,8 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
                 
             } else{
                 cell.set(conversations[indexPath.row])
+                let convers = conversations[indexPath.row]
+                data.append(convers.first_name ?? "")
             }
             return cell
         }
@@ -362,9 +365,9 @@ extension ConversationsViewController:UISearchBarDelegate {
     
      func textFilter(query:String){
         searchArray.removeAll()
-        for x in conversations{
-            if ((x.first_name?.starts(with: query)) != nil){
-                searchArray.append(x.first_name ?? "")
+        for x in data{
+            if x.starts(with: query){
+                searchArray.append(x)
             }
         }
         tableView.reloadData()
