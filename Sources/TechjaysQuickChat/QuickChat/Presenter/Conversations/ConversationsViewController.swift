@@ -334,7 +334,7 @@ extension ConversationsViewController:UISearchBarDelegate {
        // dismissKeyboard()
         isSearchEnabled = true
        // self.resignFirstResponder()
-        self.tableView.fetchData()
+        self.tableView.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -343,11 +343,11 @@ extension ConversationsViewController:UISearchBarDelegate {
         self.tableView.fetchData()
         if searchText == "" {
             isSearchEnabled = false
-            self.tableView.fetchData()
+            self.tableView.reloadData()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             if !self.tableView.isLoading {
-                self.tableView.fetchData()
+                self.tableView.reloadData()
             }
         }
     }
