@@ -200,7 +200,7 @@ extension MessagesViewController {
         })
         self.tableView.deleteRows(at: rows, with: .automatic)
         self.deleteChatMessages(rows: rows, messageIdToDelete: messages, deleteType: deleteType)
-        self.tableView.endUpdates()
+        
         
     }
 }
@@ -382,8 +382,9 @@ extension MessagesViewController {
                 self.isEditing = !self.isEditing
                 self.resetEditAndDeletebuttons()
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self.tableView.fetchData()
                 }
+                self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
             }
