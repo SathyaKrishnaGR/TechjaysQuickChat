@@ -14,7 +14,8 @@ extension Array {
 //        Loop -> Remove and Complete
         _ = array.map { index in
             print("index \(index.row)")
-            self.remove(at: index.row)
+            print("Self should print the array \(self)")
+            remove(at: index.row)
         }
         completionHandler()
     }
