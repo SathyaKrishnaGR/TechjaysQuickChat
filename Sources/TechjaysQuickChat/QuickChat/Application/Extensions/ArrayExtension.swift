@@ -8,11 +8,14 @@
 import Foundation
 
 extension Array {
-    mutating func removeArrayOfIndex(array: [IndexPath]) {
+    typealias CompletionHandler = () -> Void
+
+    mutating func removeArrayOfIndex(array: [IndexPath], completionHandler: CompletionHandler)  {
+        completionHandler()
         _ = array.map { index in
-            
             print("index \(index.row)")
             self.remove(at: index.row)
+            
         }
     }
 }

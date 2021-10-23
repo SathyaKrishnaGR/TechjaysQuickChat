@@ -131,9 +131,10 @@ extension ConversationsViewController {
                 selectedConversations.append(conversations[indexPath.row])
             }
             self.tableView.beginUpdates()
-            self.conversations.removeArrayOfIndex(array: selectedRows)
-            self.tableView.deleteRows(at: selectedRows, with: .automatic)
-            deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
+            self.conversations.removeArrayOfIndex(array: selectedRows, completionHandler: {
+                self.tableView.deleteRows(at: selectedRows, with: .automatic)
+                deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
+            })
         }
     }
     
@@ -224,7 +225,6 @@ extension ConversationsViewController {
         APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: ["to_user_id": payloadString]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
-                self.conversations.removeArrayOfIndex(array: rows)
                 self.isEditing = !self.isEditing
                 self.resetEditAndDeletebuttons()
                 self.tableView.endUpdates()
