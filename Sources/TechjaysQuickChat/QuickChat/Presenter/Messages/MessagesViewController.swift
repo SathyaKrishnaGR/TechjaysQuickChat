@@ -196,8 +196,7 @@ extension MessagesViewController {
     }
     fileprivate func deleteAndRemoveRows(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
         self.tableView.beginUpdates()
-        self.messages.removeArrayOfIndex(array: rows, completionHandler: {
-        })
+        self.messages.removeArrayOfIndex(at: rows)
         self.tableView.deleteRows(at: rows, with: .automatic)
         self.deleteChatMessages(rows: rows, messageIdToDelete: messages, deleteType: deleteType)
         

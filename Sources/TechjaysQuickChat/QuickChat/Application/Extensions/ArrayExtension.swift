@@ -10,7 +10,7 @@ import Foundation
 extension Array {
     typealias CompletionHandler = () -> Void
 
-    mutating func removeArrayOfIndex(array: [IndexPath], completionHandler: CompletionHandler)  {
+//    mutating func removeArrayOfIndex(array: [IndexPath], completionHandler: CompletionHandler)  {
 //        Loop -> Remove and Complete
 //        _ = array.reversed().map { index in
 //            print("index \(index.row)")
@@ -21,10 +21,18 @@ extension Array {
 //        }
 //        completionHandler()
 //    }
-        var iterator = array.makeIterator()
-        while let element = iterator.next() {
-            // do something with the element
-            remove(at: element.row)
+//    }
+}
+
+extension Array {
+    mutating func removeArrayOfIndex(at indexes: [IndexPath]) {
+        var lastIndex: Int? = nil
+        for index in indexes.sorted(by: >) {
+            guard lastIndex != index.row else {
+                continue
+            }
+            remove(at: index.row)
+            lastIndex = index.row
         }
     }
 }
