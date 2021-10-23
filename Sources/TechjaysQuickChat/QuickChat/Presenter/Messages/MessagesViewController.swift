@@ -43,7 +43,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     private let manager = MessageManager()
     private let imageService = ImagePickerService()
     private let documentService = DocumentService()
-    private let locationService = LocationService()
+//    private let locationService = LocationService()
     private var messages = [ObjectMessage]()
     var socketManager = SocketManager()
     var toChatScreen: Bool = false
@@ -227,14 +227,14 @@ extension MessagesViewController {
     }
     
     @IBAction func sendLocationPressed(_ sender: UIButton) {
-        locationService.getLocation {[weak self] response in
-            switch response {
-            case .denied:
-                self?.showAlert(title: "Error", message: "Please enable locattion services")
-            case .location(_):
-                self?.showActionButtons(false)
-            }
-        }
+//        locationService.getLocation {[weak self] response in
+//            switch response {
+//            case .denied:
+//                self?.showAlert(title: "Error", message: "Please enable locattion services")
+//            case .location(_):
+//                self?.showActionButtons(false)
+//            }
+//        }
     }
     
     @IBAction func expandItemsPressed(_ sender: UIButton) {
