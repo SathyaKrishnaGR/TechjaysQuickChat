@@ -15,7 +15,7 @@ extension Array {
         _ = array.reversed().map { index in
             print("index \(index.row)")
             print("Self should print the array \(self)")
-            if array.indices.contains(index) {
+            if array.indices.contains(index.row) {
                 remove(at: index.row)
             }
         }
