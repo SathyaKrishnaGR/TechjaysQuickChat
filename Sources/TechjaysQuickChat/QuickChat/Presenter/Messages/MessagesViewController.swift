@@ -381,6 +381,9 @@ extension MessagesViewController {
                 self.isEditing = !self.isEditing
                 self.resetEditAndDeletebuttons()
                 self.tableView.endUpdates()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             case .FAILURE:
                 print(response.msg)
             }
