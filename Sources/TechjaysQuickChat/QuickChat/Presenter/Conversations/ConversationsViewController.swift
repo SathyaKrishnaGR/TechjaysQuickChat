@@ -232,7 +232,7 @@ extension ConversationsViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-                self.tableView.endUpdates()
+//                self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
             }
