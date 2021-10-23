@@ -132,11 +132,11 @@ extension ConversationsViewController {
             }
             self.tableView.beginUpdates()
             self.conversations.removeArrayOfIndex(array: selectedRows, completionHandler: {
+                self.tableView.deleteRows(at: selectedRows, with: .automatic)
             })
-            self.tableView.deleteRows(at: selectedRows, with: .automatic)
             deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
         
-            self.tableView.endUpdates()
+            
         }
     }
     
@@ -232,6 +232,7 @@ extension ConversationsViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+                self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
             }
