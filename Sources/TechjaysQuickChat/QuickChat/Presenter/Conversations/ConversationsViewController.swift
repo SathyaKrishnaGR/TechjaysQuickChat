@@ -161,15 +161,12 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         
     }
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if conversations.isEmpty {
-            return 1
-        }
         return conversations.count
     }
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard !conversations.isEmpty else {
-            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
-        }
+//        guard !conversations.isEmpty else {
+//            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
+//        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
             cell.set(conversations[indexPath.row])
             return cell
