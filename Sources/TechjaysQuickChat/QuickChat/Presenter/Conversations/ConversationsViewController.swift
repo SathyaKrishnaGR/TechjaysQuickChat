@@ -130,7 +130,7 @@ extension ConversationsViewController {
             for indexPath in selectedRows  {
                 selectedConversations.append(conversations[indexPath.row])
             }
-            self.tableView.beginUpdates()
+//            self.tableView.beginUpdates()
             self.conversations.removeArrayOfIndex(array: selectedRows, completionHandler: {
                 self.tableView.deleteRows(at: selectedRows, with: .automatic)
             })
@@ -230,9 +230,8 @@ extension ConversationsViewController {
                 self.isEditing = !self.isEditing
                 self.resetEditAndDeletebuttons()
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self.tableView.fetchData()
                 }
-//                self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
             }
