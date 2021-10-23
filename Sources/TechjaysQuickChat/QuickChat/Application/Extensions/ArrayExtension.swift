@@ -12,7 +12,7 @@ extension Array {
 
     mutating func removeArrayOfIndex(array: [IndexPath], completionHandler: CompletionHandler)  {
 //        Loop -> Remove and Complete
-        _ = array.map { index in
+        _ = array.reversed().map { index in
             print("index \(index.row)")
             print("Self should print the array \(self)")
             remove(at: index.row)
