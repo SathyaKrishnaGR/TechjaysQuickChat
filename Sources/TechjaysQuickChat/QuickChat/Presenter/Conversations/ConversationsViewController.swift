@@ -133,8 +133,9 @@ extension ConversationsViewController {
 //            self.tableView.beginUpdates()
             self.conversations.removeArrayOfIndex(array: selectedRows, completionHandler: {
                 self.tableView.deleteRows(at: selectedRows, with: .automatic)
+                
+                deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
             })
-            deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
         
             
         }
