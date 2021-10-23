@@ -11,11 +11,11 @@ extension Array {
     typealias CompletionHandler = () -> Void
 
     mutating func removeArrayOfIndex(array: [IndexPath], completionHandler: CompletionHandler)  {
-        completionHandler()
+//        Loop -> Remove and Complete
         _ = array.map { index in
             print("index \(index.row)")
             self.remove(at: index.row)
-            
         }
+        completionHandler()
     }
 }
