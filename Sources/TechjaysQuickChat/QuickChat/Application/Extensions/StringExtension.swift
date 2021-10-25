@@ -81,6 +81,14 @@ extension String {
         return dateFormatter.string(from: date)
     }
     
+    func formatDateForChatList() -> String {
+        let dateFormatFromServer = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        guard let date = self.toDate(dateFormat: dateFormatFromServer) else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mmaa"
+        return dateFormatter.string(from: date)
+    }
+    
     func toDate(dateFormat: String, timezone: TimeZone = TimeZone(abbreviation: "UTC")!) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat

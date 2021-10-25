@@ -67,7 +67,7 @@ class ConversationCell: UITableViewCell {
         timeLabel.adjustsFontSizeToFitWidth = true
      //   self.timeLabel.text =  conversation.timestamp
         if let timeStamp = conversation.timestamp {
-            timeLabel.text = timeStamp.formatDateForChat()
+            timeLabel.text = timeStamp.formatDateForChatList()
         }
         self.messageLabel.text = conversation.message
         DispatchQueue.main.async {
