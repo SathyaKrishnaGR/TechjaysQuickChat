@@ -168,13 +168,9 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         if isSearchEnabled {
             return self.searchArray.count
         }
-        
         else {
             return self.conversations.count
         }
-        
-        
-        
     }
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard !conversations.isEmpty else {
@@ -184,7 +180,9 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
             if isSearchEnabled {
                 cell.nameLabel.text = searchArray[indexPath.row].first_name
                 cell.messageLabel.text = searchArray[indexPath.row].message
-                cell.timeLabel.text = searchArray[indexPath.row].timestamp
+                if let timeStamp = searchArray[indexPath.row].timestamp {
+                    cell.timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
+                }
                 DispatchQueue.main.async {
                     if let urlString = self.searchArray[indexPath.row].medium_profile_pic {
                         cell.profilePic.setImage(url: URL(string: urlString))
@@ -203,12 +201,14 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         }
         return UITableViewCell()
     }
+    
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !isEditing {
             selectedRow = indexPath.row
             performSegue(withIdentifier: "didSelect", sender: self)
         }
     }
+    
     func paginatedTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if conversations.isEmpty {
             return tableView.bounds.height - 50 //header view height
