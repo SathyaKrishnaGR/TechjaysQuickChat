@@ -370,10 +370,13 @@ extension ConversationsViewController:UISearchBarDelegate {
     
      func textFilter(query:String){
         searchArray.removeAll()
-        for x in data{
-            if x.starts(with: query){
+         for x in conversations{
+          /*  if x.starts(with: query){
                 searchArray.append(x)
-            }
+            }*/
+             if ((x.first_name?.starts(with: query)) != nil){
+                 searchArray.append(x.first_name ?? "")
+             }
         }
         tableView.reloadData()
     }
