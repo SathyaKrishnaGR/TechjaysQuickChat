@@ -150,21 +150,42 @@
                                 </connections>
                             </searchBar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newChatList" translatesAutoresizingMaskIntoConstraints="NO" id="xpL-cm-R4c">
-                                <rect key="frame" x="348" y="682" width="60" height="60"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="358" y="802" width="50" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Uln-CT-bN4"/>
-                                    <constraint firstAttribute="width" constant="60" id="aRR-fe-Pef"/>
+                                    <constraint firstAttribute="height" constant="40" id="Uln-CT-bN4"/>
+                                    <constraint firstAttribute="width" constant="50" id="aRR-fe-Pef"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dA6-vf-I6h">
+                                <rect key="frame" x="358" y="802" width="50" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="KAW-Gb-0gg"/>
+                                    <constraint firstAttribute="width" constant="50" id="jsl-nP-vlp"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadi">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eVC-iO-6zG"/>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="trailing" secondItem="xpL-cm-R4c" secondAttribute="trailing" constant="20" id="21j-hL-Zsc"/>
                             <constraint firstItem="Jvk-m2-GFt" firstAttribute="leading" secondItem="eVC-iO-6zG" secondAttribute="leading" id="77P-At-oue"/>
-                            <constraint firstItem="eVC-iO-6zG" firstAttribute="bottom" secondItem="xpL-cm-R4c" secondAttribute="bottom" constant="150" id="BrN-gZ-CfE"/>
+                            <constraint firstItem="eVC-iO-6zG" firstAttribute="bottom" secondItem="xpL-cm-R4c" secondAttribute="bottom" constant="50" id="BrN-gZ-CfE"/>
                             <constraint firstItem="jGV-l1-IZ6" firstAttribute="centerX" secondItem="eVC-iO-6zG" secondAttribute="centerX" id="COC-az-XI3"/>
                             <constraint firstItem="CZg-e7-KoX" firstAttribute="top" secondItem="Jvk-m2-GFt" secondAttribute="bottom" id="LoE-Yf-22k"/>
                             <constraint firstItem="XtN-b5-qY4" firstAttribute="centerY" secondItem="jGV-l1-IZ6" secondAttribute="centerY" id="OCJ-LD-ggN"/>
@@ -173,7 +194,9 @@
                             <constraint firstItem="CZg-e7-KoX" firstAttribute="top" secondItem="xl9-qF-y2U" secondAttribute="bottom" constant="50" id="bfI-0f-ln6"/>
                             <constraint firstItem="Jvk-m2-GFt" firstAttribute="trailing" secondItem="eVC-iO-6zG" secondAttribute="trailing" id="eLP-6B-4wQ"/>
                             <constraint firstItem="XtN-b5-qY4" firstAttribute="leading" secondItem="eVC-iO-6zG" secondAttribute="leading" constant="16" id="eWF-cg-vhl"/>
+                            <constraint firstItem="eVC-iO-6zG" firstAttribute="bottom" secondItem="dA6-vf-I6h" secondAttribute="bottom" constant="50" id="iWJ-6U-CXf"/>
                             <constraint firstItem="CZg-e7-KoX" firstAttribute="leading" secondItem="eVC-iO-6zG" secondAttribute="leading" id="lne-Ax-TUf"/>
+                            <constraint firstItem="eVC-iO-6zG" firstAttribute="trailing" secondItem="dA6-vf-I6h" secondAttribute="trailing" constant="20" id="pDB-ff-nfH"/>
                             <constraint firstItem="Jvk-m2-GFt" firstAttribute="top" secondItem="xl9-qF-y2U" secondAttribute="bottom" id="qN9-cC-fgw"/>
                             <constraint firstItem="xl9-qF-y2U" firstAttribute="top" secondItem="eVC-iO-6zG" secondAttribute="top" constant="10" id="v94-oN-ezo"/>
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="bottom" secondItem="CZg-e7-KoX" secondAttribute="bottom" id="vHa-cl-xzG"/>
