@@ -149,12 +149,22 @@
                                     <outlet property="delegate" destination="ri6-fX-8IQ" id="juF-kk-9rD"/>
                                 </connections>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPe-Xa-Rxp">
+                                <rect key="frame" x="333" y="667" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="Hch-Ke-097"/>
+                                    <constraint firstAttribute="width" constant="75" id="o65-Rp-9TJ"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="newChatList"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eVC-iO-6zG"/>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Jvk-m2-GFt" firstAttribute="leading" secondItem="eVC-iO-6zG" secondAttribute="leading" id="77P-At-oue"/>
                             <constraint firstItem="jGV-l1-IZ6" firstAttribute="centerX" secondItem="eVC-iO-6zG" secondAttribute="centerX" id="COC-az-XI3"/>
+                            <constraint firstItem="eVC-iO-6zG" firstAttribute="bottom" secondItem="BPe-Xa-Rxp" secondAttribute="bottom" constant="150" id="FxN-N2-ziA"/>
                             <constraint firstItem="CZg-e7-KoX" firstAttribute="top" secondItem="Jvk-m2-GFt" secondAttribute="bottom" id="LoE-Yf-22k"/>
                             <constraint firstItem="XtN-b5-qY4" firstAttribute="centerY" secondItem="jGV-l1-IZ6" secondAttribute="centerY" id="OCJ-LD-ggN"/>
                             <constraint firstItem="jGV-l1-IZ6" firstAttribute="centerY" secondItem="xl9-qF-y2U" secondAttribute="centerY" id="RPU-Jt-dyL"/>
@@ -166,6 +176,7 @@
                             <constraint firstItem="Jvk-m2-GFt" firstAttribute="top" secondItem="xl9-qF-y2U" secondAttribute="bottom" id="qN9-cC-fgw"/>
                             <constraint firstItem="xl9-qF-y2U" firstAttribute="top" secondItem="eVC-iO-6zG" secondAttribute="top" constant="10" id="v94-oN-ezo"/>
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="bottom" secondItem="CZg-e7-KoX" secondAttribute="bottom" id="vHa-cl-xzG"/>
+                            <constraint firstItem="eVC-iO-6zG" firstAttribute="trailing" secondItem="BPe-Xa-Rxp" secondAttribute="trailing" constant="20" id="wea-Zz-bSQ"/>
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="trailing" secondItem="CZg-e7-KoX" secondAttribute="trailing" id="y6u-6o-oOi"/>
                         </constraints>
                     </view>
@@ -235,6 +246,7 @@
     </scenes>
     <color key="tintColor" red="0.50588235290000005" green="0.56470588239999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
+        <image name="newChatList" width="50" height="50"/>
         <image name="profile_pic" width="100" height="100"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
