@@ -325,6 +325,7 @@ extension ConversationsViewController {
 extension ConversationsViewController:UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         isSearchEnabled = false
+        tableView.fetchData()
         self.resignFirstResponder()
     }
     
@@ -340,6 +341,8 @@ extension ConversationsViewController:UISearchBarDelegate {
         isSearchEnabled = true
        // self.resignFirstResponder()
         self.tableView.reloadData()
+        self.tableView.fetchData()
+        
     }
     
    /* func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
