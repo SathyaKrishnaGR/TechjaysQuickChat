@@ -64,8 +64,8 @@ class ConversationCell: UITableViewCell {
             first = firstName
         }
         self.nameLabel.text = first + company
-        
-      //  self.timeLabel.text = "8.34am"// conversation.timestamp
+        timeLabel.adjustsFontSizeToFitWidth = true
+       self.timeLabel.text = "8.34am"// conversation.timestamp
         self.messageLabel.text = conversation.message
         DispatchQueue.main.async {
             if let urlString = conversation.medium_profile_pic {
