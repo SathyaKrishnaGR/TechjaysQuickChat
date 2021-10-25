@@ -28,7 +28,7 @@ class ConversationCell: UITableViewCell {
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
-//    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     //MARK: Private properties
     let userID = UserManager().currentUserID() ?? 0
@@ -65,7 +65,7 @@ class ConversationCell: UITableViewCell {
         }
         self.nameLabel.text = first + company
         
-//        self.timeLabel.text = conversation.timestamp
+       self.timeLabel.text = "8.34 am"// conversation.timestamp
         self.messageLabel.text = conversation.message
         DispatchQueue.main.async {
             if let urlString = conversation.medium_profile_pic {

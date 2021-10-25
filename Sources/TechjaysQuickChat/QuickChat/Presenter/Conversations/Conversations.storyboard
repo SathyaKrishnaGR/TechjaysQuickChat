@@ -106,6 +106,7 @@
                                             <outlet property="messageLabel" destination="xAA-5P-oaD" id="hti-2H-25n"/>
                                             <outlet property="nameLabel" destination="SVu-Tp-h0M" id="wBP-mF-Zb3"/>
                                             <outlet property="profilePic" destination="oib-Vn-mYe" id="Bn6-IK-teD"/>
+                                            <outlet property="timeLabel" destination="33o-19-jjC" id="Vpg-bs-m5k"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EmptyCell" rowHeight="531" id="t5U-xs-Xi0">
