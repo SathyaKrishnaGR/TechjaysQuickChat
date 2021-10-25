@@ -50,8 +50,8 @@ class ConversationsViewController: UIViewController {
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
     fileprivate var isSearchEnabled: Bool = false
-    fileprivate var searchArray = [String]()
-    var data = [String]()
+    fileprivate var searchArray = [ObjectConversation]()
+   // var data = [String]()
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -158,20 +158,13 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         return PaginationUrl(endpoint: "chat/chat-lists/")
     }
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
-        if isSearchEnabled {
-            
-        } else {
         DispatchQueue.main.async {
             self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
         }
-        }
+       
         
     }
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-          /*  if conversations.isEmpty {
-                return 1
-            }
-            return conversations.count*/
         if isSearchEnabled {
             return self.searchArray.count
         }
@@ -189,14 +182,22 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
             if isSearchEnabled {
-                cell.nameLabel.text = searchArray[indexPath.row]
-                cell.messageLabel.text = ""
-                cell.profilePic.image = nil
+                cell.nameLabel.text = searchArray[indexPath.row].first_name
+                cell.messageLabel.text = searchArray[indexPath.row].message
+                cell.timeLabel.text = searchArray[indexPath.row].timestamp
+                DispatchQueue.main.async {
+                    if let urlString = self.searchArray[indexPath.row].medium_profile_pic {
+                        cell.profilePic.setImage(url: URL(string: urlString))
+                    } else {
+                        cell.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
+                        cell.profilePic.contentMode = .scaleAspectFit
+                    }
+                }
                 
             } else{
                 cell.set(conversations[indexPath.row])
-                let convers = conversations[indexPath.row]
-                data.append(convers.first_name ?? "")
+//              let convers = conversations[indexPath.row]
+//                data.append(convers.first_name ?? "")
             }
             return cell
         }
@@ -227,7 +228,7 @@ extension ConversationsViewController {
         APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
-                if let data = response.data {
+               /* if let data = response.data {
                     if isFirstPage {
                         self.conversations = data
                     } else {
@@ -237,7 +238,23 @@ extension ConversationsViewController {
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .top, animated: true)
                     self.tableView.reloadData()
+                }*/
+                if isFirstPage, let data = response.data {
+                    if self.isSearchEnabled {
+                        self.searchArray = data
+                    } else {
+                        self.conversations = data
+                    }
+                }else if let data = response.data {
+                    if self.isSearchEnabled {
+                        self.searchArray.append(contentsOf: data)
+                    } else {
+                        self.conversations.append(contentsOf: data)
+                    }
                 }
+                self.tableView.reloadData()
+                self.tableView.scroll(to: .top, animated: true)
+                self.tableView.reloadData()
                 hasNext(response.nextLink ?? false)
             case .FAILURE:
                 hasNext(false)
@@ -323,29 +340,16 @@ extension ConversationsViewController {
 }
 
 extension ConversationsViewController:UISearchBarDelegate {
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        isSearchEnabled = false
-        tableView.fetchData()
-        self.resignFirstResponder()
-    }
-    
+   
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearchEnabled = false
-        tableView.reloadData()
-        tableView.fetchData()
-        self.resignFirstResponder()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-       // dismissKeyboard()
         isSearchEnabled = true
-       // self.resignFirstResponder()
-        self.tableView.reloadData()
-        self.tableView.fetchData()
-        
     }
     
-   /* func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.resignFirstResponder()
         isSearchEnabled = true
         self.tableView.fetchData()
@@ -353,14 +357,14 @@ extension ConversationsViewController:UISearchBarDelegate {
             isSearchEnabled = false
             self.tableView.reloadData()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             if !self.tableView.isLoading {
                 self.tableView.reloadData()
             }
         }
-    }*/
+    }
     
-    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+/*    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         isSearchEnabled = true
         if let texts = searchBar.text {
             textFilter(query: texts + text)
@@ -377,5 +381,5 @@ extension ConversationsViewController:UISearchBarDelegate {
              
         }
         tableView.reloadData()
-    }
+    }*/
 }
