@@ -85,7 +85,7 @@ class ConversationCell: UITableViewCell {
             //        profilePic.cancelDownload()
             nameLabel.font = nameLabel.font.regular
             messageLabel.font = messageLabel.font.regular
-            timeLabel.font = timeLabel.font.regular
+         //   timeLabel.font = timeLabel.font.regular
             messageLabel.textColor = .gray
             messageLabel.text = nil
         }
