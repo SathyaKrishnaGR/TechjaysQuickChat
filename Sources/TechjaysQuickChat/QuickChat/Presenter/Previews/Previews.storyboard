@@ -236,7 +236,7 @@
                                     <action selector="closePressed:" destination="l7i-m2-WHZ" eventType="touchUpInside" id="LT8-zw-gAv"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Sjk-I7-ShR">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Sjk-I7-ShR" customClass="PaginatedTableView" customModule="TechjaysQuickChat">
                                 <rect key="frame" x="0.0" y="94" width="375" height="604"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -249,6 +249,9 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="paginationDelegate" destination="l7i-m2-WHZ" id="JZO-RH-SMg"/>
+                                </connections>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="g5N-EI-mS6">
                                 <rect key="frame" x="0.0" y="44" width="375" height="50"/>
@@ -278,6 +281,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="4Ps-Z9-8Mv" id="K0h-Zs-ZWX"/>
+                        <outlet property="tableView" destination="Sjk-I7-ShR" id="OLz-NK-wos"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOK-sL-MZl" userLabel="First Responder" sceneMemberID="firstResponder"/>

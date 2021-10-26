@@ -28,11 +28,13 @@ protocol ContactsPreviewControllerDelegate: class {
 
 class ContactsPreviewController: UIViewController {
   
-  @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: PaginatedTableView!
+    @IBOutlet weak var collectionView: UICollectionView!
   weak var delegate: ContactsPreviewControllerDelegate?
   
   private var users = [ObjectUser]()
   private let manager = UserManager()
+    private var conversations = [ObjectConversation]()
   
   @IBAction func closePressed(_ sender: Any) {
     dismiss(animated: true, completion: nil)
@@ -108,4 +110,50 @@ class ContactsCell: UICollectionViewCell {
     super.layoutSubviews()
     profilePic.layer.cornerRadius = (bounds.width - 10) / 2
   }
+}
+
+extension ContactsPreviewController:PaginatedTableViewDelegate {
+    func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
+        return PaginationUrl(endpoint: "chat/chat-lists/")
+    }
+    
+    func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async {
+            self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
+        }
+    }
+    
+    func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.conversations.count
+    }
+    
+    func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
+            cell.set(conversations[indexPath.row])
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    fileprivate func fetchConversations(for url: String, isFirstPage: Bool, hasNext: @escaping (Bool) -> Void) {
+        APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectConversation]>) in
+            switch status {
+            case .SUCCESS:
+                if let data = response.data {
+                    if isFirstPage {
+                        self.conversations = data
+                    } else {
+                        self.conversations.append(contentsOf: data )
+                    }
+                    
+                    self.tableView.reloadData()
+                    self.tableView.scroll(to: .top, animated: true)
+                    self.tableView.reloadData()
+                }
+                hasNext(response.nextLink ?? false)
+            case .FAILURE:
+                hasNext(false)
+            }
+        }
+    }
 }
