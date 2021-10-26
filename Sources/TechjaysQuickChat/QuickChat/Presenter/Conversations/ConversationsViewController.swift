@@ -148,7 +148,6 @@ extension ConversationsViewController {
 
 //MARK: UITableView Delegate & DataSource
 extension ConversationsViewController: PaginatedTableViewDelegate {
-    
     func paginatedTableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
