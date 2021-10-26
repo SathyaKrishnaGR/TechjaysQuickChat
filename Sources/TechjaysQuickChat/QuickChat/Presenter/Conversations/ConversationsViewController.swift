@@ -107,6 +107,13 @@ class ConversationsViewController: UIViewController {
 
 //MARK: IBActions
 extension ConversationsViewController {
+    @IBAction func newChatPressed(_ sender: Any){
+        let vc: ContactsPreviewController = UIStoryboard.controller(storyboard: .previews)
+        vc.delegate = self
+        present(vc, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func editPressed(_ sender: Any) {
         isEditing = !isEditing
         if isEditing {
