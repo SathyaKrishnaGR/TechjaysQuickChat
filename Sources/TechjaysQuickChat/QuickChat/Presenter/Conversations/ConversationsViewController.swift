@@ -92,9 +92,20 @@ class ConversationsViewController: UIViewController {
                     vc.opponentUserName = opponentUserName
                     vc.toChatScreen = toChatScreen
                 } else {
-                    if let toUserId = conversations[selectedRow].to_user_id {
+                   /* if let toUserId = conversations[selectedRow].to_user_id {
                         vc.to_user_id = toUserId
                         vc.conversation = conversations[selectedRow]
+                    }*/
+                    if isSearchEnabled {
+                        if let toUserId = searchArray[selectedRow].to_user_id {
+                             vc.to_user_id = toUserId
+                             vc.conversation = searchArray[selectedRow]
+                         }
+                    } else {
+                        if let toUserId = conversations[selectedRow].to_user_id {
+                             vc.to_user_id = toUserId
+                             vc.conversation = conversations[selectedRow]
+                         }
                     }
                 }
                 vc.socketManager.socket = self.socket
