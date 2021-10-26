@@ -46,7 +46,6 @@ class ContactsPreviewController: UIViewController {
     guard let id = manager.currentUserID() else { return }
     manager.contacts {[weak self] results in
 //      self?.users = results.filter({$0.id != id})
-     // self?.collectionView.reloadData()
         self?.tableView.fetchData()
         self?.tableView.reloadData()
     }
@@ -56,37 +55,6 @@ class ContactsPreviewController: UIViewController {
     super.init(coder: aDecoder)
     modalTransitionStyle = .crossDissolve
     modalPresentationStyle = .overFullScreen
-  }
-}
-
-extension ContactsPreviewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-  
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return users.count
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard !users.isEmpty else {
-      return collectionView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath)
-    }
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContactsCell.className, for: indexPath) as! ContactsCell
-    cell.set(users[indexPath.row])
-    return cell
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    guard !users.isEmpty else { return }
-    dismiss(animated: true) {
-      self.delegate?.contactsPreviewController(didSelect: self.users[indexPath.row])
-    }
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    guard !users.isEmpty else {
-      return collectionView.bounds.size
-    }
-    let width = (collectionView.bounds.width - 30) / 3 //spacing
-    return CGSize(width: width, height: width + 30)
   }
 }
 
