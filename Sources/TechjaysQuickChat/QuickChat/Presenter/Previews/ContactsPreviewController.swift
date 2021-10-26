@@ -35,7 +35,7 @@ class ContactsPreviewController: UIViewController {
   private var users = [ObjectUser]()
   private let manager = UserManager()
   private var conversations = [ObjectConversation]()
-    var datas = ["mahi","rajesh","dont","mahesh"]
+    
   
   @IBAction func closePressed(_ sender: Any) {
     dismiss(animated: true, completion: nil)
@@ -125,13 +125,13 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.datas.count
+        return self.conversations.count
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
        
-        /*    var last = ""
+            var last = ""
             var first = ""
             if let lastName = conversations[indexPath.row].last_name {
                 last = lastName
@@ -151,8 +151,8 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
                     cell.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
                     cell.profilePic.contentMode = .scaleAspectFit
                 }
-            }*/
-            cell.nameLabel.text = datas[indexPath.row]
+            }
+            
             
             return cell
         }
