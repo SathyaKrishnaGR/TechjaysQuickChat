@@ -109,7 +109,7 @@ class ConversationsViewController: UIViewController {
 extension ConversationsViewController {
     @IBAction func newChatPressed(_ sender: Any){
         let vc: ContactsPreviewController = UIStoryboard.controller(storyboard: .previews)
-        vc.delegate = self
+       // vc.delegate = self
         present(vc, animated: true, completion: nil)
     }
     
