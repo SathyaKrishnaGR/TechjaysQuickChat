@@ -92,9 +92,16 @@ class ConversationsViewController: UIViewController {
                     vc.opponentUserName = opponentUserName
                     vc.toChatScreen = toChatScreen
                 } else {
-                    if let toUserId = conversations[selectedRow].to_user_id {
-                        vc.to_user_id = toUserId
-                        vc.conversation = conversations[selectedRow]
+                    if isSearchEnabled {
+                        if let toUserId = searchArray[selectedRow].to_user_id {
+                             vc.to_user_id = toUserId
+                             vc.conversation = searchArray[selectedRow]
+                         }
+                    } else {
+                        if let toUserId = conversations[selectedRow].to_user_id {
+                             vc.to_user_id = toUserId
+                             vc.conversation = conversations[selectedRow]
+                         }
                     }
                 }
                 vc.socketManager.socket = self.socket
@@ -107,6 +114,13 @@ class ConversationsViewController: UIViewController {
 
 //MARK: IBActions
 extension ConversationsViewController {
+    @IBAction func newChatPressed(_ sender: Any){
+        let vc: ContactsPreviewController = UIStoryboard.controller(storyboard: .previews)
+        vc.delegate = self
+        present(vc, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func editPressed(_ sender: Any) {
         isEditing = !isEditing
         if isEditing {
@@ -158,10 +172,11 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         if isSearchEnabled{
+            return PaginationUrl(endpoint: "chat/search-in-chat-list/",search: searchBar.text ?? "")
         } else {
         return PaginationUrl(endpoint: "chat/chat-lists/")
         }
-        return PaginationUrl(endpoint: "chat/chat-lists/")
+     //   return PaginationUrl(endpoint: "chat/chat-lists/")
     }
     
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
@@ -381,5 +396,22 @@ extension ConversationsViewController:UISearchBarDelegate {
                 self.tableView.reloadData()
             }
         }
+    }
+}
+
+extension ConversationsViewController: ContactsPreviewControllerDelegate {
+    func contactsPreviewController(didSelect user: ObjectUser) {
+        guard let currentID = userManager.currentUserID() else { return }
+        let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
+        //        if let conversation = conversations.filter({$0.userIDs.contains(user.id)}).first {
+        //            vc.conversation = conversation
+        //            show(vc, sender: self)
+        //            return
+        //        }
+        let conversation = ObjectConversation()
+        //        conversation.userIDs.append(contentsOf: [currentID, user.id])
+        //        conversation.isRead = [currentID: true, user.id: true]
+        vc.conversation = conversation
+        show(vc, sender: self)
     }
 }
