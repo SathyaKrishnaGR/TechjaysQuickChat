@@ -135,8 +135,12 @@ extension ConversationsViewController {
                 selectedConversations.append(conversations[indexPath.row])
             }
             self.tableView.beginUpdates()
+            self.conversations.removeArrayOfIndex(at: selectedRows)
             self.tableView.deleteRows(at: selectedRows, with: .automatic)
             deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
+       
+        
+            
         }
     }
     
@@ -182,9 +186,9 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard !conversations.isEmpty else {
-            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
-        }
+//        guard !conversations.isEmpty else {
+//            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
+//        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
             if isSearchEnabled {
                 cell.nameLabel.text = searchArray[indexPath.row].first_name
@@ -283,9 +287,12 @@ extension ConversationsViewController {
         APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: ["to_user_id": payloadString]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
-                self.conversations.removeArrayOfIndex(array: rows)
                 self.isEditing = !self.isEditing
                 self.resetEditAndDeletebuttons()
+                DispatchQueue.main.async {
+                    self.tableView.fetchData()
+                }
+                
                 self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
@@ -312,8 +319,8 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                             if !self.conversations.contains(where: { conversation in conversation.to_user_id == userId }) {
                                 print("1 does not exists in the array")
                                 
-//                                self.newMessageCountLabel.isHidden = false
-//                                self.newMessageCountLabel.backgroundColor = ChatColors.tint
+                                //                                self.newMessageCountLabel.isHidden = false
+                                //                                self.newMessageCountLabel.backgroundColor = ChatColors.tint
                                 let newconversation = ObjectConversation()
                                 newconversation.first_name = sender.username
                                 newconversation.to_user_id = sender.user_id
@@ -325,7 +332,7 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                                 
                             } else {
                                 print("1 exists in the array")
-//                                self.newMessageCountLabel.isHidden = true
+                                //                                self.newMessageCountLabel.isHidden = true
                                 self.tableView.fetchData()
                                 
                             }

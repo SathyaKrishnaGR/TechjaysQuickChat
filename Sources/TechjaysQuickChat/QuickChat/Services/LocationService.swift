@@ -21,7 +21,7 @@
 //  SOFTWARE.
 
 import CoreLocation
-
+/*
 class LocationService: NSObject, CLLocationManagerDelegate {
   
   private lazy var manager: CLLocationManager = {
@@ -68,3 +68,4 @@ extension LocationService {
     case location(CLLocationCoordinate2D)
   }
 }
+*/
