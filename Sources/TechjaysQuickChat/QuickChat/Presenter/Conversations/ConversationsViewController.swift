@@ -51,7 +51,7 @@ class ConversationsViewController: UIViewController {
     var socketListDelegate: SocketListUpdateDelegate?
     fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [ObjectConversation]()
-   // var data = [String]()
+   
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -144,34 +144,43 @@ extension ConversationsViewController {
 
 //MARK: UITableView Delegate & DataSource
 extension ConversationsViewController: PaginatedTableViewDelegate {
+    
     func paginatedTableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
+    
     func paginatedTableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+    
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         if isSearchEnabled{
-        }else{
+        } else {
         return PaginationUrl(endpoint: "chat/chat-lists/")
         }
         return PaginationUrl(endpoint: "chat/chat-lists/")
     }
+    
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
-        DispatchQueue.main.async {
-            self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
+        if isSearchEnabled {
+            DispatchQueue.main.async {
+                self.searchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
+            }
         }
-       
-        
     }
+    
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearchEnabled {
             return self.searchArray.count
-        }
-        else {
+        } else {
             return self.conversations.count
         }
     }
+    
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard !conversations.isEmpty else {
             return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
@@ -194,8 +203,6 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
                 
             } else{
                 cell.set(conversations[indexPath.row])
-//              let convers = conversations[indexPath.row]
-//                data.append(convers.first_name ?? "")
             }
             return cell
         }
@@ -228,7 +235,7 @@ extension ConversationsViewController {
         APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
-               /* if let data = response.data {
+                if let data = response.data {
                     if isFirstPage {
                         self.conversations = data
                     } else {
@@ -238,23 +245,29 @@ extension ConversationsViewController {
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .top, animated: true)
                     self.tableView.reloadData()
-                }*/
-                if isFirstPage, let data = response.data {
-                    if self.isSearchEnabled {
+                }
+                hasNext(response.nextLink ?? false)
+            case .FAILURE:
+                hasNext(false)
+            }
+        }
+    }
+    
+    fileprivate func searchConversations(for url: String, isFirstPage: Bool, hasNext: @escaping (Bool) -> Void) {
+        APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectConversation]>) in
+            switch status {
+            case .SUCCESS:
+                if let data = response.data {
+                    if isFirstPage {
                         self.searchArray = data
                     } else {
-                        self.conversations = data
+                        self.searchArray.append(contentsOf: data )
                     }
-                }else if let data = response.data {
-                    if self.isSearchEnabled {
-                        self.searchArray.append(contentsOf: data)
-                    } else {
-                        self.conversations.append(contentsOf: data)
-                    }
+                    
+                    self.tableView.reloadData()
+                    self.tableView.scroll(to: .top, animated: true)
+                    self.tableView.reloadData()
                 }
-                self.tableView.reloadData()
-                self.tableView.scroll(to: .top, animated: true)
-                self.tableView.reloadData()
                 hasNext(response.nextLink ?? false)
             case .FAILURE:
                 hasNext(false)
@@ -346,7 +359,7 @@ extension ConversationsViewController:UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        isSearchEnabled = true
+        isSearchEnabled = false
     }
     
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -363,23 +376,4 @@ extension ConversationsViewController:UISearchBarDelegate {
             }
         }
     }
-    
-/*    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        isSearchEnabled = true
-        if let texts = searchBar.text {
-            textFilter(query: texts + text)
-        }
-        return true
-    }
-    
-     func textFilter(query:String){
-        searchArray.removeAll()
-         for x in data{
-            if x.starts(with: query){
-                searchArray.append(x)
-            }
-             
-        }
-        tableView.reloadData()
-    }*/
 }

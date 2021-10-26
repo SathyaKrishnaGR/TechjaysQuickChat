@@ -64,7 +64,6 @@ class ConversationCell: UITableViewCell {
             first = firstName
         }
         self.nameLabel.text = first + company
-        //timeLabel.adjustsFontSizeToFitWidth = true
         if let timeStamp = conversation.timestamp {
             timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
         }
