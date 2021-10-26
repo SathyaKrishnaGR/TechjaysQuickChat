@@ -46,7 +46,9 @@ class ContactsPreviewController: UIViewController {
     guard let id = manager.currentUserID() else { return }
     manager.contacts {[weak self] results in
 //      self?.users = results.filter({$0.id != id})
-      self?.collectionView.reloadData()
+     // self?.collectionView.reloadData()
+        self?.tableView.fetchData()
+        self?.tableView.reloadData()
     }
   }
   
