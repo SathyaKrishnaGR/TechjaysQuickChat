@@ -109,7 +109,7 @@ class ConversationsViewController: UIViewController {
 extension ConversationsViewController {
     @IBAction func newChatPressed(_ sender: Any){
         let vc: ContactsPreviewController = UIStoryboard.controller(storyboard: .previews)
-       // vc.delegate = self
+        vc.delegate = self
         present(vc, animated: true, completion: nil)
     }
     
@@ -388,5 +388,22 @@ extension ConversationsViewController:UISearchBarDelegate {
                 self.tableView.reloadData()
             }
         }
+    }
+}
+
+extension ConversationsViewController: ContactsPreviewControllerDelegate {
+    func contactsPreviewController(didSelect user: ObjectUser) {
+        guard let currentID = userManager.currentUserID() else { return }
+        let vc: MessagesViewController = UIStoryboard.initial(storyboard: .messages)
+        //        if let conversation = conversations.filter({$0.userIDs.contains(user.id)}).first {
+        //            vc.conversation = conversation
+        //            show(vc, sender: self)
+        //            return
+        //        }
+        let conversation = ObjectConversation()
+        //        conversation.userIDs.append(contentsOf: [currentID, user.id])
+        //        conversation.isRead = [currentID: true, user.id: true]
+        vc.conversation = conversation
+        show(vc, sender: self)
     }
 }
