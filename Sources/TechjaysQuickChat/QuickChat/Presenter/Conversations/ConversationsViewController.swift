@@ -213,7 +213,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
                 if let firstName = searchArray[indexPath.row].first_name {
                     first = firstName
                 }
-                cell.nameLabel.text = first + last
+                cell.nameLabel.text = "\(first) \(last)"
                 cell.messageLabel.text = searchArray[indexPath.row].message
                 if let timeStamp = searchArray[indexPath.row].timestamp {
                     cell.timeLabel.text = timeStamp.getElapsedIntervalWithAgo()

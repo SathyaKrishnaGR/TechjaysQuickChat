@@ -63,7 +63,7 @@ class ConversationCell: UITableViewCell {
         if let firstName = conversation.first_name {
             first = firstName
         }
-        self.nameLabel.text = first + last
+        self.nameLabel.text = "\(first) \(last)"
         if let timeStamp = conversation.timestamp {
             timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
         }
