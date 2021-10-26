@@ -165,6 +165,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         if isSearchEnabled{
+            return PaginationUrl(endpoint: "chat/search-in-chat-list/",search: searchBar.text ?? "")
         } else {
         return PaginationUrl(endpoint: "chat/chat-lists/")
         }
