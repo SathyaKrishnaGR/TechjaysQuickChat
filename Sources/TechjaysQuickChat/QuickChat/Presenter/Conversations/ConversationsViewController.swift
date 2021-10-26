@@ -205,7 +205,15 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
 //        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
             if isSearchEnabled {
-                cell.nameLabel.text = searchArray[indexPath.row].first_name
+                var last = ""
+                var first = ""
+                if let lastName = searchArray[indexPath.row].last_name {
+                    last = lastName
+                }
+                if let firstName = searchArray[indexPath.row].first_name {
+                    first = firstName
+                }
+                cell.nameLabel.text = first +"/n"+ last
                 cell.messageLabel.text = searchArray[indexPath.row].message
                 if let timeStamp = searchArray[indexPath.row].timestamp {
                     cell.timeLabel.text = timeStamp.getElapsedIntervalWithAgo()

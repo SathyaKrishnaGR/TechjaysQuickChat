@@ -155,8 +155,12 @@
                                     <constraint firstAttribute="width" constant="40" id="mwZ-sN-r71"/>
                                     <constraint firstAttribute="height" constant="30" id="nZT-K9-ssA"/>
                                 </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="newChatList"/>
+                                <connections>
+                                    <action selector="newChatPressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="i81-FZ-y5x"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eVC-iO-6zG"/>

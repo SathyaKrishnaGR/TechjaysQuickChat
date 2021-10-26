@@ -89,7 +89,7 @@ extension MessagesViewController {
         } else {
             var company = ""
             var first = ""
-            if let companyName = conversation.company_name {
+            if let companyName = conversation.last_name {
                 company = companyName
             }
             if let firstName = conversation.first_name {

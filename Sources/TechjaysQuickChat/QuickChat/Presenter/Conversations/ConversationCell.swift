@@ -55,15 +55,15 @@ class ConversationCell: UITableViewCell {
      //   timeLabel.font = timeLabel.font.bold
         
         // Data Set here
-        var company = ""
+        var last = ""
         var first = ""
-        if let companyName = conversation.company_name {
-            company = companyName
+        if let companyName = conversation.last_name {
+            last = companyName
         }
         if let firstName = conversation.first_name {
             first = firstName
         }
-        self.nameLabel.text = first + company
+        self.nameLabel.text = first + last
         if let timeStamp = conversation.timestamp {
             timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
         }
