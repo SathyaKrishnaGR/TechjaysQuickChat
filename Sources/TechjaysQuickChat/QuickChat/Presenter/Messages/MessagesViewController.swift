@@ -87,15 +87,15 @@ extension MessagesViewController {
         if toChatScreen {
             self.navigationItem.title = opponentUserName
         } else {
-            var company = ""
+            var last = ""
             var first = ""
-            if let companyName = conversation.last_name {
-                company = companyName
+            if let lastName = conversation.last_name {
+                last = lastName
             }
             if let firstName = conversation.first_name {
                 first = firstName
             }
-            self.navigationItem.title = first + company
+            self.navigationItem.title = "\(first) \(last)"
         }
         
         //        showIconOnNavigationBar(imageUrl: nil) // Will show default image
