@@ -101,8 +101,8 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
-       
-            var last = ""
+            cell.nameLabel.text = datas[indexPath.row]
+            /*  var last = ""
             var first = ""
             if let lastName = conversations[indexPath.row].last_name {
                 last = lastName
@@ -110,8 +110,8 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
             if let firstName = conversations[indexPath.row].first_name {
                 first = firstName
             }
-            cell.nameLabel.text = datas[indexPath.row]
-           /* cell.nameLabel.text = "\(first) \(last)"
+            
+            cell.nameLabel.text = "\(first) \(last)"
             cell.messageLabel.text = conversations[indexPath.row].message
             if let timeStamp = conversations[indexPath.row].timestamp {
                 cell.timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
