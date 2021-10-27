@@ -89,9 +89,8 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
-        DispatchQueue.main.async {
             self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
-        }
+        
     }
     
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -139,12 +138,13 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
                     } else {
                         self.conversations.append(contentsOf: data )
                     }
-                    
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                     self.tableView.scroll(to: .top, animated: true)
                     self.tableView.reloadData()
-                }
-                hasNext(response.nextLink ?? false)
+               }
+            hasNext(response.nextLink ?? false)
             case .FAILURE:
                 hasNext(false)
             }
