@@ -267,28 +267,30 @@
                                             <color key="titleColor" systemColor="labelColor"/>
                                         </state>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvN-rj-sLr">
+                                        <rect key="frame" x="0.0" y="43" width="390" height="1.6666666666666643"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1.5" id="beL-7B-dnN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsY-KQ-CfM">
                                         <rect key="frame" x="128.66666666666666" y="14" width="132.99999999999997" height="26"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gF4-M0-a5A">
-                                        <rect key="frame" x="0.0" y="45" width="390" height="1"/>
-                                        <color key="backgroundColor" systemColor="secondaryLabelColor"/>
-                                        <color key="tintColor" systemColor="labelColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="HN7-wB-KE0"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AmS-7V-G34">
                                         <rect key="frame" x="16" y="11.999999999999998" width="17" height="23.333333333333329"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="27" id="hJd-oH-aTT"/>
                                             <constraint firstAttribute="width" constant="17" id="wmF-P0-6AQ"/>
                                         </constraints>
+                                        <color key="tintColor" systemColor="labelColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" backgroundImage="chevron.backward" catalog="system"/>
                                         <connections>
@@ -298,15 +300,15 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="gF4-M0-a5A" secondAttribute="trailing" id="6Tg-Fn-TmN"/>
+                                    <constraint firstAttribute="trailing" secondItem="mvN-rj-sLr" secondAttribute="trailing" id="0lH-XL-VzW"/>
                                     <constraint firstAttribute="height" constant="45" id="Gdc-Sk-UYl"/>
                                     <constraint firstItem="wsY-KQ-CfM" firstAttribute="centerY" secondItem="jwM-me-r4l" secondAttribute="centerY" id="J5H-3Z-37a"/>
                                     <constraint firstItem="jwM-me-r4l" firstAttribute="top" secondItem="89Z-I1-Ps9" secondAttribute="top" constant="10" id="JNk-B8-XXo"/>
-                                    <constraint firstItem="gF4-M0-a5A" firstAttribute="leading" secondItem="89Z-I1-Ps9" secondAttribute="leading" id="Ouv-vu-vjv"/>
-                                    <constraint firstItem="gF4-M0-a5A" firstAttribute="top" secondItem="jwM-me-r4l" secondAttribute="bottom" constant="1" id="bbk-7O-nDO"/>
+                                    <constraint firstItem="mvN-rj-sLr" firstAttribute="top" secondItem="wsY-KQ-CfM" secondAttribute="bottom" constant="3" id="Oa4-yY-ASZ"/>
                                     <constraint firstItem="AmS-7V-G34" firstAttribute="top" secondItem="89Z-I1-Ps9" secondAttribute="top" constant="10" id="gNH-V8-82k"/>
                                     <constraint firstAttribute="trailing" secondItem="jwM-me-r4l" secondAttribute="trailing" constant="16" id="h8p-eQ-YrJ"/>
                                     <constraint firstItem="AmS-7V-G34" firstAttribute="leading" secondItem="89Z-I1-Ps9" secondAttribute="leading" constant="16" id="kQ9-gs-OQz"/>
+                                    <constraint firstItem="mvN-rj-sLr" firstAttribute="leading" secondItem="89Z-I1-Ps9" secondAttribute="leading" id="tMM-W4-FJF"/>
                                     <constraint firstItem="wsY-KQ-CfM" firstAttribute="centerX" secondItem="89Z-I1-Ps9" secondAttribute="centerX" id="tW6-wO-V56"/>
                                 </constraints>
                             </view>
@@ -314,8 +316,8 @@
                                 <rect key="frame" x="0.0" y="89" width="390" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86w-I5-2x3">
-                                        <rect key="frame" x="16" y="0.0" width="21" height="23"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                        <rect key="frame" x="16" y="2.6666666666666714" width="19" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -369,11 +371,11 @@
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
