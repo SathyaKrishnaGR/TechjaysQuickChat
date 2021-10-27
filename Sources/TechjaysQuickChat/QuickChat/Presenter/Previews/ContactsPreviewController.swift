@@ -28,7 +28,7 @@ protocol ContactsPreviewControllerDelegate: class {
 
 class ContactsPreviewController: UIViewController {
   
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var tableView: PaginatedTableView!
  // @IBOutlet weak var collectionView: UICollectionView!
   weak var delegate: ContactsPreviewControllerDelegate?
   
@@ -153,25 +153,3 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
 
 
 
-/*extension ContactsPreviewController:UITableViewDelegate,UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     return self.value.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as! ConversationCell
-        cell.nameLabel?.text = self.value[indexPath.row]
-        cell.timeLabel?.text = "8.34"
-        cell.messageLabel?.text = "Hii Hello"
-       return cell
-        
-       }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return UITableView.automaticDimension
-   }
-    
-}*/
