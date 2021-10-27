@@ -167,7 +167,11 @@ extension ContactsPreviewController:UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as! ConversationCell
-        cell.timeLabel?.text = self.value[indexPath.row]
+        cell.nameLabel?.text = self.value[indexPath.row]
+        cell.timeLabel?.text = "8.34"
+        cell.messageLabel?.text = "Hii Hello"
+
+
            
            return cell
         
