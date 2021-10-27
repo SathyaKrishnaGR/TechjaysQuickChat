@@ -212,10 +212,6 @@
                                         <size key="customSize" width="383" height="401"/>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="l7i-m2-WHZ" id="xlC-Ob-0pS"/>
-                                    <outlet property="delegate" destination="l7i-m2-WHZ" id="mxZ-RN-a3o"/>
-                                </connections>
                             </collectionView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3F6-JJ-eS0">
                                 <rect key="frame" x="135" y="750" width="120" height="40"/>
@@ -280,7 +276,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="4Ps-Z9-8Mv" id="K0h-Zs-ZWX"/>
                         <outlet property="tableView" destination="Sjk-I7-ShR" id="OLz-NK-wos"/>
                     </connections>
                 </viewController>
