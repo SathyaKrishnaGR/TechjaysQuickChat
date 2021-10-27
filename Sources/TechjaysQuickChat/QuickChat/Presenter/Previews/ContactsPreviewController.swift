@@ -34,8 +34,8 @@ class ContactsPreviewController: UIViewController {
   
   private var users = [ObjectUser]()
  private let manager = UserManager()
-  private var conversations = [ObjectConversation]()
-    let value: [String] = ["1","2", "3", "4", "5","6","7","8","9","10"]
+//  private var conversations = [ObjectUser]()
+   // let value: [String] = ["1","2", "3", "4", "5","6","7","8","9","10"]
     
   
   @IBAction func closePressed(_ sender: Any) {
@@ -85,9 +85,9 @@ class ContactsPreviewController: UIViewController {
   }
 }*/
 
-/*extension ContactsPreviewController:PaginatedTableViewDelegate {
+extension ContactsPreviewController:PaginatedTableViewDelegate {
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
-        return PaginationUrl(endpoint: "chat/chat-lists/")
+        return PaginationUrl(endpoint: "chat/get-users-list/",parameters: ["is_following":"true"])
     }
     
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
@@ -96,7 +96,7 @@ class ContactsPreviewController: UIViewController {
     }
     
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.datas.count
+        return self.users.count
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -104,20 +104,17 @@ class ContactsPreviewController: UIViewController {
             
              var last = ""
             var first = ""
-            if let lastName = conversations[indexPath.row].last_name {
+            if let lastName = users[indexPath.row].last_name {
                 last = lastName
             }
-            if let firstName = conversations[indexPath.row].first_name {
+            if let firstName = users[indexPath.row].first_name {
                 first = firstName
             }
             
             cell.nameLabel.text = "\(first) \(last)"
-            cell.messageLabel.text = conversations[indexPath.row].message
-            if let timeStamp = conversations[indexPath.row].timestamp {
-                cell.timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
-            }
+            cell.messageLabel.text = users[indexPath.row].username
             DispatchQueue.main.async {
-                if let urlString = self.conversations[indexPath.row].medium_profile_pic {
+                if let urlString = self.users[indexPath.row].medium_profile_pic {
                     cell.profilePic.setImage(url: URL(string: urlString))
                 } else {
                     cell.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
@@ -132,20 +129,19 @@ class ContactsPreviewController: UIViewController {
     }
     
     fileprivate func fetchConversations(for url: String, isFirstPage: Bool, hasNext: @escaping (Bool) -> Void) {
-        APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectConversation]>) in
+        APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectUser]>) in
             switch status {
             case .SUCCESS:
                 if let data = response.data {
                     if isFirstPage {
-                        self.conversations = data
+                        self.users = data
                     } else {
-                        self.conversations.append(contentsOf: data )
+                        self.users.append(contentsOf: data )
                     }
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
                     self.tableView.scroll(to: .top, animated: true)
-                    self.tableView.reloadData()
                }
             hasNext(response.nextLink ?? false)
             case .FAILURE:
@@ -153,11 +149,11 @@ class ContactsPreviewController: UIViewController {
             }
         }
     }
-}*/
+}
 
 
 
-extension ContactsPreviewController:UITableViewDelegate,UITableViewDataSource {
+/*extension ContactsPreviewController:UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -178,4 +174,4 @@ extension ContactsPreviewController:UITableViewDelegate,UITableViewDataSource {
         return UITableView.automaticDimension
    }
     
-}
+}*/

@@ -22,6 +22,7 @@
 
 import UIKit
 import Starscream
+import Alamofire
 
 class ConversationsViewController: UIViewController {
     
