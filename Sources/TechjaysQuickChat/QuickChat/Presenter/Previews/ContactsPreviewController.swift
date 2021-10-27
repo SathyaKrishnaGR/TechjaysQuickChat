@@ -28,7 +28,7 @@ protocol ContactsPreviewControllerDelegate: class {
 
 class ContactsPreviewController: UIViewController {
   
-  @IBOutlet weak var tableView: PaginatedTableView!
+  @IBOutlet weak var tableView: UITableView!
  // @IBOutlet weak var collectionView: UICollectionView!
   weak var delegate: ContactsPreviewControllerDelegate?
   
@@ -49,8 +49,8 @@ class ContactsPreviewController: UIViewController {
 //      self?.users = results.filter({$0.id != id})
        
     }
-      self.tableView.fetchData()
-      self.tableView.reloadData()
+    //  self.tableView.fetchData()
+    //  self.tableView.reloadData()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -85,7 +85,7 @@ class ContactsCell: UICollectionViewCell {
   }
 }
 
-extension ContactsPreviewController:PaginatedTableViewDelegate {
+/*extension ContactsPreviewController:PaginatedTableViewDelegate {
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         return PaginationUrl(endpoint: "chat/chat-lists/")
     }
@@ -101,8 +101,8 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
-            cell.nameLabel.text = datas[indexPath.row]
-            /*  var last = ""
+            
+             var last = ""
             var first = ""
             if let lastName = conversations[indexPath.row].last_name {
                 last = lastName
@@ -123,7 +123,7 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
                     cell.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
                     cell.profilePic.contentMode = .scaleAspectFit
                 }
-            }*/
+            }
             
             
             return cell
@@ -153,4 +153,23 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
             }
         }
     }
+}*/
+
+
+
+extension ContactsPreviewController:UITableViewDelegate,UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return datas.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
+             cell.nameLabel.text = datas[indexPath.row]
+             return cell
+        }
+        return UITableViewCell()
+    }
+    
+    
 }
