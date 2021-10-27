@@ -260,24 +260,6 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qX9-tZ-I7c">
-                                <rect key="frame" x="314" y="54" width="60" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="v5x-pX-irR"/>
-                                    <constraint firstAttribute="width" constant="60" id="ydS-cb-Cbz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Delete">
-                                    <color key="titleColor" systemColor="tintColor"/>
-                                </state>
-                            </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSv-Hu-oSe">
-                                <rect key="frame" x="128.66666666666666" y="58.666666666666657" width="132.99999999999997" height="26"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GlF-hg-eYZ"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -288,15 +270,11 @@
                             <constraint firstItem="g5N-EI-mS6" firstAttribute="leading" secondItem="GlF-hg-eYZ" secondAttribute="leading" id="OhO-Tb-t81"/>
                             <constraint firstAttribute="trailing" secondItem="4Ps-Z9-8Mv" secondAttribute="trailing" constant="15" id="P4M-P2-GgM"/>
                             <constraint firstItem="GlF-hg-eYZ" firstAttribute="bottom" secondItem="3F6-JJ-eS0" secondAttribute="bottom" constant="20" id="W4u-Tl-9Wz"/>
-                            <constraint firstItem="qX9-tZ-I7c" firstAttribute="top" secondItem="GlF-hg-eYZ" secondAttribute="top" constant="10" id="WDb-5p-itD"/>
                             <constraint firstItem="Sjk-I7-ShR" firstAttribute="leading" secondItem="GlF-hg-eYZ" secondAttribute="leading" id="axJ-Kl-t45"/>
                             <constraint firstItem="4Ps-Z9-8Mv" firstAttribute="leading" secondItem="Edj-vT-ggE" secondAttribute="leading" constant="15" id="hSf-pI-A26"/>
                             <constraint firstItem="GlF-hg-eYZ" firstAttribute="trailing" secondItem="Sjk-I7-ShR" secondAttribute="trailing" id="he4-LC-Wbc"/>
                             <constraint firstItem="3F6-JJ-eS0" firstAttribute="top" secondItem="Sjk-I7-ShR" secondAttribute="bottom" constant="20" id="is4-F1-OCa"/>
-                            <constraint firstItem="ZSv-Hu-oSe" firstAttribute="centerX" secondItem="Edj-vT-ggE" secondAttribute="centerX" id="kES-H9-xmD"/>
                             <constraint firstItem="GlF-hg-eYZ" firstAttribute="trailing" secondItem="g5N-EI-mS6" secondAttribute="trailing" id="lxJ-Dv-p3Y"/>
-                            <constraint firstItem="GlF-hg-eYZ" firstAttribute="trailing" secondItem="qX9-tZ-I7c" secondAttribute="trailing" constant="16" id="qKi-9P-fZk"/>
-                            <constraint firstItem="ZSv-Hu-oSe" firstAttribute="centerY" secondItem="qX9-tZ-I7c" secondAttribute="centerY" id="s2Z-ds-lud"/>
                             <constraint firstItem="3F6-JJ-eS0" firstAttribute="centerX" secondItem="Edj-vT-ggE" secondAttribute="centerX" id="vDv-i2-bYM"/>
                             <constraint firstItem="4Ps-Z9-8Mv" firstAttribute="top" secondItem="GlF-hg-eYZ" secondAttribute="top" id="wdy-it-zdN"/>
                         </constraints>
@@ -317,9 +295,6 @@
         <image name="profile_pic" width="100" height="100"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
