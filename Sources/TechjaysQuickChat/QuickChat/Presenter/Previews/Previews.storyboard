@@ -230,7 +230,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Sjk-I7-ShR">
-                                <rect key="frame" x="0.0" y="164" width="390" height="646"/>
+                                <rect key="frame" x="0.0" y="174" width="390" height="636"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConversationCell" rowHeight="55" id="Mgf-Rj-tLr" customClass="ConversationCell" customModule="TechjaysQuickChat">
@@ -248,7 +248,7 @@
                                 </connections>
                             </tableView>
                             <searchBar contentMode="redraw" placeholder="Search..." translatesAutoresizingMaskIntoConstraints="NO" id="g5N-EI-mS6">
-                                <rect key="frame" x="0.0" y="114" width="390" height="50"/>
+                                <rect key="frame" x="0.0" y="124" width="390" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="oUe-z5-QXb"/>
                                 </constraints>
@@ -268,8 +268,8 @@
                                             <color key="titleColor" systemColor="labelColor"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvN-rj-sLr">
-                                        <rect key="frame" x="0.0" y="42.666666666666671" width="390" height="1"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvN-rj-sLr">
+                                        <rect key="frame" x="0.0" y="43.666666666666671" width="390" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="beL-7B-dnN"/>
@@ -292,7 +292,7 @@
                                         </constraints>
                                         <color key="tintColor" systemColor="labelColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="chevron.backward" catalog="system"/>
+                                        <state key="normal" image="newChatList"/>
                                         <connections>
                                             <action selector="closePressed:" destination="l7i-m2-WHZ" eventType="touchUpInside" id="fGj-FT-fqZ"/>
                                         </connections>
@@ -304,7 +304,7 @@
                                     <constraint firstAttribute="height" constant="45" id="Gdc-Sk-UYl"/>
                                     <constraint firstItem="wsY-KQ-CfM" firstAttribute="centerY" secondItem="jwM-me-r4l" secondAttribute="centerY" id="J5H-3Z-37a"/>
                                     <constraint firstItem="jwM-me-r4l" firstAttribute="top" secondItem="89Z-I1-Ps9" secondAttribute="top" constant="10" id="JNk-B8-XXo"/>
-                                    <constraint firstItem="mvN-rj-sLr" firstAttribute="top" secondItem="wsY-KQ-CfM" secondAttribute="bottom" constant="4" id="Oa4-yY-ASZ"/>
+                                    <constraint firstItem="mvN-rj-sLr" firstAttribute="top" secondItem="wsY-KQ-CfM" secondAttribute="bottom" constant="5" id="Oa4-yY-ASZ"/>
                                     <constraint firstItem="AmS-7V-G34" firstAttribute="top" secondItem="89Z-I1-Ps9" secondAttribute="top" constant="10" id="gNH-V8-82k"/>
                                     <constraint firstAttribute="trailing" secondItem="jwM-me-r4l" secondAttribute="trailing" constant="16" id="h8p-eQ-YrJ"/>
                                     <constraint firstItem="AmS-7V-G34" firstAttribute="leading" secondItem="89Z-I1-Ps9" secondAttribute="leading" constant="16" id="kQ9-gs-OQz"/>
@@ -313,10 +313,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XeM-6A-F0H">
-                                <rect key="frame" x="0.0" y="89" width="390" height="25"/>
+                                <rect key="frame" x="0.0" y="89" width="390" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86w-I5-2x3">
-                                        <rect key="frame" x="16" y="2.6666666666666714" width="19" height="20.333333333333332"/>
+                                        <rect key="frame" x="16" y="7.3333333333333268" width="19" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -324,9 +324,9 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="86w-I5-2x3" secondAttribute="bottom" constant="2" id="7va-LE-0lh"/>
-                                    <constraint firstAttribute="height" constant="25" id="CoL-d3-LKs"/>
+                                    <constraint firstAttribute="height" constant="35" id="CoL-d3-LKs"/>
                                     <constraint firstItem="86w-I5-2x3" firstAttribute="leading" secondItem="XeM-6A-F0H" secondAttribute="leading" constant="16" id="XnS-7t-WmA"/>
+                                    <constraint firstItem="86w-I5-2x3" firstAttribute="centerY" secondItem="XeM-6A-F0H" secondAttribute="centerY" id="i4a-Ep-SYr"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -365,8 +365,8 @@
     </scenes>
     <resources>
         <image name="button" width="60" height="20"/>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="close" width="25" height="25"/>
+        <image name="newChatList" width="21.333333969116211" height="21.333333969116211"/>
         <image name="profile_pic" width="100" height="100"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

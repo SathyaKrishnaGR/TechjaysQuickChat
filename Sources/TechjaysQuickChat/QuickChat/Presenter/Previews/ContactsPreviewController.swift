@@ -45,23 +45,23 @@ class ContactsPreviewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     guard let id = manager.currentUserID() else { return }
-    manager.contacts {[weak self] results in
+ /*   manager.contacts {[weak self] results in
 //      self?.users = results.filter({$0.id != id})
        
-    }
+    }*/
     //  self.tableView.fetchData()
-    //  self.tableView.reloadData()
+      self.tableView.reloadData()
   }
   
-  required init?(coder aDecoder: NSCoder) {
+ /* required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     modalTransitionStyle = .crossDissolve
     modalPresentationStyle = .overFullScreen
-  }
+  }*/
 }
 
 
-class ContactsCell: UICollectionViewCell {
+/*class ContactsCell: UICollectionViewCell {
   
   @IBOutlet weak var profilePic: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
@@ -83,7 +83,7 @@ class ContactsCell: UICollectionViewCell {
     super.layoutSubviews()
     profilePic.layer.cornerRadius = (bounds.width - 10) / 2
   }
-}
+}*/
 
 /*extension ContactsPreviewController:PaginatedTableViewDelegate {
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
