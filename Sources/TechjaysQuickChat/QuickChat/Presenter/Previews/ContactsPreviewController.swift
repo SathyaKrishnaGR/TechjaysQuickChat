@@ -29,11 +29,11 @@ protocol ContactsPreviewControllerDelegate: class {
 class ContactsPreviewController: UIViewController {
   
   @IBOutlet weak var tableView: PaginatedTableView!
-  @IBOutlet weak var collectionView: UICollectionView!
+ // @IBOutlet weak var collectionView: UICollectionView!
   weak var delegate: ContactsPreviewControllerDelegate?
   
   private var users = [ObjectUser]()
-  private let manager = UserManager()
+ private let manager = UserManager()
   private var conversations = [ObjectConversation]()
     
   
@@ -46,9 +46,10 @@ class ContactsPreviewController: UIViewController {
     guard let id = manager.currentUserID() else { return }
     manager.contacts {[weak self] results in
 //      self?.users = results.filter({$0.id != id})
-        self?.tableView.fetchData()
-        self?.tableView.reloadData()
+       
     }
+      self.tableView.fetchData()
+      self.tableView.reloadData()
   }
   
   required init?(coder aDecoder: NSCoder) {

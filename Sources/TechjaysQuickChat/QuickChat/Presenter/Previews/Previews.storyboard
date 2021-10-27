@@ -237,7 +237,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Sjk-I7-ShR" customClass="PaginatedTableView" customModule="TechjaysQuickChat">
-                                <rect key="frame" x="0.0" y="139" width="390" height="591"/>
+                                <rect key="frame" x="0.0" y="94" width="390" height="636"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConversationCell" rowHeight="55" id="Mgf-Rj-tLr" customClass="ConversationCell" customModule="TechjaysQuickChat">
@@ -254,7 +254,7 @@
                                 </connections>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="g5N-EI-mS6">
-                                <rect key="frame" x="0.0" y="89" width="390" height="50"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="oUe-z5-QXb"/>
                                 </constraints>
@@ -272,7 +272,7 @@
                                     <color key="titleColor" systemColor="tintColor"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSv-Hu-oSe">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSv-Hu-oSe">
                                 <rect key="frame" x="128.66666666666666" y="58.666666666666657" width="132.99999999999997" height="26"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                 <nil key="textColor"/>
@@ -282,7 +282,8 @@
                         <viewLayoutGuide key="safeArea" id="GlF-hg-eYZ"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="g5N-EI-mS6" firstAttribute="top" secondItem="qX9-tZ-I7c" secondAttribute="bottom" id="Gvd-Fp-xLi"/>
+                            <constraint firstItem="g5N-EI-mS6" firstAttribute="top" secondItem="GlF-hg-eYZ" secondAttribute="top" id="10s-fn-fbz"/>
+                            <constraint firstItem="Sjk-I7-ShR" firstAttribute="top" secondItem="g5N-EI-mS6" secondAttribute="bottom" id="BKs-Tl-8dz"/>
                             <constraint firstItem="3F6-JJ-eS0" firstAttribute="top" secondItem="4Ps-Z9-8Mv" secondAttribute="bottom" constant="20" id="JB4-sg-cjA"/>
                             <constraint firstItem="g5N-EI-mS6" firstAttribute="leading" secondItem="GlF-hg-eYZ" secondAttribute="leading" id="OhO-Tb-t81"/>
                             <constraint firstAttribute="trailing" secondItem="4Ps-Z9-8Mv" secondAttribute="trailing" constant="15" id="P4M-P2-GgM"/>
@@ -297,7 +298,6 @@
                             <constraint firstItem="GlF-hg-eYZ" firstAttribute="trailing" secondItem="qX9-tZ-I7c" secondAttribute="trailing" constant="16" id="qKi-9P-fZk"/>
                             <constraint firstItem="ZSv-Hu-oSe" firstAttribute="centerY" secondItem="qX9-tZ-I7c" secondAttribute="centerY" id="s2Z-ds-lud"/>
                             <constraint firstItem="3F6-JJ-eS0" firstAttribute="centerX" secondItem="Edj-vT-ggE" secondAttribute="centerX" id="vDv-i2-bYM"/>
-                            <constraint firstItem="Sjk-I7-ShR" firstAttribute="top" secondItem="qX9-tZ-I7c" secondAttribute="bottom" constant="50" id="wCH-JY-kh2"/>
                             <constraint firstItem="4Ps-Z9-8Mv" firstAttribute="top" secondItem="GlF-hg-eYZ" secondAttribute="top" id="wdy-it-zdN"/>
                         </constraints>
                     </view>

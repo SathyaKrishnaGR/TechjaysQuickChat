@@ -175,7 +175,6 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         } else {
         return PaginationUrl(endpoint: "chat/chat-lists/")
         }
-     //   return PaginationUrl(endpoint: "chat/chat-lists/")
     }
     
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
