@@ -170,10 +170,7 @@ extension ContactsPreviewController:UITableViewDelegate,UITableViewDataSource {
         cell.nameLabel?.text = self.value[indexPath.row]
         cell.timeLabel?.text = "8.34"
         cell.messageLabel?.text = "Hii Hello"
-
-
-           
-           return cell
+       return cell
         
        }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
