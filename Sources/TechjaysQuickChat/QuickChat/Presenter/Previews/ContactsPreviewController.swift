@@ -35,7 +35,7 @@ class ContactsPreviewController: UIViewController {
   private var users = [ObjectUser]()
  private let manager = UserManager()
   private var conversations = [ObjectConversation]()
-   var datas = ["mahi","cse","journey"]
+    let value: [String] = ["1","2", "3", "4", "5","6","7","8","9","10"]
     
   
   @IBAction func closePressed(_ sender: Any) {
@@ -159,17 +159,22 @@ class ContactsCell: UICollectionViewCell {
 
 extension ContactsPreviewController:UITableViewDelegate,UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datas.count
+     return self.value.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
-        if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
-             cell.nameLabel.text = datas[indexPath.row]
-             return cell
-        }
-        return UITableViewCell()
-    }
-    
+       let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as! ConversationCell
+        cell.nameLabel?.text = self.value[indexPath.row]
+           
+           return cell
+        
+       }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return UITableView.automaticDimension
+   }
     
 }
