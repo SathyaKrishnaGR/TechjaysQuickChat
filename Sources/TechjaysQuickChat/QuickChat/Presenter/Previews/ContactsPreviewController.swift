@@ -49,8 +49,8 @@ class ContactsPreviewController: UIViewController {
 //      self?.users = results.filter({$0.id != id})
        
     }*/
-    //  self.tableView.fetchData()
-      self.tableView.reloadData()
+      self.tableView.fetchData()
+     // self.tableView.reloadData()
   }
   
  /* required init?(coder aDecoder: NSCoder) {
