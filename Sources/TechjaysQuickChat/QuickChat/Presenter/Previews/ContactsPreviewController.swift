@@ -67,7 +67,8 @@ class ContactsPreviewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "didSelect" {
-            if let vc = segue.destination as? MessagesViewController {
+            let nav = segue.destination as! UINavigationController
+            if let vc = nav.viewControllers.first as? MessagesViewController{
                    if isSearchEnabled {
                         if let toUserId = searchArray[selectedRow].to_user_id {
                              vc.to_user_id = toUserId
