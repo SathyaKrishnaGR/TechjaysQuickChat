@@ -100,25 +100,25 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
             
-         /*    var last = ""
+            var last = ""
             var first = ""
-            if let lastName = users[indexPath.row].last_name {
+            if let lastName = self.users[indexPath.row].last_name {
                 last = lastName
             }
-            if let firstName = users[indexPath.row].first_name {
+            if let firstName = self.users[indexPath.row].first_name {
                 first = firstName
             }
             
-           cell.nameLabel.text = "\(first) \(last)"*/
-            cell.messageLabel.text = users[indexPath.row].username
-           /* DispatchQueue.main.async {
+           cell.nameLabel.text = "\(first) \(last)"
+            cell.messageLabel.text = self.users[indexPath.row].username
+            DispatchQueue.main.async {
                 if let urlString = self.users[indexPath.row].medium_profile_pic {
                     cell.profilePic.setImage(url: URL(string: urlString))
                 } else {
                     cell.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
                     cell.profilePic.contentMode = .scaleAspectFit
                 }
-            }*/
+            }
             
             
             return cell
