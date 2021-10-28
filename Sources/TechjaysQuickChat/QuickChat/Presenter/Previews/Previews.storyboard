@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nRe-hF-mGQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l7i-m2-WHZ">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -241,7 +241,7 @@
                     <connections>
                         <outlet property="searchbar" destination="g5N-EI-mS6" id="Gi7-xX-hK3"/>
                         <outlet property="tableView" destination="Sjk-I7-ShR" id="OLz-NK-wos"/>
-                        <segue destination="Vfh-3Y-bdt" kind="show" identifier="didSelect" id="AzD-92-9Of"/>
+                        <segue destination="Vfh-3Y-bdt" kind="presentation" identifier="didSelect" id="AzD-92-9Of"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOK-sL-MZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
