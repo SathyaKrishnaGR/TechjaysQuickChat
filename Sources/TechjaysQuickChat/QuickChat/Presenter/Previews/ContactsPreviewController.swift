@@ -50,7 +50,6 @@ class ContactsPreviewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
       socket = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
-      self.setTint()
       self.tableView.fetchData()
     
   }
