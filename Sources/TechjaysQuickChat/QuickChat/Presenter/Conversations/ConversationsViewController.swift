@@ -119,7 +119,7 @@ class ConversationsViewController: UIViewController {
 extension ConversationsViewController {
     @IBAction func newChatPressed(_ sender: Any){
         let vc: ContactsPreviewController = UIStoryboard.controller(storyboard: .previews)
-        present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
