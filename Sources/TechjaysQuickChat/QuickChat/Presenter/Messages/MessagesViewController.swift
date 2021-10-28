@@ -51,6 +51,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     
     //MARK: Public properties
     var conversation = ObjectConversation()
+    var newList = ObjectUser()
     var bottomInset: CGFloat {
         return view.safeAreaInsets.bottom + 50
     }

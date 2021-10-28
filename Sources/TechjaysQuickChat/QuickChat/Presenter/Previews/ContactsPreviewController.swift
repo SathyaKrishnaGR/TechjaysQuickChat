@@ -21,6 +21,8 @@
 //  SOFTWARE.
 
 import UIKit
+import Starscream
+import Alamofire
 
 protocol ContactsPreviewControllerDelegate: class {
   func contactsPreviewController(didSelect user: ObjectUser)
@@ -33,6 +35,12 @@ class ContactsPreviewController: UIViewController {
   weak var delegate: ContactsPreviewControllerDelegate?
   
   private var users = [ObjectUser]()
+    var toChatScreen: Bool = false
+    var selectedRow: Int =  -1
+    var opponentUserName: String?
+    var socketManager = SocketManager()
+    var socket: WebSocket!
+    var to_user_id: Int? = 0
  private let manager = UserManager()
 
   
@@ -50,7 +58,47 @@ class ContactsPreviewController: UIViewController {
       self.tableView.fetchData()
     
   }
-  
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if toChatScreen {
+            self.performSegue(withIdentifier: "didSelect", sender: self)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "didSelect" {
+            let nav = segue.destination as! UINavigationController
+            if let vc = nav.viewControllers.first as? MessagesViewController {
+                if selectedRow == -1 {
+                    if let toUserId = self.to_user_id {
+                        vc.to_user_id = toUserId
+                    }
+                    vc.opponentUserName = opponentUserName
+                    vc.toChatScreen = toChatScreen
+                } else {
+                   /* if isSearchEnabled {
+                        if let toUserId = searchArray[selectedRow].to_user_id {
+                             vc.to_user_id = toUserId
+                             vc.conversation = searchArray[selectedRow]
+                         }
+                    } else {*/
+                        if let toUserId = users[selectedRow].to_user_id {
+                             vc.to_user_id = toUserId
+                             vc.newList = users[selectedRow]
+                         }
+                   // }
+                }
+                vc.socketManager.socket = self.socket
+                vc.socketManager = self.socketManager
+            }
+            modalPresentationStyle = .fullScreen
+        }
+    }
  /* required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     modalTransitionStyle = .crossDissolve
@@ -125,6 +173,13 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
             return cell
         }
         return UITableViewCell()
+    }
+    
+    func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+            selectedRow = indexPath.row
+            performSegue(withIdentifier: "didSelect", sender: self)
+       
     }
     
     func paginatedTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
