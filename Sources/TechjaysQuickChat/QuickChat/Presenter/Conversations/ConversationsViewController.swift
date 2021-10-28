@@ -70,6 +70,7 @@ class ConversationsViewController: UIViewController {
         socket = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         socketManager.listUpdateDelegate = self
         self.setTint()
+        self.deleteButton.customView?.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {

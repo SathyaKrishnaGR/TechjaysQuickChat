@@ -53,9 +53,9 @@ class ContactsPreviewController: UIViewController {
       self.tableView.fetchData()
     
   }
-    override func viewDidAppear(_ animated: Bool) {
+    /*  override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        if toChatScreen {
+       if toChatScreen {
             self.performSegue(withIdentifier: "didSelect", sender: self)
         }
     }
@@ -63,7 +63,7 @@ class ContactsPreviewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         navigationController?.setNavigationBarHidden(false, animated: true)
-    }
+    }*/
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "didSelect" {
