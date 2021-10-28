@@ -31,6 +31,7 @@ class ConversationsViewController: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
 //    @IBOutlet weak var newMessageCountLabel: UILabel!
+//    @IBOutlet weak var searchBar: UISearchBar!
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -48,6 +49,9 @@ class ConversationsViewController: UIViewController {
     var socketManager = SocketManager()
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
+//    fileprivate var isSearchEnabled: Bool = false
+    fileprivate var searchArray = [ObjectConversation]()
+   
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -131,8 +135,12 @@ extension ConversationsViewController {
                 selectedConversations.append(conversations[indexPath.row])
             }
             self.tableView.beginUpdates()
+            self.conversations.removeArrayOfIndex(at: selectedRows)
             self.tableView.deleteRows(at: selectedRows, with: .automatic)
             deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
+       
+        
+            
         }
     }
     
@@ -143,41 +151,42 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     func paginatedTableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
+    
     func paginatedTableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+    
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
-        
+
         return PaginationUrl(endpoint: "chat/chat-lists/")
     }
+    
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
-        DispatchQueue.main.async {
-            self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
-        }
-        
+        self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
     }
+    
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if conversations.isEmpty {
-            return 1
-        }
-        return conversations.count
+            return self.conversations.count
     }
+    
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard !conversations.isEmpty else {
-            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
-        }
+//        guard !conversations.isEmpty else {
+//            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
+//        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
             cell.set(conversations[indexPath.row])
             return cell
         }
         return UITableViewCell()
     }
+    
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !isEditing {
             selectedRow = indexPath.row
             performSegue(withIdentifier: "didSelect", sender: self)
         }
     }
+    
     func paginatedTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if conversations.isEmpty {
             return tableView.bounds.height - 50 //header view height
@@ -215,6 +224,28 @@ extension ConversationsViewController {
         }
     }
     
+    fileprivate func searchConversations(for url: String, isFirstPage: Bool, hasNext: @escaping (Bool) -> Void) {
+        APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectConversation]>) in
+            switch status {
+            case .SUCCESS:
+                if let data = response.data {
+                    if isFirstPage {
+                        self.searchArray = data
+                    } else {
+                        self.searchArray.append(contentsOf: data )
+                    }
+                    
+                    self.tableView.reloadData()
+                    self.tableView.scroll(to: .top, animated: true)
+                    self.tableView.reloadData()
+                }
+                hasNext(response.nextLink ?? false)
+            case .FAILURE:
+                hasNext(false)
+            }
+        }
+    }
+    
     fileprivate func deleteChatList(rows: [IndexPath], userIdToDelete: [ObjectConversation] ) {
         let stringArray = userIdToDelete.map { "\($0.to_user_id ?? 0)" }
         let payloadString = stringArray.joined(separator: ",")
@@ -223,9 +254,12 @@ extension ConversationsViewController {
         APIClient().POST(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token], payload: ["to_user_id": payloadString]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
-                self.conversations.removeArrayOfIndex(array: rows)
                 self.isEditing = !self.isEditing
                 self.resetEditAndDeletebuttons()
+                DispatchQueue.main.async {
+                    self.tableView.fetchData()
+                }
+                
                 self.tableView.endUpdates()
             case .FAILURE:
                 print(response.msg)
@@ -252,8 +286,8 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                             if !self.conversations.contains(where: { conversation in conversation.to_user_id == userId }) {
                                 print("1 does not exists in the array")
                                 
-//                                self.newMessageCountLabel.isHidden = false
-//                                self.newMessageCountLabel.backgroundColor = ChatColors.tint
+                                //                                self.newMessageCountLabel.isHidden = false
+                                //                                self.newMessageCountLabel.backgroundColor = ChatColors.tint
                                 let newconversation = ObjectConversation()
                                 newconversation.first_name = sender.username
                                 newconversation.to_user_id = sender.user_id
@@ -265,7 +299,7 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                                 
                             } else {
                                 print("1 exists in the array")
-//                                self.newMessageCountLabel.isHidden = true
+                                //                                self.newMessageCountLabel.isHidden = true
                                 self.tableView.fetchData()
                                 
                             }
@@ -291,3 +325,4 @@ extension ConversationsViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
     }
 }
+

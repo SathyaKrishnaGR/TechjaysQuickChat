@@ -28,7 +28,7 @@ class ConversationCell: UITableViewCell {
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
-//    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     //MARK: Private properties
     let userID = UserManager().currentUserID() ?? 0
@@ -52,7 +52,7 @@ class ConversationCell: UITableViewCell {
         //    guard let id = conversation.userIDs.filter({$0 != userID}).first else { return }
         //    let isRead = conversation.isRead[userID] ?? true
         //    if !isRead {
-//        timeLabel.font = timeLabel.font.bold
+     //   timeLabel.font = timeLabel.font.bold
         
         // Data Set here
         var company = ""
@@ -64,8 +64,9 @@ class ConversationCell: UITableViewCell {
             first = firstName
         }
         self.nameLabel.text = first + company
-        
-//        self.timeLabel.text = conversation.timestamp
+        if let timeStamp = conversation.timestamp {
+            timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
+        }
         self.messageLabel.text = conversation.message
         DispatchQueue.main.async {
             if let urlString = conversation.medium_profile_pic {
@@ -83,7 +84,7 @@ class ConversationCell: UITableViewCell {
             //        profilePic.cancelDownload()
             nameLabel.font = nameLabel.font.regular
             messageLabel.font = messageLabel.font.regular
-//            timeLabel.font = timeLabel.font.regular
+         //   timeLabel.font = timeLabel.font.regular
             messageLabel.textColor = .gray
             messageLabel.text = nil
         }

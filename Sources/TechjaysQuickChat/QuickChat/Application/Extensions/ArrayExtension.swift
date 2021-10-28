@@ -8,9 +8,31 @@
 import Foundation
 
 extension Array {
-    mutating func removeArrayOfIndex(array: [IndexPath]) {
-        _ = array.map { index in
-            self.remove(at: index.row)
+    typealias CompletionHandler = () -> Void
+
+//    mutating func removeArrayOfIndex(array: [IndexPath], completionHandler: CompletionHandler)  {
+//        Loop -> Remove and Complete
+//        _ = array.reversed().map { index in
+//            print("index \(index.row)")
+//            print("Self should print the array \(self)")
+//            if array.indices.contains(index.row) {
+//                remove(at: index.row)
+//            }
+//        }
+//        completionHandler()
+//    }
+//    }
+}
+
+extension Array {
+    mutating func removeArrayOfIndex(at indexes: [IndexPath]) {
+        var lastIndex: Int? = nil
+        for index in indexes.sorted(by: >) {
+            guard lastIndex != index.row else {
+                continue
+            }
+            remove(at: index.row)
+            lastIndex = index.row
         }
     }
 }
