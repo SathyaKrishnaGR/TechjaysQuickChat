@@ -59,6 +59,7 @@ class ConversationsViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.deleteButton.customView?.isHidden = true
         tableView.allowsMultipleSelectionDuringEditing = true
         FayvKeys.ChatDefaults.paginationLimit = "10"
     }
