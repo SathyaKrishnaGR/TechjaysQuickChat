@@ -242,7 +242,7 @@
                     <connections>
                         <outlet property="searchbar" destination="g5N-EI-mS6" id="Gi7-xX-hK3"/>
                         <outlet property="tableView" destination="Sjk-I7-ShR" id="OLz-NK-wos"/>
-                        <segue destination="Vfh-3Y-bdt" kind="push" identifier="didSelect" id="AzD-92-9Of"/>
+                        <segue destination="Vfh-3Y-bdt" kind="show" identifier="didSelect" id="AzD-92-9Of"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOK-sL-MZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -275,7 +275,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dz2-1d-iVu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6.1538461538461533" y="968.95734597156388"/>
+            <point key="canvasLocation" x="237" y="970"/>
         </scene>
     </scenes>
     <resources>
