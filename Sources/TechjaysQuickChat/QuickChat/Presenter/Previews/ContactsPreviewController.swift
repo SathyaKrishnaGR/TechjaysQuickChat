@@ -113,10 +113,10 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
             cell.messageLabel?.text = self.users[indexPath.row].username
             DispatchQueue.main.async {
                 if let urlString = self.users[indexPath.row].medium_profile_pic {
-                    cell.profilePic.setImage(url: URL(string: urlString))
+                    cell.profilePic?.setImage(url: URL(string: urlString))
                 } else {
                     cell.profilePic?.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
-                    cell.profilePic.contentMode = .scaleAspectFit
+                    cell.profilePic?.contentMode = .scaleAspectFit
                 }
             }
             
