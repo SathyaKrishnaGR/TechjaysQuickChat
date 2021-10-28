@@ -385,7 +385,7 @@ extension ConversationsViewController {
 
 extension ConversationsViewController:UISearchBarDelegate {
    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearchEnabled = false
     }
     

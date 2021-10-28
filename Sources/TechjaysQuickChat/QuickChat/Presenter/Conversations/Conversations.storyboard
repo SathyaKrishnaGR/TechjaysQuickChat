@@ -142,7 +142,7 @@
                                     <action selector="editPressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="6RJ-Pg-qJG"/>
                                 </connections>
                             </button>
-                            <searchBar contentMode="redraw" placeholder="Search..." translatesAutoresizingMaskIntoConstraints="NO" id="Jvk-m2-GFt">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search..." translatesAutoresizingMaskIntoConstraints="NO" id="Jvk-m2-GFt">
                                 <rect key="frame" x="0.0" y="89" width="390" height="50"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -194,7 +194,7 @@
                         <outlet property="newChatListBtn" destination="EWf-D9-C9R" id="iPg-YR-nqf"/>
                         <outlet property="searchBar" destination="Jvk-m2-GFt" id="y9y-pw-u3x"/>
                         <outlet property="tableView" destination="CZg-e7-KoX" id="EC0-gT-Cqg"/>
-                        <segue destination="jE4-jN-pKd" kind="show" identifier="didSelect" id="uYn-Fc-dsr"/>
+                        <segue destination="FIB-XP-7yZ" kind="push" identifier="didSelect" id="Yfv-SP-2mQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lqd-ZW-jLO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -209,26 +209,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QYc-mz-mWY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5513.6000000000004" y="428.57142857142861"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="bOb-7N-vLg">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jE4-jN-pKd" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="yhI-rE-O1g"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Onq-in-TIV">
-                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="FIB-XP-7yZ" kind="relationship" relationship="rootViewController" id="ZKj-zK-ypi"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BXs-4F-J89" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4861.6000000000004" y="428.57142857142861"/>
+            <point key="canvasLocation" x="4837" y="400"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mff-gj-2vO">

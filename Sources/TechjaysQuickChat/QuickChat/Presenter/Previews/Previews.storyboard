@@ -296,7 +296,7 @@
                                     <outlet property="paginationDelegate" destination="l7i-m2-WHZ" id="bDv-uv-rug"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" placeholder="Search..." translatesAutoresizingMaskIntoConstraints="NO" id="g5N-EI-mS6">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search..." translatesAutoresizingMaskIntoConstraints="NO" id="g5N-EI-mS6">
                                 <rect key="frame" x="0.0" y="134" width="390" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="oUe-z5-QXb"/>
@@ -410,29 +410,12 @@
                         <outlet property="backArrowBtn" destination="AmS-7V-G34" id="AAd-Et-Nbd"/>
                         <outlet property="searchbar" destination="g5N-EI-mS6" id="Gi7-xX-hK3"/>
                         <outlet property="tableView" destination="Sjk-I7-ShR" id="OLz-NK-wos"/>
-                        <segue destination="na2-AC-wfw" kind="show" identifier="didSelect" id="SLq-Zv-QBP"/>
+                        <segue destination="Vfh-3Y-bdt" kind="push" identifier="didSelect" id="AzD-92-9Of"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOK-sL-MZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7.2000000000000002" y="969.45812807881782"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="5TX-G7-vFf">
-            <objects>
-                <navigationController id="na2-AC-wfw" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Ie1-ph-aTU"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="chp-uz-0oh">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Vfh-3Y-bdt" kind="relationship" relationship="rootViewController" id="xDD-sb-aEl"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SNH-7g-0ad" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="912" y="978"/>
         </scene>
         <!--MessagesViewController-->
         <scene sceneID="3fM-w3-eEd">
@@ -442,7 +425,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Le2-TR-jX0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1682" y="864"/>
+            <point key="canvasLocation" x="651" y="914"/>
         </scene>
     </scenes>
     <resources>
