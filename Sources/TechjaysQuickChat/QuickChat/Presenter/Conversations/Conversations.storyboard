@@ -131,16 +131,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Chat" largeTitleDisplayMode="always" id="VV4-rQ-2Nk">
-                        <barButtonItem key="leftBarButtonItem" title="Edit" id="SQJ-xZ-GMi">
-                            <connections>
-                                <action selector="editPressed:" destination="ri6-fX-8IQ" id="dNP-IX-pWy"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="square.and.pencil" catalog="system" id="Nlh-Sm-TwQ">
-                            <connections>
-                                <action selector="newChatPressed:" destination="ri6-fX-8IQ" id="gmx-a2-Uk8"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Edit" id="SQJ-xZ-GMi">
+                                <connections>
+                                    <action selector="editPressed:" destination="ri6-fX-8IQ" id="dNP-IX-pWy"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="square.and.pencil" catalog="system" id="Nlh-Sm-TwQ">
+                                <connections>
+                                    <action selector="newChatPressed:" destination="ri6-fX-8IQ" id="gmx-a2-Uk8"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="editButton" destination="SQJ-xZ-GMi" id="tTH-OP-ehb"/>

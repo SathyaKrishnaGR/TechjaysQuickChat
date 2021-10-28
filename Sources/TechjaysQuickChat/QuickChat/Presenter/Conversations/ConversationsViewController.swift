@@ -131,7 +131,8 @@ extension ConversationsViewController {
         isEditing = !isEditing
         if isEditing {
             self.editButton.title = "Done"
-            self.navigationItem.rightBarButtonItem = nil
+            self.navigationItem.rightBarButtonItem = self.doneButton
+            doneButton = UIBarButtonItem(title: "Delete", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ConversationsViewController.deletePressed(_:)))
 //            self.editButton.setTitle("Done", for: .normal)
 //            self.editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
 //            self.deleteButton.isHidden = false
@@ -139,7 +140,8 @@ extension ConversationsViewController {
         } else {
             self.editButton.title = "Edit"
             self.navigationItem.rightBarButtonItem = self.doneButton
-            doneButton = UIBarButtonItem(title: "Delete", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ConversationsViewController.deletePressed(_:)))
+            self.navigationItem.rightBarButtonItem = nil
+
 //            self.editButton.setTitle("Edit", for: .normal)
 //            self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
 //            self.deleteButton.isHidden = true
