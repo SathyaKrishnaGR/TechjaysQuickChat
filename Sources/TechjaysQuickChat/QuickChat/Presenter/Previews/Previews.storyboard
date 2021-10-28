@@ -405,7 +405,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Sjk-I7-ShR" id="OLz-NK-wos"/>
-                        <segue destination="na2-AC-wfw" kind="show" identifier="didselect" id="SLq-Zv-QBP"/>
+                        <segue destination="na2-AC-wfw" kind="show" identifier="didSelect" id="SLq-Zv-QBP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOK-sL-MZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
