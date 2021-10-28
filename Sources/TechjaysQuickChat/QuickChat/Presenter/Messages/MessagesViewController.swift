@@ -275,6 +275,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             //        if message.contentType == .none {
             let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
             cell.setChatList(message, conversation: conversation)
+            cell.selectionStyle = .none
             return cell
             //        }
             //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
@@ -286,6 +287,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
             cell.chatBubbleView.backgroundColor = ChatColors.tint
             cell.setChatList(message, conversation: conversation)
+            cell.selectionStyle = .none
             return cell
             //        }
             //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell

@@ -126,11 +126,15 @@ extension ConversationsViewController {
     @IBAction func editPressed(_ sender: Any) {
         isEditing = !isEditing
         if isEditing {
+            self.editButton.title = "Done"
+            self.deleteButton.customView?.isHidden = false
 //            self.editButton.setTitle("Done", for: .normal)
 //            self.editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
 //            self.deleteButton.isHidden = false
 //            self.deleteButton.isUserInteractionEnabled = true
         } else {
+            self.editButton.title = "Edit"
+            self.deleteButton.customView?.isHidden = true
 //            self.editButton.setTitle("Edit", for: .normal)
 //            self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
 //            self.deleteButton.isHidden = true
