@@ -132,7 +132,11 @@ extension ConversationsViewController {
         if isEditing {
             self.editButton.title = "Done"
             self.navigationItem.rightBarButtonItem = self.doneButton
-            doneButton = UIBarButtonItem(title: "Delete", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ConversationsViewController.deletePressed(_:)))
+          //  doneButton = UIBarButtonItem(title: "Delete", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ConversationsViewController.deletePressed(_:)))
+          //  self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "messenger"), style: .done, target: self, action: #selector(didTapButton))
+          //  self.navigationItem.rightBarButtonItem?.tintColor = UILabel.init().textColor
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(didTapClose))
+            self.navigationItem.rightBarButtonItem?.tintColor = ChatColors.tint
 //            self.editButton.setTitle("Done", for: .normal)
 //            self.editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
 //            self.deleteButton.isHidden = false
@@ -148,7 +152,10 @@ extension ConversationsViewController {
 //            self.deleteButton.isUserInteractionEnabled = false
         }
     }
-    
+    @objc func didTapClose() {
+        self.navigationItem.rightBarButtonItem = self.doneButton
+        self.deleteAndRemoveRows()
+     }
     @IBAction func deletePressed(_ sender: Any) {
        /* if deleteButton.isEnabled {
             deleteButton.isEnabled = false
