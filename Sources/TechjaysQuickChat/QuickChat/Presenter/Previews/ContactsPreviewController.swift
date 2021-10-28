@@ -24,17 +24,14 @@ import UIKit
 import Starscream
 import Alamofire
 
-protocol ContactsPreviewControllerDelegate: class {
-  func contactsPreviewController(didSelect user: ObjectUser)
-}
-
 class ContactsPreviewController: UIViewController {
-  
+    
+    //MARK: IBOutlets
     @IBOutlet weak var searchbar: UISearchBar!
     @IBOutlet weak var tableView: PaginatedTableView!
     @IBOutlet weak var backArrowBtn: UIButton!
     
-    weak var delegate: ContactsPreviewControllerDelegate?
+    //MARK: Private properties
     private var users = [ObjectConversation]()
     private var searchArray = [ObjectConversation]()
     fileprivate var isSearchEnabled: Bool = false
@@ -74,13 +71,13 @@ class ContactsPreviewController: UIViewController {
         if segue.identifier == "didSelect" {
             let nav = segue.destination as! UINavigationController
             if let vc = nav.viewControllers.first as? MessagesViewController {
-                if selectedRow == -1 {
+               /* if selectedRow == -1 {
                     if let toUserId = self.to_user_id {
                         vc.to_user_id = toUserId
                     }
                     vc.opponentUserName = opponentUserName
                     vc.toChatScreen = toChatScreen
-                } else {
+                } else {*/
                    if isSearchEnabled {
                         if let toUserId = searchArray[selectedRow].to_user_id {
                              vc.to_user_id = toUserId
@@ -92,18 +89,14 @@ class ContactsPreviewController: UIViewController {
                              vc.conversation = users[selectedRow]
                          }
                     }
-                }
+                //}
                 vc.socketManager.socket = self.socket
                 vc.socketManager = self.socketManager
             }
             modalPresentationStyle = .fullScreen
         }
     }
- 
 }
-
-
-
 
 extension ContactsPreviewController:PaginatedTableViewDelegate {
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
@@ -130,10 +123,9 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as? ConversationCell {
-            
+            var last = ""
+            var first = ""
             if isSearchEnabled {
-                var last = ""
-                var first = ""
                 if let lastName = self.searchArray[indexPath.row].last_name {
                     last = lastName
                 }
@@ -153,9 +145,7 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
                     }
                 }
             } else {
-                var last = ""
-                var first = ""
-                if let lastName = self.users[indexPath.row].last_name {
+               if let lastName = self.users[indexPath.row].last_name {
                     last = lastName
                 }
                 if let firstName = self.users[indexPath.row].first_name {
@@ -174,18 +164,14 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
                     }
                 }
             }
-            
-            
             return cell
         }
         return UITableViewCell()
     }
     
     func paginatedTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-            selectedRow = indexPath.row
-            performSegue(withIdentifier: "didSelect", sender: self)
-       
+        selectedRow = indexPath.row
+        performSegue(withIdentifier: "didSelect", sender: self)
     }
     
     func paginatedTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -199,18 +185,6 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
         APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
-               /* if let data = response.data {
-                    if isFirstPage {
-                        self.users = data
-                    } else {
-                        self.users.append(contentsOf: data )
-                    }
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                    self.tableView.scroll(to: .top, animated: true)
-               }
-            hasNext(response.nextLink ?? false)*/
                 if isFirstPage, let data = response.data {
                     if self.isSearchEnabled {
                         self.searchArray = data
