@@ -14,11 +14,11 @@
             <objects>
                 <viewController storyboardIdentifier="ConversationsViewController" title=" " id="ri6-fX-8IQ" userLabel="Conversations" customClass="ConversationsViewController" customModule="TechjaysQuickChat" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qEq-DZ-2B1">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="756"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CZg-e7-KoX" customClass="PaginatedTableView" customModule="TechjaysQuickChat">
-                                <rect key="frame" x="0.0" y="183" width="390" height="627"/>
+                                <rect key="frame" x="0.0" y="51" width="390" height="671"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="tintColor" red="0.25162395830000001" green="0.53981399539999997" blue="0.8078737855" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
@@ -109,74 +109,22 @@
                                     <outlet property="paginationDelegate" destination="ri6-fX-8IQ" id="1dp-7j-Wl9"/>
                                 </connections>
                             </tableView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xl9-qF-y2U">
-                                <rect key="frame" x="314" y="98" width="60" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="jVa-9g-uWF"/>
-                                    <constraint firstAttribute="width" constant="60" id="tzo-S2-9nW"/>
-                                </constraints>
-                                <color key="tintColor" red="0.1247849539" green="0.45409178729999999" blue="0.94906610250000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Delete">
-                                    <color key="titleColor" red="0.1247849539" green="0.45409178729999999" blue="0.94906610250000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <action selector="deletePressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="GGo-H0-zdB"/>
-                                </connections>
-                            </button>
-                            <label hidden="YES" opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGV-l1-IZ6">
-                                <rect key="frame" x="167.66666666666666" y="103" width="55" height="25"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XtN-b5-qY4">
-                                <rect key="frame" x="16" y="98.666666666666671" width="46" height="34.000000000000014"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="fNN-hJ-KFm"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Edit">
-                                    <color key="titleColor" red="0.1247849539" green="0.45409178729999999" blue="0.94906610250000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <action selector="editPressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="6RJ-Pg-qJG"/>
-                                </connections>
-                            </button>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search..." translatesAutoresizingMaskIntoConstraints="NO" id="Jvk-m2-GFt">
-                                <rect key="frame" x="0.0" y="133" width="390" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="ri6-fX-8IQ" id="juF-kk-9rD"/>
                                 </connections>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWf-D9-C9R">
-                                <rect key="frame" x="254" y="100.66666666666667" width="40" height="30.000000000000014"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="mwZ-sN-r71"/>
-                                    <constraint firstAttribute="height" constant="30" id="nZT-K9-ssA"/>
-                                </constraints>
-                                <color key="tintColor" systemColor="labelColor"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="square.and.pencil" catalog="system"/>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eVC-iO-6zG"/>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Jvk-m2-GFt" firstAttribute="top" secondItem="eVC-iO-6zG" secondAttribute="top" id="3wA-Il-P3C"/>
                             <constraint firstItem="Jvk-m2-GFt" firstAttribute="leading" secondItem="eVC-iO-6zG" secondAttribute="leading" id="77P-At-oue"/>
-                            <constraint firstItem="jGV-l1-IZ6" firstAttribute="centerX" secondItem="eVC-iO-6zG" secondAttribute="centerX" id="COC-az-XI3"/>
-                            <constraint firstItem="EWf-D9-C9R" firstAttribute="centerY" secondItem="jGV-l1-IZ6" secondAttribute="centerY" id="FL1-JZ-Ivr"/>
                             <constraint firstItem="CZg-e7-KoX" firstAttribute="top" secondItem="Jvk-m2-GFt" secondAttribute="bottom" id="LoE-Yf-22k"/>
-                            <constraint firstItem="XtN-b5-qY4" firstAttribute="centerY" secondItem="jGV-l1-IZ6" secondAttribute="centerY" id="OCJ-LD-ggN"/>
-                            <constraint firstItem="jGV-l1-IZ6" firstAttribute="centerY" secondItem="xl9-qF-y2U" secondAttribute="centerY" id="RPU-Jt-dyL"/>
-                            <constraint firstItem="eVC-iO-6zG" firstAttribute="trailing" secondItem="xl9-qF-y2U" secondAttribute="trailing" constant="16" id="SGz-na-mMd"/>
-                            <constraint firstItem="CZg-e7-KoX" firstAttribute="top" secondItem="xl9-qF-y2U" secondAttribute="bottom" constant="50" id="bfI-0f-ln6"/>
                             <constraint firstItem="Jvk-m2-GFt" firstAttribute="trailing" secondItem="eVC-iO-6zG" secondAttribute="trailing" id="eLP-6B-4wQ"/>
-                            <constraint firstItem="XtN-b5-qY4" firstAttribute="leading" secondItem="eVC-iO-6zG" secondAttribute="leading" constant="16" id="eWF-cg-vhl"/>
-                            <constraint firstItem="xl9-qF-y2U" firstAttribute="leading" secondItem="EWf-D9-C9R" secondAttribute="trailing" constant="20" id="hrT-yT-Emk"/>
                             <constraint firstItem="CZg-e7-KoX" firstAttribute="leading" secondItem="eVC-iO-6zG" secondAttribute="leading" id="lne-Ax-TUf"/>
-                            <constraint firstItem="Jvk-m2-GFt" firstAttribute="top" secondItem="xl9-qF-y2U" secondAttribute="bottom" id="qN9-cC-fgw"/>
-                            <constraint firstItem="xl9-qF-y2U" firstAttribute="top" secondItem="eVC-iO-6zG" secondAttribute="top" constant="10" id="v94-oN-ezo"/>
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="bottom" secondItem="CZg-e7-KoX" secondAttribute="bottom" id="vHa-cl-xzG"/>
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="trailing" secondItem="CZg-e7-KoX" secondAttribute="trailing" id="y6u-6o-oOi"/>
                         </constraints>
@@ -206,12 +154,12 @@
                         <outlet property="newChatListButton" destination="Nlh-Sm-TwQ" id="WYM-4c-XF7"/>
                         <outlet property="searchBar" destination="Jvk-m2-GFt" id="y9y-pw-u3x"/>
                         <outlet property="tableView" destination="CZg-e7-KoX" id="EC0-gT-Cqg"/>
-                        <segue destination="s4l-NB-coC" kind="push" identifier="didSelect" id="YoX-2n-Vbl"/>
+                        <segue destination="s4l-NB-coC" kind="showDetail" identifier="didSelect" id="YoX-2n-Vbl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lqd-ZW-jLO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4178.4615384615381" y="427.96208530805683"/>
+            <point key="canvasLocation" x="4012" y="428"/>
         </scene>
         <!--MessagesViewController-->
         <scene sceneID="nvb-VT-jAS">
@@ -228,7 +176,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T4u-7a-8pH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Xp-LY-Exj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="3Xp-LY-Exj">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -258,7 +206,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PNH-cO-s70" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4836.9230769230771" y="399.52606635071089"/>
+            <point key="canvasLocation" x="4854" y="428"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.50588235290000005" green="0.56470588239999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
