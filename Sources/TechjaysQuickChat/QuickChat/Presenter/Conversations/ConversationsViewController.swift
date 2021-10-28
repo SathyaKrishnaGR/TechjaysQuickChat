@@ -152,7 +152,7 @@ extension ConversationsViewController {
     @objc func didTapClose() {
         self.navigationItem.rightBarButtonItem = self.doneButton
         self.deleteAndRemoveRows()
-        self.editButton.title = "Done"
+        self.editButton.title = "Edit"
      }
     @IBAction func deletePressed(_ sender: Any) {
        /* if deleteButton.isEnabled {
