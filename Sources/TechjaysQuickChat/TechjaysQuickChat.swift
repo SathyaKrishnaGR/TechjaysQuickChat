@@ -1,7 +1,6 @@
 import UIKit
 
 public struct TechjaysQuickChat {
-    
     public init(themeColor: UIColor) {
         ChatColors.tint = themeColor
     }
