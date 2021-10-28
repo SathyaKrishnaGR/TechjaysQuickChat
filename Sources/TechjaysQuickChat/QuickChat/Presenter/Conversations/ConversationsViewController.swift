@@ -31,7 +31,7 @@ class ConversationsViewController: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
 //    @IBOutlet weak var newMessageCountLabel: UILabel!
-    @IBOutlet weak var searchBar: UISearchBar!
+//    @IBOutlet weak var searchBar: UISearchBar!
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -49,7 +49,7 @@ class ConversationsViewController: UIViewController {
     var socketManager = SocketManager()
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
-    fileprivate var isSearchEnabled: Bool = false
+//    fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [ObjectConversation]()
    
     
@@ -157,31 +157,16 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
-        if isSearchEnabled{
-        } else {
-        return PaginationUrl(endpoint: "chat/chat-lists/")
-        }
+
         return PaginationUrl(endpoint: "chat/chat-lists/")
     }
     
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
-        if isSearchEnabled {
-            DispatchQueue.main.async {
-                self.searchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
-            }
-        }
+        self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
     }
     
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearchEnabled {
-            return self.searchArray.count
-        } else {
             return self.conversations.count
-        }
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -189,24 +174,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
 //            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
 //        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
-            if isSearchEnabled {
-                cell.nameLabel.text = searchArray[indexPath.row].first_name
-                cell.messageLabel.text = searchArray[indexPath.row].message
-                if let timeStamp = searchArray[indexPath.row].timestamp {
-                    cell.timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
-                }
-                DispatchQueue.main.async {
-                    if let urlString = self.searchArray[indexPath.row].medium_profile_pic {
-                        cell.profilePic.setImage(url: URL(string: urlString))
-                    } else {
-                        cell.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
-                        cell.profilePic.contentMode = .scaleAspectFit
-                    }
-                }
-                
-            } else{
-                cell.set(conversations[indexPath.row])
-            }
+            cell.set(conversations[indexPath.row])
             return cell
         }
         return UITableViewCell()
@@ -358,28 +326,3 @@ extension ConversationsViewController {
     }
 }
 
-extension ConversationsViewController:UISearchBarDelegate {
-   
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        isSearchEnabled = false
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        isSearchEnabled = false
-    }
-    
-   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.resignFirstResponder()
-        isSearchEnabled = true
-        self.tableView.fetchData()
-        if searchText == "" {
-            isSearchEnabled = false
-            self.tableView.reloadData()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            if !self.tableView.isLoading {
-                self.tableView.reloadData()
-            }
-        }
-    }
-}
