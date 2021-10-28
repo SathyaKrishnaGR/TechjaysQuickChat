@@ -30,7 +30,7 @@ class ConversationsViewController: UIViewController {
     @IBOutlet weak var tableView: PaginatedTableView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var editButton: UIBarButtonItem!
-    @IBOutlet weak var deleteButton: UIBarButtonItem!
+  //  @IBOutlet weak var deleteButton: UIBarButtonItem!
 //    @IBOutlet weak var newMessageCountLabel: UILabel!
     
     @IBOutlet weak var newChatListButton: UIBarButtonItem!
@@ -54,24 +54,26 @@ class ConversationsViewController: UIViewController {
     var socketListDelegate: SocketListUpdateDelegate?
     fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [ObjectConversation]()
+    var doneButton = UIBarButtonItem()
    
     
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.deleteButton.customView?.isHidden = true
         tableView.allowsMultipleSelectionDuringEditing = true
         FayvKeys.ChatDefaults.paginationLimit = "10"
+        self.navigationItem.rightBarButtonItem = nil
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.tableView.fetchData()
-        deleteButton.isEnabled = true
+       // deleteButton.isEnabled = true
         socket = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         socketManager.listUpdateDelegate = self
         self.setTint()
-        self.deleteButton.customView?.isHidden = true
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -129,14 +131,15 @@ extension ConversationsViewController {
         isEditing = !isEditing
         if isEditing {
             self.editButton.title = "Done"
-            self.deleteButton.customView?.isHidden = false
+            self.navigationItem.rightBarButtonItem = nil
 //            self.editButton.setTitle("Done", for: .normal)
 //            self.editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
 //            self.deleteButton.isHidden = false
 //            self.deleteButton.isUserInteractionEnabled = true
         } else {
             self.editButton.title = "Edit"
-            self.deleteButton.customView?.isHidden = true
+            self.navigationItem.rightBarButtonItem = self.doneButton
+            doneButton = UIBarButtonItem(title: "Delete", style: UIBarButtonItem.Style.plain, target: self, action: #selector(ConversationsViewController.deletePressed(_:)))
 //            self.editButton.setTitle("Edit", for: .normal)
 //            self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
 //            self.deleteButton.isHidden = true
@@ -145,10 +148,12 @@ extension ConversationsViewController {
     }
     
     @IBAction func deletePressed(_ sender: Any) {
-        if deleteButton.isEnabled {
+       /* if deleteButton.isEnabled {
             deleteButton.isEnabled = false
             deleteAndRemoveRows()
-        }
+        }*/
+        self.navigationItem.rightBarButtonItem = nil
+        deleteAndRemoveRows()
     }
     fileprivate func deleteAndRemoveRows() {
         if let selectedRows = tableView.indexPathsForSelectedRows {
@@ -330,6 +335,8 @@ extension ConversationsViewController {
     }
     
     fileprivate func resetEditAndDeletebuttons() {
+        self.navigationItem.rightBarButtonItem = nil
+        self.doneButton.title = "Edit"
 //        self.deleteButton.isHidden =  true
 //        self.deleteButton.isEnabled = true
 //        self.deleteButton.isUserInteractionEnabled = false
@@ -387,7 +394,7 @@ extension ConversationsViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
         self.newChatListButton.tintColor = ChatColors.tint
         self.editButton.tintColor = ChatColors.tint
-        self.deleteButton.tintColor = ChatColors.tint
+       // self.deleteButton.tintColor = ChatColors.tint
     }
 }
 

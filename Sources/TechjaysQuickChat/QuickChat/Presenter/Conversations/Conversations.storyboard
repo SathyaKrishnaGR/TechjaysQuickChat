@@ -136,21 +136,13 @@
                                 <action selector="editPressed:" destination="ri6-fX-8IQ" id="dNP-IX-pWy"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem title="Delete" id="IfA-Wk-5eQ">
-                                <connections>
-                                    <action selector="deletePressed:" destination="ri6-fX-8IQ" id="8ju-bk-vDc"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="square.and.pencil" catalog="system" id="Nlh-Sm-TwQ">
-                                <connections>
-                                    <action selector="newChatPressed:" destination="ri6-fX-8IQ" id="gmx-a2-Uk8"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="square.and.pencil" catalog="system" id="Nlh-Sm-TwQ">
+                            <connections>
+                                <action selector="newChatPressed:" destination="ri6-fX-8IQ" id="gmx-a2-Uk8"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="deleteButton" destination="IfA-Wk-5eQ" id="W5s-Uh-N8o"/>
                         <outlet property="editButton" destination="SQJ-xZ-GMi" id="tTH-OP-ehb"/>
                         <outlet property="newChatListButton" destination="Nlh-Sm-TwQ" id="WYM-4c-XF7"/>
                         <outlet property="searchBar" destination="Jvk-m2-GFt" id="y9y-pw-u3x"/>
