@@ -55,6 +55,8 @@ class ContactsPreviewController: UIViewController {
 //      self?.users = results.filter({$0.id != id})
        
     }*/
+      socket = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
+      
       self.tableView.fetchData()
     
   }
