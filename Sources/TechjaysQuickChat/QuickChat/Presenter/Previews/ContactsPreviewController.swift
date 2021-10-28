@@ -126,6 +126,13 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
         return UITableViewCell()
     }
     
+    func paginatedTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if users.isEmpty {
+            return tableView.bounds.height - 50 //header view height
+        }
+        return 80
+    }
+    
     fileprivate func fetchConversations(for url: String, isFirstPage: Bool, hasNext: @escaping (Bool) -> Void) {
         APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectUser]>) in
             switch status {
