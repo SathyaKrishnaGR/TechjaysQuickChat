@@ -29,7 +29,6 @@ class ContactsPreviewController: UIViewController {
     //MARK: IBOutlets
     @IBOutlet weak var searchbar: UISearchBar!
     @IBOutlet weak var tableView: PaginatedTableView!
-    @IBOutlet weak var backArrowBtn: UIButton!
     
     //MARK: Private properties
     private var users = [ObjectConversation]()
@@ -237,8 +236,4 @@ extension ContactsPreviewController:UISearchBarDelegate {
         }
     }
 }
-extension ContactsPreviewController {
-    func setTint() {
-        self.backArrowBtn.tintColor = ChatColors.tint
-    }
-}
+
