@@ -242,7 +242,7 @@
                     <connections>
                         <outlet property="searchbar" destination="g5N-EI-mS6" id="Gi7-xX-hK3"/>
                         <outlet property="tableView" destination="Sjk-I7-ShR" id="OLz-NK-wos"/>
-                        <segue destination="Vfh-3Y-bdt" kind="show" identifier="didSelect" id="AzD-92-9Of"/>
+                        <segue destination="Vfh-3Y-bdt" kind="presentation" identifier="didSelect" id="AzD-92-9Of"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOK-sL-MZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
