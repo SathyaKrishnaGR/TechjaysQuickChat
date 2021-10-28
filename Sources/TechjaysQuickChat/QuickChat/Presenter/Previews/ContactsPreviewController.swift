@@ -34,9 +34,7 @@ class ContactsPreviewController: UIViewController {
   
   private var users = [ObjectUser]()
  private let manager = UserManager()
-//  private var conversations = [ObjectUser]()
-   // let value: [String] = ["1","2", "3", "4", "5","6","7","8","9","10"]
-    
+
   
   @IBAction func closePressed(_ sender: Any) {
     dismiss(animated: true, completion: nil)
@@ -50,7 +48,7 @@ class ContactsPreviewController: UIViewController {
        
     }*/
       self.tableView.fetchData()
-     // self.tableView.reloadData()
+    
   }
   
  /* required init?(coder aDecoder: NSCoder) {
