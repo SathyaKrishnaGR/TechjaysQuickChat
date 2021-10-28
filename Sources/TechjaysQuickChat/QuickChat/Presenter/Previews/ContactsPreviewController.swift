@@ -110,6 +110,7 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
             }
             
            cell.nameLabel?.text = "\(first) \(last)"
+            cell.nameLabel?.backgroundColor = .red
             cell.messageLabel?.text = self.users[indexPath.row].username
             DispatchQueue.main.async {
                 if let urlString = self.users[indexPath.row].medium_profile_pic {
