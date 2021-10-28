@@ -239,7 +239,24 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mgf-Rj-tLr" id="UOD-0r-WM5">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMF-v0-YgE">
+                                                    <rect key="frame" x="70" y="16" width="250" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="dMF-v0-YgE" secondAttribute="bottom" constant="5" id="1bn-Tl-CFA"/>
+                                                <constraint firstItem="dMF-v0-YgE" firstAttribute="top" secondItem="UOD-0r-WM5" secondAttribute="topMargin" constant="5" id="2ow-OH-dgD"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="dMF-v0-YgE" secondAttribute="trailing" constant="50" id="b4d-hM-tOd"/>
+                                                <constraint firstItem="dMF-v0-YgE" firstAttribute="leading" secondItem="UOD-0r-WM5" secondAttribute="leadingMargin" constant="50" id="gGK-h0-0t2"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageLabel" destination="dMF-v0-YgE" id="8tT-Uy-CcL"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
