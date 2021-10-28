@@ -29,11 +29,11 @@ class ConversationsViewController: UIViewController {
     //MARK: IBOutlets
     @IBOutlet weak var tableView: PaginatedTableView!
     @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
 //    @IBOutlet weak var newMessageCountLabel: UILabel!
     
-    @IBOutlet weak var newChatListBtn: UIButton!
+    @IBOutlet weak var newChatListButton: UIBarButtonItem!
     @IBOutlet weak var searchBar: UISearchBar!
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -126,15 +126,15 @@ extension ConversationsViewController {
     @IBAction func editPressed(_ sender: Any) {
         isEditing = !isEditing
         if isEditing {
-            self.editButton.setTitle("Done", for: .normal)
-            self.editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-            self.deleteButton.isHidden = false
-            self.deleteButton.isUserInteractionEnabled = true
+//            self.editButton.setTitle("Done", for: .normal)
+//            self.editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+//            self.deleteButton.isHidden = false
+//            self.deleteButton.isUserInteractionEnabled = true
         } else {
-            self.editButton.setTitle("Edit", for: .normal)
-            self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-            self.deleteButton.isHidden = true
-            self.deleteButton.isUserInteractionEnabled = false
+//            self.editButton.setTitle("Edit", for: .normal)
+//            self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+//            self.deleteButton.isHidden = true
+//            self.deleteButton.isUserInteractionEnabled = false
         }
     }
     
@@ -324,11 +324,11 @@ extension ConversationsViewController {
     }
     
     fileprivate func resetEditAndDeletebuttons() {
-        self.deleteButton.isHidden =  true
-        self.deleteButton.isEnabled = true
-        self.deleteButton.isUserInteractionEnabled = false
-        self.editButton.setTitle("Edit", for: .normal)
-        self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+//        self.deleteButton.isHidden =  true
+//        self.deleteButton.isEnabled = true
+//        self.deleteButton.isUserInteractionEnabled = false
+//        self.editButton.setTitle("Edit", for: .normal)
+//        self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     }
 }
 
@@ -379,7 +379,9 @@ extension ConversationsViewController {
         self.tableView.tintColor = ChatColors.tint
         self.navigationItem.rightBarButtonItem?.tintColor = ChatColors.tint
         self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
-        self.newChatListBtn.tintColor = ChatColors.tint
+        self.newChatListButton.tintColor = ChatColors.tint
+        self.editButton.tintColor = ChatColors.tint
+        self.deleteButton.tintColor = ChatColors.tint
     }
 }
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T4u-7a-8pH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T4u-7a-8pH">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CZg-e7-KoX" customClass="PaginatedTableView" customModule="TechjaysQuickChat">
-                                <rect key="frame" x="0.0" y="139" width="390" height="671"/>
+                                <rect key="frame" x="0.0" y="183" width="390" height="627"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="tintColor" red="0.25162395830000001" green="0.53981399539999997" blue="0.8078737855" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
@@ -109,8 +109,8 @@
                                     <outlet property="paginationDelegate" destination="ri6-fX-8IQ" id="1dp-7j-Wl9"/>
                                 </connections>
                             </tableView>
-                            <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xl9-qF-y2U">
-                                <rect key="frame" x="314" y="54" width="60" height="35"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xl9-qF-y2U">
+                                <rect key="frame" x="314" y="98" width="60" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="jVa-9g-uWF"/>
                                     <constraint firstAttribute="width" constant="60" id="tzo-S2-9nW"/>
@@ -123,14 +123,14 @@
                                     <action selector="deletePressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="GGo-H0-zdB"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGV-l1-IZ6">
-                                <rect key="frame" x="167.66666666666666" y="59" width="55" height="25"/>
+                            <label hidden="YES" opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGV-l1-IZ6">
+                                <rect key="frame" x="167.66666666666666" y="103" width="55" height="25"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XtN-b5-qY4">
-                                <rect key="frame" x="16" y="54.666666666666657" width="46" height="34"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XtN-b5-qY4">
+                                <rect key="frame" x="16" y="98.666666666666671" width="46" height="34.000000000000014"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="fNN-hJ-KFm"/>
                                 </constraints>
@@ -143,14 +143,14 @@
                                 </connections>
                             </button>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search..." translatesAutoresizingMaskIntoConstraints="NO" id="Jvk-m2-GFt">
-                                <rect key="frame" x="0.0" y="89" width="390" height="50"/>
+                                <rect key="frame" x="0.0" y="133" width="390" height="50"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="ri6-fX-8IQ" id="juF-kk-9rD"/>
                                 </connections>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWf-D9-C9R">
-                                <rect key="frame" x="254" y="56.666666666666657" width="40" height="30"/>
+                                <rect key="frame" x="254" y="100.66666666666667" width="40" height="30.000000000000014"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="mwZ-sN-r71"/>
                                     <constraint firstAttribute="height" constant="30" id="nZT-K9-ssA"/>
@@ -158,9 +158,6 @@
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="square.and.pencil" catalog="system"/>
-                                <connections>
-                                    <action selector="newChatPressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="i81-FZ-y5x"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eVC-iO-6zG"/>
@@ -185,13 +182,28 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Chat" largeTitleDisplayMode="always" id="VV4-rQ-2Nk">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="IfA-Wk-5eQ"/>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="SQJ-xZ-GMi">
+                            <connections>
+                                <action selector="editPressed:" destination="ri6-fX-8IQ" id="dNP-IX-pWy"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Delete" id="IfA-Wk-5eQ">
+                                <connections>
+                                    <action selector="deletePressed:" destination="ri6-fX-8IQ" id="8ju-bk-vDc"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="square.and.pencil" catalog="system" id="Nlh-Sm-TwQ">
+                                <connections>
+                                    <action selector="newChatPressed:" destination="ri6-fX-8IQ" id="gmx-a2-Uk8"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
-                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="deleteButton" destination="xl9-qF-y2U" id="j1m-t1-BJB"/>
-                        <outlet property="editButton" destination="XtN-b5-qY4" id="Vx1-xs-LTt"/>
-                        <outlet property="newChatListBtn" destination="EWf-D9-C9R" id="iPg-YR-nqf"/>
+                        <outlet property="deleteButton" destination="IfA-Wk-5eQ" id="W5s-Uh-N8o"/>
+                        <outlet property="editButton" destination="SQJ-xZ-GMi" id="tTH-OP-ehb"/>
+                        <outlet property="newChatListButton" destination="Nlh-Sm-TwQ" id="WYM-4c-XF7"/>
                         <outlet property="searchBar" destination="Jvk-m2-GFt" id="y9y-pw-u3x"/>
                         <outlet property="tableView" destination="CZg-e7-KoX" id="EC0-gT-Cqg"/>
                         <segue destination="FIB-XP-7yZ" kind="push" identifier="didSelect" id="Yfv-SP-2mQ"/>
@@ -199,7 +211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lqd-ZW-jLO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4178.9719626168226" y="428.29373650107993"/>
+            <point key="canvasLocation" x="4178.4615384615381" y="427.96208530805683"/>
         </scene>
         <!--MessagesViewController-->
         <scene sceneID="nvb-VT-jAS">
