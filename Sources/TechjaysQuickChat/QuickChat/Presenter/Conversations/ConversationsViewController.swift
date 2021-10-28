@@ -86,8 +86,8 @@ class ConversationsViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "didSelect" {
-            let nav = segue.destination as! UINavigationController
-            if let vc = nav.viewControllers.first as? MessagesViewController {
+         //   let nav = segue.destination as! UINavigationController
+            if let vc = segue.destination as? MessagesViewController{
                 if selectedRow == -1 {
                     if let toUserId = self.to_user_id {
                         vc.to_user_id = toUserId
