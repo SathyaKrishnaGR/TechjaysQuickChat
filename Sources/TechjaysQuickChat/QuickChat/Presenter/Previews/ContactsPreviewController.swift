@@ -30,11 +30,17 @@ protocol ContactsPreviewControllerDelegate: class {
 
 class ContactsPreviewController: UIViewController {
   
-  @IBOutlet weak var tableView: PaginatedTableView!
- // @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchbar: UISearchBar!
+    @IBOutlet weak var tableView: PaginatedTableView!
+    
+    @IBOutlet weak var backArrowBtn: UIButton!
+    // @IBOutlet weak var collectionView: UICollectionView!
   weak var delegate: ContactsPreviewControllerDelegate?
   
-  private var users = [ObjectUser]()
+    private var users = [ObjectConversation]()
+    private var searchArray = [ObjectConversation]()
+    
+    fileprivate var isSearchEnabled: Bool = false
     var toChatScreen: Bool = false
     var selectedRow: Int =  -1
     var opponentUserName: String?
@@ -56,7 +62,7 @@ class ContactsPreviewController: UIViewController {
        
     }*/
       socket = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
-      
+      self.setTint()
       self.tableView.fetchData()
     
   }
@@ -83,7 +89,7 @@ class ContactsPreviewController: UIViewController {
                     vc.opponentUserName = opponentUserName
                     vc.toChatScreen = toChatScreen
                 } else {
-                   /* if isSearchEnabled {
+                  /* if isSearchEnabled {
                         if let toUserId = searchArray[selectedRow].to_user_id {
                              vc.to_user_id = toUserId
                              vc.conversation = searchArray[selectedRow]
@@ -91,9 +97,9 @@ class ContactsPreviewController: UIViewController {
                     } else {*/
                         if let toUserId = users[selectedRow].to_user_id {
                              vc.to_user_id = toUserId
-                             vc.newList = users[selectedRow]
+                             vc.conversation = users[selectedRow]
                          }
-                   // }
+                    //}
                 }
                 vc.socketManager.socket = self.socket
                 vc.socketManager = self.socketManager
@@ -101,37 +107,11 @@ class ContactsPreviewController: UIViewController {
             modalPresentationStyle = .fullScreen
         }
     }
- /* required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    modalTransitionStyle = .crossDissolve
-    modalPresentationStyle = .overFullScreen
-  }*/
+ 
 }
 
 
-/*class ContactsCell: UICollectionViewCell {
-  
-  @IBOutlet weak var profilePic: UIImageView!
-  @IBOutlet weak var nameLabel: UILabel!
-  
-  override func prepareForReuse() {
-    super.prepareForReuse()
-//    profilePic.cancelDownload()
-    profilePic.image = UIImage(named: "profile pic")
-  }
-  
-  func set(_ user: ObjectUser) {
-    nameLabel.text = user.name
-    if let urlString = user.profilePicLink {
-      profilePic.setImage(url: URL(string: urlString))
-    }
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    profilePic.layer.cornerRadius = (bounds.width - 10) / 2
-  }
-}*/
+
 
 extension ContactsPreviewController:PaginatedTableViewDelegate {
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
@@ -192,7 +172,7 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
     }
     
     fileprivate func fetchConversations(for url: String, isFirstPage: Bool, hasNext: @escaping (Bool) -> Void) {
-        APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectUser]>) in
+        APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
                 if let data = response.data {
@@ -216,3 +196,35 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
 
 
 
+extension ContactsPreviewController:UISearchBarDelegate {
+   
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.resignFirstResponder()
+        isSearchEnabled = false
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.resignFirstResponder()
+        isSearchEnabled = false
+    }
+    
+   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.resignFirstResponder()
+        isSearchEnabled = true
+        self.tableView.fetchData()
+        if searchText == "" {
+            isSearchEnabled = false
+            self.tableView.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            if !self.tableView.isLoading {
+                self.tableView.reloadData()
+            }
+        }
+    }
+}
+extension ContactsPreviewController {
+    func setTint() {
+        self.backArrowBtn.tintColor = ChatColors.tint
+    }
+}

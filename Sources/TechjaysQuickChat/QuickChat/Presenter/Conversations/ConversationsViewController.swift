@@ -32,6 +32,8 @@ class ConversationsViewController: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
 //    @IBOutlet weak var newMessageCountLabel: UILabel!
+    
+    @IBOutlet weak var newChatListBtn: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -377,6 +379,7 @@ extension ConversationsViewController {
         self.tableView.tintColor = ChatColors.tint
         self.navigationItem.rightBarButtonItem?.tintColor = ChatColors.tint
         self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
+        self.newChatListBtn.tintColor = ChatColors.tint
     }
 }
 

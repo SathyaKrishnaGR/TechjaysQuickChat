@@ -36,7 +36,6 @@ class ObjectUser: ChatStorageCodable {
     var first_name: String?
     var last_name: String?
    var username: String?
-   var is_following: Bool?
    var profile_pic:String?
   
   func encode(to encoder: Encoder) throws {
@@ -51,7 +50,7 @@ class ObjectUser: ChatStorageCodable {
     try container.encodeIfPresent(first_name, forKey: .first_name)
     try container.encodeIfPresent(last_name, forKey: .last_name)
     try container.encodeIfPresent(username, forKey: .username)
-    try container.encodeIfPresent(is_following, forKey: .is_following)
+   // try container.encodeIfPresent(is_following, forKey: .is_following)
     try container.encodeIfPresent(profile_pic, forKey: .profile_pic)
     
   }
@@ -71,7 +70,7 @@ class ObjectUser: ChatStorageCodable {
     first_name = try container.decodeIfPresent(String.self, forKey: .first_name)
     last_name = try container.decodeIfPresent(String.self, forKey: .last_name)
     username = try container.decodeIfPresent(String.self, forKey: .username)
-    is_following = try container.decodeIfPresent(Bool.self, forKey: .is_following)
+   // is_following = try container.decodeIfPresent(Bool.self, forKey: .is_following)
     profile_pic = try container.decodeIfPresent(String.self, forKey: .profile_pic)
   }
 }

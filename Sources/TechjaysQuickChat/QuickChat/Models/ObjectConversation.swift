@@ -80,6 +80,8 @@ public class ObjectConversation: Codable, Equatable {
     var user_type: String?
     var timestamp: String?
     var type: String?
+    var username: String?
+    
     //    var lastMessage: String?
     //    var isRead = [String: Bool]()
     //    var userIDs = [String]()
@@ -99,6 +101,8 @@ public class ObjectConversation: Codable, Equatable {
         try container.encodeIfPresent(user_type, forKey: .user_type)
         try container.encodeIfPresent(timestamp, forKey: .timestamp)
         try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(username, forKey: .username)
+        
         //    try container.encode(userIDs, forKey: .userIDs)
         //    try container.encodeIfPresent(lastMessage, forKey: .lastMessage)
         //    try container.encode(isRead, forKey: .isRead)
@@ -123,6 +127,7 @@ public class ObjectConversation: Codable, Equatable {
         user_type = try container.decodeIfPresent(String.self, forKey: .user_type)
         timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp)
         type = try container.decodeIfPresent(String.self, forKey: .type)
+        username = try container.decodeIfPresent(String.self, forKey: .username)
         //    userIDs = try container.decode([String].self, forKey: .userIDs)
         //    lastMessage = try container.decodeIfPresent(String.self, forKey: .lastMessage)
         //    isRead = try container.decode([String: Bool].self, forKey: .isRead)
@@ -145,6 +150,9 @@ extension ObjectConversation {
         case user_type
         case timestamp
         case type
+        case username
+        
+
         
         //    case userIDs
         //    case lastMessage

@@ -157,7 +157,7 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="newChatList"/>
+                                <state key="normal" image="square.and.pencil" catalog="system"/>
                                 <connections>
                                     <action selector="newChatPressed:" destination="ri6-fX-8IQ" eventType="touchUpInside" id="i81-FZ-y5x"/>
                                 </connections>
@@ -191,6 +191,7 @@
                     <connections>
                         <outlet property="deleteButton" destination="xl9-qF-y2U" id="j1m-t1-BJB"/>
                         <outlet property="editButton" destination="XtN-b5-qY4" id="Vx1-xs-LTt"/>
+                        <outlet property="newChatListBtn" destination="EWf-D9-C9R" id="iPg-YR-nqf"/>
                         <outlet property="searchBar" destination="Jvk-m2-GFt" id="y9y-pw-u3x"/>
                         <outlet property="tableView" destination="CZg-e7-KoX" id="EC0-gT-Cqg"/>
                         <segue destination="jE4-jN-pKd" kind="show" identifier="didSelect" id="uYn-Fc-dsr"/>
@@ -250,8 +251,8 @@
     </scenes>
     <color key="tintColor" red="0.50588235290000005" green="0.56470588239999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
-        <image name="newChatList" width="21.333333969116211" height="21.333333969116211"/>
         <image name="profile_pic" width="100" height="100"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
