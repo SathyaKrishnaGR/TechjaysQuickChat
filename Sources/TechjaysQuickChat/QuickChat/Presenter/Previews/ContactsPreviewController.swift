@@ -32,14 +32,11 @@ class ContactsPreviewController: UIViewController {
   
     @IBOutlet weak var searchbar: UISearchBar!
     @IBOutlet weak var tableView: PaginatedTableView!
-    
     @IBOutlet weak var backArrowBtn: UIButton!
-    // @IBOutlet weak var collectionView: UICollectionView!
-  weak var delegate: ContactsPreviewControllerDelegate?
-  
+    
+    weak var delegate: ContactsPreviewControllerDelegate?
     private var users = [ObjectConversation]()
     private var searchArray = [ObjectConversation]()
-    
     fileprivate var isSearchEnabled: Bool = false
     var toChatScreen: Bool = false
     var selectedRow: Int =  -1
@@ -47,7 +44,7 @@ class ContactsPreviewController: UIViewController {
     var socketManager = SocketManager()
     var socket: WebSocket!
     var to_user_id: Int? = 0
- private let manager = UserManager()
+    private let manager = UserManager()
 
   
   @IBAction func closePressed(_ sender: Any) {
@@ -56,11 +53,6 @@ class ContactsPreviewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    guard let id = manager.currentUserID() else { return }
- /*   manager.contacts {[weak self] results in
-//      self?.users = results.filter({$0.id != id})
-       
-    }*/
       socket = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
       self.setTint()
       self.tableView.fetchData()
@@ -89,17 +81,17 @@ class ContactsPreviewController: UIViewController {
                     vc.opponentUserName = opponentUserName
                     vc.toChatScreen = toChatScreen
                 } else {
-                  /* if isSearchEnabled {
+                   if isSearchEnabled {
                         if let toUserId = searchArray[selectedRow].to_user_id {
                              vc.to_user_id = toUserId
                              vc.conversation = searchArray[selectedRow]
                          }
-                    } else {*/
+                    } else {
                         if let toUserId = users[selectedRow].to_user_id {
                              vc.to_user_id = toUserId
                              vc.conversation = users[selectedRow]
                          }
-                    //}
+                    }
                 }
                 vc.socketManager.socket = self.socket
                 vc.socketManager = self.socketManager
@@ -115,7 +107,12 @@ class ContactsPreviewController: UIViewController {
 
 extension ContactsPreviewController:PaginatedTableViewDelegate {
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
-        return PaginationUrl(endpoint: "chat/get-users-list/",parameters: ["is_following":"true"])
+        if isSearchEnabled {
+            return PaginationUrl(endpoint: "chat/get-users-list/",search: searchbar.text ?? "",parameters: ["is_following":"true"])
+        } else {
+            return PaginationUrl(endpoint: "chat/get-users-list/",parameters: ["is_following":"true"])
+
+        }
     }
     
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
@@ -124,30 +121,57 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.users.count
+        if isSearchEnabled {
+            return self.searchArray.count
+        } else {
+            return self.users.count
+        }
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as? ConversationCell {
             
-            var last = ""
-            var first = ""
-            if let lastName = self.users[indexPath.row].last_name {
-                last = lastName
-            }
-            if let firstName = self.users[indexPath.row].first_name {
-                first = firstName
-            }
-            
-           cell.nameLabel?.text = "\(first) \(last)"
-            
-            cell.messageLabel?.text = self.users[indexPath.row].username
-          DispatchQueue.main.async {
-                if let urlString = self.users[indexPath.row].medium_profile_pic {
-                    cell.profilePic?.setImage(url: URL(string: urlString))
-                } else {
-                    cell.profilePic?.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
-                    cell.profilePic?.contentMode = .scaleAspectFit
+            if isSearchEnabled {
+                var last = ""
+                var first = ""
+                if let lastName = self.searchArray[indexPath.row].last_name {
+                    last = lastName
+                }
+                if let firstName = self.searchArray[indexPath.row].first_name {
+                    first = firstName
+                }
+                
+               cell.nameLabel?.text = "\(first) \(last)"
+                
+                cell.messageLabel?.text = self.searchArray[indexPath.row].username
+              DispatchQueue.main.async {
+                    if let urlString = self.searchArray[indexPath.row].medium_profile_pic {
+                        cell.profilePic?.setImage(url: URL(string: urlString))
+                    } else {
+                        cell.profilePic?.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
+                        cell.profilePic?.contentMode = .scaleAspectFit
+                    }
+                }
+            } else {
+                var last = ""
+                var first = ""
+                if let lastName = self.users[indexPath.row].last_name {
+                    last = lastName
+                }
+                if let firstName = self.users[indexPath.row].first_name {
+                    first = firstName
+                }
+                
+               cell.nameLabel?.text = "\(first) \(last)"
+                
+                cell.messageLabel?.text = self.users[indexPath.row].username
+              DispatchQueue.main.async {
+                    if let urlString = self.users[indexPath.row].medium_profile_pic {
+                        cell.profilePic?.setImage(url: URL(string: urlString))
+                    } else {
+                        cell.profilePic?.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
+                        cell.profilePic?.contentMode = .scaleAspectFit
+                    }
                 }
             }
             
@@ -175,7 +199,7 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
         APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
-                if let data = response.data {
+               /* if let data = response.data {
                     if isFirstPage {
                         self.users = data
                     } else {
@@ -186,7 +210,23 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
                     }
                     self.tableView.scroll(to: .top, animated: true)
                }
-            hasNext(response.nextLink ?? false)
+            hasNext(response.nextLink ?? false)*/
+                if isFirstPage, let data = response.data {
+                    if self.isSearchEnabled {
+                        self.searchArray = data
+                    } else {
+                        self.users = data
+                    }
+                } else if let data = response.data {
+                    if self.isSearchEnabled {
+                        self.searchArray.append(contentsOf: data)
+                    } else {
+                        self.users.append(contentsOf: data)
+                    }
+                }
+                self.tableView.reloadData()
+                hasNext(response.nextLink ?? false)
+                self.tableView.scroll(to: .top, animated: true)
             case .FAILURE:
                 hasNext(false)
             }
