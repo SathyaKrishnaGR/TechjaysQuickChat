@@ -30,7 +30,7 @@ class ConversationsViewController: UIViewController {
     @IBOutlet weak var tableView: PaginatedTableView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var editButton: UIBarButtonItem!
-  //  @IBOutlet weak var deleteButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
 //    @IBOutlet weak var newMessageCountLabel: UILabel!
     
     @IBOutlet weak var newChatListButton: UIBarButtonItem!
@@ -55,6 +55,7 @@ class ConversationsViewController: UIViewController {
     fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [ObjectConversation]()
     var doneButton = UIBarButtonItem()
+    var selectedConversations = [ObjectConversation]()
    
     
     //MARK: Lifecycle
@@ -131,40 +132,21 @@ extension ConversationsViewController {
         isEditing = !isEditing
         if isEditing {
             self.editButton.title = "Done"
-            self.navigationItem.rightBarButtonItem = self.doneButton
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(didTapClose))
-            self.navigationItem.rightBarButtonItem?.tintColor = ChatColors.tint
-//            self.editButton.setTitle("Done", for: .normal)
-//            self.editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-//            self.deleteButton.isHidden = false
-//            self.deleteButton.isUserInteractionEnabled = true
         } else {
             self.editButton.title = "Edit"
-            self.navigationItem.rightBarButtonItem = self.doneButton
-            self.navigationItem.rightBarButtonItem = nil
-
-//            self.editButton.setTitle("Edit", for: .normal)
-//            self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-//            self.deleteButton.isHidden = true
-//            self.deleteButton.isUserInteractionEnabled = false
+      
         }
     }
-    @objc func didTapClose() {
-        self.navigationItem.rightBarButtonItem = self.doneButton
-        self.deleteAndRemoveRows()
-        self.editButton.title = "Edit"
-     }
     @IBAction func deletePressed(_ sender: Any) {
-       /* if deleteButton.isEnabled {
-            deleteButton.isEnabled = false
+        if selectedConversations.count > 0 {
             deleteAndRemoveRows()
-        }*/
-        self.navigationItem.rightBarButtonItem = nil
-        deleteAndRemoveRows()
+        } else {
+            self.showAlert( message: "Please select atleast one conversation to delete it", completion: nil)
+        }
     }
     fileprivate func deleteAndRemoveRows() {
         if let selectedRows = tableView.indexPathsForSelectedRows {
-            var selectedConversations = [ObjectConversation]()
+            
             for indexPath in selectedRows  {
                 selectedConversations.append(conversations[indexPath.row])
             }
@@ -200,13 +182,9 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
         if isSearchEnabled {
-            DispatchQueue.main.async {
-                self.searchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
-            }
+           self.searchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
         } else {
-            DispatchQueue.main.async {
-                self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
-            }
+            self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
         }
     }
     
@@ -219,34 +197,10 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard !conversations.isEmpty else {
-//            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
-//        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
             if isSearchEnabled {
-                var last = ""
-                var first = ""
-                if let lastName = searchArray[indexPath.row].last_name {
-                    last = lastName
-                }
-                if let firstName = searchArray[indexPath.row].first_name {
-                    first = firstName
-                }
-                cell.nameLabel.text = "\(first) \(last)"
-                cell.messageLabel.text = searchArray[indexPath.row].message
-                if let timeStamp = searchArray[indexPath.row].timestamp {
-                    cell.timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
-                }
-                DispatchQueue.main.async {
-                    if let urlString = self.searchArray[indexPath.row].medium_profile_pic {
-                        cell.profilePic.setImage(url: URL(string: urlString))
-                    } else {
-                        cell.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
-                        cell.profilePic.contentMode = .scaleAspectFit
-                    }
-                }
-                
-            } else{
+                cell.set(searchArray[indexPath.row])
+            } else {
                 cell.set(conversations[indexPath.row])
             }
             return cell
@@ -342,13 +296,7 @@ extension ConversationsViewController {
     }
     
     fileprivate func resetEditAndDeletebuttons() {
-        self.navigationItem.rightBarButtonItem = nil
-      //  self.doneButton.title = "Edit"
-//        self.deleteButton.isHidden =  true
-//        self.deleteButton.isEnabled = true
-//        self.deleteButton.isUserInteractionEnabled = false
-//        self.editButton.setTitle("Edit", for: .normal)
-//        self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        self.editButton.title = "Edit"
     }
 }
 
@@ -401,7 +349,7 @@ extension ConversationsViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
         self.newChatListButton.tintColor = ChatColors.tint
         self.editButton.tintColor = ChatColors.tint
-       // self.deleteButton.tintColor = ChatColors.tint
+        self.deleteButton.tintColor = ChatColors.tint
     }
 }
 
@@ -421,13 +369,10 @@ extension ConversationsViewController:UISearchBarDelegate {
         self.tableView.fetchData()
         if searchText == "" {
             isSearchEnabled = false
-            self.tableView.reloadData()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            if !self.tableView.isLoading {
-                self.tableView.reloadData()
-            }
-        }
+       DispatchQueue.main.async {
+           self.tableView.reloadData()
+       }
     }
 }
 

@@ -131,10 +131,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Chat" largeTitleDisplayMode="always" id="VV4-rQ-2Nk">
-                        <leftBarButtonItems>
-                            <barButtonItem title="Edit" id="SQJ-xZ-GMi">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="SQJ-xZ-GMi">
+                            <connections>
+                                <action selector="editPressed:" destination="ri6-fX-8IQ" id="dNP-IX-pWy"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Delete" id="sTQ-Hc-c38">
                                 <connections>
-                                    <action selector="editPressed:" destination="ri6-fX-8IQ" id="dNP-IX-pWy"/>
+                                    <action selector="deletePressed:" destination="ri6-fX-8IQ" id="gF1-5G-gIC"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="square.and.pencil" catalog="system" id="Nlh-Sm-TwQ">
@@ -142,9 +147,10 @@
                                     <action selector="newChatPressed:" destination="ri6-fX-8IQ" id="gmx-a2-Uk8"/>
                                 </connections>
                             </barButtonItem>
-                        </leftBarButtonItems>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="sTQ-Hc-c38" id="OFe-hQ-IR9"/>
                         <outlet property="editButton" destination="SQJ-xZ-GMi" id="tTH-OP-ehb"/>
                         <outlet property="newChatListButton" destination="Nlh-Sm-TwQ" id="WYM-4c-XF7"/>
                         <outlet property="searchBar" destination="Jvk-m2-GFt" id="y9y-pw-u3x"/>

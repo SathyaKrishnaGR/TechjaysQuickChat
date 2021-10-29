@@ -64,12 +64,13 @@ extension Conversation {
 }
 public class ObjectConversation: Codable, Equatable {
     public static func == (lhs: ObjectConversation, rhs: ObjectConversation) -> Bool {
-        return (lhs.last_name == rhs.last_name) && (lhs.first_name == rhs.first_name) && (lhs.is_sent_by_myself == rhs.is_sent_by_myself) && (lhs.medium_profile_pic == rhs.medium_profile_pic) && (lhs.message == rhs.message) && (lhs.message_id == rhs.message_id) && (lhs.profile_pic == rhs.profile_pic) && (lhs.thumbnail_profile_pic == rhs.thumbnail_profile_pic) && (lhs.to_user_id == rhs.to_user_id) && (lhs.user_type == rhs.user_type) && (lhs.timestamp == rhs.timestamp)
+        return (lhs.company_name == rhs.company_name) && (lhs.first_name == rhs.first_name) && (lhs.is_sent_by_myself == rhs.is_sent_by_myself) && (lhs.medium_profile_pic == rhs.medium_profile_pic) && (lhs.message == rhs.message) && (lhs.message_id == rhs.message_id) && (lhs.profile_pic == rhs.profile_pic) && (lhs.thumbnail_profile_pic == rhs.thumbnail_profile_pic) && (lhs.to_user_id == rhs.to_user_id) && (lhs.user_type == rhs.user_type) && (lhs.timestamp == rhs.timestamp)
     }
     
 //    var id = UUID().uuidString
-    var last_name: String?
+    var company_name: String?
     var first_name: String?
+    var last_name: String?
     var is_sent_by_myself: Bool?
     var medium_profile_pic: String?
     var message: String?
@@ -89,8 +90,9 @@ public class ObjectConversation: Codable, Equatable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 //        try container.encode(id, forKey: .id)
-        try container.encodeIfPresent(last_name, forKey: .last_name)
+        try container.encodeIfPresent(company_name, forKey: .company_name)
         try container.encodeIfPresent(first_name, forKey: .first_name)
+        try container.encodeIfPresent(last_name, forKey: .last_name)
         try container.encodeIfPresent(is_sent_by_myself, forKey: .is_sent_by_myself)
         try container.encodeIfPresent(medium_profile_pic, forKey: .medium_profile_pic)
         try container.encodeIfPresent(message, forKey: .message)
@@ -115,8 +117,9 @@ public class ObjectConversation: Codable, Equatable {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
 //        id = try container.decode(String.self, forKey: .id)
-        last_name = try container.decodeIfPresent(String.self, forKey: .last_name)
+        company_name = try container.decodeIfPresent(String.self, forKey: .company_name)
         first_name = try container.decodeIfPresent(String.self, forKey: .first_name)
+        last_name = try container.decodeIfPresent(String.self, forKey: .last_name)
         is_sent_by_myself = try container.decodeIfPresent(Bool.self, forKey: .is_sent_by_myself)
         medium_profile_pic = try container.decodeIfPresent(String.self, forKey: .medium_profile_pic)
         message = try container.decodeIfPresent(String.self, forKey: .message)
@@ -138,6 +141,7 @@ public class ObjectConversation: Codable, Equatable {
 extension ObjectConversation {
     private enum CodingKeys: String, CodingKey {
 //        case id
+        case company_name
         case last_name
         case first_name
         case is_sent_by_myself

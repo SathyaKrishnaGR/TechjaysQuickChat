@@ -51,19 +51,9 @@ class ContactsPreviewController: UIViewController {
     super.viewWillAppear(animated)
       socket = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
       self.tableView.fetchData()
+      self.navigationItem.backBarButtonItem?.tintColor = ChatColors.tint
     
   }
-    /*  override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-       if toChatScreen {
-            self.performSegue(withIdentifier: "didSelect", sender: self)
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }*/
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "didSelect" {
@@ -91,10 +81,11 @@ class ContactsPreviewController: UIViewController {
 extension ContactsPreviewController:PaginatedTableViewDelegate {
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         if isSearchEnabled {
-            return PaginationUrl(endpoint: "chat/get-users-list/",search: searchbar.text ?? "",parameters: ["is_following":"true"])
+            if let searchbarText = searchbar.text {
+                return PaginationUrl(endpoint: "chat/get-users-list/",search: searchbarText ,parameters: ["is_following":"true"])
+            }
         } else {
             return PaginationUrl(endpoint: "chat/get-users-list/",parameters: ["is_following":"true"])
-
         }
     }
     
@@ -113,46 +104,10 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as? ConversationCell {
-            var last = ""
-            var first = ""
             if isSearchEnabled {
-                if let lastName = self.searchArray[indexPath.row].last_name {
-                    last = lastName
-                }
-                if let firstName = self.searchArray[indexPath.row].first_name {
-                    first = firstName
-                }
-                
-               cell.nameLabel?.text = "\(first) \(last)"
-                
-                cell.messageLabel?.text = self.searchArray[indexPath.row].username
-              DispatchQueue.main.async {
-                    if let urlString = self.searchArray[indexPath.row].medium_profile_pic {
-                        cell.profilePic?.setImage(url: URL(string: urlString))
-                    } else {
-                        cell.profilePic?.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
-                        cell.profilePic?.contentMode = .scaleAspectFit
-                    }
-                }
+                cell.set(searchArray[indexPath.row])
             } else {
-               if let lastName = self.users[indexPath.row].last_name {
-                    last = lastName
-                }
-                if let firstName = self.users[indexPath.row].first_name {
-                    first = firstName
-                }
-                
-               cell.nameLabel?.text = "\(first) \(last)"
-                
-                cell.messageLabel?.text = self.users[indexPath.row].username
-              DispatchQueue.main.async {
-                    if let urlString = self.users[indexPath.row].medium_profile_pic {
-                        cell.profilePic?.setImage(url: URL(string: urlString))
-                    } else {
-                        cell.profilePic?.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
-                        cell.profilePic?.contentMode = .scaleAspectFit
-                    }
-                }
+                cell.set(conversations[indexPath.row])
             }
             return cell
         }
@@ -188,7 +143,9 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
                         self.users.append(contentsOf: data)
                     }
                 }
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
                 hasNext(response.nextLink ?? false)
                 self.tableView.scroll(to: .top, animated: true)
             case .FAILURE:
@@ -198,11 +155,8 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
     }
 }
 
-
-
 extension ContactsPreviewController:UISearchBarDelegate {
-   
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.resignFirstResponder()
         isSearchEnabled = false
     }
@@ -218,13 +172,10 @@ extension ContactsPreviewController:UISearchBarDelegate {
         self.tableView.fetchData()
         if searchText == "" {
             isSearchEnabled = false
-            self.tableView.reloadData()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            if !self.tableView.isLoading {
-                self.tableView.reloadData()
-            }
-        }
+       DispatchQueue.main.async {
+           self.tableView.reloadData()
+       }
     }
 }
 
