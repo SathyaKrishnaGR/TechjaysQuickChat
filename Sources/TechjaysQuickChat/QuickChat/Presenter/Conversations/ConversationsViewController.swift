@@ -54,7 +54,7 @@ class ConversationsViewController: UIViewController {
     fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [ObjectConversation]()
     var doneButton = UIBarButtonItem()
-    var selectedConversations = [ObjectConversation]()
+    
    
     
     //MARK: Lifecycle
@@ -62,8 +62,6 @@ class ConversationsViewController: UIViewController {
         super.viewDidLoad()
         tableView.allowsMultipleSelectionDuringEditing = true
         FayvKeys.ChatDefaults.paginationLimit = "10"
-        self.navigationItem.rightBarButtonItem = nil
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -137,25 +135,22 @@ extension ConversationsViewController {
         }
     }
     @IBAction func deletePressed(_ sender: Any) {
-        if selectedConversations.count > 0 {
-            deleteAndRemoveRows()
-        } else {
-            self.showAlert( message: "Please select atleast one conversation to delete it", completion: nil)
-        }
+        deleteAndRemoveRows()
     }
     fileprivate func deleteAndRemoveRows() {
         if let selectedRows = tableView.indexPathsForSelectedRows {
-            
+            var selectedConversations = [ObjectConversation]()
             for indexPath in selectedRows  {
                 selectedConversations.append(conversations[indexPath.row])
             }
-            self.tableView.beginUpdates()
-            self.conversations.removeArrayOfIndex(at: selectedRows)
-            self.tableView.deleteRows(at: selectedRows, with: .automatic)
-            deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
-       
-        
-            
+            if selectedConversations.count > 0 {
+                self.tableView.beginUpdates()
+                self.conversations.removeArrayOfIndex(at: selectedRows)
+                self.tableView.deleteRows(at: selectedRows, with: .automatic)
+                deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
+            }
+        } else {
+            self.showAlert( message: "Please select atleast one conversation to delete it", completion: nil)
         }
     }
     
@@ -192,15 +187,19 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
 
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isSearchEnabled {
+            return self.searchArray.count
+        } else {
             return self.conversations.count
+        }
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
             if isSearchEnabled {
-                cell.set(searchArray[indexPath.row])
+                cell.set(searchArray[indexPath.row], id: "Conversation")
             } else {
-                cell.set(conversations[indexPath.row])
+                cell.set(conversations[indexPath.row], id: "Conversation")
             }
             return cell
         }

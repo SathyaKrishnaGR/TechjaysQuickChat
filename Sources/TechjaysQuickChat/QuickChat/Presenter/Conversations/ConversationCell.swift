@@ -46,7 +46,7 @@ class ConversationCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     //MARK: Public methods
-    func set(_ conversation: ObjectConversation) {
+    func set(_ conversation: ObjectConversation,id:String) {
         //        timeLabel.text = DateService.shared.format(Date(timeIntervalSinceNow: TimeInterval(conversation.timestamp)))
         
         //    guard let id = conversation.userIDs.filter({$0 != userID}).first else { return }
@@ -71,7 +71,12 @@ class ConversationCell: UITableViewCell {
         if let timeStamp = conversation.timestamp {
             timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
         }
-        self.messageLabel.text = conversation.message
+        if id == "Conversation" {
+            self.messageLabel.text = conversation.message
+        } else {
+            self.messageLabel.text = conversation.username
+        }
+       // self.messageLabel.text = conversation.message
         DispatchQueue.main.async {
             if let urlString = conversation.medium_profile_pic {
                 self.profilePic.setImage(url: URL(string: urlString))
