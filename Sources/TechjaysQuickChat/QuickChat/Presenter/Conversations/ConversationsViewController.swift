@@ -192,7 +192,11 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
 
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isSearchEnabled {
+            return self.searchArray.count
+        } else {
             return self.conversations.count
+        }
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
