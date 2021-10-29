@@ -81,9 +81,11 @@ class ContactsPreviewController: UIViewController {
 extension ContactsPreviewController:PaginatedTableViewDelegate {
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
         if isSearchEnabled {
-            if let searchbarText = searchbar.text {
-                return PaginationUrl(endpoint: "chat/get-users-list/",search: searchbarText ,parameters: ["is_following":"true"])
+            var searchText = ""
+            if let searchbarText = searchbar.text, !searchbarText.isEmpty {
+                searchText = searchbarText
             }
+            return PaginationUrl(endpoint: "chat/get-users-list/",search: searchText ,parameters: ["is_following":"true"])
         } else {
             return PaginationUrl(endpoint: "chat/get-users-list/",parameters: ["is_following":"true"])
         }
@@ -107,7 +109,7 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
             if isSearchEnabled {
                 cell.set(searchArray[indexPath.row])
             } else {
-                cell.set(conversations[indexPath.row])
+                cell.set(users[indexPath.row])
             }
             return cell
         }
