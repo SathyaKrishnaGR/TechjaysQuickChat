@@ -3,7 +3,7 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,6 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CZg-e7-KoX" customClass="PaginatedTableView" customModule="TechjaysQuickChat">
+
                                 <rect key="frame" x="0.0" y="51" width="390" height="671"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="tintColor" red="0.25162395830000001" green="0.53981399539999997" blue="0.8078737855" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -64,6 +65,7 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.34pm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33o-19-jjC">
                                                     <rect key="frame" x="320" y="2.6666666666666661" width="50" height="25"/>
+
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="RAJ-ws-4Gw"/>
                                                         <constraint firstAttribute="height" constant="25" id="aJh-a5-wUb"/>
@@ -117,6 +119,7 @@
                                     <outlet property="delegate" destination="ri6-fX-8IQ" id="juF-kk-9rD"/>
                                 </connections>
                             </searchBar>
+
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eVC-iO-6zG"/>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
