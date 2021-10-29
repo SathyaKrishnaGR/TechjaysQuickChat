@@ -148,13 +148,9 @@ extension ConversationsViewController {
                 self.conversations.removeArrayOfIndex(at: selectedRows)
                 self.tableView.deleteRows(at: selectedRows, with: .automatic)
                 deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
-            } else {
-                self.showAlert( message: "Please select atleast one conversation to delete it", completion: nil)
             }
-            
-       
-        
-            
+        } else {
+            self.showAlert( message: "Please select atleast one conversation to delete it", completion: nil)
         }
     }
     
