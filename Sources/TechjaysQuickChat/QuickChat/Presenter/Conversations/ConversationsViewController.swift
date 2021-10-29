@@ -135,11 +135,7 @@ extension ConversationsViewController {
         }
     }
     @IBAction func deletePressed(_ sender: Any) {
-        if selectedConversations.count > 0 {
-            deleteAndRemoveRows()
-        } else {
-            self.showAlert( message: "Please select atleast one conversation to delete it", completion: nil)
-        }
+        deleteAndRemoveRows()
     }
     fileprivate func deleteAndRemoveRows() {
         if let selectedRows = tableView.indexPathsForSelectedRows {
@@ -147,10 +143,15 @@ extension ConversationsViewController {
             for indexPath in selectedRows  {
                 selectedConversations.append(conversations[indexPath.row])
             }
-            self.tableView.beginUpdates()
-            self.conversations.removeArrayOfIndex(at: selectedRows)
-            self.tableView.deleteRows(at: selectedRows, with: .automatic)
-            deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
+            if selectedConversations.count > 0 {
+                self.tableView.beginUpdates()
+                self.conversations.removeArrayOfIndex(at: selectedRows)
+                self.tableView.deleteRows(at: selectedRows, with: .automatic)
+                deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
+            } else {
+                self.showAlert( message: "Please select atleast one conversation to delete it", completion: nil)
+            }
+            
        
         
             
