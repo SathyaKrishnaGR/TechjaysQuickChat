@@ -51,6 +51,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     
     //MARK: Public properties
     var conversation = ObjectConversation()
+    var newList = ObjectUser()
     var bottomInset: CGFloat {
         return view.safeAreaInsets.bottom + 50
     }
@@ -87,15 +88,15 @@ extension MessagesViewController {
         if toChatScreen {
             self.navigationItem.title = opponentUserName
         } else {
-            var company = ""
+            var last = ""
             var first = ""
-            if let companyName = conversation.company_name {
-                company = companyName
+            if let lastName = conversation.last_name {
+                last = lastName
             }
             if let firstName = conversation.first_name {
                 first = firstName
             }
-            self.navigationItem.title = first + company
+            self.navigationItem.title = "\(first) \(last)"
         }
         
         //        showIconOnNavigationBar(imageUrl: nil) // Will show default image
@@ -274,6 +275,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             //        if message.contentType == .none {
             let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
             cell.setChatList(message, conversation: conversation)
+            cell.selectionStyle = .none
             return cell
             //        }
             //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell
@@ -285,6 +287,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
             cell.chatBubbleView.backgroundColor = ChatColors.tint
             cell.setChatList(message, conversation: conversation)
+            cell.selectionStyle = .none
             return cell
             //        }
             //        let cell = tableView.dequeueReusableCell(withIdentifier: message.ownerID == UserManager().currentUserID() ? "MessageAttachmentTableViewCell" : "UserMessageAttachmentTableViewCell") as! MessageAttachmentTableViewCell

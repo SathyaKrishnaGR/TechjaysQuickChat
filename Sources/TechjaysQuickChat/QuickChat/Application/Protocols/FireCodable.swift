@@ -24,19 +24,19 @@ import UIKit
 
 protocol BaseCodable: AnyObject {
   
-  var id: String { get set }
+ // var id: String { get set }
   
 }
 
 protocol ChatCodable: BaseCodable, Codable {
   
-  var id: String { get set }
+//  var id: String { get set }
   
 }
 
 protocol ChatStorageCodable: ChatCodable {
   
-  var profilePic: UIImage? { get set }
-  var profilePicLink: String? { get set }
+ // var profilePic: UIImage? { get set }
+ // var profilePicLink: String? { get set }
   
 }

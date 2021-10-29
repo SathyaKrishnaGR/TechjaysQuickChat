@@ -55,15 +55,19 @@ class ConversationCell: UITableViewCell {
      //   timeLabel.font = timeLabel.font.bold
         
         // Data Set here
-        var company = ""
+        var last = ""
         var first = ""
-        if let companyName = conversation.company_name {
-            company = companyName
+        var company = ""
+        if let lastName = conversation.last_name {
+            last = lastName
         }
         if let firstName = conversation.first_name {
             first = firstName
         }
-        self.nameLabel.text = first + company
+        if let companyName = conversation.company_name {
+            company = companyName
+        }
+        self.nameLabel.text = "\(first) \(last) \(company)"
         if let timeStamp = conversation.timestamp {
             timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
         }
@@ -81,10 +85,8 @@ class ConversationCell: UITableViewCell {
         //MARK: Lifecycle
         override func prepareForReuse() {
             super.prepareForReuse()
-            //        profilePic.cancelDownload()
             nameLabel.font = nameLabel.font.regular
             messageLabel.font = messageLabel.font.regular
-         //   timeLabel.font = timeLabel.font.regular
             messageLabel.textColor = .gray
             messageLabel.text = nil
         }
