@@ -51,7 +51,7 @@ class ConversationsViewController: UIViewController {
     var socketManager = SocketManager()
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
-//    fileprivate var isSearchEnabled: Bool = false
+    fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [ObjectConversation]()
     var doneButton = UIBarButtonItem()
     var selectedConversations = [ObjectConversation]()
