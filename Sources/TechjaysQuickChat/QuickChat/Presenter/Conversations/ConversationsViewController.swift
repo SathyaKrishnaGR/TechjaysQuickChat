@@ -348,7 +348,7 @@ extension ConversationsViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
         self.newChatListButton.tintColor = ChatColors.tint
         self.editButton.tintColor = ChatColors.tint
-        self.deleteButton.tintColor = ChatColors.tint
+      //  self.deleteButton.tintColor = ChatColors.tint
     }
 }
 
