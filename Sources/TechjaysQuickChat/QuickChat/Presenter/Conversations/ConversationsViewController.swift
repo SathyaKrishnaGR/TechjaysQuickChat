@@ -62,8 +62,6 @@ class ConversationsViewController: UIViewController {
         super.viewDidLoad()
         tableView.allowsMultipleSelectionDuringEditing = true
         FayvKeys.ChatDefaults.paginationLimit = "10"
-        self.navigationItem.rightBarButtonItem = nil
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -202,9 +200,9 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
             if isSearchEnabled {
-                cell.set(searchArray[indexPath.row])
+                cell.set(searchArray[indexPath.row], id: "Conversation")
             } else {
-                cell.set(conversations[indexPath.row])
+                cell.set(conversations[indexPath.row], id: "Conversation")
             }
             return cell
         }
@@ -352,7 +350,7 @@ extension ConversationsViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
         self.newChatListButton.tintColor = ChatColors.tint
         self.editButton.tintColor = ChatColors.tint
-      //  self.deleteButton.tintColor = ChatColors.tint
+        self.deleteButton.tintColor = ChatColors.tint
     }
 }
 

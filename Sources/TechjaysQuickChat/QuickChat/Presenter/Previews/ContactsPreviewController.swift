@@ -107,9 +107,9 @@ extension ContactsPreviewController:PaginatedTableViewDelegate {
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as? ConversationCell {
             if isSearchEnabled {
-                cell.set(searchArray[indexPath.row])
+                cell.set(searchArray[indexPath.row], id: "Contacts")
             } else {
-                cell.set(users[indexPath.row])
+                cell.set(users[indexPath.row], id: "Contacts")
             }
             return cell
         }
