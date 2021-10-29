@@ -32,7 +32,6 @@ class ConversationsViewController: UIViewController {
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var deleteButton: UIBarButtonItem!
 //    @IBOutlet weak var newMessageCountLabel: UILabel!
-    
     @IBOutlet weak var newChatListButton: UIBarButtonItem!
     @IBOutlet weak var searchBar: UISearchBar!
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -52,7 +51,7 @@ class ConversationsViewController: UIViewController {
     var socketManager = SocketManager()
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
-    fileprivate var isSearchEnabled: Bool = false
+//    fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [ObjectConversation]()
     var doneButton = UIBarButtonItem()
     var selectedConversations = [ObjectConversation]()
@@ -191,13 +190,9 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
             self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
         }
     }
-    
+
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearchEnabled {
-            return self.searchArray.count
-        } else {
             return self.conversations.count
-        }
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -379,6 +374,4 @@ extension ConversationsViewController:UISearchBarDelegate {
        }
     }
 }
-
-
 
