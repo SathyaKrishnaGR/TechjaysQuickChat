@@ -54,7 +54,7 @@ class ConversationsViewController: UIViewController {
     fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [ObjectConversation]()
     var doneButton = UIBarButtonItem()
-    var selectedConversations = [ObjectConversation]()
+    
    
     
     //MARK: Lifecycle
@@ -139,7 +139,7 @@ extension ConversationsViewController {
     }
     fileprivate func deleteAndRemoveRows() {
         if let selectedRows = tableView.indexPathsForSelectedRows {
-            
+            var selectedConversations = [ObjectConversation]()
             for indexPath in selectedRows  {
                 selectedConversations.append(conversations[indexPath.row])
             }
