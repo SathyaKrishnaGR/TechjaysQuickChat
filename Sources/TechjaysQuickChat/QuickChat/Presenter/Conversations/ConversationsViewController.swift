@@ -219,6 +219,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         }
         return 80
     }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         tableView.fetchData()
     }
