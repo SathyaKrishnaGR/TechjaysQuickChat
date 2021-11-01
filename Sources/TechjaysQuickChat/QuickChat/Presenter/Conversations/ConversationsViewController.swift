@@ -219,10 +219,6 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         }
         return 80
     }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        tableView.fetchData()
-    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         tableView.fetchData()
     }
