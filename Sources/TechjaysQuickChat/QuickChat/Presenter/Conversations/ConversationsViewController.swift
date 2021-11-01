@@ -220,6 +220,13 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         return 80
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        tableView.fetchData()
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        tableView.fetchData()
+    }
+    
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
@@ -358,6 +365,7 @@ extension ConversationsViewController:UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
         isSearchEnabled = false
     }
     
