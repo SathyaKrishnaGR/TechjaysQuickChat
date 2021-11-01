@@ -125,6 +125,7 @@ class ConversationsViewController: UIViewController {
     
     @objc private func refreshChatList(_ sender: Any) {
         tableView.fetchData()
+        self.refreshControl.endRefreshing()
     }
 }
 
