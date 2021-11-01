@@ -164,6 +164,7 @@ extension ContactsPreviewController:UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
         self.resignFirstResponder()
         isSearchEnabled = false
     }

@@ -54,6 +54,7 @@ class ConversationsViewController: UIViewController {
     fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [ObjectConversation]()
     var doneButton = UIBarButtonItem()
+    private let refreshControl = UIRefreshControl()
     
    
     
@@ -71,6 +72,7 @@ class ConversationsViewController: UIViewController {
         socket = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         socketManager.listUpdateDelegate = self
         self.setTint()
+        refreshPullTableView()
         
     }
     
@@ -114,6 +116,16 @@ class ConversationsViewController: UIViewController {
             }
             modalPresentationStyle = .fullScreen
         }
+    }
+    
+    func refreshPullTableView(){
+        tableView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(refreshChatList(_:)), for: .valueChanged)
+    }
+    
+    @objc private func refreshChatList(_ sender: Any) {
+        tableView.fetchData()
+        self.refreshControl.endRefreshing()
     }
 }
 
@@ -358,6 +370,7 @@ extension ConversationsViewController:UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
         isSearchEnabled = false
     }
     

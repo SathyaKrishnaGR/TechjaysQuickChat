@@ -130,7 +130,7 @@
                             <constraint firstItem="eVC-iO-6zG" firstAttribute="trailing" secondItem="CZg-e7-KoX" secondAttribute="trailing" id="y6u-6o-oOi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Chat" largeTitleDisplayMode="always" id="VV4-rQ-2Nk">
+                    <navigationItem key="navigationItem" title="Chats" largeTitleDisplayMode="always" id="VV4-rQ-2Nk">
                         <barButtonItem key="leftBarButtonItem" title="Edit" id="SQJ-xZ-GMi">
                             <connections>
                                 <action selector="editPressed:" destination="ri6-fX-8IQ" id="dNP-IX-pWy"/>
