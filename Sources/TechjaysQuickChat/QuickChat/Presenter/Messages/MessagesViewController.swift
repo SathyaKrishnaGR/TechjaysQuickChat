@@ -188,9 +188,9 @@ extension MessagesViewController {
                 }
             }
             if !deleteType.contains("for_me") {
-                self.showDeleteActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: "everyone")
+                self.showDeleteActionSheet(rows: selectedRows, messages: selectedMessages)
             } else {
-                self.showDeleteforMeActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: "for_me")
+                self.showDeleteforMeActionSheet(rows: selectedRows, messages: selectedMessages)
             }
         }
     }
@@ -485,13 +485,13 @@ extension MessagesViewController {
         }
     }
     
-    fileprivate func showDeleteActionSheet(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
+    fileprivate func showDeleteActionSheet(rows: [IndexPath], messages: [ObjectMessage]) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete For Everyone", style: .destructive , handler:{ (UIAlertAction)in
-            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
+            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: "everyone")
         }))
         alert.addAction(UIAlertAction(title: "Delete For Me", style: .destructive , handler:{ (UIAlertAction)in
-            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
+            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: "for_me")
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
             self.isEditing = !self.isEditing
@@ -500,10 +500,10 @@ extension MessagesViewController {
         })
     }
     
-    fileprivate func showDeleteforMeActionSheet(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
+    fileprivate func showDeleteforMeActionSheet(rows: [IndexPath], messages: [ObjectMessage]) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete For Me", style: .destructive , handler:{ (UIAlertAction)in
-            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
+            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: "for_me")
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
             self.isEditing = !self.isEditing
