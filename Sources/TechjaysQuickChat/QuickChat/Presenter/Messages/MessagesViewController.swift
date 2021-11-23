@@ -492,7 +492,7 @@ extension MessagesViewController {
             self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
         }))
         alert.addAction(UIAlertAction(title: "Delete For Me", style: .destructive , handler:{ (UIAlertAction)in
-            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
+            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: "for_me")
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
             self.isEditing = !self.isEditing
