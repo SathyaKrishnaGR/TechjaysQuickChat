@@ -97,7 +97,7 @@ extension PaginatedTableView: UITableViewDelegate, UITableViewDataSource {
     }
     // while scrolling this delegate is being called so you may now check which direction your scrollView is being scrolled to
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        paginationDelegate.scrollViewDidScroll?(scrollView)
+        //paginationDelegate.scrollViewDidScroll?(scrollView)
     }
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return UITableViewCell.EditingStyle(rawValue: (paginationDelegate.paginatedTableView?(self, editingStyleForRowAt: indexPath))!.rawValue) ?? .none
