@@ -367,6 +367,9 @@ extension MessagesViewController {
                         })
 
                     }*/
+                    if self.messages.count > 1 {
+                                self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
+                              }
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .bottom, animated: true)
                 }
