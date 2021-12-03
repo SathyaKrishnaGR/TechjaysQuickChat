@@ -358,7 +358,7 @@ extension MessagesViewController {
                     } else {
                         self.messages.append(contentsOf: data )
                     }
-                    if self.messages.count > 1 {
+                /*    if self.messages.count > 1 {
                         self.messages = self.messages.sorted(by: {
                             if let timeStampOne = $0.timestamp, let timeStampTwo = $1.timestamp {
                                 timeStampOne.stringToDate().compare(timeStampTwo.stringToDate()) == .orderedAscending
@@ -366,7 +366,7 @@ extension MessagesViewController {
                            return true
                         })
 
-                    }
+                    }*/
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .bottom, animated: true)
                 }
