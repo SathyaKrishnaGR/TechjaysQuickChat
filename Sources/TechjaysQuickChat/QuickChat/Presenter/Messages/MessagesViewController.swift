@@ -358,14 +358,15 @@ extension MessagesViewController {
                     } else {
                         self.messages.append(contentsOf: data )
                     }
-//                    if self.messages.count > 1 {
-//                        self.messages = self.messages.sorted(by: {
-//                            $0.timestamp_in_date = $0.timestamp
-//                            $0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending
-//                            
-//                        })
-//                        
-//                    }
+                    if self.messages.count > 1 {
+                        self.messages = self.messages.sorted(by: {
+                            if let timeStampOne = $0.timestamp, let timeStampTwo = $1.timestamp {
+                                timeStampOne.stringToDate().compare(timeStampTwo.stringToDate()) == .orderedAscending
+                            }
+                            
+                        })
+
+                    }
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .bottom, animated: true)
                 }
