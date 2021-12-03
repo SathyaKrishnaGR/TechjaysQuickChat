@@ -51,14 +51,7 @@ class ObjectMessage: Codable {
         try container.encodeIfPresent(chat_type, forKey: .chat_type)
         try container.encodeIfPresent(timestamp_in_date, forKey: .timestamp_in_date)
         try container.encodeIfPresent(file_url, forKey: .file_url)
-        
-        //    try container.encode(id, forKey: .id)
-        //    try container.encodeIfPresent(message, forKey: .message)
-        //    try container.encodeIfPresent(timestamp, forKey: .timestamp)
-        //    try container.encodeIfPresent(ownerID, forKey: .ownerID)
-        //    try container.encodeIfPresent(profilePicLink, forKey: .profilePicLink)
-        //    try container.encodeIfPresent(contentType.rawValue, forKey: .contentType)
-        //    try container.encodeIfPresent(content, forKey: .content)
+
     }
     
     init() {}
