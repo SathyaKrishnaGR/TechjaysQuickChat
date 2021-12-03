@@ -358,17 +358,15 @@ extension MessagesViewController {
                     } else {
                         self.messages.append(contentsOf: data )
                     }
-                     /*  if self.messages.count > 1 {
+                    if self.messages.count > 1 {
                         self.messages = self.messages.sorted(by: {
-                          
                             if let timeStampOne = $0.timestamp, let timeStampTwo = $1.timestamp {
-                                let result = timeStampOne.stringToDate().compare(timeStampTwo.stringToDate()) == .orderedAscending
-                                return result
+                                timeStampOne.stringToDate().compare(timeStampTwo.stringToDate()) == .orderedAscending
                             }
-                           
+                           return false
                         })
 
-                    }*/
+                    }
                     /*
                      if self.messages.count > 1 {
                                  self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
