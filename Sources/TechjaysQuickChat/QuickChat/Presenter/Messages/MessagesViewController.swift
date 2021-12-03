@@ -358,18 +358,30 @@ extension MessagesViewController {
                     } else {
                         self.messages.append(contentsOf: data )
                     }
-                /*    if self.messages.count > 1 {
+                   if self.messages.count > 1 {
                         self.messages = self.messages.sorted(by: {
-                            if let timeStampOne = $0.timestamp, let timeStampTwo = $1.timestamp {
+                           /* if let timeStampOne = $0.timestamp, let timeStampTwo = $1.timestamp {
                                 timeStampOne.stringToDate().compare(timeStampTwo.stringToDate()) == .orderedAscending
+                            }*/
+                            let timeStampOne = $0.timestamp
+                            let timeStampTwo = $1.timestamp
+                            if timeStampOne != nil {
+                                print("Contains a value!")
+                            } else {
+                                print("Doesn't contain a value.")
                             }
-                           return true
+                            if timeStampTwo !=  nil {
+                                print("Contains a value!")
+
+                            }
+                          return true
                         })
 
-                    }*/
-                    if self.messages.count > 1 {
-                                self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
-                              }
+                    }
+                   
+                 /*   if self.messages.count > 1 {
+                        self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate()) ) == .orderedAscending})
+                              }*/
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .bottom, animated: true)
                 }
