@@ -365,19 +365,21 @@ extension MessagesViewController {
                             }*/
                             let timeStampOne = $0.timestamp
                             let timeStampTwo = $1.timestamp
-                            if timeStampOne != nil {
-                                print("Contains a value!")
+                            if timeStampOne != nil && timeStampTwo !=  nil  {
+                                self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
                             } else {
                                 print("Doesn't contain a value.")
                             }
-                            if timeStampTwo !=  nil {
-                                print("Contains a value!")
-
-                            }
+                            
                           return true
                         })
 
                     }
+                    /*
+                     if self.messages.count > 1 {
+                                 self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
+                               }
+                     */
                    
                  /*   if self.messages.count > 1 {
                         self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate()) ) == .orderedAscending})
