@@ -423,7 +423,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bek-LY-nS1"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="bBq-0a-Ntf" firstAttribute="leading" secondItem="bek-LY-nS1" secondAttribute="leading" id="RAZ-sd-QEH"/>
                             <constraint firstItem="bek-LY-nS1" firstAttribute="trailing" secondItem="bBq-0a-Ntf" secondAttribute="trailing" id="SqY-6K-2BJ"/>
@@ -501,9 +501,6 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
             <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
