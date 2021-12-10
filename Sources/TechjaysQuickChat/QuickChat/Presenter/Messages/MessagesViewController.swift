@@ -356,7 +356,7 @@ extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
         } else if self.inputTextField.contentSize.height < 120 {
             tableViewHeight.constant = 580
             topViewHeight.constant = self.inputTextField.contentSize.height + 10
-            inputTextFieldHeight.constant = self.inputTextField.contentSize.height + 10
+            inputTextFieldHeight.constant = self.inputTextField.contentSize.height 
         } else {
             tableViewHeight.constant = 580
             topViewHeight.constant = 110
