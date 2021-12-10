@@ -28,7 +28,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     
     //MARK: IBOutlets
     @IBOutlet weak var tableView: PaginatedTableView!
-    @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var inputTextField: UITextView!
     @IBOutlet weak var expandButton: UIButton!
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var deleteButton: UIBarButtonItem!
@@ -38,6 +38,12 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet var actionButtons: [UIButton]!
+    @IBOutlet weak var inputTextFieldHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var topViewTop: NSLayoutConstraint!
+    @IBOutlet weak var topViewHeight: NSLayoutConstraint!
+    
+    
     
     //MARK: Private properties
     private let manager = MessageManager()
@@ -329,7 +335,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
 }
 
 //MARK: UItextField Delegate
-extension MessagesViewController: UITextFieldDelegate {
+extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
@@ -337,6 +343,27 @@ extension MessagesViewController: UITextFieldDelegate {
         showActionButtons(false)
         return true
     }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        let line = yourTextView.numberOfLines()
+        
+        if line < 2 {
+            tableViewHeight.constant = 640
+            topViewHeight.constant = 50
+            inputTextFieldHeight.constant = 40
+           } else {
+           tableViewHeight.constant = 600
+           topViewHeight.constant = 90
+            inputTextFieldHeight.constant = 90
+           }
+    }
+    
+    func numberOfLines() -> Int{
+            if let fontUnwrapped = self.font{
+                return Int(self.contentSize.height / fontUnwrapped.lineHeight)
+            }
+            return 0
+        }
 }
 
 //MARK: MessageTableViewCellDelegate Delegate
