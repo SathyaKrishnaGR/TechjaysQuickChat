@@ -351,11 +351,11 @@ extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
         showActionButtons(false)
         if self.inputTextField.contentSize.height < 50 {
             tableViewHeight.constant = 640
-            topViewHeight.constant = self.inputTextField.contentSize.height//50
+            topViewHeight.constant = self.inputTextField.contentSize.height
             inputTextFieldHeight.constant = self.inputTextField.contentSize.height
         } else if self.inputTextField.contentSize.height < 110 {
             tableViewHeight.constant = 580
-            topViewHeight.constant = self.inputTextField.contentSize.height//110
+            topViewHeight.constant = self.inputTextField.contentSize.height + 10
             inputTextFieldHeight.constant = self.inputTextField.contentSize.height
         } else {
             tableViewHeight.constant = 580
