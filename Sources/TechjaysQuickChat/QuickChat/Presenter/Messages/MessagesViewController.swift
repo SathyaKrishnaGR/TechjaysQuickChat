@@ -28,7 +28,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     
     //MARK: IBOutlets
     @IBOutlet weak var tableView: PaginatedTableView!
-    @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var inputTextField: UITextView!
     @IBOutlet weak var expandButton: UIButton!
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var deleteButton: UIBarButtonItem!
