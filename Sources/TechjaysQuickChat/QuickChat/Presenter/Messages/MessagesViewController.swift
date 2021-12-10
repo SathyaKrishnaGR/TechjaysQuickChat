@@ -38,7 +38,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet var actionButtons: [UIButton]!
-    @IBOutlet weak var inputTextFieldHeight: NSLayoutConstraint!
+   // @IBOutlet weak var inputTextFieldHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var topViewTop: NSLayoutConstraint!
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
@@ -344,7 +344,7 @@ extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
         return true
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
+  /*  func textViewDidBeginEditing(_ textView: UITextView) {
         let line = yourTextView.numberOfLines()
         
         if line < 2 {
@@ -363,7 +363,7 @@ extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
                 return Int(self.contentSize.height / fontUnwrapped.lineHeight)
             }
             return 0
-        }
+        }*/
 }
 
 //MARK: MessageTableViewCellDelegate Delegate
@@ -537,5 +537,40 @@ extension MessagesViewController {
         }))
         self.present(alert, animated: true, completion: {
         })
+    }
+}
+
+
+class AutoExpandingTextView: UITextView {
+
+    private var heightConstraint: NSLayoutConstraint!
+
+    var maxHeight: CGFloat = 100 {
+        didSet {
+            heightConstraint?.constant = maxHeight
+        }
+    }
+
+    private var observer: NSObjectProtocol?
+
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        commonInit()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+
+    private func commonInit() {
+        heightConstraint = heightAnchor.constraint(equalToConstant: maxHeight)
+
+        observer = NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.heightConstraint.isActive = self.contentSize.height > self.maxHeight
+            self.isScrollEnabled = self.contentSize.height > self.maxHeight
+            self.invalidateIntrinsicContentSize()
+        }
     }
 }

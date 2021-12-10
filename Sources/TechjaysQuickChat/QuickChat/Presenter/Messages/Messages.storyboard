@@ -362,12 +362,9 @@
                                                     <constraint firstAttribute="width" constant="72" id="cmr-g3-TmI"/>
                                                 </constraints>
                                             </stackView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bqA-4f-38d">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bqA-4f-38d" customClass="AutoExpandingTextView">
                                                 <rect key="frame" x="84" y="5" width="235" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="Qy5-uk-PgV"/>
-                                                </constraints>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -447,7 +444,6 @@
                         <outlet property="editButton" destination="28p-sW-RXl" id="mQK-dx-8ML"/>
                         <outlet property="expandButton" destination="Wiw-ke-ss8" id="68o-lJ-1dX"/>
                         <outlet property="inputTextField" destination="4Vl-1H-NHv" id="wIV-uX-MKB"/>
-                        <outlet property="inputTextFieldHeight" destination="Qy5-uk-PgV" id="TtV-mS-ba1"/>
                         <outlet property="sendButton" destination="aBf-gd-SKK" id="hBj-Ge-UjU"/>
                         <outlet property="stackViewWidthConstraint" destination="cmr-g3-TmI" id="yp2-AV-yit"/>
                         <outlet property="tableView" destination="bBq-0a-Ntf" id="3bs-rp-U9P"/>
