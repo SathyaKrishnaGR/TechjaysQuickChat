@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="640"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="640" id="UCF-bl-gJ0"/>
+                                    <constraint firstAttribute="height" priority="250" constant="640" id="UCF-bl-gJ0"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserMessageTableViewCell" rowHeight="90" id="m0C-Mh-4Nd" customClass="MessageTableViewCell" customModule="TechjaysQuickChat">
@@ -401,7 +401,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="i5t-5V-5MW" firstAttribute="leading" secondItem="Vn0-qa-7SK" secondAttribute="leading" id="8Ki-sj-mfe"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="Bne-vW-I6e"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Bne-vW-I6e"/>
                                     <constraint firstAttribute="trailing" secondItem="i5t-5V-5MW" secondAttribute="trailing" id="T1e-Le-Xwt"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="centerX" secondItem="Vn0-qa-7SK" secondAttribute="centerX" id="Vcc-qn-CSX"/>
                                     <constraint firstItem="i5t-5V-5MW" firstAttribute="top" secondItem="Vn0-qa-7SK" secondAttribute="top" id="Zn4-Ay-l22"/>
