@@ -388,9 +388,7 @@
                                             <constraint firstItem="aBf-gd-SKK" firstAttribute="centerY" secondItem="YAR-7v-vPl" secondAttribute="centerY" id="Xzq-mj-pIX"/>
                                             <constraint firstItem="QSa-zB-UHJ" firstAttribute="centerY" secondItem="YAR-7v-vPl" secondAttribute="centerY" id="Yqd-UL-CUA"/>
                                             <constraint firstItem="lxa-V7-sAi" firstAttribute="leading" secondItem="eTe-ES-iF1" secondAttribute="trailing" constant="6" id="e9K-M1-UG7"/>
-                                            <constraint firstItem="bqA-4f-38d" firstAttribute="bottom" secondItem="lxa-V7-sAi" secondAttribute="bottom" id="f2W-YO-VQZ"/>
                                             <constraint firstItem="bqA-4f-38d" firstAttribute="leading" secondItem="lxa-V7-sAi" secondAttribute="leading" id="hHW-Lh-n5z"/>
-                                            <constraint firstItem="bqA-4f-38d" firstAttribute="top" secondItem="lxa-V7-sAi" secondAttribute="top" id="hML-My-U9F"/>
                                             <constraint firstItem="aBf-gd-SKK" firstAttribute="leading" secondItem="QSa-zB-UHJ" secondAttribute="trailing" constant="12" id="syR-Xv-zaZ"/>
                                             <constraint firstItem="QSa-zB-UHJ" firstAttribute="leading" secondItem="lxa-V7-sAi" secondAttribute="leading" constant="5" id="v5o-ls-8IA"/>
                                         </constraints>
@@ -413,6 +411,7 @@
                                     <constraint firstItem="i5t-5V-5MW" firstAttribute="top" secondItem="Vn0-qa-7SK" secondAttribute="top" id="Zn4-Ay-l22"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="bottom" secondItem="Vn0-qa-7SK" secondAttribute="bottom" id="dFw-Rm-XGs"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="width" secondItem="Vn0-qa-7SK" secondAttribute="width" id="hgh-CY-pnO"/>
+                                    <constraint firstItem="bqA-4f-38d" firstAttribute="top" secondItem="Vn0-qa-7SK" secondAttribute="top" constant="5" id="mPU-0q-EZY"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="top" secondItem="Vn0-qa-7SK" secondAttribute="top" id="yZj-go-kAH"/>
                                 </constraints>
                             </view>
