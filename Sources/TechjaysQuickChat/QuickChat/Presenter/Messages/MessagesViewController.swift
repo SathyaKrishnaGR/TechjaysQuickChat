@@ -349,17 +349,18 @@ extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
         showActionButtons(false)
-        if self.inputTextField.contentSize.height < 40 {
+        if self.inputTextField.contentSize.height < 50 {
             tableViewHeight.constant = 640
-            topViewHeight.constant = 50
+            topViewHeight.constant = self.inputTextField.contentSize.height + 15
             inputTextFieldHeight.constant = self.inputTextField.contentSize.height
-        } else if self.inputTextField.contentSize.height < 110 {
+        } else if self.inputTextField.contentSize.height < 130 {
             tableViewHeight.constant = 580
-            topViewHeight.constant = 110
+            topViewHeight.constant = self.inputTextField.contentSize.height + 10
             inputTextFieldHeight.constant = self.inputTextField.contentSize.height
         } else {
             tableViewHeight.constant = 580
-            topViewHeight.constant = 110
+            topViewHeight.constant = 130
+            inputTextFieldHeight.constant = 120
             self.inputTextField.isScrollEnabled = true
         }
            
