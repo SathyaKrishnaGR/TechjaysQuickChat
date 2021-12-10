@@ -67,8 +67,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
-        addKeyboardObservers() {[weak self] state in
+       addKeyboardObservers() {[weak self] state in
             guard state else { return }
             self?.tableView.scroll(to: .bottom, animated: true)
         }
@@ -344,7 +343,10 @@ extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
         showActionButtons(false)
         return true
     }
-    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
+        return true
+    }
   /*  func textViewDidBeginEditing(_ textView: UITextView) {
         let line = yourTextView.numberOfLines()
         
