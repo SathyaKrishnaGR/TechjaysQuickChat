@@ -38,7 +38,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet var actionButtons: [UIButton]!
-   // @IBOutlet weak var inputTextFieldHeight: NSLayoutConstraint!
+    @IBOutlet weak var inputTextFieldHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var topViewTop: NSLayoutConstraint!
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
@@ -67,6 +67,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
         addKeyboardObservers() {[weak self] state in
             guard state else { return }
             self?.tableView.scroll(to: .bottom, animated: true)
@@ -541,36 +542,3 @@ extension MessagesViewController {
 }
 
 
-class AutoExpandingTextView: UITextView {
-
-    private var heightConstraint: NSLayoutConstraint!
-
-    var maxHeight: CGFloat = 100 {
-        didSet {
-            heightConstraint?.constant = maxHeight
-        }
-    }
-
-    private var observer: NSObjectProtocol?
-
-    override init(frame: CGRect, textContainer: NSTextContainer?) {
-        super.init(frame: frame, textContainer: textContainer)
-        commonInit()
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        commonInit()
-    }
-
-    private func commonInit() {
-        heightConstraint = heightAnchor.constraint(equalToConstant: maxHeight)
-
-        observer = NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
-            guard let self = self else { return }
-            self.heightConstraint.isActive = self.contentSize.height > self.maxHeight
-            self.isScrollEnabled = self.contentSize.height > self.maxHeight
-            self.invalidateIntrinsicContentSize()
-        }
-    }
-}
