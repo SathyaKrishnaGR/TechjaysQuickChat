@@ -61,6 +61,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        inputTextField.sizeThatFits(CGSize(width: 230, height: inputTextField.frame.size.height))
         addKeyboardObservers() {[weak self] state in
             guard state else { return }
             self?.tableView.scroll(to: .bottom, animated: true)
