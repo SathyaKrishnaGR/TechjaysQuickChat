@@ -348,12 +348,12 @@ extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
             tableViewHeight.constant = 640
             topViewHeight.constant = 50
             inputTextFieldHeight.constant = 40
-            self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
+           // self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
         } else {
             tableViewHeight.constant = 580
             topViewHeight.constant = 110
             inputTextFieldHeight.constant = 120
-            self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
+           // self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
 
             
         }
