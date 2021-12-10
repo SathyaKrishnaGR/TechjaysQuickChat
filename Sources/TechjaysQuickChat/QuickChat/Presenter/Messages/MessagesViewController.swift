@@ -349,13 +349,17 @@ extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
             topViewHeight.constant = 50
             inputTextFieldHeight.constant = self.inputTextField.contentSize.height
            // self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
-        } else {
+        } else if self.inputTextField.contentSize.height < 110 {
             tableViewHeight.constant = 580
             topViewHeight.constant = 110
             inputTextFieldHeight.constant = self.inputTextField.contentSize.height
            // self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
 
-            
+        } else {
+            tableViewHeight.constant = 580
+            topViewHeight.constant = 110
+            self.inputTextField.isScrollEnabled = true
+            //   self.inputTextField.contentSize = [self.myTextView sizeThatFits:self.myTextView.frame.size];
         }
            
         return true
