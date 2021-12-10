@@ -19,9 +19,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bBq-0a-Ntf" customClass="PaginatedTableView" customModule="TechjaysQuickChat">
+                            <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bBq-0a-Ntf" customClass="PaginatedTableView" customModule="TechjaysQuickChat">
                                 <rect key="frame" x="0.0" y="88" width="375" height="640"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="640" id="UCF-bl-gJ0"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserMessageTableViewCell" rowHeight="90" id="m0C-Mh-4Nd" customClass="MessageTableViewCell" customModule="TechjaysQuickChat">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="90"/>
@@ -287,7 +290,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxa-V7-sAi">
-                                                <rect key="frame" x="84" y="5" width="235" height="40"/>
+                                                <rect key="frame" x="84" y="12.666666666666629" width="235" height="25"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -302,12 +305,9 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type message..." adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QSa-zB-UHJ">
-                                                <rect key="frame" x="89" y="5" width="230" height="40"/>
+                                                <rect key="frame" x="89" y="12.666666666666629" width="230" height="25"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" red="0.25162395830000001" green="0.53981399539999997" blue="0.8078737855" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="3OT-Tj-uJ6"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" returnKeyType="done"/>
                                             </textField>
@@ -360,7 +360,7 @@
                                                 </constraints>
                                             </stackView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3VZ-UR-pw6">
-                                                <rect key="frame" x="89" y="5" width="230" height="40"/>
+                                                <rect key="frame" x="89" y="12.666666666666629" width="230" height="25"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -381,9 +381,9 @@
                                             <constraint firstItem="eTe-ES-iF1" firstAttribute="centerY" secondItem="QSa-zB-UHJ" secondAttribute="centerY" id="KRj-UL-sKj"/>
                                             <constraint firstItem="lxa-V7-sAi" firstAttribute="trailing" secondItem="QSa-zB-UHJ" secondAttribute="trailing" id="QFd-uX-jFG"/>
                                             <constraint firstItem="lxa-V7-sAi" firstAttribute="top" secondItem="QSa-zB-UHJ" secondAttribute="top" id="W7j-Pm-iwB"/>
+                                            <constraint firstItem="3VZ-UR-pw6" firstAttribute="bottom" secondItem="lxa-V7-sAi" secondAttribute="bottom" id="WYn-7z-YOf"/>
                                             <constraint firstItem="aBf-gd-SKK" firstAttribute="centerY" secondItem="YAR-7v-vPl" secondAttribute="centerY" id="Xzq-mj-pIX"/>
                                             <constraint firstItem="QSa-zB-UHJ" firstAttribute="centerY" secondItem="YAR-7v-vPl" secondAttribute="centerY" id="Yqd-UL-CUA"/>
-                                            <constraint firstItem="3VZ-UR-pw6" firstAttribute="bottom" secondItem="lxa-V7-sAi" secondAttribute="bottom" id="asn-nv-lJV"/>
                                             <constraint firstItem="lxa-V7-sAi" firstAttribute="leading" secondItem="eTe-ES-iF1" secondAttribute="trailing" constant="6" id="e9K-M1-UG7"/>
                                             <constraint firstItem="aBf-gd-SKK" firstAttribute="leading" secondItem="QSa-zB-UHJ" secondAttribute="trailing" constant="12" id="syR-Xv-zaZ"/>
                                             <constraint firstItem="QSa-zB-UHJ" firstAttribute="leading" secondItem="lxa-V7-sAi" secondAttribute="leading" constant="5" id="v5o-ls-8IA"/>
@@ -401,11 +401,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="i5t-5V-5MW" firstAttribute="leading" secondItem="Vn0-qa-7SK" secondAttribute="leading" id="8Ki-sj-mfe"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="Bne-vW-I6e"/>
                                     <constraint firstAttribute="trailing" secondItem="i5t-5V-5MW" secondAttribute="trailing" id="T1e-Le-Xwt"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="centerX" secondItem="Vn0-qa-7SK" secondAttribute="centerX" id="Vcc-qn-CSX"/>
                                     <constraint firstItem="i5t-5V-5MW" firstAttribute="top" secondItem="Vn0-qa-7SK" secondAttribute="top" id="Zn4-Ay-l22"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="bottom" secondItem="Vn0-qa-7SK" secondAttribute="bottom" id="dFw-Rm-XGs"/>
-                                    <constraint firstAttribute="height" secondItem="3VZ-UR-pw6" secondAttribute="height" multiplier="1.25" id="gWj-lP-G2j"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="width" secondItem="Vn0-qa-7SK" secondAttribute="width" id="hgh-CY-pnO"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="top" secondItem="Vn0-qa-7SK" secondAttribute="top" id="yZj-go-kAH"/>
                                 </constraints>
