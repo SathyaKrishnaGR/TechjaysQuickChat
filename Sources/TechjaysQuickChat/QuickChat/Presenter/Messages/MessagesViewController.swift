@@ -344,7 +344,20 @@ extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
         return true
     }
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
+        if self.inputTextField.contentSize.height < 40 {
+            tableViewHeight.constant = 640
+            topViewHeight.constant = 50
+            inputTextFieldHeight.constant = 40
+            self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
+        } else {
+            tableViewHeight.constant = 600
+            topViewHeight.constant = 90
+            inputTextFieldHeight.constant = 90
+            self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
+
+            
+        }
+           
         return true
     }
   /*  func textViewDidBeginEditing(_ textView: UITextView) {
