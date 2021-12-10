@@ -383,7 +383,6 @@
                                             <constraint firstItem="aBf-gd-SKK" firstAttribute="centerY" secondItem="YAR-7v-vPl" secondAttribute="centerY" id="Xzq-mj-pIX"/>
                                             <constraint firstItem="QSa-zB-UHJ" firstAttribute="centerY" secondItem="YAR-7v-vPl" secondAttribute="centerY" id="Yqd-UL-CUA"/>
                                             <constraint firstItem="lxa-V7-sAi" firstAttribute="leading" secondItem="eTe-ES-iF1" secondAttribute="trailing" constant="6" id="e9K-M1-UG7"/>
-                                            <constraint firstItem="KNS-cl-63N" firstAttribute="bottom" secondItem="lxa-V7-sAi" secondAttribute="bottom" id="hH0-NM-FnM"/>
                                             <constraint firstItem="KNS-cl-63N" firstAttribute="leading" secondItem="lxa-V7-sAi" secondAttribute="leading" id="kmX-5q-T6j"/>
                                             <constraint firstItem="aBf-gd-SKK" firstAttribute="leading" secondItem="QSa-zB-UHJ" secondAttribute="trailing" constant="12" id="syR-Xv-zaZ"/>
                                             <constraint firstItem="QSa-zB-UHJ" firstAttribute="leading" secondItem="lxa-V7-sAi" secondAttribute="leading" constant="5" id="v5o-ls-8IA"/>
@@ -401,6 +400,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="i5t-5V-5MW" firstAttribute="leading" secondItem="Vn0-qa-7SK" secondAttribute="leading" id="8Ki-sj-mfe"/>
+                                    <constraint firstItem="KNS-cl-63N" firstAttribute="height" secondItem="Vn0-qa-7SK" secondAttribute="height" multiplier="0.444444" id="Fbx-tP-ShI"/>
                                     <constraint firstAttribute="height" constant="90" id="NF8-Lz-AeV"/>
                                     <constraint firstAttribute="trailing" secondItem="i5t-5V-5MW" secondAttribute="trailing" id="T1e-Le-Xwt"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="centerX" secondItem="Vn0-qa-7SK" secondAttribute="centerX" id="Vcc-qn-CSX"/>
