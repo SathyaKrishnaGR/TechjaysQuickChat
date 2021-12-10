@@ -359,7 +359,7 @@
                                                     <constraint firstAttribute="width" constant="72" id="cmr-g3-TmI"/>
                                                 </constraints>
                                             </stackView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3VZ-UR-pw6">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3VZ-UR-pw6">
                                                 <rect key="frame" x="89" y="5" width="230" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <color key="textColor" systemColor="labelColor"/>
@@ -401,11 +401,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="i5t-5V-5MW" firstAttribute="leading" secondItem="Vn0-qa-7SK" secondAttribute="leading" id="8Ki-sj-mfe"/>
-                                    <constraint firstAttribute="height" constant="50" id="LK3-bV-8Wl"/>
                                     <constraint firstAttribute="trailing" secondItem="i5t-5V-5MW" secondAttribute="trailing" id="T1e-Le-Xwt"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="centerX" secondItem="Vn0-qa-7SK" secondAttribute="centerX" id="Vcc-qn-CSX"/>
                                     <constraint firstItem="i5t-5V-5MW" firstAttribute="top" secondItem="Vn0-qa-7SK" secondAttribute="top" id="Zn4-Ay-l22"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="bottom" secondItem="Vn0-qa-7SK" secondAttribute="bottom" id="dFw-Rm-XGs"/>
+                                    <constraint firstAttribute="height" secondItem="3VZ-UR-pw6" secondAttribute="height" multiplier="1.25" id="gWj-lP-G2j"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="width" secondItem="Vn0-qa-7SK" secondAttribute="width" id="hgh-CY-pnO"/>
                                     <constraint firstItem="YAR-7v-vPl" firstAttribute="top" secondItem="Vn0-qa-7SK" secondAttribute="top" id="yZj-go-kAH"/>
                                 </constraints>
