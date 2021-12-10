@@ -28,7 +28,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     
     //MARK: IBOutlets
     @IBOutlet weak var tableView: PaginatedTableView!
-    @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var inputTextField: UITextView!
     @IBOutlet weak var expandButton: UIButton!
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var deleteButton: UIBarButtonItem!
@@ -38,6 +38,12 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet var actionButtons: [UIButton]!
+    @IBOutlet weak var inputTextFieldHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var topViewTop: NSLayoutConstraint!
+    @IBOutlet weak var topViewHeight: NSLayoutConstraint!
+    
+    
     
     //MARK: Private properties
     private let manager = MessageManager()
@@ -61,7 +67,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        addKeyboardObservers() {[weak self] state in
+       addKeyboardObservers() {[weak self] state in
             guard state else { return }
             self?.tableView.scroll(to: .bottom, animated: true)
         }
@@ -208,6 +214,9 @@ extension MessagesViewController {
     
     @IBAction func sendMessagePressed(_ sender: Any) {
         guard let text = inputTextField.text, !text.isEmpty else { return }
+        tableViewHeight.constant = 640
+        topViewHeight.constant = 50
+        inputTextFieldHeight.constant = 40
         let message = ObjectMessage()
         message.message = text
         message.timestamp = Date().dateToString()
@@ -329,7 +338,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
 }
 
 //MARK: UItextField Delegate
-extension MessagesViewController: UITextFieldDelegate {
+extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
@@ -337,6 +346,26 @@ extension MessagesViewController: UITextFieldDelegate {
         showActionButtons(false)
         return true
     }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        showActionButtons(false)
+        if self.inputTextField.contentSize.height < 40 {
+            tableViewHeight.constant = 640
+            topViewHeight.constant = 50
+            inputTextFieldHeight.constant = self.inputTextField.contentSize.height
+        } else if self.inputTextField.contentSize.height < 110 {
+            tableViewHeight.constant = 580
+            topViewHeight.constant = 110
+            inputTextFieldHeight.constant = self.inputTextField.contentSize.height
+        } else {
+            tableViewHeight.constant = 580
+            topViewHeight.constant = 110
+            self.inputTextField.isScrollEnabled = true
+        }
+           
+        return true
+    }
+  
 }
 
 //MARK: MessageTableViewCellDelegate Delegate
@@ -512,3 +541,5 @@ extension MessagesViewController {
         })
     }
 }
+
+
