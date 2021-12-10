@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dBT-bD-WzK">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -387,15 +386,15 @@
                                             <constraint firstItem="eTe-ES-iF1" firstAttribute="leading" secondItem="YAR-7v-vPl" secondAttribute="leading" constant="6" id="6Pv-6r-PuW"/>
                                             <constraint firstItem="lxa-V7-sAi" firstAttribute="bottom" secondItem="QSa-zB-UHJ" secondAttribute="bottom" id="B8h-8A-R2j"/>
                                             <constraint firstAttribute="trailing" secondItem="aBf-gd-SKK" secondAttribute="trailing" constant="12" id="BRR-Pd-JgJ"/>
-                                            <constraint firstItem="eTe-ES-iF1" firstAttribute="centerY" secondItem="QSa-zB-UHJ" secondAttribute="centerY" id="KRj-UL-sKj"/>
                                             <constraint firstItem="lxa-V7-sAi" firstAttribute="trailing" secondItem="QSa-zB-UHJ" secondAttribute="trailing" id="QFd-uX-jFG"/>
                                             <constraint firstItem="lxa-V7-sAi" firstAttribute="top" secondItem="QSa-zB-UHJ" secondAttribute="top" id="W7j-Pm-iwB"/>
                                             <constraint firstItem="bqA-4f-38d" firstAttribute="trailing" secondItem="lxa-V7-sAi" secondAttribute="trailing" id="XHp-YC-foS"/>
-                                            <constraint firstItem="aBf-gd-SKK" firstAttribute="centerY" secondItem="YAR-7v-vPl" secondAttribute="centerY" id="Xzq-mj-pIX"/>
                                             <constraint firstItem="QSa-zB-UHJ" firstAttribute="centerY" secondItem="YAR-7v-vPl" secondAttribute="centerY" id="Yqd-UL-CUA"/>
+                                            <constraint firstItem="aBf-gd-SKK" firstAttribute="leading" secondItem="bqA-4f-38d" secondAttribute="trailing" constant="12" id="d5s-n0-7f3"/>
                                             <constraint firstItem="lxa-V7-sAi" firstAttribute="leading" secondItem="eTe-ES-iF1" secondAttribute="trailing" constant="6" id="e9K-M1-UG7"/>
                                             <constraint firstItem="bqA-4f-38d" firstAttribute="leading" secondItem="lxa-V7-sAi" secondAttribute="leading" id="hHW-Lh-n5z"/>
-                                            <constraint firstItem="aBf-gd-SKK" firstAttribute="leading" secondItem="QSa-zB-UHJ" secondAttribute="trailing" constant="12" id="syR-Xv-zaZ"/>
+                                            <constraint firstItem="eTe-ES-iF1" firstAttribute="centerY" secondItem="bqA-4f-38d" secondAttribute="centerY" id="n4a-dW-3mO"/>
+                                            <constraint firstItem="aBf-gd-SKK" firstAttribute="centerY" secondItem="bqA-4f-38d" secondAttribute="centerY" id="pxo-hA-Xzx"/>
                                             <constraint firstItem="QSa-zB-UHJ" firstAttribute="leading" secondItem="lxa-V7-sAi" secondAttribute="leading" constant="5" id="v5o-ls-8IA"/>
                                         </constraints>
                                     </view>
