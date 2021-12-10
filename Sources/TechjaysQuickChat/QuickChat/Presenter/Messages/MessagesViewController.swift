@@ -214,6 +214,9 @@ extension MessagesViewController {
     
     @IBAction func sendMessagePressed(_ sender: Any) {
         guard let text = inputTextField.text, !text.isEmpty else { return }
+        tableViewHeight.constant = 640
+        topViewHeight.constant = 50
+        inputTextFieldHeight.constant = 40
         let message = ObjectMessage()
         message.message = text
         message.timestamp = Date().dateToString()
@@ -344,46 +347,24 @@ extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
         return true
     }
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        showActionButtons(false)
         if self.inputTextField.contentSize.height < 40 {
             tableViewHeight.constant = 640
             topViewHeight.constant = 50
             inputTextFieldHeight.constant = self.inputTextField.contentSize.height
-           // self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
         } else if self.inputTextField.contentSize.height < 110 {
             tableViewHeight.constant = 580
             topViewHeight.constant = 110
             inputTextFieldHeight.constant = self.inputTextField.contentSize.height
-           // self.inputTextFieldHeight.constant = self.inputTextField.contentSize.height
-
         } else {
             tableViewHeight.constant = 580
             topViewHeight.constant = 110
             self.inputTextField.isScrollEnabled = true
-            //   self.inputTextField.contentSize = [self.myTextView sizeThatFits:self.myTextView.frame.size];
         }
            
         return true
     }
-  /*  func textViewDidBeginEditing(_ textView: UITextView) {
-        let line = yourTextView.numberOfLines()
-        
-        if line < 2 {
-            tableViewHeight.constant = 640
-            topViewHeight.constant = 50
-            inputTextFieldHeight.constant = 40
-           } else {
-           tableViewHeight.constant = 600
-           topViewHeight.constant = 90
-            inputTextFieldHeight.constant = 90
-           }
-    }
-    
-    func numberOfLines() -> Int{
-            if let fontUnwrapped = self.font{
-                return Int(self.contentSize.height / fontUnwrapped.lineHeight)
-            }
-            return 0
-        }*/
+  
 }
 
 //MARK: MessageTableViewCellDelegate Delegate
