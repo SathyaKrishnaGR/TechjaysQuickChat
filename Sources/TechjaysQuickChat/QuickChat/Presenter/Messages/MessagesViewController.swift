@@ -347,6 +347,7 @@ extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
         return true
     }
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
         showActionButtons(false)
         if self.inputTextField.contentSize.height < 40 {
             tableViewHeight.constant = 640
