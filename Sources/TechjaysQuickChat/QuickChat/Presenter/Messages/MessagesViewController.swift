@@ -360,7 +360,7 @@ extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
         } else {
             tableViewHeight.constant = 580
             topViewHeight.constant = 110
-            inputTextFieldHeight.constant = 150
+            inputTextFieldHeight.constant = 140
             self.inputTextField.isScrollEnabled = true
         }
            
