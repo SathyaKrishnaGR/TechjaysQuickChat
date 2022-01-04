@@ -2,7 +2,7 @@ import UIKit
 
 public struct TechjaysQuickChat {
     
-    public init(themeColor: UIColor, background: Image?) {
+    public init(themeColor: UIColor, background: UIImage?) {
         ChatColors.tint = themeColor
         ChatBackground.image = background
     }
