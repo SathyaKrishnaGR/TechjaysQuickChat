@@ -23,7 +23,7 @@
                                 <color key="tintColor" red="0.25162395830000001" green="0.53981399539999997" blue="0.8078737855" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConversationCell" rowHeight="55" id="omi-P6-clh" customClass="ConversationCell" customModule="TechjaysQuickChat">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConversationCell" rowHeight="55" id="omi-P6-clh" customClass="ConversationCell" customModule="TechjaysQuickChat">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="omi-P6-clh" id="09Y-kk-zKy">
@@ -95,7 +95,7 @@
                                             <outlet property="timeLabel" destination="33o-19-jjC" id="Vpg-bs-m5k"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EmptyCell" rowHeight="531" id="t5U-xs-Xi0">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EmptyCell" rowHeight="531" id="t5U-xs-Xi0">
                                         <rect key="frame" x="0.0" y="99.666666030883789" width="428" height="531"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t5U-xs-Xi0" id="jnb-KT-YJg">
