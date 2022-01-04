@@ -401,7 +401,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bek-LY-nS1"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="bBq-0a-Ntf" firstAttribute="leading" secondItem="bek-LY-nS1" secondAttribute="leading" id="RAZ-sd-QEH"/>
                             <constraint firstItem="bek-LY-nS1" firstAttribute="trailing" secondItem="bBq-0a-Ntf" secondAttribute="trailing" id="SqY-6K-2BJ"/>
@@ -467,6 +467,9 @@
         <namedColor name="AuthBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
