@@ -174,6 +174,10 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
 //            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
 //        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
+            cell.backgroundColor = ChatColors.cellBackground
+            cell.nameLabel.font = ChatFont.title
+            cell.messageLabel.font = ChatFont.text
+            cell.timeLabel.font = ChatFont.smallText
             cell.set(conversations[indexPath.row])
             return cell
         }
@@ -286,8 +290,6 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                             if !self.conversations.contains(where: { conversation in conversation.to_user_id == userId }) {
                                 print("1 does not exists in the array")
                                 
-                                //                                self.newMessageCountLabel.isHidden = false
-                                //                                self.newMessageCountLabel.backgroundColor = ChatColors.tint
                                 let newconversation = ObjectConversation()
                                 newconversation.first_name = sender.username
                                 newconversation.to_user_id = sender.user_id
@@ -323,6 +325,14 @@ extension ConversationsViewController {
         self.tableView.tintColor = ChatColors.tint
         self.navigationItem.rightBarButtonItem?.tintColor = ChatColors.tint
         self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
+        self.setBackgroundTheme(image: ChatBackground.image)
     }
+    
+    func setBackgroundTheme(image: UIImage? = nil) {
+        let background = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+         background.image = image
+         self.view.addSubview(background)
+         self.view.sendSubviewToBack(background)
+     }
 }
 

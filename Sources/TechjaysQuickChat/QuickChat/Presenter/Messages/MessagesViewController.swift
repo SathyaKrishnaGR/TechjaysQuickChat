@@ -273,6 +273,9 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             
             //        if message.contentType == .none {
             let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
+            cell.messageTextView?.font = ChatFont.title
+            cell.timestampLabel?.font = ChatFont.smallText
+            
             cell.setChatList(message, conversation: conversation)
             return cell
             //        }
@@ -284,6 +287,9 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             //        if message.contentType == .none {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
             cell.chatBubbleView.backgroundColor = ChatColors.tint
+            cell.messageTextView?.font = ChatFont.title
+            cell.timestampLabel?.font = ChatFont.smallText
+          
             cell.setChatList(message, conversation: conversation)
             return cell
             //        }
@@ -483,6 +489,7 @@ extension MessagesViewController {
         _ = self.actionButtons.map { btn in
             btn.tintColor = ChatColors.tint
         }
+        self.setBackgroundTheme(image: ChatBackground.image)
     }
     
     fileprivate func showDeleteActionSheet(rows: [IndexPath], messages: [ObjectMessage]) {
@@ -511,4 +518,11 @@ extension MessagesViewController {
         self.present(alert, animated: true, completion: {
         })
     }
+    
+    func setBackgroundTheme(image: UIImage? = nil) {
+        let background = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+         background.image = image
+         self.view.addSubview(background)
+         self.view.sendSubviewToBack(background)
+     }
 }
