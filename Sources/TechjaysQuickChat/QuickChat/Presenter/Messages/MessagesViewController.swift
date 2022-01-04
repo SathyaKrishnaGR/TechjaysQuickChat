@@ -483,6 +483,7 @@ extension MessagesViewController {
         _ = self.actionButtons.map { btn in
             btn.tintColor = ChatColors.tint
         }
+        self.setBackgroundTheme(image: ChatBackground.image)
     }
     
     fileprivate func showDeleteActionSheet(rows: [IndexPath], messages: [ObjectMessage]) {
@@ -511,4 +512,13 @@ extension MessagesViewController {
         self.present(alert, animated: true, completion: {
         })
     }
+    
+    func setBackgroundTheme(image: UIImage? = nil) {
+       if let top = VidProperties.topMostController?.view {
+         let background = UIImageView(frame: CGRect(x: 0, y: 0, width: top.frame.size.width, height: top.frame.size.height))
+         background.image = image
+         self.view.addSubview(background)
+         self.view.sendSubviewToBack(background)
+       }
+     }
 }

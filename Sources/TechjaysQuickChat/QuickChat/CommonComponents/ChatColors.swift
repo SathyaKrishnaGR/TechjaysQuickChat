@@ -10,3 +10,7 @@ import UIKit
 struct ChatColors {
     static var tint = UIColor.blue
 }
+
+struct ChatBackground {
+    static var image = UIImage(named: "")
+}
