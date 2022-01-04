@@ -195,7 +195,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         if conversations.isEmpty {
             return tableView.bounds.height - 50 //header view height
         }
-        return 80
+        return UITableView.automaticDimension
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
