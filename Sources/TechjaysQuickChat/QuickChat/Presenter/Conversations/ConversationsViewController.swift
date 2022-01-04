@@ -58,6 +58,8 @@ class ConversationsViewController: UIViewController {
         super.viewDidLoad()
         tableView.allowsMultipleSelectionDuringEditing = true
         FayvKeys.ChatDefaults.paginationLimit = "10"
+        self.setBackgroundTheme(image: ChatBackground.image)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -325,7 +327,6 @@ extension ConversationsViewController {
         self.tableView.tintColor = ChatColors.tint
         self.navigationItem.rightBarButtonItem?.tintColor = ChatColors.tint
         self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
-        self.setBackgroundTheme(image: ChatBackground.image)
     }
     
     func setBackgroundTheme(image: UIImage? = nil) {

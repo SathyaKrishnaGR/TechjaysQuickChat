@@ -65,6 +65,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
             self?.tableView.scroll(to: .bottom, animated: true)
         }
         FayvKeys.ChatDefaults.paginationLimit = "100"
+        self.setBackgroundTheme(image: ChatBackground.image)
         self.tableView.fetchData()
         
     }
@@ -489,7 +490,6 @@ extension MessagesViewController {
         _ = self.actionButtons.map { btn in
             btn.tintColor = ChatColors.tint
         }
-        self.setBackgroundTheme(image: ChatBackground.image)
     }
     
     fileprivate func showDeleteActionSheet(rows: [IndexPath], messages: [ObjectMessage]) {
