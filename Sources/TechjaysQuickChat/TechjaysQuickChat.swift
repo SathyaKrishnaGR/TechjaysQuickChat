@@ -2,9 +2,11 @@ import UIKit
 
 public struct TechjaysQuickChat {
     
-    public init(themeColor: UIColor, background: UIImage?) {
-        ChatColors.tint = themeColor
+    public init(tint: UIColor, cellTint: UIColor, background: UIImage?, font: UIFont?) {
+        ChatColors.tint = tint
+        ChatColors.cellBackground = cellTint
         ChatBackground.image = background
+        
     }
     
     public func openChatList(accessToken: String, chatToken: String, appEndPoint: String, version: String, socket: String) -> UIViewController {

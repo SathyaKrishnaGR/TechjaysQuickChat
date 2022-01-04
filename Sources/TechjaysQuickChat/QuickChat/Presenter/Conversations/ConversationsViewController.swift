@@ -174,6 +174,10 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
 //            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
 //        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
+            cell.backgroundColor = ChatColors.cellBackground
+            cell.nameLabel.font = ChatFont.title
+            cell.messageLabel.font = ChatFont.text
+            cell.timeLabel.font = ChatFont.smallText
             cell.set(conversations[indexPath.row])
             return cell
         }

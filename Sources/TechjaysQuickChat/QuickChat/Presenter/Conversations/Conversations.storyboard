@@ -125,8 +125,8 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGV-l1-IZ6">
-                                <rect key="frame" x="186.33333333333334" y="59.000000000000007" width="55.333333333333343" height="25.333333333333336"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                                <rect key="frame" x="190" y="60.666666666666664" width="48.333333333333343" height="21.666666666666664"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

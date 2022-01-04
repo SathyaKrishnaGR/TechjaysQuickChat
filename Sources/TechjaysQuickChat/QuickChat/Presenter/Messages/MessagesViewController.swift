@@ -273,6 +273,9 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             
             //        if message.contentType == .none {
             let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
+            cell.messageTextView?.font = ChatFont.title
+            cell.timestampLabel?.font = ChatFont.smallText
+            
             cell.setChatList(message, conversation: conversation)
             return cell
             //        }
@@ -284,6 +287,9 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             //        if message.contentType == .none {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
             cell.chatBubbleView.backgroundColor = ChatColors.tint
+            cell.messageTextView?.font = ChatFont.title
+            cell.timestampLabel?.font = ChatFont.smallText
+          
             cell.setChatList(message, conversation: conversation)
             return cell
             //        }
