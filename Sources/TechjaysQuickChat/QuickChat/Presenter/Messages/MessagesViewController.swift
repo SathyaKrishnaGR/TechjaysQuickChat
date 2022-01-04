@@ -514,11 +514,9 @@ extension MessagesViewController {
     }
     
     func setBackgroundTheme(image: UIImage? = nil) {
-       if let top = VidProperties.topMostController?.view {
-         let background = UIImageView(frame: CGRect(x: 0, y: 0, width: top.frame.size.width, height: top.frame.size.height))
+        let background = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
          background.image = image
          self.view.addSubview(background)
          self.view.sendSubviewToBack(background)
-       }
      }
 }
