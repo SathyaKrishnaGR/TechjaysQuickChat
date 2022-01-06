@@ -68,15 +68,23 @@ class ConversationCell: UITableViewCell {
             timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
         }
         self.messageLabel.text = conversation.message
-       // DispatchQueue.main.async {
+    /*   DispatchQueue.main.async {
             if let urlString = conversation.medium_profile_pic {
                 self.profilePic.setImage(url: URL(string: urlString))
             } else {
-               // self.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
-                //self.profilePic.contentMode = .scaleAspectFit
+              self.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
+                self.profilePic.contentMode = .scaleAspectFit
                 self.profilePic.image = UIImage(named: "profile_pic")
             }
-      //  }
+     }*/
+        
+        if conversation.medium_profile_pic != nil {
+            if let urlString = conversation.medium_profile_pic {
+                self.profilePic.setImage(url: URL(string: urlString))
+            }
+        } else {
+            self.profilePic.image = UIImage(named: "profile_pic")
+        }
     }
         
         //MARK: Lifecycle
