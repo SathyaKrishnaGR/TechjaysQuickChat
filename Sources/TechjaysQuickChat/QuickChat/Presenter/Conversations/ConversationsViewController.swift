@@ -212,6 +212,7 @@ extension ConversationsViewController {
         APIClient().GET(url: url, headers: ["Authorization": FayvKeys.ChatDefaults.token]) { (status, response: APIResponse<[ObjectConversation]>) in
             switch status {
             case .SUCCESS:
+                self.conversations.removeAll()
                 if let data = response.data {
                     if isFirstPage {
                         self.conversations = data
