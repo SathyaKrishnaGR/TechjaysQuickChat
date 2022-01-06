@@ -77,14 +77,6 @@ class ConversationCell: UITableViewCell {
                 self.profilePic.image = UIImage(named: "profile_pic")
             }
      }*/
-        
-        if conversation.medium_profile_pic != nil {
-            if let urlString = conversation.medium_profile_pic {
-                self.profilePic.setImage(url: URL(string: urlString))
-            }
-        } else {
-            self.profilePic.image = UIImage(named: "profile_pic")
-        }
     }
         
         //MARK: Lifecycle

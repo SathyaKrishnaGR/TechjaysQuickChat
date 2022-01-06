@@ -181,6 +181,13 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
             cell.messageLabel.font = ChatFont.text
             cell.timeLabel.font = ChatFont.smallText
             cell.set(conversations[indexPath.row])
+            if conversations[indexPath.row].medium_profile_pic != nil {
+                if let urlString = conversations[indexPath.row].medium_profile_pic {
+                      cell.profilePic.setImage(url: URL(string: urlString))
+                  }
+              } else {
+                  cell.profilePic.image = UIImage(named: "profile_pic")
+              }
             return cell
         }
         return UITableViewCell()
@@ -222,7 +229,7 @@ extension ConversationsViewController {
                     
                     self.tableView.reloadData()
                     self.tableView.scroll(to: .top, animated: true)
-                    self.tableView.reloadData()
+                   // self.tableView.reloadData()
                 }
                 hasNext(response.nextLink ?? false)
             case .FAILURE:
