@@ -431,6 +431,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
                         socketMessage.message = messageinClosure?.data?.message
                         socketMessage.message_id = messageinClosure?.data?.message_id
                         socketMessage.is_sent_by_myself = true
+                        socketMessage.timestamp = messageinClosure?.data?.timestamp?.formatDateForChat()
                         self.inputTextField.text = nil
                         self.showDataOnChatScreen(socket: socketMessage)
                     } else {
@@ -447,6 +448,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
                                     } else {
                                         socketMessage.message = objMessage.data?.message
                                         socketMessage.message_id = objMessage.data?.message_id
+                                        socketMessage.timestamp = messageinClosure?.data?.timestamp?.formatDateForChat()
+
                                         self.showDataOnChatScreen(socket: socketMessage)
                                     }
                                 }
