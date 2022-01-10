@@ -366,13 +366,9 @@ extension MessagesViewController {
                     } else {
                         self.messages.append(contentsOf: data )
                     }
-//                    if self.messages.count > 1 {
-//                        self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
-//
-//                    }
                     DispatchQueue.main.async {
-                        self.tableView.reloadData()
                         self.tableView.scroll(to: .bottom, animated: true)
+                        self.tableView.reloadData()
                     }
                 }
                 hasNext(response.nextLink ?? false)
@@ -468,9 +464,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
         if socket.type == "chat" && socket.result == true {
             messages.append(socket)
             DispatchQueue.main.async {
-                self.tableView.reloadData()
                 self.tableView.scroll(to: .bottom, animated: true)
-                
+                self.tableView.reloadData()
             }
         }
     }
