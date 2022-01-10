@@ -222,7 +222,6 @@ extension ConversationsViewController {
                     }
                     
                     DispatchQueue.main.async {
-                        self.tableView.reloadData()
                         self.tableView.scroll(to: .top, animated: true)
                         self.tableView.reloadData()
                     }
