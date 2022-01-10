@@ -412,8 +412,6 @@ extension MessagesViewController {
             case .FAILURE:
                 break
             }
-            
-            _ = self.socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         }
     }
     
