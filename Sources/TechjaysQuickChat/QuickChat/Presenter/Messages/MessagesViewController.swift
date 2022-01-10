@@ -75,6 +75,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
         self.tableView.fetchData()
         showUserNameOnNavBar()
         self.setTint()
+        _ = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         socketManager.dataUpdateDelegate = self
         showActionButtons(false)
     }
