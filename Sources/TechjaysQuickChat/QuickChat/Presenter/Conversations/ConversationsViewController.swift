@@ -172,9 +172,6 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard !conversations.isEmpty else {
-//            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
-//        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
             cell.backgroundColor = ChatColors.cellBackground
             cell.nameLabel.font = ChatFont.title

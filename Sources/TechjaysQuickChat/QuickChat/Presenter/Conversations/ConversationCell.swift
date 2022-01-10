@@ -47,13 +47,7 @@ class ConversationCell: UITableViewCell {
     }
     //MARK: Public methods
     func set(_ conversation: ObjectConversation) {
-        //        timeLabel.text = DateService.shared.format(Date(timeIntervalSinceNow: TimeInterval(conversation.timestamp)))
-        
-        //    guard let id = conversation.userIDs.filter({$0 != userID}).first else { return }
-        //    let isRead = conversation.isRead[userID] ?? true
-        //    if !isRead {
-     //   timeLabel.font = timeLabel.font.bold
-        
+
         // Data Set here
         var company = ""
         var first = ""
@@ -69,8 +63,8 @@ class ConversationCell: UITableViewCell {
         }
         self.messageLabel.text = conversation.message
         DispatchQueue.main.async {
-            if let urlString = conversation.medium_profile_pic {
-                self.profilePic.setImage(url: URL(string: urlString))
+            if let urlString = conversation.medium_profile_pic, let imageUrl = URL(string: urlString) {
+                self.profilePic.setImage(url: imageUrl)
             } else {
                 self.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
                 self.profilePic.contentMode = .scaleAspectFit
