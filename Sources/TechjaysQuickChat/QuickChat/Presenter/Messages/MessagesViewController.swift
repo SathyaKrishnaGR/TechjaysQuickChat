@@ -367,8 +367,8 @@ extension MessagesViewController {
                         self.messages.append(contentsOf: data )
                     }
                     DispatchQueue.main.async {
-                        self.tableView.scroll(to: .bottom, animated: true)
                         self.tableView.reloadData()
+                        self.tableView.scroll(to: .bottom, animated: true)
                     }
                 }
                 hasNext(response.nextLink ?? false)
@@ -466,8 +466,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
         if socket.type == "chat" && socket.result == true {
             messages.append(socket)
             DispatchQueue.main.async {
-                self.tableView.scroll(to: .bottom, animated: true)
                 self.tableView.reloadData()
+                self.tableView.scroll(to: .bottom, animated: true)
             }
         }
     }
