@@ -221,9 +221,11 @@ extension ConversationsViewController {
                         self.conversations.append(contentsOf: data )
                     }
                     
-                    self.tableView.reloadData()
-                    self.tableView.scroll(to: .top, animated: true)
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.tableView.scroll(to: .top, animated: true)
+                        self.tableView.reloadData()
+                    }
                 }
                 hasNext(response.nextLink ?? false)
             case .FAILURE:
