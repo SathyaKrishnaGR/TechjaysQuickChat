@@ -49,7 +49,6 @@ class ConversationsViewController: UIViewController {
     var socketManager = SocketManager()
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
-//    fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [ObjectConversation]()
    
     
@@ -177,6 +176,12 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
             cell.nameLabel.font = ChatFont.title
             cell.messageLabel.font = ChatFont.text
             cell.timeLabel.font = ChatFont.smallText
+            if let urlString = conversations[indexPath.row].medium_profile_pic, let imageUrl = URL(string: urlString) {
+                cell.profilePic.setImage(url: imageUrl)
+            } else {
+                cell.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
+                cell.profilePic.contentMode = .scaleAspectFit
+            }
             cell.set(conversations[indexPath.row])
             return cell
         }
