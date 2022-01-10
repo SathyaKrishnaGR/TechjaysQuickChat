@@ -369,6 +369,10 @@ extension MessagesViewController {
                     } else {
                         self.messages.append(contentsOf: data )
                     }
+                    if self.messages.count > 1 {
+                        self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
+                        
+                    }
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.tableView.scroll(to: .bottom, animated: true)
