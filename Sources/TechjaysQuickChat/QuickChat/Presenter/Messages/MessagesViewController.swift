@@ -66,12 +66,13 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
         }
         FayvKeys.ChatDefaults.paginationLimit = "100"
         self.setBackgroundTheme(image: ChatBackground.image)
-        self.tableView.fetchData()
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.tableView.fetchData()
         showUserNameOnNavBar()
         self.setTint()
         socketManager.dataUpdateDelegate = self
