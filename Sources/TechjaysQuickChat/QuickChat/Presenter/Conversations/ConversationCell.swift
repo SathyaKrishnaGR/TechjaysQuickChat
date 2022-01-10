@@ -64,7 +64,13 @@ class ConversationCell: UITableViewCell {
         self.messageLabel.text = conversation.message
         DispatchQueue.main.async {
             if let urlString = conversation.medium_profile_pic, let imageUrl = URL(string: urlString) {
-                self.profilePic.setImage(url: imageUrl)
+                if urlString != "<null>" {
+                    self.profilePic.setImage(url: imageUrl)
+                } else {
+                    self.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
+                    self.profilePic.contentMode = .scaleAspectFit
+                }
+                    
             } else {
                 self.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
                 self.profilePic.contentMode = .scaleAspectFit
