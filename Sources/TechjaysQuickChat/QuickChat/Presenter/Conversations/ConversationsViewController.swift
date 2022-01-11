@@ -49,7 +49,6 @@ class ConversationsViewController: UIViewController {
     var socketManager = SocketManager()
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
-//    fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [ObjectConversation]()
    
     
@@ -172,14 +171,17 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard !conversations.isEmpty else {
-//            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
-//        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
             cell.backgroundColor = ChatColors.cellBackground
             cell.nameLabel.font = ChatFont.title
             cell.messageLabel.font = ChatFont.text
             cell.timeLabel.font = ChatFont.smallText
+            if let urlString = conversations[indexPath.row].medium_profile_pic, let imageUrl = URL(string: urlString) {
+                cell.profilePic.setImage(url: imageUrl)
+            } else {
+                cell.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
+                cell.profilePic.contentMode = .scaleAspectFit
+            }
             cell.set(conversations[indexPath.row])
             return cell
         }
@@ -219,9 +221,10 @@ extension ConversationsViewController {
                         self.conversations.append(contentsOf: data )
                     }
                     
-                    self.tableView.reloadData()
-                    self.tableView.scroll(to: .top, animated: true)
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView.scroll(to: .top, animated: true)
+                        self.tableView.reloadData()
+                    }
                 }
                 hasNext(response.nextLink ?? false)
             case .FAILURE:
@@ -241,9 +244,10 @@ extension ConversationsViewController {
                         self.searchArray.append(contentsOf: data )
                     }
                     
-                    self.tableView.reloadData()
-                    self.tableView.scroll(to: .top, animated: true)
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView.scroll(to: .top, animated: true)
+                        self.tableView.reloadData()
+                    }
                 }
                 hasNext(response.nextLink ?? false)
             case .FAILURE:

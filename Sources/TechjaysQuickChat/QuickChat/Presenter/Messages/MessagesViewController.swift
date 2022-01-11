@@ -66,14 +66,19 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
         }
         FayvKeys.ChatDefaults.paginationLimit = "100"
         self.setBackgroundTheme(image: ChatBackground.image)
-        self.tableView.fetchData()
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.tableView.fetchData()
         showUserNameOnNavBar()
         self.setTint()
+        if socketManager.socket == nil {
+            _ = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
+        }
+       
         socketManager.dataUpdateDelegate = self
         showActionButtons(false)
     }
@@ -368,8 +373,10 @@ extension MessagesViewController {
                         self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
                         
                     }
-                    self.tableView.reloadData()
-                    self.tableView.scroll(to: .bottom, animated: true)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.tableView.scroll(to: .bottom, animated: true)
+                    }
                 }
                 hasNext(response.nextLink ?? false)
             case .FAILURE:
@@ -431,6 +438,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
                         socketMessage.message = messageinClosure?.data?.message
                         socketMessage.message_id = messageinClosure?.data?.message_id
                         socketMessage.is_sent_by_myself = true
+                        socketMessage.timestamp = messageinClosure?.data?.timestamp
                         self.inputTextField.text = nil
                         self.showDataOnChatScreen(socket: socketMessage)
                     } else {
@@ -447,6 +455,8 @@ extension MessagesViewController: SocketDataTransferDelegate {
                                     } else {
                                         socketMessage.message = objMessage.data?.message
                                         socketMessage.message_id = objMessage.data?.message_id
+                                        socketMessage.timestamp = messageinClosure?.data?.timestamp
+
                                         self.showDataOnChatScreen(socket: socketMessage)
                                     }
                                 }
@@ -463,7 +473,6 @@ extension MessagesViewController: SocketDataTransferDelegate {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.tableView.scroll(to: .bottom, animated: true)
-                
             }
         }
     }
