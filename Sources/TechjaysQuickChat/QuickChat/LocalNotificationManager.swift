@@ -22,18 +22,32 @@ class LocalNotificationManager: NSObject {
     static let shared = LocalNotificationManager()
     
     func sendNotification(localNotification: LocalNotification) {
+        let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
-//        UNUserNotificationCenter.current().delegate = self
         guard let title = localNotification.title else {return}
         //        guard let subTitle = localNotification.subTitle else {return}
         guard let body = localNotification.body else {return}
         content.title = title
         content.body = body
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.5, repeats: false)
-        let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
         
-        
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        content.sound = .default
+        let fireDate = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute, .second], from: Date().addingTimeInterval(20))
+        let trigger = UNCalendarNotificationTrigger(dateMatching: fireDate, repeats: false)
+        let request = UNNotificationRequest(identifier: "reminder", content: content, trigger: trigger)
+        center.add(request) { (error) in
+            if error != nil {
+                print("Error = \(error?.localizedDescription ?? "error local notification")")
+            }
+        }
+        /*
+         let content = UNMutableNotificationContent()
+         //        UNUserNotificationCenter.current().delegate = self
+         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.5, repeats: false)
+         let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
+         
+         
+         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+         */
     }
     
 //    func getAccessPermissionAndNotify(localNotification: LocalNotification) {
