@@ -295,7 +295,12 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                         if let userId = sender.user_id {
                             if !self.conversations.contains(where: { conversation in conversation.to_user_id == userId }) {
                                 print("1 does not exists in the array")
-                                
+                                if self.userId != sender.user_id {
+                                    if let user = sender.username {
+                                        let notification = LocalNotification(title: "New message from \(user)", subTitle: "", body: message.message)
+                                        LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
+                                    }
+                                }
                                 let newconversation = ObjectConversation()
                                 newconversation.first_name = sender.username
                                 newconversation.to_user_id = sender.user_id
@@ -306,11 +311,9 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                                 self.tableView.fetchData()
                                 
                             } else {
-                                if let user = sender.username {
-                                    let notification = LocalNotification(title: "New message from \(user)", subTitle: "", body: message.message)
-                                    LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
-                                    self.tableView.fetchData()
-                                }
+                                print("1 exists in the array")
+                                self.tableView.fetchData()
+                                
                             }
                         }
                     }
