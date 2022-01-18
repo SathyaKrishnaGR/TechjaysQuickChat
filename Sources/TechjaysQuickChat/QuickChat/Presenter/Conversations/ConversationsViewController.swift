@@ -306,10 +306,11 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                                 self.tableView.fetchData()
                                 
                             } else {
-                                print("1 exists in the array")
-                                //                                self.newMessageCountLabel.isHidden = true
-                                self.tableView.fetchData()
-                                
+                                if let user = sender.username {
+                                    let notification = LocalNotification(title: "New message from \(user)", subTitle: "", body: message.message)
+                                    LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
+                                    self.tableView.fetchData()
+                                }
                             }
                         }
                     }
