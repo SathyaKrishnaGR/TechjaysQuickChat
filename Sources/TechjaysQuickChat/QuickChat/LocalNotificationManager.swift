@@ -23,30 +23,30 @@ class LocalNotificationManager: NSObject {
     
     func sendNotification(localNotification: LocalNotification) {
         let content = UNMutableNotificationContent()
-        UNUserNotificationCenter.current().delegate = self
+//        UNUserNotificationCenter.current().delegate = self
         guard let title = localNotification.title else {return}
         //        guard let subTitle = localNotification.subTitle else {return}
         guard let body = localNotification.body else {return}
         content.title = title
         content.body = body
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.5, repeats: false)
         let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
         
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
-    func getAccessPermissionAndNotify(localNotification: LocalNotification) {
-        UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {
-            (granted, error) in
-            if granted {
-                self.sendNotification(localNotification: localNotification)
-            } else {
-                return
-            }
-        }
-    }
+//    func getAccessPermissionAndNotify(localNotification: LocalNotification) {
+//        UNUserNotificationCenter.current().delegate = self
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {
+//            (granted, error) in
+//            if granted {
+//                self.sendNotification(localNotification: localNotification)
+//            } else {
+//                return
+//            }
+//        }
+//    }
 }
 
 extension LocalNotificationManager: UNUserNotificationCenterDelegate {
