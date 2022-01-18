@@ -37,6 +37,7 @@ class LocalNotificationManager: NSObject {
     }
     
     func getAccessPermissionAndNotify(localNotification: LocalNotification) {
+        UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {
             (granted, error) in
             if granted {
