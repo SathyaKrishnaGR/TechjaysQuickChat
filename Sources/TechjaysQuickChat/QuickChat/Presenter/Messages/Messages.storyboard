@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a55-9b-zJA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a55-9b-zJA">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -14,7 +14,7 @@
         <!--Messages View Controller-->
         <scene sceneID="J9y-GG-FKZ">
             <objects>
-                <viewController restorationIdentifier="MessagesViewController" storyboardIdentifier="MessagesViewController" id="gTs-Hf-oyN" customClass="MessagesViewController" customModule="TechjaysQuickChat" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MessagesViewController" storyboardIdentifier="MessagesViewController" hidesBottomBarWhenPushed="YES" id="gTs-Hf-oyN" customClass="MessagesViewController" customModule="TechjaysQuickChat" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZCI-dJ-g5h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -314,7 +314,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBf-gd-SKK">
-                                                <rect key="frame" x="331" y="11.333333333333297" width="32" height="29.000000000000004"/>
+                                                <rect key="frame" x="331" y="10.333333333333297" width="32" height="31.000000000000004"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="Q2f-MT-V6y"/>
                                                     <constraint firstAttribute="width" constant="32" id="WD5-bs-nec"/>
