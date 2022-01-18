@@ -307,11 +307,12 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                                 
                             } else {
                                 print("1 exists in the array")
-                                if self.userId != self.to_user_id {
-                                    if let user = sender.username {
-                                        let notification = LocalNotification(title: "New message from \(user)", subTitle: "", body: message.message)
-//                                        LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
-                                        LocalNotificationManager.shared.sendNotification(localNotification: notification)
+                                if self.userId != nil {
+                                    if self.userId != self.to_user_id {
+                                        if let user = sender.username {
+                                            let notification = LocalNotification(title: "New message from \(user)", subTitle: "", body: message.message)
+                                            LocalNotificationManager.shared.sendNotification(localNotification: notification)
+                                        }
                                     }
                                 }
                                 self.tableView.fetchData()
