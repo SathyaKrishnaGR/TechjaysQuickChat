@@ -24,6 +24,7 @@ class LocalNotificationManager: NSObject {
     func sendNotification(localNotification: LocalNotification) {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
+        UNUserNotificationCenter.current().delegate = self
         
         guard let title = localNotification.title else {return}
         guard let body = localNotification.body else {return}
