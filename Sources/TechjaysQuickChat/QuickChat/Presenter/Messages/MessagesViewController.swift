@@ -451,7 +451,6 @@ extension MessagesViewController: SocketDataTransferDelegate {
                                         if let user = sender.username {
                                             let notification = LocalNotification(title: "New message from \(user)", subTitle: "", body: message.message)
                                             LocalNotificationManager.shared.sendNotification(localNotification: notification)
-//                                            LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
                                         }
                                     } else {
                                         socketMessage.message = objMessage.data?.message
