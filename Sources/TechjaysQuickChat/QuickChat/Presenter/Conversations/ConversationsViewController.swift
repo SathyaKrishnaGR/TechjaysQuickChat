@@ -310,7 +310,8 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                                 if self.userId != sender.user_id {
                                     if let user = sender.username {
                                         let notification = LocalNotification(title: "New message from \(user)", subTitle: "", body: message.message)
-                                        LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
+//                                        LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
+                                        LocalNotificationManager.shared.sendNotification(localNotification: notification)
                                     }
                                 }
                                 self.tableView.fetchData()
