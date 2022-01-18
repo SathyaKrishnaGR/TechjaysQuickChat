@@ -169,7 +169,7 @@
                         <outlet property="deleteButton" destination="xl9-qF-y2U" id="j1m-t1-BJB"/>
                         <outlet property="editButton" destination="XtN-b5-qY4" id="Vx1-xs-LTt"/>
                         <outlet property="tableView" destination="CZg-e7-KoX" id="EC0-gT-Cqg"/>
-                        <segue destination="jE4-jN-pKd" kind="show" identifier="didSelect" id="uYn-Fc-dsr"/>
+                        <segue destination="jE4-jN-pKd" kind="push" identifier="didSelect" id="uYn-Fc-dsr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lqd-ZW-jLO" userLabel="First Responder" sceneMemberID="firstResponder"/>
