@@ -51,7 +51,6 @@ class ConversationsViewController: UIViewController {
     var socketManager = SocketManager()
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
-    fileprivate var isSearchEnabled: Bool = false
     fileprivate var searchArray = [ObjectConversation]()
     var doneButton = UIBarButtonItem()
     private let refreshControl = UIRefreshControl()
@@ -63,6 +62,8 @@ class ConversationsViewController: UIViewController {
         super.viewDidLoad()
         tableView.allowsMultipleSelectionDuringEditing = true
         FayvKeys.ChatDefaults.paginationLimit = "10"
+        self.setBackgroundTheme(image: ChatBackground.image)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -208,11 +209,18 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.className, for: indexPath) as? ConversationCell {
-            if isSearchEnabled {
-                cell.set(searchArray[indexPath.row], id: "Conversation")
+            cell.backgroundColor = ChatColors.cellBackground
+            cell.nameLabel.font = ChatFont.title
+            cell.messageLabel.font = ChatFont.text
+            cell.timeLabel.font = ChatFont.smallText
+            if let urlString = conversations[indexPath.row].medium_profile_pic, let imageUrl = URL(string: urlString) {
+                cell.profilePic.setImage(url: imageUrl)
             } else {
-                cell.set(conversations[indexPath.row], id: "Conversation")
+                cell.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
+                cell.profilePic.contentMode = .scaleAspectFit
             }
+            cell.set(conversations[indexPath.row])
+
             return cell
         }
         return UITableViewCell()
@@ -229,7 +237,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
         if conversations.isEmpty {
             return tableView.bounds.height - 50 //header view height
         }
-        return 80
+        return UITableView.automaticDimension
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -251,9 +259,10 @@ extension ConversationsViewController {
                         self.conversations.append(contentsOf: data )
                     }
                     
-                    self.tableView.reloadData()
-                    self.tableView.scroll(to: .top, animated: true)
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView.scroll(to: .top, animated: true)
+                        self.tableView.reloadData()
+                    }
                 }
                 hasNext(response.nextLink ?? false)
             case .FAILURE:
@@ -273,9 +282,10 @@ extension ConversationsViewController {
                         self.searchArray.append(contentsOf: data )
                     }
                     
-                    self.tableView.reloadData()
-                    self.tableView.scroll(to: .top, animated: true)
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView.scroll(to: .top, animated: true)
+                        self.tableView.reloadData()
+                    }
                 }
                 hasNext(response.nextLink ?? false)
             case .FAILURE:
@@ -320,8 +330,6 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                             if !self.conversations.contains(where: { conversation in conversation.to_user_id == userId }) {
                                 print("1 does not exists in the array")
                                 
-                                //                                self.newMessageCountLabel.isHidden = false
-                                //                                self.newMessageCountLabel.backgroundColor = ChatColors.tint
                                 let newconversation = ObjectConversation()
                                 newconversation.first_name = sender.username
                                 newconversation.to_user_id = sender.user_id
@@ -333,7 +341,12 @@ extension ConversationsViewController: SocketListUpdateDelegate {
                                 
                             } else {
                                 print("1 exists in the array")
-                                //                                self.newMessageCountLabel.isHidden = true
+                                    if self.userId != self.to_user_id {
+                                        if let user = sender.username {
+                                            let notification = LocalNotification(title: "New message from \(user)", subTitle: "", body: message.message)
+                                            LocalNotificationManager.shared.sendNotification(localNotification: notification)
+                                        }
+                                    }
                                 self.tableView.fetchData()
                                 
                             }
@@ -385,5 +398,12 @@ extension ConversationsViewController:UISearchBarDelegate {
            self.tableView.reloadData()
        }
     }
+    
+    func setBackgroundTheme(image: UIImage? = nil) {
+        let background = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+         background.image = image
+         self.view.addSubview(background)
+         self.view.sendSubviewToBack(background)
+     }
 }
 

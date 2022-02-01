@@ -72,14 +72,20 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
             self?.tableView.scroll(to: .bottom, animated: true)
         }
         FayvKeys.ChatDefaults.paginationLimit = "100"
-        self.tableView.fetchData()
+        self.setBackgroundTheme(image: ChatBackground.image)
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.tableView.fetchData()
         showUserNameOnNavBar()
         self.setTint()
+        if socketManager.socket == nil {
+            _ = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
+        }
+       
         socketManager.dataUpdateDelegate = self
         showActionButtons(false)
     }
@@ -197,7 +203,7 @@ extension MessagesViewController {
             if !deleteType.contains("for_me") {
                 self.showDeleteActionSheet(rows: selectedRows, messages: selectedMessages)
             } else {
-                self.showDeleteforMeActionSheet(rows: selectedRows, messages: selectedMessages, deleteType: "for_me")
+                self.showDeleteforMeActionSheet(rows: selectedRows, messages: selectedMessages)
             }
         }
     }
@@ -283,6 +289,9 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             
             //        if message.contentType == .none {
             let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell") as! MessageTableViewCell
+            cell.messageTextView?.font = ChatFont.text
+            cell.timestampLabel?.font = ChatFont.smallText
+            
             cell.setChatList(message, conversation: conversation)
             return cell
             //        }
@@ -294,6 +303,9 @@ extension MessagesViewController: PaginatedTableViewDelegate {
             //        if message.contentType == .none {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! MessageTableViewCell
             cell.chatBubbleView.backgroundColor = ChatColors.tint
+            cell.messageTextView?.font = ChatFont.text
+            cell.timestampLabel?.font = ChatFont.smallText
+          
             cell.setChatList(message, conversation: conversation)
             return cell
             //        }
@@ -391,8 +403,10 @@ extension MessagesViewController {
                     if self.messages.count > 1 {
                         self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
                     }
-                    self.tableView.reloadData()
-                    self.tableView.scroll(to: .bottom, animated: true)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.tableView.scroll(to: .bottom, animated: true)
+                    }
                 }
                 hasNext(response.nextLink ?? false)
             case .FAILURE:
@@ -454,6 +468,7 @@ extension MessagesViewController: SocketDataTransferDelegate {
                         socketMessage.message = messageinClosure?.data?.message
                         socketMessage.message_id = messageinClosure?.data?.message_id
                         socketMessage.is_sent_by_myself = true
+                        socketMessage.timestamp = messageinClosure?.data?.timestamp
                         self.inputTextField.text = nil
                         self.showDataOnChatScreen(socket: socketMessage)
                     } else {
@@ -465,11 +480,13 @@ extension MessagesViewController: SocketDataTransferDelegate {
                                     if  userId != self.to_user_id {
                                         if let user = sender.username {
                                             let notification = LocalNotification(title: "New message from \(user)", subTitle: "", body: message.message)
-                                            LocalNotificationManager.shared.getAccessPermissionAndNotify(localNotification: notification)
+                                            LocalNotificationManager.shared.sendNotification(localNotification: notification)
                                         }
                                     } else {
                                         socketMessage.message = objMessage.data?.message
                                         socketMessage.message_id = objMessage.data?.message_id
+                                        socketMessage.timestamp = messageinClosure?.data?.timestamp
+
                                         self.showDataOnChatScreen(socket: socketMessage)
                                     }
                                 }
@@ -486,7 +503,6 @@ extension MessagesViewController: SocketDataTransferDelegate {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.tableView.scroll(to: .bottom, animated: true)
-                
             }
         }
     }
@@ -530,10 +546,10 @@ extension MessagesViewController {
         })
     }
     
-    fileprivate func showDeleteforMeActionSheet(rows: [IndexPath], messages: [ObjectMessage], deleteType: String) {
+    fileprivate func showDeleteforMeActionSheet(rows: [IndexPath], messages: [ObjectMessage]) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete For Me", style: .destructive , handler:{ (UIAlertAction)in
-            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: deleteType)
+            self.deleteAndRemoveRows(rows: rows, messages: messages, deleteType: "for_me")
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
             self.isEditing = !self.isEditing
@@ -541,6 +557,13 @@ extension MessagesViewController {
         self.present(alert, animated: true, completion: {
         })
     }
+    
+    func setBackgroundTheme(image: UIImage? = nil) {
+        let background = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+         background.image = image
+         self.view.addSubview(background)
+         self.view.sendSubviewToBack(background)
+     }
 }
 
 

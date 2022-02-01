@@ -46,14 +46,9 @@ class ConversationCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     //MARK: Public methods
-    func set(_ conversation: ObjectConversation,id:String) {
-        //        timeLabel.text = DateService.shared.format(Date(timeIntervalSinceNow: TimeInterval(conversation.timestamp)))
-        
-        //    guard let id = conversation.userIDs.filter({$0 != userID}).first else { return }
-        //    let isRead = conversation.isRead[userID] ?? true
-        //    if !isRead {
-     //   timeLabel.font = timeLabel.font.bold
-        
+
+    func set(_ conversation: ObjectConversation) {
+
         // Data Set here
         var last = ""
         var first = ""
@@ -71,20 +66,7 @@ class ConversationCell: UITableViewCell {
         if let timeStamp = conversation.timestamp {
             timeLabel.text = timeStamp.getElapsedIntervalWithAgo()
         }
-        if id == "Conversation" {
-            self.messageLabel.text = conversation.message
-        } else {
-            self.messageLabel.text = conversation.username
-        }
-       // self.messageLabel.text = conversation.message
-        DispatchQueue.main.async {
-            if let urlString = conversation.medium_profile_pic {
-                self.profilePic.setImage(url: URL(string: urlString))
-            } else {
-                self.profilePic.image = UIImage(named: "profile_pic", in: Bundle.module, compatibleWith: .some(.current))
-                self.profilePic.contentMode = .scaleAspectFit
-            }
-        }
+        self.messageLabel.text = conversation.message
     }
         
         //MARK: Lifecycle
