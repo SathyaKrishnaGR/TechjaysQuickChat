@@ -28,7 +28,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     
     //MARK: IBOutlets
     @IBOutlet weak var tableView: PaginatedTableView!
-    @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var inputTextField: UITextView!
     @IBOutlet weak var expandButton: UIButton!
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var deleteButton: UIBarButtonItem!
@@ -38,6 +38,12 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet var actionButtons: [UIButton]!
+    @IBOutlet weak var inputTextFieldHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var topViewTop: NSLayoutConstraint!
+    @IBOutlet weak var topViewHeight: NSLayoutConstraint!
+    
+    
     
     //MARK: Private properties
     private let manager = MessageManager()
@@ -51,6 +57,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     
     //MARK: Public properties
     var conversation = ObjectConversation()
+    var newList = ObjectUser()
     var bottomInset: CGFloat {
         return view.safeAreaInsets.bottom + 50
     }
@@ -60,7 +67,7 @@ class MessagesViewController: UIViewController, KeyboardHandler, UIGestureRecogn
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        addKeyboardObservers() {[weak self] state in
+       addKeyboardObservers() {[weak self] state in
             guard state else { return }
             self?.tableView.scroll(to: .bottom, animated: true)
         }
@@ -93,15 +100,15 @@ extension MessagesViewController {
         if toChatScreen {
             self.navigationItem.title = opponentUserName
         } else {
-            var company = ""
+            var last = ""
             var first = ""
-            if let companyName = conversation.company_name {
-                company = companyName
+            if let lastName = conversation.last_name {
+                last = lastName
             }
             if let firstName = conversation.first_name {
                 first = firstName
             }
-            self.navigationItem.title = first + company
+            self.navigationItem.title = "\(first) \(last)"
         }
         
         //        showIconOnNavigationBar(imageUrl: nil) // Will show default image
@@ -213,6 +220,9 @@ extension MessagesViewController {
     
     @IBAction func sendMessagePressed(_ sender: Any) {
         guard let text = inputTextField.text, !text.isEmpty else { return }
+        tableViewHeight.constant = 640
+        topViewHeight.constant = 50
+        inputTextFieldHeight.constant = 40
         let message = ObjectMessage()
         message.message = text
         message.timestamp = Date().dateToString()
@@ -340,7 +350,7 @@ extension MessagesViewController: PaginatedTableViewDelegate {
 }
 
 //MARK: UItextField Delegate
-extension MessagesViewController: UITextFieldDelegate {
+extension MessagesViewController: UITextFieldDelegate,UITextViewDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
@@ -348,6 +358,27 @@ extension MessagesViewController: UITextFieldDelegate {
         showActionButtons(false)
         return true
     }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        showActionButtons(false)
+        if self.inputTextField.contentSize.height < 50 {
+            tableViewHeight.constant = 640
+            topViewHeight.constant = self.inputTextField.contentSize.height + 15
+            inputTextFieldHeight.constant = self.inputTextField.contentSize.height
+        } else if self.inputTextField.contentSize.height < 130 {
+            tableViewHeight.constant = 580
+            topViewHeight.constant = self.inputTextField.contentSize.height + 10
+            inputTextFieldHeight.constant = self.inputTextField.contentSize.height
+        } else {
+            tableViewHeight.constant = 580
+            topViewHeight.constant = 130
+            inputTextFieldHeight.constant = 120
+            self.inputTextField.isScrollEnabled = true
+        }
+           
+        return true
+    }
+  
 }
 
 //MARK: MessageTableViewCellDelegate Delegate
@@ -371,7 +402,6 @@ extension MessagesViewController {
                     }
                     if self.messages.count > 1 {
                         self.messages = self.messages.sorted(by: {$0.timestamp?.stringToDate().compare(($1.timestamp?.stringToDate())!) == .orderedAscending})
-                        
                     }
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
@@ -535,3 +565,5 @@ extension MessagesViewController {
          self.view.sendSubviewToBack(background)
      }
 }
+
+

@@ -22,16 +22,18 @@
 
 import UIKit
 import Starscream
+import Alamofire
 
 class ConversationsViewController: UIViewController {
     
     //MARK: IBOutlets
     @IBOutlet weak var tableView: PaginatedTableView!
     @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
 //    @IBOutlet weak var newMessageCountLabel: UILabel!
-//    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var newChatListButton: UIBarButtonItem!
+    @IBOutlet weak var searchBar: UISearchBar!
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -50,6 +52,9 @@ class ConversationsViewController: UIViewController {
     var socket: WebSocket!
     var socketListDelegate: SocketListUpdateDelegate?
     fileprivate var searchArray = [ObjectConversation]()
+    var doneButton = UIBarButtonItem()
+    private let refreshControl = UIRefreshControl()
+    
    
     
     //MARK: Lifecycle
@@ -64,10 +69,12 @@ class ConversationsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.tableView.fetchData()
-        deleteButton.isEnabled = true
+       // deleteButton.isEnabled = true
         socket = socketManager.startSocketWith(url: FayvKeys.ChatDefaults.socketUrl)
         socketManager.listUpdateDelegate = self
         self.setTint()
+        refreshPullTableView()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -85,7 +92,7 @@ class ConversationsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "didSelect" {
             let nav = segue.destination as! UINavigationController
-            if let vc = nav.viewControllers.first as? MessagesViewController {
+            if let vc = nav.viewControllers.first as? MessagesViewController{
                 if selectedRow == -1 {
                     if let toUserId = self.to_user_id {
                         vc.to_user_id = toUserId
@@ -93,9 +100,16 @@ class ConversationsViewController: UIViewController {
                     vc.opponentUserName = opponentUserName
                     vc.toChatScreen = toChatScreen
                 } else {
-                    if let toUserId = conversations[selectedRow].to_user_id {
-                        vc.to_user_id = toUserId
-                        vc.conversation = conversations[selectedRow]
+                    if isSearchEnabled {
+                        if let toUserId = searchArray[selectedRow].to_user_id {
+                             vc.to_user_id = toUserId
+                             vc.conversation = searchArray[selectedRow]
+                         }
+                    } else {
+                        if let toUserId = conversations[selectedRow].to_user_id {
+                             vc.to_user_id = toUserId
+                             vc.conversation = conversations[selectedRow]
+                         }
                     }
                 }
                 vc.socketManager.socket = self.socket
@@ -104,30 +118,37 @@ class ConversationsViewController: UIViewController {
             modalPresentationStyle = .fullScreen
         }
     }
+    
+    func refreshPullTableView(){
+        tableView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(refreshChatList(_:)), for: .valueChanged)
+    }
+    
+    @objc private func refreshChatList(_ sender: Any) {
+        tableView.fetchData()
+        self.refreshControl.endRefreshing()
+    }
 }
 
 //MARK: IBActions
 extension ConversationsViewController {
+    @IBAction func newChatPressed(_ sender: Any){
+        let vc: ContactsPreviewController = UIStoryboard.controller(storyboard: .previews)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     @IBAction func editPressed(_ sender: Any) {
         isEditing = !isEditing
         if isEditing {
-            self.editButton.setTitle("Done", for: .normal)
-            self.editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-            self.deleteButton.isHidden = false
-            self.deleteButton.isUserInteractionEnabled = true
+            self.editButton.title = "Done"
         } else {
-            self.editButton.setTitle("Edit", for: .normal)
-            self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-            self.deleteButton.isHidden = true
-            self.deleteButton.isUserInteractionEnabled = false
+            self.editButton.title = "Edit"
+      
         }
     }
-    
     @IBAction func deletePressed(_ sender: Any) {
-        if deleteButton.isEnabled {
-            deleteButton.isEnabled = false
-            deleteAndRemoveRows()
-        }
+        deleteAndRemoveRows()
     }
     fileprivate func deleteAndRemoveRows() {
         if let selectedRows = tableView.indexPathsForSelectedRows {
@@ -135,13 +156,14 @@ extension ConversationsViewController {
             for indexPath in selectedRows  {
                 selectedConversations.append(conversations[indexPath.row])
             }
-            self.tableView.beginUpdates()
-            self.conversations.removeArrayOfIndex(at: selectedRows)
-            self.tableView.deleteRows(at: selectedRows, with: .automatic)
-            deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
-       
-        
-            
+            if selectedConversations.count > 0 {
+                self.tableView.beginUpdates()
+                self.conversations.removeArrayOfIndex(at: selectedRows)
+                self.tableView.deleteRows(at: selectedRows, with: .automatic)
+                deleteChatList(rows: selectedRows, userIdToDelete: selectedConversations)
+            }
+        } else {
+            self.showAlert( message: "Please select atleast one conversation to delete it", completion: nil)
         }
     }
     
@@ -158,16 +180,31 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
     }
     
     func paginatedTableView(paginationEndpointFor tableView: UITableView) -> PaginationUrl {
-
+        if isSearchEnabled{
+            var searchText = ""
+            if let searchbarText = searchBar.text, !searchbarText.isEmpty {
+                searchText = searchbarText
+            }
+            return PaginationUrl(endpoint: "chat/search-in-chat-list/",search: searchText)
+        } else {
         return PaginationUrl(endpoint: "chat/chat-lists/")
+        }
     }
     
     func paginatedTableView(_ tableView: UITableView, paginateTo url: String, isFirstPage: Bool, afterPagination hasNext: @escaping (Bool) -> Void) {
-        self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
+        if isSearchEnabled {
+           self.searchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
+        } else {
+            self.fetchConversations(for: url, isFirstPage: isFirstPage, hasNext: hasNext)
+        }
     }
-    
+
     func paginatedTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isSearchEnabled {
+            return self.searchArray.count
+        } else {
             return self.conversations.count
+        }
     }
     
     func paginatedTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -183,6 +220,7 @@ extension ConversationsViewController: PaginatedTableViewDelegate {
                 cell.profilePic.contentMode = .scaleAspectFit
             }
             cell.set(conversations[indexPath.row])
+
             return cell
         }
         return UITableViewCell()
@@ -278,11 +316,7 @@ extension ConversationsViewController {
     }
     
     fileprivate func resetEditAndDeletebuttons() {
-        self.deleteButton.isHidden =  true
-        self.deleteButton.isEnabled = true
-        self.deleteButton.isUserInteractionEnabled = false
-        self.editButton.setTitle("Edit", for: .normal)
-        self.editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        self.editButton.title = "Edit"
     }
 }
 
@@ -336,6 +370,33 @@ extension ConversationsViewController {
         self.tableView.tintColor = ChatColors.tint
         self.navigationItem.rightBarButtonItem?.tintColor = ChatColors.tint
         self.navigationItem.leftBarButtonItem?.tintColor = ChatColors.tint
+        self.newChatListButton.tintColor = ChatColors.tint
+        self.editButton.tintColor = ChatColors.tint
+        self.deleteButton.tintColor = ChatColors.tint
+    }
+}
+
+extension ConversationsViewController:UISearchBarDelegate {
+   
+   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearchEnabled = false
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+        isSearchEnabled = false
+    }
+    
+   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.resignFirstResponder()
+        isSearchEnabled = true
+        self.tableView.fetchData()
+        if searchText == "" {
+            isSearchEnabled = false
+        }
+       DispatchQueue.main.async {
+           self.tableView.reloadData()
+       }
     }
     
     func setBackgroundTheme(image: UIImage? = nil) {
