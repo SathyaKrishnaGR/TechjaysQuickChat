@@ -70,6 +70,7 @@ public class ObjectConversation: Codable, Equatable {
 //    var id = UUID().uuidString
     var company_name: String?
     var first_name: String?
+    var last_name: String?
     var is_sent_by_myself: Bool?
     var medium_profile_pic: String?
     var message: String?
@@ -80,6 +81,8 @@ public class ObjectConversation: Codable, Equatable {
     var user_type: String?
     var timestamp: String?
     var type: String?
+    var username: String?
+    
     //    var lastMessage: String?
     //    var isRead = [String: Bool]()
     //    var userIDs = [String]()
@@ -89,6 +92,7 @@ public class ObjectConversation: Codable, Equatable {
 //        try container.encode(id, forKey: .id)
         try container.encodeIfPresent(company_name, forKey: .company_name)
         try container.encodeIfPresent(first_name, forKey: .first_name)
+        try container.encodeIfPresent(last_name, forKey: .last_name)
         try container.encodeIfPresent(is_sent_by_myself, forKey: .is_sent_by_myself)
         try container.encodeIfPresent(medium_profile_pic, forKey: .medium_profile_pic)
         try container.encodeIfPresent(message, forKey: .message)
@@ -99,6 +103,8 @@ public class ObjectConversation: Codable, Equatable {
         try container.encodeIfPresent(user_type, forKey: .user_type)
         try container.encodeIfPresent(timestamp, forKey: .timestamp)
         try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(username, forKey: .username)
+        
         //    try container.encode(userIDs, forKey: .userIDs)
         //    try container.encodeIfPresent(lastMessage, forKey: .lastMessage)
         //    try container.encode(isRead, forKey: .isRead)
@@ -113,6 +119,7 @@ public class ObjectConversation: Codable, Equatable {
 //        id = try container.decode(String.self, forKey: .id)
         company_name = try container.decodeIfPresent(String.self, forKey: .company_name)
         first_name = try container.decodeIfPresent(String.self, forKey: .first_name)
+        last_name = try container.decodeIfPresent(String.self, forKey: .last_name)
         is_sent_by_myself = try container.decodeIfPresent(Bool.self, forKey: .is_sent_by_myself)
         medium_profile_pic = try container.decodeIfPresent(String.self, forKey: .medium_profile_pic)
         message = try container.decodeIfPresent(String.self, forKey: .message)
@@ -123,6 +130,7 @@ public class ObjectConversation: Codable, Equatable {
         user_type = try container.decodeIfPresent(String.self, forKey: .user_type)
         timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp)
         type = try container.decodeIfPresent(String.self, forKey: .type)
+        username = try container.decodeIfPresent(String.self, forKey: .username)
         //    userIDs = try container.decode([String].self, forKey: .userIDs)
         //    lastMessage = try container.decodeIfPresent(String.self, forKey: .lastMessage)
         //    isRead = try container.decode([String: Bool].self, forKey: .isRead)
@@ -134,6 +142,7 @@ extension ObjectConversation {
     private enum CodingKeys: String, CodingKey {
 //        case id
         case company_name
+        case last_name
         case first_name
         case is_sent_by_myself
         case medium_profile_pic
@@ -145,6 +154,9 @@ extension ObjectConversation {
         case user_type
         case timestamp
         case type
+        case username
+        
+
         
         //    case userIDs
         //    case lastMessage

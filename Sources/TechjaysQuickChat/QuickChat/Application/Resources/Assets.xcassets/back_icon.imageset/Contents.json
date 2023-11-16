@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icons8-edit-64.png",
+      "filename" : "icons8-back-50.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-edit-65.png",
+      "filename" : "icons8-back-51.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icons8-edit-66.png",
+      "filename" : "icons8-back-52.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
